@@ -16,7 +16,9 @@ module.exports = {
         'no-debugger': 'off',
         'quotes': ['error', 'single'],
         'semi': ['error', 'never'],
-        'indent': ['error', 4]
+        'indent': ['error', 4],
+        'vue/html-indent': ['error', 4],
+        'vue/script-indent': ['error', 4]
     },
     overrides: [
         {
