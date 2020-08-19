@@ -3,22 +3,28 @@ module.exports = {
     env: {
         node: true
     },
-    'extends': [
-        'plugin:vue/recommended',
-        'eslint:recommended',
+    extends: [
+        'plugin:vue/essential',
+        '@vue/standard',
         '@vue/typescript/recommended'
     ],
     parserOptions: {
         ecmaVersion: 2020
     },
     rules: {
-        'no-console': 'off',
-        'no-debugger': 'off',
+        'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+        'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
         'quotes': ['error', 'single'],
         'semi': ['error', 'never'],
         'indent': ['error', 4],
         'vue/html-indent': ['error', 4],
-        'vue/script-indent': ['error', 4]
+        'vue/script-indent': ['error', 4],
+        'space-before-function-paren': ['error', {
+            anonymous: 'always',
+            named: 'never',
+            asyncArrow: 'always'
+        }],
+        'quote-props': ['error', 'consistent']
     },
     overrides: [
         {
