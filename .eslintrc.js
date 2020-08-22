@@ -24,7 +24,8 @@ module.exports = {
             named: 'never',
             asyncArrow: 'always'
         }],
-        'quote-props': ['error', 'consistent']
+        'quote-props': ['error', 'consistent'],
+        'space-infix-ops': ['error']
     },
     overrides: [
         {
