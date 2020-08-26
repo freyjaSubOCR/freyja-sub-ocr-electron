@@ -88,7 +88,7 @@ export default class VideoPlayer extends Vue {
         const renderedVideo = (await global.ipcRenderer.invoke('VideoPlayer:RenderImage', timestamp)) as RenderedVideo | null
         if (renderedVideo != null) {
             this.timestamp = renderedVideo.timestamp
-            this.frameData = renderedVideo.data
+            this.frameData = renderedVideo.data as Buffer
         }
     }
 
