@@ -12,7 +12,7 @@ class VideoPlayer {
     private renderedCache: Array<RenderedVideo> = []
     private rectPositons: Array<RectPos> | null = null
 
-    registerIPCListener() {
+    registerIPCListener(): void {
         ipcMain.handle('VideoPlayer:OpenVideo', async (e, ...args) => {
             try {
                 return await this.OpenVideo(args[0])
@@ -31,7 +31,7 @@ class VideoPlayer {
         })
     }
 
-    async OpenVideo(path: string) {
+    async OpenVideo(path: string): Promise<VideoProperties> {
         this.demuxer = await beamcoder.demuxer(path)
         this.decoder = beamcoder.decoder({ 'demuxer': this.demuxer, 'stream_index': 0 })
         this.encoder = beamcoder.encoder({
@@ -66,7 +66,7 @@ class VideoPlayer {
         } as VideoProperties
     }
 
-    async SeekByTime(time: number) {
+    async SeekByTime(time: number): Promise<void> {
         logger.debug(`seek to time ${time}`)
         if (this.demuxer == null) {
             throw new Error('No video is opened for seek')
@@ -74,7 +74,7 @@ class VideoPlayer {
         await this.demuxer.seek({ 'time': time })
     }
 
-    async SeekByTimestamp(timestamp: number) {
+    async SeekByTimestamp(timestamp: number): Promise<void> {
         logger.debug(`seek to timestamp ${timestamp}`)
         if (this.demuxer == null) {
             throw new Error('No video is opened for seek')
@@ -82,7 +82,7 @@ class VideoPlayer {
         await this.demuxer.seek({ 'timestamp': timestamp, 'stream_index': 0 })
     }
 
-    async RenderImage(timestamp: number) {
+    async RenderImage(timestamp: number): Promise<RenderedVideo> {
         logger.debug(`start render frame on timestamp ${timestamp}`)
         if (!this.renderedCache.some(t => t.timestamp === timestamp)) {
             await this.SeekByTimestamp(timestamp)
@@ -92,7 +92,7 @@ class VideoPlayer {
                 decodedFrames = await this.convertPixelFormat(decodedFrames)
 
                 if (this.rectPositons !== null) {
-                    decodedFrames = this.DrawRect(decodedFrames)
+                    decodedFrames = await this.DrawRect(decodedFrames)
                 }
 
                 if (decodedFrames == null) {
@@ -126,7 +126,7 @@ class VideoPlayer {
         return targetFrame
     }
 
-    private async convertPixelFormat(decodedFrames: beamcoder.Frame[]) {
+    private async convertPixelFormat(decodedFrames: beamcoder.Frame[]): Promise<beamcoder.Frame[]> {
         if (this.formatFilter == null) {
             throw new Error('Failed to initlize formatFilter')
         }
@@ -138,11 +138,11 @@ class VideoPlayer {
         return decodedFrames
     }
 
-    private DrawRect(frames: beamcoder.Frame[]) {
+    private async DrawRect(frames: beamcoder.Frame[]): Promise<beamcoder.Frame[]> {
         return frames
     }
 
-    private async Encode(frame: beamcoder.Frame) {
+    private async Encode(frame: beamcoder.Frame): Promise<beamcoder.Packet> {
         if (this.encoder == null) {
             throw new Error('Failed to initlize encoder')
         }
@@ -156,7 +156,7 @@ class VideoPlayer {
         return encodeResult.packets[0]
     }
 
-    private async Decode() {
+    private async Decode(): Promise<beamcoder.Frame[]> {
         if (this.demuxer == null || this.decoder == null) {
             throw new Error('No video is opened for decode')
         }

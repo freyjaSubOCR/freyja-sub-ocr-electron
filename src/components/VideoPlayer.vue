@@ -47,22 +47,22 @@ export default class VideoPlayer extends Vue {
     private frameData: Buffer | null = null
     private debouncedUpdatePicData: ((frame: number) => Promise<void>)&lodash.Cancelable | null = null
 
-    created() {
+    created(): void {
         this.debouncedUpdatePicData = lodash.debounce(this.updatePicData, 500, { leading: true })
     }
 
-    get unitFrame() {
+    get unitFrame(): number {
         return this.videoProperties.timeBase[1] *
                 this.videoProperties.fps[1] /
                 this.videoProperties.timeBase[0] /
                 this.videoProperties.fps[0]
     }
 
-    get lastFrame() {
+    get lastFrame(): number {
         return Math.floor(this.videoProperties.duration / this.unitFrame)
     }
 
-    get picData() {
+    get picData(): string {
         if (this.frameData == null) {
             return ''
         } else {
@@ -71,7 +71,7 @@ export default class VideoPlayer extends Vue {
         }
     }
 
-    get currentFrame() {
+    get currentFrame(): number {
         return lodash.toInteger(this.timestamp / this.unitFrame)
     }
 
@@ -84,7 +84,7 @@ export default class VideoPlayer extends Vue {
         }
     }
 
-    private async updatePicData(timestamp: number) {
+    private async updatePicData(timestamp: number): Promise<void> {
         const renderedVideo = (await global.ipcRenderer.invoke('VideoPlayer:RenderImage', timestamp)) as RenderedVideo | null
         if (renderedVideo != null) {
             this.timestamp = renderedVideo.timestamp
@@ -92,7 +92,7 @@ export default class VideoPlayer extends Vue {
         }
     }
 
-    async openVideo() {
+    async openVideo(): Promise<void> {
         this.play = false
         const openVideoBtn = document.querySelector('#openVideo') as HTMLButtonElement
         openVideoBtn.disabled = true
@@ -110,7 +110,7 @@ export default class VideoPlayer extends Vue {
         openVideoBtn.disabled = false
     }
 
-    async playVideo() {
+    async playVideo(): Promise<void> {
         this.play = true
         const timeoutTime = 1000 * this.videoProperties.fps[1] / this.videoProperties.fps[0]
         while (this.currentFrame < this.lastFrame && this.play) {
@@ -121,7 +121,7 @@ export default class VideoPlayer extends Vue {
         this.play = false
     }
 
-    stopVideo() {
+    stopVideo(): void {
         this.play = false
     }
 }
