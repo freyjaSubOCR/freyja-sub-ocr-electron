@@ -4,8 +4,9 @@ import { app, protocol, BrowserWindow } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
 import path from 'path'
-import VideoPlayer from './backends/VideoPlayer'
 import CommonIpc from './CommonIpc'
+import TorchOCR from './backends/TorchOCR'
+import BMPVideoPlayer from './backends/BMPVideoPlayer'
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -32,7 +33,7 @@ function createWindow() {
     })
 
     if (process.env.WEBPACK_DEV_SERVER_URL) {
-    // Load the url of the dev server if in development mode
+        // Load the url of the dev server if in development mode
         win.loadURL(process.env.WEBPACK_DEV_SERVER_URL as string)
         if (!process.env.IS_TEST) win.webContents.openDevTools()
     } else {
@@ -68,7 +69,7 @@ app.on('activate', () => {
 // Some APIs can only be used after this event occurs.
 app.on('ready', async () => {
     if (isDevelopment && !process.env.IS_TEST) {
-    // Install Vue Devtools
+        // Install Vue Devtools
         try {
             await installExtension(VUEJS_DEVTOOLS)
         } catch (e) {
@@ -76,10 +77,12 @@ app.on('ready', async () => {
         }
     }
 
-    const videoPlayer = new VideoPlayer()
-    videoPlayer.registerIPCListener()
+    const bmpVideoPlayer = new BMPVideoPlayer()
+    bmpVideoPlayer.registerIPCListener()
     const commonIpc = new CommonIpc()
     commonIpc.registerIPCListener()
+    const torchOCR = new TorchOCR()
+    torchOCR.registerIPCListener()
 
     createWindow()
 })
