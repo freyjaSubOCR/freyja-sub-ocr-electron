@@ -2,14 +2,18 @@ import { ScriptModule } from 'torch-js'
 import Config from '@/config'
 import { ipcMain } from 'electron'
 import logger from '@/logger'
-import fs from 'fs/promises'
+import fs_ from 'fs'
 import RawVideoPlayer from './RawVideoPlayer'
+import { VideoProperties } from '@/interfaces'
+
+const fs = fs_.promises
 
 class TorchOCR {
-    RCNNModule: ScriptModule | undefined
-    OCRModule: ScriptModule | undefined
+    private RCNNModule: ScriptModule | undefined
+    private OCRModule: ScriptModule | undefined
     OCRChars: string | undefined
-    VideoPlayer: RawVideoPlayer | undefined
+    private VideoPlayer: RawVideoPlayer | undefined
+    private VideoProperties: VideoProperties | undefined
 
     registerIPCListener(): void {
         ipcMain.handle('TorchOCR:InitRCNN', () => {
@@ -44,9 +48,10 @@ class TorchOCR {
         if (Config.EnableCuda && ScriptModule.isCudaAvailable()) { this.OCRModule = this.OCRModule.cuda() }
     }
 
-    async InitVideoPlayer(path: string): Promise<void> {
+    async InitVideoPlayer(path: string): Promise<VideoProperties> {
         this.VideoPlayer = new RawVideoPlayer()
-        await this.VideoPlayer.OpenVideo(path)
+        this.VideoProperties = await this.VideoPlayer.OpenVideo(path)
+        return this.VideoProperties
     }
 }
 
