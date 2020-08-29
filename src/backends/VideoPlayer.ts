@@ -39,7 +39,9 @@ class VideoPlayer {
         return {
             'duration': this.demuxer.streams[0].duration,
             'timeBase': this.demuxer.streams[0].time_base,
-            'fps': this.demuxer.streams[0].r_frame_rate
+            'fps': this.demuxer.streams[0].r_frame_rate,
+            'width': this.demuxer.streams[0].codecpar.width,
+            'height': this.demuxer.streams[0].codecpar.height
         } as VideoProperties
     }
 

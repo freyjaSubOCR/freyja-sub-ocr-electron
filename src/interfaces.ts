@@ -14,6 +14,8 @@ interface VideoProperties {
     duration: number;
     timeBase: number[];
     fps: number[];
+    width: number;
+    height: number;
 }
 
 export { RectPos, RenderedVideo, VideoProperties }

@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TorchOCR.ts Init VideoPlayer 1`] = `
+Object {
+  "duration": 864864,
+  "fps": Array [
+    24000,
+    1001,
+  ],
+  "height": 1080,
+  "timeBase": Array [
+    1,
+    24000,
+  ],
+  "width": 1920,
+}
+`;
+
+exports[`TorchOCR.ts Render raw frame 1`] = `6220800`;
+
+exports[`TorchOCR.ts Render raw frame 2`] = `
+Object {
+  "data": Array [
+    207,
+    250,
+    203,
+    207,
+    250,
+    203,
+    207,
+    250,
+    203,
+    207,
+    250,
+    203,
+    207,
+    250,
+    203,
+    207,
+    250,
+    203,
+    209,
+    252,
+  ],
+  "type": "Buffer",
+}
+`;

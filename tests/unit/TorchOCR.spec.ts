@@ -1,20 +1,27 @@
 import TorchOCR from '@/backends/TorchOCR'
 
 describe('TorchOCR.ts', () => {
-    const torchOCR = new TorchOCR()
     it('Init RCNN Module', () => {
-        // torchOCR.InitRCNN()
+        const torchOCR = new TorchOCR()
+        torchOCR.InitRCNN()
         expect(torchOCR).toBeDefined()
     })
     it('Init OCR Module', async () => {
+        const torchOCR = new TorchOCR()
         await torchOCR.InitOCR()
         expect(torchOCR).toBeDefined()
     })
     it('Init VideoPlayer', async () => {
-        const result = await torchOCR.InitVideoPlayer('tests/files/test.mp4')
-        expect(result.timeBase[0]).toBe(1)
-        expect(result.timeBase[1]).toBe(24000)
-        expect(result.fps[0]).toBe(24000)
-        expect(result.fps[1]).toBe(1001)
+        const torchOCR = new TorchOCR()
+        const result = await torchOCR.InitVideoPlayer('tests/files/sample.mp4')
+        expect(result).toMatchSnapshot()
     })
+    it('Render raw frame', async () => {
+        const torchOCR = new TorchOCR()
+        await torchOCR.InitVideoPlayer('tests/files/sample.mp4')
+        const result = await torchOCR.ReadRawFrame(10)
+        expect(result.length).toMatchSnapshot()
+        // Total samples are too large, only record first 20 value
+        expect(result.slice(0, 20)).toMatchSnapshot()
+    }, 100000)
 })

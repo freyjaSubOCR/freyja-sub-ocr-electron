@@ -5,13 +5,14 @@ import logger from '@/logger'
 import fs_ from 'fs'
 import RawVideoPlayer from './RawVideoPlayer'
 import { VideoProperties } from '@/interfaces'
+import lodash from 'lodash'
 
 const fs = fs_.promises
 
 class TorchOCR {
     private RCNNModule: ScriptModule | undefined
     private OCRModule: ScriptModule | undefined
-    OCRChars: string | undefined
+    private OCRChars: string | undefined
     private VideoPlayer: RawVideoPlayer | undefined
     private VideoProperties: VideoProperties | undefined
 
@@ -52,6 +53,21 @@ class TorchOCR {
         this.VideoPlayer = new RawVideoPlayer()
         this.VideoProperties = await this.VideoPlayer.OpenVideo(path)
         return this.VideoProperties
+    }
+
+    async ReadRawFrame(frame: number): Promise<Buffer> {
+        if (this.VideoPlayer === undefined || this.VideoProperties === undefined) {
+            throw new Error('VideoPlayer is not initialized')
+        }
+        const unitFrame = this.VideoProperties.timeBase[1] *
+                this.VideoProperties.fps[1] /
+                this.VideoProperties.timeBase[0] /
+                this.VideoProperties.fps[0]
+        const timestamp = lodash.toInteger(frame * unitFrame)
+        const rawFrame = await this.VideoPlayer.RenderImage(timestamp)
+        let rawData = rawFrame.data[0] as Buffer
+        rawData = rawData.slice(0, 3 * this.VideoProperties.height * this.VideoProperties.width)
+        return rawData
     }
 }
 
