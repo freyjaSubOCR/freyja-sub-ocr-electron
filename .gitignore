@@ -3,7 +3,8 @@ node_modules
 /dist
 
 *.log
-utils
+/utils
+/dist_timetest
 
 # local env files
 .env.local

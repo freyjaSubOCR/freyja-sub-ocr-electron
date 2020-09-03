@@ -104,8 +104,14 @@ class TorchOCR {
         if (this.RCNNModule === undefined) {
             throw new Error('RCNN Module is not initialized')
         }
-        if (ScriptModule.isCudaAvailable()) input = input.cuda()
-        return this.RCNNModule.forward(input) as Array<Record<string, Tensor>>
+        if (ScriptModule.isCudaAvailable()) {
+            const inputCUDA = input.cuda()
+            const result = this.RCNNModule.forward(inputCUDA) as Array<Record<string, Tensor>>
+            inputCUDA.free()
+            return result
+        } else {
+            return this.RCNNModule.forward(input) as Array<Record<string, Tensor>>
+        }
     }
 }
 
