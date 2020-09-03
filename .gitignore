@@ -3,6 +3,7 @@ node_modules
 /dist
 
 *.log
+utils
 
 # local env files
 .env.local
