@@ -1,4 +1,4 @@
-import { ScriptModule } from 'torch-js'
+import { ScriptModule, ObjectTensor, Tensor } from 'torch-js'
 import Config from '@/config'
 import { ipcMain } from 'electron'
 import logger from '@/logger'
@@ -68,6 +68,44 @@ class TorchOCR {
         let rawData = rawFrame.data[0] as Buffer
         rawData = rawData.slice(0, 3 * this.VideoProperties.height * this.VideoProperties.width)
         return rawData
+    }
+
+    BufferToImgTensor(buffers: Buffer[], cropTop = 0): Tensor {
+        if (this.VideoProperties === undefined) {
+            throw new Error('VideoPlayer is not initialized')
+        }
+
+        const oneImgLength = 3 * (this.VideoProperties.height - cropTop) * this.VideoProperties.width
+        const imgObjTensor = {
+            data: new Float32Array(buffers.length * oneImgLength),
+            shape: [buffers.length, 3, this.VideoProperties.height - cropTop, this.VideoProperties.width]
+        } as ObjectTensor
+
+        for (let j = 0; j < buffers.length; j++) {
+            const buffer = buffers[j]
+            if (this.VideoProperties === undefined) {
+                throw new Error('VideoPlayer is not initialized')
+            }
+            if (buffer.length !== 3 * this.VideoProperties.height * this.VideoProperties.width) {
+                throw new Error(`Buffer length mismatch. Should be ${3 * this.VideoProperties.height * this.VideoProperties.width}, got ${buffer.length}`)
+            }
+            if (cropTop < 0) cropTop = 0
+            cropTop = lodash.toInteger(cropTop)
+            for (let i = 3 * this.VideoProperties.width * cropTop; i < buffer.length; i++) {
+                const pos = oneImgLength * j +
+                    (i % 3) * 1080 * 1920 + lodash.toInteger((i - 3 * this.VideoProperties.width * cropTop) / 3)
+                imgObjTensor.data[pos] = buffer[i] / 256
+            }
+        }
+        return Tensor.fromObject(imgObjTensor)
+    }
+
+    RCNNForward(input: Tensor): Array<Record<string, Tensor>> {
+        if (this.RCNNModule === undefined) {
+            throw new Error('RCNN Module is not initialized')
+        }
+        if (ScriptModule.isCudaAvailable()) input = input.cuda()
+        return this.RCNNModule.forward(input) as Array<Record<string, Tensor>>
     }
 }
 

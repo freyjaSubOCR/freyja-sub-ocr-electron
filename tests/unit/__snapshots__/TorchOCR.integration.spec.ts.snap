@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TorchOCR.ts Intergration test 1`] = `
+Object {
+  "data": Float32Array [
+    786.79345703125,
+    972.4028930664062,
+    1134.7374267578125,
+    1053.88671875,
+  ],
+  "shape": Array [
+    1,
+    4,
+  ],
+}
+`;
