@@ -14,3 +14,9 @@ Object {
   ],
 }
 `;
+
+exports[`TorchOCR.ts Intergration test 2`] = `
+Array [
+  "我是神野惠",
+]
+`;

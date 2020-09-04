@@ -109,6 +109,30 @@ class TorchOCR {
             return this.RCNNModule.forward(input) as Array<Record<string, Tensor>>
         }
     }
+
+    OCRForward(input: Tensor, boxes: Tensor): Array<Array<number>> {
+        if (this.OCRModule === undefined) {
+            throw new Error('OCR Module is not initialized')
+        }
+
+        if (ScriptModule.isCudaAvailable()) {
+            const inputCUDA = input.cuda()
+            const result = this.OCRModule.forward(inputCUDA, boxes) as Array<Array<number>>
+            inputCUDA.free()
+            return result
+        } else {
+            return this.OCRModule.forward(input, boxes) as Array<Array<number>>
+        }
+    }
+
+    OCRParse(OCRResult: Array<Array<number>>): Array<string> {
+        return OCRResult.map(t => t.map(d => {
+            if (this.OCRChars === undefined) {
+                throw new Error('OCR Module is not initialized')
+            }
+            return this.OCRChars[d]
+        }).join(''))
+    }
 }
 
 export default TorchOCR
