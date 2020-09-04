@@ -78,7 +78,7 @@ class TorchOCR {
         const oneImgLength = 3 * (this.VideoProperties.height - cropTop) * this.VideoProperties.width
         const imgObjTensor = {
             data: new Float32Array(buffers.length * oneImgLength),
-            shape: [buffers.length, 3, this.VideoProperties.height - cropTop, this.VideoProperties.width]
+            shape: [buffers.length, this.VideoProperties.height - cropTop, this.VideoProperties.width, 3]
         } as ObjectTensor
 
         for (let j = 0; j < buffers.length; j++) {
@@ -91,11 +91,7 @@ class TorchOCR {
             }
             if (cropTop < 0) cropTop = 0
             cropTop = lodash.toInteger(cropTop)
-            for (let i = 3 * this.VideoProperties.width * cropTop; i < buffer.length; i++) {
-                const pos = oneImgLength * j +
-                    (i % 3) * 1080 * 1920 + lodash.toInteger((i - 3 * this.VideoProperties.width * cropTop) / 3)
-                imgObjTensor.data[pos] = buffer[i] / 256
-            }
+            imgObjTensor.data.set(buffer.slice(cropTop * this.VideoProperties.width * 3), j * oneImgLength)
         }
         return Tensor.fromObject(imgObjTensor)
     }
