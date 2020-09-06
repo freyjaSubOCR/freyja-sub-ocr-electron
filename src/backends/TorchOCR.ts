@@ -96,32 +96,32 @@ class TorchOCR {
         return Tensor.fromObject(imgObjTensor)
     }
 
-    RCNNForward(input: Tensor): Array<Record<string, Tensor>> {
+    async RCNNForward(input: Tensor): Promise<Array<Record<string, Tensor>>> {
         if (this.RCNNModule === undefined) {
             throw new Error('RCNN Module is not initialized')
         }
         if (ScriptModule.isCudaAvailable()) {
             const inputCUDA = input.cuda()
-            const result = this.RCNNModule.forward(inputCUDA) as Array<Record<string, Tensor>>
+            const result = await this.RCNNModule.forward(inputCUDA) as Array<Record<string, Tensor>>
             inputCUDA.free()
             return result
         } else {
-            return this.RCNNModule.forward(input) as Array<Record<string, Tensor>>
+            return await this.RCNNModule.forward(input) as Array<Record<string, Tensor>>
         }
     }
 
-    OCRForward(input: Tensor, boxes: Tensor): Array<Array<number>> {
+    async OCRForward(input: Tensor, boxes: Tensor): Promise<Array<Array<number>>> {
         if (this.OCRModule === undefined) {
             throw new Error('OCR Module is not initialized')
         }
 
         if (ScriptModule.isCudaAvailable()) {
             const inputCUDA = input.cuda()
-            const result = this.OCRModule.forward(inputCUDA, boxes) as Array<Array<number>>
+            const result = await this.OCRModule.forward(inputCUDA, boxes) as Array<Array<number>>
             inputCUDA.free()
             return result
         } else {
-            return this.OCRModule.forward(input, boxes) as Array<Array<number>>
+            return await this.OCRModule.forward(input, boxes) as Array<Array<number>>
         }
     }
 

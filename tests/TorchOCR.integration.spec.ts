@@ -11,7 +11,7 @@ describe('TorchOCR.ts', () => {
         const rawImg = await torchOCR.ReadRawFrame(10)
         const inputTensor = torchOCR.BufferToImgTensor([rawImg])
         const rcnnResult = torchOCR.RCNNForward(inputTensor)
-        const resultTensor = (rcnnResult[0].boxes as Tensor).cpu()
+        const resultTensor = ((await rcnnResult)[0].boxes as Tensor).cpu()
         const resultObjectTensor = resultTensor.toObject()
         expect(resultObjectTensor).toMatchSnapshot()
 
@@ -21,7 +21,7 @@ describe('TorchOCR.ts', () => {
         boxesObjectTensor.data[2] = lodash.toInteger(resultObjectTensor.data[2]) + 10
         boxesObjectTensor.data[3] = lodash.toInteger(resultObjectTensor.data[3]) + 10
         const boxesTensor = Tensor.fromObject(boxesObjectTensor)
-        const result = torchOCR.OCRParse(torchOCR.OCRForward(inputTensor, boxesTensor))
+        const result = torchOCR.OCRParse(await torchOCR.OCRForward(inputTensor, boxesTensor))
         expect(result).toMatchSnapshot()
     }, 100000)
 })
