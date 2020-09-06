@@ -23,5 +23,7 @@ describe('TorchOCR.ts', () => {
         const boxesTensor = Tensor.fromObject(boxesObjectTensor)
         const result = torchOCR.OCRParse(await torchOCR.OCRForward(inputTensor, boxesTensor))
         expect(result).toMatchSnapshot()
+        inputTensor.free()
+        boxesTensor.free()
     }, 100000)
 })

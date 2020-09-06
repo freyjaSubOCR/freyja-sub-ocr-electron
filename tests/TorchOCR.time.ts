@@ -60,6 +60,7 @@ import lodash from 'lodash'
                 const ocrResults = torchOCR.OCRParse(await torchOCR.OCRForward(inputTensor, boxesTensor))
                 console.log(`Inferance OCR ${frame}: ` + (performance.now() - tStart) + 'ms')
                 inputTensor.free()
+                boxesTensor.free()
             })
             ocrPromiseBuffer.shift()
             ocrPromiseBuffer.push(ocrPromise)
