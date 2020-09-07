@@ -52,7 +52,7 @@ interface SubtitleInfo {
     text?: string;
     startTime?: string;
     endTime?: string;
-    imageTensor?: Int32Array;
+    box?: Int32Array;
 }
 
 export { RectPos, RenderedVideo, VideoProperties, SubtitleInfo }

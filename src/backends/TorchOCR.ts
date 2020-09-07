@@ -115,11 +115,11 @@ class TorchOCR {
                 const boxObjectTensor = rcnnResults[i].boxes.cpu().toObject()
                 const currentWidth = boxObjectTensor.data[2] - boxObjectTensor.data[0]
                 subtitleInfo = { startFrame: i, endFrame: 0 }
-                subtitleInfo.imageTensor = new Int32Array(4)
-                subtitleInfo.imageTensor[0] = lodash.toInteger(boxObjectTensor.data[0]) - 10
-                subtitleInfo.imageTensor[1] = lodash.toInteger(boxObjectTensor.data[1]) - 10
-                subtitleInfo.imageTensor[2] = lodash.toInteger(boxObjectTensor.data[2]) + 10
-                subtitleInfo.imageTensor[3] = lodash.toInteger(boxObjectTensor.data[3]) + 10
+                subtitleInfo.box = new Int32Array(4)
+                subtitleInfo.box[0] = lodash.toInteger(boxObjectTensor.data[0]) - 10
+                subtitleInfo.box[1] = lodash.toInteger(boxObjectTensor.data[1]) - 10
+                subtitleInfo.box[2] = lodash.toInteger(boxObjectTensor.data[2]) + 10
+                subtitleInfo.box[3] = lodash.toInteger(boxObjectTensor.data[3]) + 10
                 lastWidth = currentWidth
             } else {
                 const boxObjectTensor = rcnnResults[i].boxes.cpu().toObject()
@@ -130,11 +130,11 @@ class TorchOCR {
                     subtitleInfos.push(subtitleInfo)
                     // create new subtitleInfo
                     subtitleInfo = { startFrame: i, endFrame: 0 }
-                    subtitleInfo.imageTensor = new Int32Array(4)
-                    subtitleInfo.imageTensor[0] = lodash.toInteger(boxObjectTensor.data[0]) - 10
-                    subtitleInfo.imageTensor[1] = lodash.toInteger(boxObjectTensor.data[1]) - 10
-                    subtitleInfo.imageTensor[2] = lodash.toInteger(boxObjectTensor.data[2]) + 10
-                    subtitleInfo.imageTensor[3] = lodash.toInteger(boxObjectTensor.data[3]) + 10
+                    subtitleInfo.box = new Int32Array(4)
+                    subtitleInfo.box[0] = lodash.toInteger(boxObjectTensor.data[0]) - 10
+                    subtitleInfo.box[1] = lodash.toInteger(boxObjectTensor.data[1]) - 10
+                    subtitleInfo.box[2] = lodash.toInteger(boxObjectTensor.data[2]) + 10
+                    subtitleInfo.box[3] = lodash.toInteger(boxObjectTensor.data[3]) + 10
                     lastWidth = currentWidth
                 }
             }

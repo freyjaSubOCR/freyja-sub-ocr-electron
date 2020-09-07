@@ -45,12 +45,12 @@ import { Tensor } from 'torch-js'
                 const subtitleInfos = torchOCR.RCNNParse(rcnnResults)
                 const boxesObjectTensor = { data: new Int32Array(subtitleInfos.length * 4), shape: [subtitleInfos.length, 4] }
                 for (const i of subtitleInfos.keys()) {
-                    const imageTensor = subtitleInfos[i].imageTensor
-                    if (imageTensor !== undefined) {
-                        boxesObjectTensor.data[i * 4 + 0] = imageTensor[0]
-                        boxesObjectTensor.data[i * 4 + 1] = imageTensor[1]
-                        boxesObjectTensor.data[i * 4 + 2] = imageTensor[2]
-                        boxesObjectTensor.data[i * 4 + 3] = imageTensor[3]
+                    const box = subtitleInfos[i].box
+                    if (box !== undefined) {
+                        boxesObjectTensor.data[i * 4 + 0] = box[0]
+                        boxesObjectTensor.data[i * 4 + 1] = box[1]
+                        boxesObjectTensor.data[i * 4 + 2] = box[2]
+                        boxesObjectTensor.data[i * 4 + 3] = box[3]
                     }
                 }
                 const boxesTensor = Tensor.fromObject(boxesObjectTensor)

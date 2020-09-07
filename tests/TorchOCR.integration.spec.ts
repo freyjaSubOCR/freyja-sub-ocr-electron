@@ -15,7 +15,7 @@ describe('TorchOCR.ts', () => {
         expect(resultObjectTensor).toMatchSnapshot()
 
         const subtitleInfo = torchOCR.RCNNParse(rcnnResult)[0]
-        const boxesObjectTensor = { data: subtitleInfo.imageTensor, shape: [1, 4] } as ObjectTensor
+        const boxesObjectTensor = { data: subtitleInfo.box, shape: [1, 4] } as ObjectTensor
         const boxesTensor = Tensor.fromObject(boxesObjectTensor)
         const result = torchOCR.OCRParse(await torchOCR.OCRForward(inputTensor, boxesTensor))
         expect(result).toMatchSnapshot()
