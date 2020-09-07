@@ -1,7 +1,6 @@
 import TorchOCR from '@/backends/TorchOCR'
 import { performance } from 'perf_hooks'
 import { Tensor } from 'torch-js'
-import lodash from 'lodash'
 
 (async () => {
     try {
