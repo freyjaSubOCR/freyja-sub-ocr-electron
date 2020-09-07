@@ -36,13 +36,12 @@ class VideoPlayer {
             ],
             filterSpec: 'format=pix_fmts=bgr24'
         })
-        return {
-            'duration': this.demuxer.streams[0].duration,
-            'timeBase': this.demuxer.streams[0].time_base,
-            'fps': this.demuxer.streams[0].r_frame_rate,
-            'width': this.demuxer.streams[0].codecpar.width,
-            'height': this.demuxer.streams[0].codecpar.height
-        } as VideoProperties
+        return new VideoProperties(
+            this.demuxer.streams[0].duration as number,
+            this.demuxer.streams[0].time_base,
+            this.demuxer.streams[0].r_frame_rate,
+            this.demuxer.streams[0].codecpar.width,
+            this.demuxer.streams[0].codecpar.height)
     }
 
     async SeekByTime(time: number): Promise<void> {

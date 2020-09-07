@@ -40,7 +40,7 @@ import { RenderedVideo, VideoProperties } from '@/interfaces'
 @Component
 export default class VideoPlayer extends Vue {
     videoOpened = false
-    videoProperties: VideoProperties = { duration: 0, timeBase: [1, 1], fps: [1, 1], width: 0, height: 0 }
+    videoProperties: VideoProperties = new VideoProperties(0, [1, 1], [1, 1], 0, 0)
     timestamp = 0
     play = false
 
@@ -49,17 +49,6 @@ export default class VideoPlayer extends Vue {
 
     created(): void {
         this.debouncedUpdatePicData = lodash.debounce(this.updatePicData, 500, { leading: true })
-    }
-
-    get unitFrame(): number {
-        return this.videoProperties.timeBase[1] *
-                this.videoProperties.fps[1] /
-                this.videoProperties.timeBase[0] /
-                this.videoProperties.fps[0]
-    }
-
-    get lastFrame(): number {
-        return Math.floor(this.videoProperties.duration / this.unitFrame)
     }
 
     get picData(): string {
@@ -72,14 +61,14 @@ export default class VideoPlayer extends Vue {
     }
 
     get currentFrame(): number {
-        return lodash.toInteger(this.timestamp / this.unitFrame)
+        return lodash.toInteger(this.timestamp / this.videoProperties.unitFrame)
     }
 
     set currentFrame(value) {
         if (this.debouncedUpdatePicData !== undefined) {
             if (value < 0) value = 0
-            if (value > this.lastFrame) value = this.lastFrame
-            this.timestamp = lodash.toInteger(value * this.unitFrame)
+            if (value > this.videoProperties.lastFrame) value = this.videoProperties.lastFrame
+            this.timestamp = lodash.toInteger(value * this.videoProperties.unitFrame)
             this.debouncedUpdatePicData(this.timestamp)
         }
     }
@@ -113,9 +102,9 @@ export default class VideoPlayer extends Vue {
     async playVideo(): Promise<void> {
         this.play = true
         const timeoutTime = 1000 * this.videoProperties.fps[1] / this.videoProperties.fps[0]
-        while (this.currentFrame < this.lastFrame && this.play) {
+        while (this.currentFrame < this.videoProperties.lastFrame && this.play) {
             const timeout = new Promise(resolve => setTimeout(resolve, timeoutTime))
-            await this.updatePicData(this.timestamp + this.unitFrame)
+            await this.updatePicData(this.timestamp + this.videoProperties.unitFrame)
             await timeout
         }
         this.play = false
