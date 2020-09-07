@@ -40,12 +40,12 @@ import { RenderedVideo, VideoProperties } from '@/interfaces'
 @Component
 export default class VideoPlayer extends Vue {
     videoOpened = false
-    videoProperties: VideoProperties = { duration: 0, timeBase: [1, 1], fps: [1, 1] }
+    videoProperties: VideoProperties = { duration: 0, timeBase: [1, 1], fps: [1, 1], width: 0, height: 0 }
     timestamp = 0
     play = false
 
-    private frameData: Buffer | null = null
-    private debouncedUpdatePicData: ((frame: number) => Promise<void>)&lodash.Cancelable | null = null
+    private frameData?: Buffer
+    private debouncedUpdatePicData?: lodash.DebouncedFunc<(timestamp: number) => Promise<void>>
 
     created(): void {
         this.debouncedUpdatePicData = lodash.debounce(this.updatePicData, 500, { leading: true })
@@ -63,7 +63,7 @@ export default class VideoPlayer extends Vue {
     }
 
     get picData(): string {
-        if (this.frameData == null) {
+        if (this.frameData === undefined) {
             return ''
         } else {
             const blob = new Blob([this.frameData.buffer], { type: 'image/bmp' })
@@ -76,7 +76,7 @@ export default class VideoPlayer extends Vue {
     }
 
     set currentFrame(value) {
-        if (this.debouncedUpdatePicData != null) {
+        if (this.debouncedUpdatePicData !== undefined) {
             if (value < 0) value = 0
             if (value > this.lastFrame) value = this.lastFrame
             this.timestamp = lodash.toInteger(value * this.unitFrame)
