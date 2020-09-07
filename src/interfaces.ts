@@ -1,3 +1,5 @@
+import { Tensor } from 'torch-js'
+
 interface RectPos {
     top: number;
     left: number;
@@ -18,4 +20,13 @@ interface VideoProperties {
     height: number;
 }
 
-export { RectPos, RenderedVideo, VideoProperties }
+interface SubtitleInfo {
+    startFrame: number;
+    endFrame: number;
+    text?: string;
+    startTime?: string;
+    endTime?: string;
+    imageTensor?: Int32Array;
+}
+
+export { RectPos, RenderedVideo, VideoProperties, SubtitleInfo }

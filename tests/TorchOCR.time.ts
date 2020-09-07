@@ -43,14 +43,16 @@ import lodash from 'lodash'
                 tStart = performance.now()
                 const inputTensor = values[1] as Tensor
                 const rcnnResults = values[2] as Record<string, Tensor>[]
-                const resultTensor = rcnnResults.map(rcnnResult => (rcnnResult.boxes as Tensor).cpu().toObject())
-                    .filter(t => t.shape.length === 2 && t.shape[0] > 0)
-                const boxesObjectTensor = { data: new Int32Array(resultTensor.length * 4), shape: [resultTensor.length, 4] }
-                for (const i of resultTensor.keys()) {
-                    boxesObjectTensor.data[i * 4 + 0] = lodash.toInteger(resultTensor[i].data[0]) - 10
-                    boxesObjectTensor.data[i * 4 + 1] = lodash.toInteger(resultTensor[i].data[1]) - 10
-                    boxesObjectTensor.data[i * 4 + 2] = lodash.toInteger(resultTensor[i].data[2]) + 10
-                    boxesObjectTensor.data[i * 4 + 3] = lodash.toInteger(resultTensor[i].data[3]) + 10
+                const subtitleInfos = torchOCR.RCNNParse(rcnnResults)
+                const boxesObjectTensor = { data: new Int32Array(subtitleInfos.length * 4), shape: [subtitleInfos.length, 4] }
+                for (const i of subtitleInfos.keys()) {
+                    const imageTensor = subtitleInfos[i].imageTensor
+                    if (imageTensor !== undefined) {
+                        boxesObjectTensor.data[i * 4 + 0] = imageTensor[0]
+                        boxesObjectTensor.data[i * 4 + 1] = imageTensor[1]
+                        boxesObjectTensor.data[i * 4 + 2] = imageTensor[2]
+                        boxesObjectTensor.data[i * 4 + 3] = imageTensor[3]
+                    }
                 }
                 const boxesTensor = Tensor.fromObject(boxesObjectTensor)
                 console.log(`Copy Tensor data (box) ${frame}: ` + (performance.now() - tStart) + 'ms')
@@ -71,29 +73,3 @@ import lodash from 'lodash'
         console.log(e)
     }
 })()
-
-/*
-(async () => {
-    function sleep(time: number) {
-        return new Promise((resolve) => setTimeout(resolve, time))
-    }
-    async function a(loopCount: number) {
-        await sleep(2000)
-        console.log(`function a: ${loopCount}`)
-    }
-    async function b(loopCount: number) {
-        await sleep(3000)
-        console.log(`function b: ${loopCount}`)
-    }
-
-    let aPromise = a(0)
-    let bPromise = new Promise((resolve) => resolve())
-    for (const i of Array(10).keys()) {
-        const bPromiseTemp = bPromise
-        bPromise = Promise.all([aPromise, bPromise]).then(() => b(i))
-        aPromise = Promise.all([aPromise, bPromiseTemp]).then(() => a(i + 1))
-    }
-    await Promise.all([aPromise, bPromise])
-})()
-
-*/

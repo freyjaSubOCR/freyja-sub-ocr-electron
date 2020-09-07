@@ -4,7 +4,7 @@ import { ipcMain } from 'electron'
 import logger from '@/logger'
 import fs_ from 'fs'
 import RawVideoPlayer from './RawVideoPlayer'
-import { VideoProperties } from '@/interfaces'
+import { VideoProperties, SubtitleInfo } from '@/interfaces'
 import lodash from 'lodash'
 
 const fs = fs_.promises
@@ -110,6 +110,56 @@ class TorchOCR {
         }
     }
 
+    RCNNParse(rcnnResults: Array<Record<string, Tensor>>): SubtitleInfo[] {
+        let lastWidth = 0
+        let subtitleInfo: SubtitleInfo | undefined
+        const subtitleInfos: SubtitleInfo[] = []
+        for (const i of rcnnResults.keys()) {
+            if (rcnnResults[i].boxes.cpu().toObject().shape[0] === 0) {
+                // empty box, end
+                if (subtitleInfo !== undefined) {
+                    subtitleInfo.endFrame = i
+                    subtitleInfos.push(subtitleInfo)
+                    subtitleInfo = undefined
+                    lastWidth = 0
+                }
+            } else if (subtitleInfo === undefined) {
+                // create new subtitleInfo
+                const boxObjectTensor = rcnnResults[i].boxes.cpu().toObject()
+                const currentWidth = boxObjectTensor.data[2] - boxObjectTensor.data[0]
+                subtitleInfo = { startFrame: i, endFrame: 0 }
+                subtitleInfo.imageTensor = new Int32Array(4)
+                subtitleInfo.imageTensor[0] = lodash.toInteger(boxObjectTensor.data[0]) - 10
+                subtitleInfo.imageTensor[1] = lodash.toInteger(boxObjectTensor.data[1]) - 10
+                subtitleInfo.imageTensor[2] = lodash.toInteger(boxObjectTensor.data[2]) + 10
+                subtitleInfo.imageTensor[3] = lodash.toInteger(boxObjectTensor.data[3]) + 10
+                lastWidth = currentWidth
+            } else {
+                const boxObjectTensor = rcnnResults[i].boxes.cpu().toObject()
+                const currentWidth = boxObjectTensor.data[2] - boxObjectTensor.data[0]
+                if (Math.abs(lastWidth - currentWidth) > 10) {
+                    // not same length, end
+                    subtitleInfo.endFrame = i
+                    subtitleInfos.push(subtitleInfo)
+                    // create new subtitleInfo
+                    subtitleInfo = { startFrame: i, endFrame: 0 }
+                    subtitleInfo.imageTensor = new Int32Array(4)
+                    subtitleInfo.imageTensor[0] = lodash.toInteger(boxObjectTensor.data[0]) - 10
+                    subtitleInfo.imageTensor[1] = lodash.toInteger(boxObjectTensor.data[1]) - 10
+                    subtitleInfo.imageTensor[2] = lodash.toInteger(boxObjectTensor.data[2]) + 10
+                    subtitleInfo.imageTensor[3] = lodash.toInteger(boxObjectTensor.data[3]) + 10
+                    lastWidth = currentWidth
+                }
+            }
+        }
+        if (subtitleInfo !== undefined) {
+            subtitleInfo.endFrame = rcnnResults.length
+            subtitleInfos.push(subtitleInfo)
+        }
+
+        return subtitleInfos
+    }
+
     async OCRForward(input: Tensor, boxes: Tensor): Promise<Array<Array<number>>> {
         if (this.OCRModule === undefined) {
             throw new Error('OCR Module is not initialized')
@@ -125,8 +175,8 @@ class TorchOCR {
         }
     }
 
-    OCRParse(OCRResult: Array<Array<number>>): Array<string> {
-        return OCRResult.map(t => t.map(d => {
+    OCRParse(OCRResults: Array<Array<number>>): Array<string> {
+        return OCRResults.map(t => t.map(d => {
             if (this.OCRChars === undefined) {
                 throw new Error('OCR Module is not initialized')
             }
