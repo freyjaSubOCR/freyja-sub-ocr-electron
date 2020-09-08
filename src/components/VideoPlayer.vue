@@ -8,13 +8,13 @@
         </div>
         <div>
             <button @click="currentFrame -= 1" :disabled="!videoOpened || currentFrame <= 0">previous</button>
-            <button @click="currentFrame += 1" :disabled="!videoOpened || currentFrame >= lastFrame">next</button>
+            <button @click="currentFrame += 1" :disabled="!videoOpened || currentFrame >= videoProperties.lastFrame">next</button>
         </div>
         <div>
             <div>
                 <label for="currentFrame">Current frame: </label>
                 <input id="currentName" name="currentName" type="number"
-                       min="0" :max="lastFrame" step="1"
+                       min="0" :max="videoProperties.lastFrame" step="1"
                        :disabled="!videoOpened" v-model.number="currentFrame">
             </div>
             <div>
@@ -22,8 +22,8 @@
                 <button v-else @click="playVideo()" :disabled="!videoOpened">play</button>
             </div>
             <div>Duration: {{videoProperties.duration}}</div>
-            <div>unitFrame: {{unitFrame}}</div>
-            <div>lastFrame: {{lastFrame}}</div>
+            <div>unitFrame: {{videoProperties.unitFrame}}</div>
+            <div>lastFrame: {{videoProperties.lastFrame}}</div>
             <div>TimeBase: {{videoProperties.timeBase[0]}} / {{videoProperties.timeBase[1]}}</div>
             <div>fps: {{videoProperties.fps[0]}} / {{videoProperties.fps[1]}}</div>
         </div>
@@ -44,7 +44,7 @@ export default class VideoPlayer extends Vue {
     timestamp = 0
     play = false
 
-    private frameData?: Buffer
+    private frameData: Buffer | null = null
     private debouncedUpdatePicData?: lodash.DebouncedFunc<(timestamp: number) => Promise<void>>
 
     created(): void {
@@ -52,7 +52,7 @@ export default class VideoPlayer extends Vue {
     }
 
     get picData(): string {
-        if (this.frameData === undefined) {
+        if (this.frameData == null) {
             return ''
         } else {
             const blob = new Blob([this.frameData.buffer], { type: 'image/bmp' })
@@ -90,7 +90,13 @@ export default class VideoPlayer extends Vue {
         if (path != null) {
             const videoProperties = (await global.ipcRenderer.invoke('VideoPlayer:OpenVideo', path)) as VideoProperties | null
             if (videoProperties != null) {
-                this.videoProperties = videoProperties
+                this.videoProperties = new VideoProperties(
+                    videoProperties.duration,
+                    videoProperties.timeBase,
+                    videoProperties.fps,
+                    videoProperties.width,
+                    videoProperties.height
+                )
                 await this.updatePicData(0)
                 this.videoOpened = true
             }
