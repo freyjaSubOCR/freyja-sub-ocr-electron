@@ -110,10 +110,20 @@ class TorchOCR {
                     subtitleInfo = undefined
                     lastWidth = 0
                 }
-            } else if (subtitleInfo === undefined) {
-                // create new subtitleInfo
+            } else {
                 const boxObjectTensor = rcnnResults[i].boxes.cpu().toObject()
                 const currentWidth = boxObjectTensor.data[2] - boxObjectTensor.data[0]
+                if (subtitleInfo !== undefined) {
+                    if (Math.abs(lastWidth - currentWidth) > 10) {
+                        // not same length, end
+                        subtitleInfo.endFrame = i
+                        subtitleInfos.push(subtitleInfo)
+                    } else {
+                        // skip create new subtitleinfo
+                        continue
+                    }
+                }
+                // create new subtitleInfo
                 subtitleInfo = { startFrame: i, endFrame: 0 }
                 subtitleInfo.box = new Int32Array(4)
                 subtitleInfo.box[0] = lodash.toInteger(boxObjectTensor.data[0]) - 10
@@ -121,22 +131,6 @@ class TorchOCR {
                 subtitleInfo.box[2] = lodash.toInteger(boxObjectTensor.data[2]) + 10
                 subtitleInfo.box[3] = lodash.toInteger(boxObjectTensor.data[3]) + 10
                 lastWidth = currentWidth
-            } else {
-                const boxObjectTensor = rcnnResults[i].boxes.cpu().toObject()
-                const currentWidth = boxObjectTensor.data[2] - boxObjectTensor.data[0]
-                if (Math.abs(lastWidth - currentWidth) > 10) {
-                    // not same length, end
-                    subtitleInfo.endFrame = i
-                    subtitleInfos.push(subtitleInfo)
-                    // create new subtitleInfo
-                    subtitleInfo = { startFrame: i, endFrame: 0 }
-                    subtitleInfo.box = new Int32Array(4)
-                    subtitleInfo.box[0] = lodash.toInteger(boxObjectTensor.data[0]) - 10
-                    subtitleInfo.box[1] = lodash.toInteger(boxObjectTensor.data[1]) - 10
-                    subtitleInfo.box[2] = lodash.toInteger(boxObjectTensor.data[2]) + 10
-                    subtitleInfo.box[3] = lodash.toInteger(boxObjectTensor.data[3]) + 10
-                    lastWidth = currentWidth
-                }
             }
         }
         if (subtitleInfo !== undefined) {
@@ -145,6 +139,21 @@ class TorchOCR {
         }
 
         return subtitleInfos
+    }
+
+    SubtitleInfoToTensor(subtitleInfos: SubtitleInfo[]): Tensor {
+        const boxesObjectTensor = { data: new Int32Array(subtitleInfos.length * 5), shape: [subtitleInfos.length, 5] }
+        for (const i of subtitleInfos.keys()) {
+            const box = subtitleInfos[i].box
+            if (box !== undefined) {
+                boxesObjectTensor.data[i * 5 + 0] = box[0]
+                boxesObjectTensor.data[i * 5 + 1] = box[1]
+                boxesObjectTensor.data[i * 5 + 2] = box[2]
+                boxesObjectTensor.data[i * 5 + 3] = box[3]
+                boxesObjectTensor.data[i * 5 + 4] = subtitleInfos[i].startFrame
+            }
+        }
+        return Tensor.fromObject(boxesObjectTensor)
     }
 
     async OCRForward(input: Tensor, boxes: Tensor): Promise<Array<Array<number>>> {

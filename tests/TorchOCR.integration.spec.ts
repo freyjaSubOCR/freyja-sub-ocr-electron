@@ -1,5 +1,5 @@
 import TorchOCR from '@/backends/TorchOCR'
-import { Tensor, ObjectTensor } from 'torch-js'
+import { Tensor } from 'torch-js'
 
 describe('TorchOCR.ts', () => {
     it('Intergration test', async () => {
@@ -14,9 +14,8 @@ describe('TorchOCR.ts', () => {
         const resultObjectTensor = resultTensor.toObject()
         expect(resultObjectTensor).toMatchSnapshot()
 
-        const subtitleInfo = torchOCR.RCNNParse(rcnnResult)[0]
-        const boxesObjectTensor = { data: subtitleInfo.box, shape: [1, 4] } as ObjectTensor
-        const boxesTensor = Tensor.fromObject(boxesObjectTensor)
+        const subtitleInfos = torchOCR.RCNNParse(rcnnResult)
+        const boxesTensor = torchOCR.SubtitleInfoToTensor(subtitleInfos)
         const result = torchOCR.OCRParse(await torchOCR.OCRForward(inputTensor, boxesTensor))
         expect(result).toMatchSnapshot()
         inputTensor.free()

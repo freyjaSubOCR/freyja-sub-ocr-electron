@@ -43,17 +43,7 @@ import { Tensor } from 'torch-js'
                 const inputTensor = values[1] as Tensor
                 const rcnnResults = values[2] as Record<string, Tensor>[]
                 const subtitleInfos = torchOCR.RCNNParse(rcnnResults)
-                const boxesObjectTensor = { data: new Int32Array(subtitleInfos.length * 4), shape: [subtitleInfos.length, 4] }
-                for (const i of subtitleInfos.keys()) {
-                    const box = subtitleInfos[i].box
-                    if (box !== undefined) {
-                        boxesObjectTensor.data[i * 4 + 0] = box[0]
-                        boxesObjectTensor.data[i * 4 + 1] = box[1]
-                        boxesObjectTensor.data[i * 4 + 2] = box[2]
-                        boxesObjectTensor.data[i * 4 + 3] = box[3]
-                    }
-                }
-                const boxesTensor = Tensor.fromObject(boxesObjectTensor)
+                const boxesTensor = torchOCR.SubtitleInfoToTensor(subtitleInfos)
                 console.log(`Copy Tensor data (box) ${frame}: ` + (performance.now() - tStart) + 'ms')
 
                 tStart = performance.now()
