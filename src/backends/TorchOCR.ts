@@ -103,7 +103,7 @@ class TorchOCR {
         for (const i of rcnnResults.keys()) {
             if (rcnnResults[i].boxes.cpu().toObject().shape[0] !== 0) {
                 const boxObjectTensor = rcnnResults[i].boxes.cpu().toObject()
-                subtitleInfo = { startFrame: i, endFrame: i + 1 }
+                subtitleInfo = new SubtitleInfo(i, i + 1)
                 subtitleInfo.box = new Int32Array(4)
                 subtitleInfo.box[0] = lodash.toInteger(boxObjectTensor.data[0]) - 10
                 subtitleInfo.box[1] = lodash.toInteger(boxObjectTensor.data[1]) - 10
@@ -152,7 +152,7 @@ class TorchOCR {
                 throw new Error('OCR Module is not initialized')
             }
             return this.ocrChars[d]
-        }).join(''))
+        }).join('').trim())
     }
 }
 
