@@ -15,7 +15,7 @@ class TorchOCR {
     private _videoProperties: VideoProperties | undefined
 
     public get videoProperties() {
-        return Object.assign({}, this._videoProperties)
+        return this._videoProperties
     }
 
     public get videoPlayer() {
@@ -39,7 +39,7 @@ class TorchOCR {
     async InitVideoPlayer(path: string): Promise<VideoProperties> {
         this._videoPlayer = new RawVideoPlayer()
         this._videoProperties = await this._videoPlayer.OpenVideo(path)
-        return this.videoProperties
+        return this.videoProperties as VideoProperties
     }
 
     async ReadRawFrame(frame: number): Promise<Buffer> {
@@ -98,44 +98,19 @@ class TorchOCR {
     }
 
     RCNNParse(rcnnResults: Array<Record<string, Tensor>>): SubtitleInfo[] {
-        let lastWidth = 0
         let subtitleInfo: SubtitleInfo | undefined
         const subtitleInfos: SubtitleInfo[] = []
         for (const i of rcnnResults.keys()) {
-            if (rcnnResults[i].boxes.cpu().toObject().shape[0] === 0) {
-                // empty box, end
-                if (subtitleInfo !== undefined) {
-                    subtitleInfo.endFrame = i
-                    subtitleInfos.push(subtitleInfo)
-                    subtitleInfo = undefined
-                    lastWidth = 0
-                }
-            } else {
+            if (rcnnResults[i].boxes.cpu().toObject().shape[0] !== 0) {
                 const boxObjectTensor = rcnnResults[i].boxes.cpu().toObject()
-                const currentWidth = boxObjectTensor.data[2] - boxObjectTensor.data[0]
-                if (subtitleInfo !== undefined) {
-                    if (Math.abs(lastWidth - currentWidth) > 10) {
-                        // not same length, end
-                        subtitleInfo.endFrame = i
-                        subtitleInfos.push(subtitleInfo)
-                    } else {
-                        // skip create new subtitleinfo
-                        continue
-                    }
-                }
-                // create new subtitleInfo
-                subtitleInfo = { startFrame: i, endFrame: 0 }
+                subtitleInfo = { startFrame: i, endFrame: i + 1 }
                 subtitleInfo.box = new Int32Array(4)
                 subtitleInfo.box[0] = lodash.toInteger(boxObjectTensor.data[0]) - 10
                 subtitleInfo.box[1] = lodash.toInteger(boxObjectTensor.data[1]) - 10
                 subtitleInfo.box[2] = lodash.toInteger(boxObjectTensor.data[2]) + 10
                 subtitleInfo.box[3] = lodash.toInteger(boxObjectTensor.data[3]) + 10
-                lastWidth = currentWidth
+                subtitleInfos.push(subtitleInfo)
             }
-        }
-        if (subtitleInfo !== undefined) {
-            subtitleInfo.endFrame = rcnnResults.length
-            subtitleInfos.push(subtitleInfo)
         }
 
         return subtitleInfos

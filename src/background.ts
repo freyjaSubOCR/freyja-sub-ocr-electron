@@ -5,7 +5,7 @@ import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
 import path from 'path'
 import CommonIpc from './CommonIpc'
-import TorchOCR from './backends/TorchOCR'
+import TorchOCRTaskScheduler from './backends/TorchOCRTaskScheduler'
 import BMPVideoPlayer from './backends/BMPVideoPlayer'
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
@@ -81,8 +81,8 @@ app.on('ready', async () => {
     bmpVideoPlayer.registerIPCListener()
     const commonIpc = new CommonIpc()
     commonIpc.registerIPCListener()
-    const torchOCR = new TorchOCR()
-    torchOCR.registerIPCListener()
+    const torchOCRTaskScheduler = new TorchOCRTaskScheduler()
+    torchOCRTaskScheduler.registerIPCListener()
 
     createWindow()
 })
