@@ -3,7 +3,8 @@ import { ipcMain } from 'electron'
 import logger from '@/logger'
 import { Tensor } from 'torch-js'
 import Config from '@/config'
-import { SubtitleInfo, VideoProperties } from '@/interfaces'
+import { SubtitleInfo } from '@/interfaces'
+import levenshtein from 'js-levenshtein'
 
 class TorchOCRTaskScheduler {
     private torchOCR: TorchOCR = new TorchOCR()
@@ -45,8 +46,6 @@ class TorchOCRTaskScheduler {
             tensorDataPromise = Promise.all([tensorDataPromise, ocrPromiseBuffer[0]]).then(async () => {
                 const rawImg: Buffer[] = []
                 for (const i of Array(step).keys()) {
-                    console.log(`read frame ${i + frame}`)
-                    console.log(`last frame ${(this.torchOCR.videoProperties as VideoProperties).lastFrame}`)
                     rawImg.push(await this.torchOCR.ReadRawFrame(i + frame))
                 }
                 this.currentProcessingFrame = frame
@@ -69,7 +68,7 @@ class TorchOCRTaskScheduler {
                     const ocrResults = this.torchOCR.OCRParse(await this.torchOCR.OCRForward(inputTensor, boxesTensor))
 
                     for (const i of subtitleInfos.keys()) {
-                        subtitleInfos[i].text = ocrResults[i]
+                        subtitleInfos[i].texts = [ocrResults[i]]
                         subtitleInfos[i].startFrame = subtitleInfos[i].startFrame + frame
                         subtitleInfos[i].endFrame = subtitleInfos[i].endFrame + frame
                         this.subtitleInfos.push(subtitleInfos[i])
@@ -82,6 +81,33 @@ class TorchOCRTaskScheduler {
             ocrPromiseBuffer.push(ocrPromise)
         }
         await Promise.all([tensorDataPromise, rcnnPromise, ocrPromise])
+        return this.subtitleInfos
+    }
+
+    CleanUpSubtitleInfos() {
+        let subtitleInfo: SubtitleInfo | undefined
+        const subtitleInfos: SubtitleInfo[] = []
+        for (const i of this.subtitleInfos.keys()) {
+            const currentSubtitleInfo = this.subtitleInfos[i]
+            if (subtitleInfo === undefined) {
+                subtitleInfo = new SubtitleInfo(currentSubtitleInfo.startFrame, 0)
+            }
+            if (subtitleInfo.text !== undefined && currentSubtitleInfo.text !== undefined) {
+                if (levenshtein(subtitleInfo.text, currentSubtitleInfo.text) > 3) {
+                    subtitleInfo.endFrame = currentSubtitleInfo.endFrame
+                    subtitleInfos.push(subtitleInfo)
+                    subtitleInfo = new SubtitleInfo(i, 0)
+                }
+            }
+            if (currentSubtitleInfo.text !== undefined) {
+                subtitleInfo.texts.push(currentSubtitleInfo.text)
+            }
+        }
+        if (subtitleInfo !== undefined) {
+            subtitleInfo.endFrame = this.subtitleInfos[this.subtitleInfos.length - 1].endFrame
+            subtitleInfos.push(subtitleInfo)
+        }
+        this.subtitleInfos = subtitleInfos
         return this.subtitleInfos
     }
 }

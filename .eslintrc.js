@@ -25,7 +25,9 @@ module.exports = {
             asyncArrow: 'always'
         }],
         'quote-props': ['error', 'consistent'],
-        'space-infix-ops': ['error']
+        'space-infix-ops': ['error'],
+        'no-useless-constructor': 'off',
+        '@typescript-eslint/no-useless-constructor': 'error'
     },
     overrides: [
         {
