@@ -20,6 +20,30 @@ class TorchOCRTaskScheduler {
                 return null
             }
         })
+        ipcMain.handle('TorchOCRTaskScheduler:Start', async () => {
+            try {
+                return await this.Start()
+            } catch (error) {
+                logger.error(error.message)
+                return null
+            }
+        })
+        ipcMain.handle('TorchOCRTaskScheduler:CleanUpSubtitleInfos', () => {
+            try {
+                return this.CleanUpSubtitleInfos()
+            } catch (error) {
+                logger.error(error.message)
+                return null
+            }
+        })
+        ipcMain.handle('TorchOCRTaskScheduler:currentProcessingFrame', () => {
+            try {
+                return this.currentProcessingFrame
+            } catch (error) {
+                logger.error(error.message)
+                return null
+            }
+        })
     }
 
     async Init(path: string): Promise<void> {
