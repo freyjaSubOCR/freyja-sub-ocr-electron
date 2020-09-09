@@ -122,6 +122,42 @@ class SubtitleInfo implements ISubtitleInfo {
         }
         return maxFreqText
     }
+
+    GenerateTime(fps: number) {
+        let timeInt = Math.floor(this.startFrame * 1000 / fps)
+        let timeStruct = new Date(timeInt)
+        this.startTime = `${timeStruct.getUTCHours().toString().padStart(2, '0')}:${timeStruct.getUTCMinutes().toString().padStart(2, '0')}:${timeStruct.getUTCSeconds().toString().padStart(2, '0')}.${Math.floor(timeStruct.getUTCMilliseconds() / 10).toString().padStart(2, '0')}`
+
+        timeInt = Math.floor(this.endFrame * 1000 / fps)
+        timeStruct = new Date(timeInt)
+        this.endTime = `${timeStruct.getUTCHours().toString().padStart(2, '0')}:${timeStruct.getUTCMinutes().toString().padStart(2, '0')}:${timeStruct.getUTCSeconds().toString().padStart(2, '0')}.${Math.floor(timeStruct.getUTCMilliseconds() / 10).toString().padStart(2, '0')}`
+    }
 }
 
-export { RectPos, RenderedVideo, VideoProperties, SubtitleInfo }
+class ASSStyle {
+    Name = 'Default'
+    Fontname = '方正准圆_GBK'
+    Fontsize = '75'
+    PrimaryColour = '&H00FFFFFF'
+    SecondaryColour = '&HF0000000'
+    OutlineColour = '&H00193768'
+    BackColour = '&HF0000000'
+    Bold = false
+    Italic = false
+    Underline = false
+    StrikeOut = false
+    ScaleX = 100
+    ScaleY = 100
+    Spacing = 0
+    Angle = 0
+    BorderStyle = 1
+    Outline = 2
+    Shadow = 0
+    Alignment = 2
+    MarginL = 10
+    MarginR = 10
+    MarginV = 15
+    Encoding = 1
+}
+
+export { RectPos, RenderedVideo, VideoProperties, SubtitleInfo, ASSStyle }

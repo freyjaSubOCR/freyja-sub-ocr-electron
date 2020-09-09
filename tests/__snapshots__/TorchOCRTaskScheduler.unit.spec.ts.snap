@@ -9915,7 +9915,9 @@ exports[`TorchOCRTaskScheduler.ts task test 2`] = `
 Array [
   SubtitleInfo {
     "endFrame": 27,
+    "endTime": "00:00:01.12",
     "startFrame": 2,
+    "startTime": "00:00:00.08",
     "texts": Array [
       "我是神野惠",
       "我是神野惠",
@@ -9946,7 +9948,9 @@ Array [
   },
   SubtitleInfo {
     "endFrame": 82,
+    "endTime": "00:00:03.42",
     "startFrame": 35,
+    "startTime": "00:00:01.45",
     "texts": Array [
       "是和泉纱雾的同班同学",
       "是和泉纱雾的同班同学",
@@ -9999,7 +10003,9 @@ Array [
   },
   SubtitleInfo {
     "endFrame": 142,
+    "endTime": "00:00:05.92",
     "startFrame": 84,
+    "startTime": "00:00:03.50",
     "texts": Array [
       "你为什么要b她进我家啊",
       "你为什么要b她进我家啊",
@@ -10063,7 +10069,9 @@ Array [
   },
   SubtitleInfo {
     "endFrame": 243,
+    "endTime": "00:00:10.13",
     "startFrame": 144,
+    "startTime": "00:00:06.00",
     "texts": Array [
       "跟我差不多岁数的女孩子都最喜欢鸡了",
       "跟我差不多岁数的女孩子都最喜欢鸡了",
@@ -10168,7 +10176,9 @@ Array [
   },
   SubtitleInfo {
     "endFrame": 278,
+    "endTime": "00:00:11.59",
     "startFrame": 246,
+    "startTime": "00:00:10.26",
     "texts": Array [
       "最…最喜欢？",
       "最…最喜欢？",
@@ -10206,14 +10216,18 @@ Array [
   },
   SubtitleInfo {
     "endFrame": 0,
+    "endTime": "00:00:00.00",
     "startFrame": 284,
+    "startTime": "00:00:11.84",
     "texts": Array [
       "名字就叫 x和泉从房里拖出求ll同盟",
     ],
   },
   SubtitleInfo {
     "endFrame": 287,
+    "endTime": "00:00:11.97",
     "startFrame": 285,
+    "startTime": "00:00:11.88",
     "texts": Array [
       "名字就i叫 k和泉从房里施出来y 」同盟",
       "名字就i叫 k和泉从房里施出来y 」同盟",
@@ -10221,7 +10235,9 @@ Array [
   },
   SubtitleInfo {
     "endFrame": 289,
+    "endTime": "00:00:12.05",
     "startFrame": 287,
+    "startTime": "00:00:11.97",
     "texts": Array [
       "名字 txk 泉从房间里抽也求！」同盟",
       "名字 txk 泉从房间里抽也求！」同盟",
@@ -10229,7 +10245,9 @@ Array [
   },
   SubtitleInfo {
     "endFrame": 291,
+    "endTime": "00:00:12.13",
     "startFrame": 289,
+    "startTime": "00:00:12.05",
     "texts": Array [
       "名字就叫「 tk和泉从房间里拖出来求！l同盟",
       "名字就叫「 tk和泉从房间里拖出来求！l同盟",
@@ -10237,7 +10255,9 @@ Array [
   },
   SubtitleInfo {
     "endFrame": 293,
+    "endTime": "00:00:12.22",
     "startFrame": 291,
+    "startTime": "00:00:12.13",
     "texts": Array [
       "名字就叫「 小和泉从房间里拖出来！ln题",
       "名字就叫「 小和泉从房间里拖出来！ln题",
@@ -10245,7 +10265,9 @@ Array [
   },
   SubtitleInfo {
     "endFrame": 295,
+    "endTime": "00:00:12.30",
     "startFrame": 293,
+    "startTime": "00:00:12.22",
     "texts": Array [
       "名字就叫 把ky和最从房间里拖出求l」同盟",
       "名字就叫 把ky和最从房间里拖出求l」同盟",
@@ -10253,7 +10275,9 @@ Array [
   },
   SubtitleInfo {
     "endFrame": 313,
+    "endTime": "00:00:13.05",
     "startFrame": 295,
+    "startTime": "00:00:12.30",
     "texts": Array [
       "名字m「把小和泉从房间里拖出来lJ同盟",
       "名字m「把小和泉从房间里拖出来lJ同盟",
@@ -10277,7 +10301,9 @@ Array [
   },
   SubtitleInfo {
     "endFrame": 318,
+    "endTime": "00:00:13.26",
     "startFrame": 313,
+    "startTime": "00:00:13.05",
     "texts": Array [
       "名字 把xk和最从房里抽出汝！」同盟",
       "名字 把xk和最从房里抽出汝！」同盟",
@@ -10288,14 +10314,18 @@ Array [
   },
   SubtitleInfo {
     "endFrame": 0,
+    "endTime": "00:00:00.00",
     "startFrame": 318,
+    "startTime": "00:00:13.26",
     "texts": Array [
       "名字m「把小和泉从房间里拖出来lJ同盟",
     ],
   },
   SubtitleInfo {
     "endFrame": 322,
+    "endTime": "00:00:13.43",
     "startFrame": 319,
+    "startTime": "00:00:13.30",
     "texts": Array [
       "名字 把xk和最从房里抽出汝！」同盟",
       "名字 把xk和最从房里抽出汝！」同盟",
@@ -10304,7 +10334,9 @@ Array [
   },
   SubtitleInfo {
     "endFrame": 333,
+    "endTime": "00:00:13.88",
     "startFrame": 322,
+    "startTime": "00:00:13.43",
     "texts": Array [
       "名字m「把小和泉从房间里拖出来lJ同盟",
       "名字m「把小和泉从房间里拖出来lJ同盟",
@@ -10321,7 +10353,9 @@ Array [
   },
   SubtitleInfo {
     "endFrame": 337,
+    "endTime": "00:00:14.05",
     "startFrame": 333,
+    "startTime": "00:00:13.88",
     "texts": Array [
       "名字 把xk和最从房里抽出汝！」同盟",
       "名字 把xk和最从房里抽出汝！」同盟",
@@ -10331,7 +10365,9 @@ Array [
   },
   SubtitleInfo {
     "endFrame": 342,
+    "endTime": "00:00:14.26",
     "startFrame": 337,
+    "startTime": "00:00:14.05",
     "texts": Array [
       "名字m「把小和泉从房间里拖出来lJ同盟",
       "名字m「把小和泉从房间里拖出来lJ同盟",
@@ -10342,14 +10378,18 @@ Array [
   },
   SubtitleInfo {
     "endFrame": 0,
+    "endTime": "00:00:00.00",
     "startFrame": 342,
+    "startTime": "00:00:14.26",
     "texts": Array [
       "名字 把xk和最从房里抽出汝！」同盟",
     ],
   },
   SubtitleInfo {
     "endFrame": 346,
+    "endTime": "00:00:14.43",
     "startFrame": 343,
+    "startTime": "00:00:14.30",
     "texts": Array [
       "名字m「把小和泉从房间里拖出来lJ同盟",
       "名字m「把小和泉从房间里拖出来lJ同盟",
@@ -10358,7 +10398,9 @@ Array [
   },
   SubtitleInfo {
     "endFrame": 352,
+    "endTime": "00:00:14.68",
     "startFrame": 346,
+    "startTime": "00:00:14.43",
     "texts": Array [
       "名字 把xk和最从房里抽出汝！」同盟",
       "名字 把xk和最从房里抽出汝！」同盟",
@@ -10370,7 +10412,9 @@ Array [
   },
   SubtitleInfo {
     "endFrame": 372,
+    "endTime": "00:00:15.51",
     "startFrame": 352,
+    "startTime": "00:00:14.68",
     "texts": Array [
       "名字就叫「把小和泉从房间里拖出来l！」同盟",
       "名字就叫「把小和泉从房间里拖出来l！」同盟",
@@ -10396,7 +10440,9 @@ Array [
   },
   SubtitleInfo {
     "endFrame": 403,
+    "endTime": "00:00:16.80",
     "startFrame": 377,
+    "startTime": "00:00:15.72",
     "texts": Array [
       "不出去 不出去",
       "不出去 不出去",
@@ -10428,7 +10474,9 @@ Array [
   },
   SubtitleInfo {
     "endFrame": 438,
+    "endTime": "00:00:18.26",
     "startFrame": 403,
+    "startTime": "00:00:16.80",
     "texts": Array [
       "我说不出去就是不出去",
       "我说不出去就是不出去",
@@ -10469,7 +10517,9 @@ Array [
   },
   SubtitleInfo {
     "endFrame": 513,
+    "endTime": "00:00:21.39",
     "startFrame": 441,
+    "startTime": "00:00:18.39",
     "texts": Array [
       "哥哥想凶妹妹变成什么样？",
       "哥哥想凶妹妹变成什么样？",
@@ -10547,7 +10597,9 @@ Array [
   },
   SubtitleInfo {
     "endFrame": 561,
+    "endTime": "00:00:23.39",
     "startFrame": 531,
+    "startTime": "00:00:22.14",
     "texts": Array [
       "和泉政宗?",
       "和泉政宗?",
@@ -10583,7 +10635,9 @@ Array [
   },
   SubtitleInfo {
     "endFrame": 619,
+    "endTime": "00:00:25.81",
     "startFrame": 571,
+    "startTime": "00:00:23.81",
     "texts": Array [
       "居然是如此年轻的女孩子？",
       "居然是如此年轻的女孩子？",
@@ -10637,7 +10691,9 @@ Array [
   },
   SubtitleInfo {
     "endFrame": 719,
+    "endTime": "00:00:29.98",
     "startFrame": 628,
+    "startTime": "00:00:26.19",
     "texts": Array [
       "我的下一个作品要请情色漫画老师来担任插画师",
       "我的下一个作品要请情色漫画老师来担任插画师",
@@ -10734,7 +10790,9 @@ Array [
   },
   SubtitleInfo {
     "endFrame": 840,
+    "endTime": "00:00:35.03",
     "startFrame": 729,
+    "startTime": "00:00:30.40",
     "texts": Array [
       "？ 乃…与  人 t",
       "？ 乃…与  人 t",

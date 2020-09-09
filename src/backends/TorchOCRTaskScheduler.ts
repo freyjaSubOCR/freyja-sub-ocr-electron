@@ -111,6 +111,10 @@ class TorchOCRTaskScheduler {
     }
 
     CleanUpSubtitleInfos() {
+        if (this.torchOCR.videoProperties === undefined) {
+            throw new Error('VideoPlayer is not initialized')
+        }
+
         let subtitleInfo: SubtitleInfo | undefined
         const subtitleInfos: SubtitleInfo[] = []
         for (const i of this.subtitleInfos.keys()) {
@@ -120,6 +124,7 @@ class TorchOCRTaskScheduler {
             }
             if (subtitleInfo.text !== undefined && currentSubtitleInfo.text !== undefined) {
                 if (levenshtein(subtitleInfo.text, currentSubtitleInfo.text) > 3) {
+                    subtitleInfo.GenerateTime(this.torchOCR.videoProperties?.fps[0] / this.torchOCR.videoProperties?.fps[1])
                     subtitleInfos.push(subtitleInfo)
                     subtitleInfo = new SubtitleInfo(currentSubtitleInfo.startFrame, 0)
                 } else {
@@ -132,6 +137,7 @@ class TorchOCRTaskScheduler {
         }
         if (subtitleInfo !== undefined) {
             subtitleInfo.endFrame = this.subtitleInfos[this.subtitleInfos.length - 1].endFrame
+            subtitleInfo.GenerateTime(this.torchOCR.videoProperties?.fps[0] / this.torchOCR.videoProperties?.fps[1])
             subtitleInfos.push(subtitleInfo)
         }
         this.subtitleInfos = subtitleInfos
