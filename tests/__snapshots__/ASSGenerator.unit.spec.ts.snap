@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ASSGenerator.ts generate test 1`] = `
+"[Script Info]
+ScriptType: v4.00+
+PlayResX: 1920
+PlayResY: 1080
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Default,方正准圆_GBK,75,&H00FFFFFF,&HF0000000,&H00193768,&HF0000000,0,0,0,0,100,100,0,0,1,2,0,2,10,10,15,1
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,00:00:00.08,00:00:01.12,Default,,0,0,0,,我是神野惠
+Dialogue: 0,00:00:01.45,00:00:03.42,Default,,0,0,0,,是和泉纱雾的同班同学
+Dialogue: 0,00:00:03.50,00:00:05.92,Default,,0,0,0,,你为什么要让她进我们家啊
+Dialogue: 0,00:00:06.00,00:00:10.13,Default,,0,0,0,,跟我差不多岁数的女孩子都最喜欢鸡鸡了
+Dialogue: 0,00:00:10.26,00:00:11.59,Default,,0,0,0,,最…最喜欢？
+Dialogue: 0,00:00:11.84,00:00:15.51,Default,,0,0,0,,名字就叫「把小和泉从房间里拖出来！」同盟
+Dialogue: 0,00:00:15.72,00:00:16.80,Default,,0,0,0,,不出去 不出去
+Dialogue: 0,00:00:16.80,00:00:18.26,Default,,0,0,0,,我说不出去就是不出去
+Dialogue: 0,00:00:18.39,00:00:21.39,Default,,0,0,0,,哥哥想让妹妹变成什么样？
+Dialogue: 0,00:00:22.14,00:00:23.39,Default,,0,0,0,,和泉政宗？
+Dialogue: 0,00:00:23.81,00:00:25.81,Default,,0,0,0,,居然是如此年轻的女孩子？
+Dialogue: 0,00:00:26.19,00:00:29.98,Default,,0,0,0,,我的下一个作品要请情色漫画老师来担任插画师"
+`;

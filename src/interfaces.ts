@@ -160,4 +160,4 @@ class ASSStyle {
     Encoding = 1
 }
 
-export { RectPos, RenderedVideo, VideoProperties, SubtitleInfo, ASSStyle }
+export { RectPos, RenderedVideo, IVideoProperties, VideoProperties, ISubtitleInfo, SubtitleInfo, ASSStyle }
