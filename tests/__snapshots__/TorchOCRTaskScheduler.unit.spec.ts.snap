@@ -1,9 +1,9920 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`TorchOCRTaskScheduler.ts Intergration test 1`] = `
+exports[`TorchOCRTaskScheduler.ts task test 1`] = `
 Array [
   SubtitleInfo {
+    "box": Int32Array [
+      774,
+      361,
+      1143,
+      462,
+    ],
+    "endFrame": 3,
+    "startFrame": 2,
+    "texts": Array [
+      "我是神野惠",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      774,
+      361,
+      1143,
+      462,
+    ],
+    "endFrame": 4,
+    "startFrame": 3,
+    "texts": Array [
+      "我是神野惠",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      774,
+      361,
+      1143,
+      462,
+    ],
+    "endFrame": 5,
+    "startFrame": 4,
+    "texts": Array [
+      "我是神野惠",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      774,
+      362,
+      1143,
+      462,
+    ],
+    "endFrame": 6,
+    "startFrame": 5,
+    "texts": Array [
+      "我是神野惠",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      774,
+      362,
+      1143,
+      462,
+    ],
+    "endFrame": 7,
+    "startFrame": 6,
+    "texts": Array [
+      "我是神野惠",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      774,
+      362,
+      1143,
+      462,
+    ],
+    "endFrame": 8,
+    "startFrame": 7,
+    "texts": Array [
+      "我是神野惠",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      775,
+      361,
+      1140,
+      462,
+    ],
+    "endFrame": 9,
+    "startFrame": 8,
+    "texts": Array [
+      "我是神野惠",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      775,
+      361,
+      1140,
+      462,
+    ],
+    "endFrame": 10,
+    "startFrame": 9,
+    "texts": Array [
+      "我是神野惠",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      775,
+      361,
+      1140,
+      462,
+    ],
+    "endFrame": 11,
+    "startFrame": 10,
+    "texts": Array [
+      "我是神野惠",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      774,
+      362,
+      1146,
+      462,
+    ],
+    "endFrame": 12,
+    "startFrame": 11,
+    "texts": Array [
+      "我是神野惠",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      774,
+      362,
+      1146,
+      462,
+    ],
+    "endFrame": 13,
+    "startFrame": 12,
+    "texts": Array [
+      "我是神野惠",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      774,
+      362,
+      1146,
+      462,
+    ],
+    "endFrame": 14,
+    "startFrame": 13,
+    "texts": Array [
+      "我是神野惠",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      772,
+      362,
+      1145,
+      462,
+    ],
+    "endFrame": 15,
+    "startFrame": 14,
+    "texts": Array [
+      "我是神野惠",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      772,
+      362,
+      1145,
+      462,
+    ],
+    "endFrame": 16,
+    "startFrame": 15,
+    "texts": Array [
+      "我是神野惠",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      772,
+      362,
+      1145,
+      462,
+    ],
+    "endFrame": 17,
+    "startFrame": 16,
+    "texts": Array [
+      "我是神野惠",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      769,
+      362,
+      1142,
+      461,
+    ],
+    "endFrame": 18,
+    "startFrame": 17,
+    "texts": Array [
+      "我是神野惠",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      769,
+      362,
+      1142,
+      461,
+    ],
+    "endFrame": 19,
+    "startFrame": 18,
+    "texts": Array [
+      "我是神野惠",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      769,
+      362,
+      1142,
+      461,
+    ],
+    "endFrame": 20,
+    "startFrame": 19,
+    "texts": Array [
+      "我是神野惠",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      769,
+      362,
+      1142,
+      461,
+    ],
+    "endFrame": 21,
+    "startFrame": 20,
+    "texts": Array [
+      "我是神野惠",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      769,
+      362,
+      1142,
+      461,
+    ],
+    "endFrame": 22,
+    "startFrame": 21,
+    "texts": Array [
+      "我是神野惠",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      769,
+      362,
+      1142,
+      461,
+    ],
+    "endFrame": 23,
+    "startFrame": 22,
+    "texts": Array [
+      "我是神野惠",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      769,
+      362,
+      1142,
+      461,
+    ],
+    "endFrame": 24,
+    "startFrame": 23,
+    "texts": Array [
+      "我是神野惠",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      769,
+      362,
+      1142,
+      461,
+    ],
+    "endFrame": 25,
+    "startFrame": 24,
+    "texts": Array [
+      "我是神野惠",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      769,
+      362,
+      1142,
+      461,
+    ],
+    "endFrame": 26,
+    "startFrame": 25,
+    "texts": Array [
+      "我是神野惠",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      769,
+      362,
+      1142,
+      461,
+    ],
+    "endFrame": 27,
+    "startFrame": 26,
+    "texts": Array [
+      "我是神野惠",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      609,
+      362,
+      1314,
+      465,
+    ],
+    "endFrame": 36,
+    "startFrame": 35,
+    "texts": Array [
+      "是和泉纱雾的同班同学",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      609,
+      362,
+      1314,
+      465,
+    ],
+    "endFrame": 37,
+    "startFrame": 36,
+    "texts": Array [
+      "是和泉纱雾的同班同学",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      609,
+      362,
+      1314,
+      465,
+    ],
+    "endFrame": 38,
+    "startFrame": 37,
+    "texts": Array [
+      "是和泉纱雾的同班同学",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      609,
+      362,
+      1314,
+      465,
+    ],
+    "endFrame": 39,
+    "startFrame": 38,
+    "texts": Array [
+      "是和泉纱雾的同班同学",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      609,
+      362,
+      1314,
+      465,
+    ],
+    "endFrame": 40,
+    "startFrame": 39,
+    "texts": Array [
+      "是和泉纱雾的同班同学",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      609,
+      362,
+      1314,
+      465,
+    ],
     "endFrame": 41,
+    "startFrame": 40,
+    "texts": Array [
+      "是和泉纱雾的同班同学",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      609,
+      362,
+      1314,
+      465,
+    ],
+    "endFrame": 42,
+    "startFrame": 41,
+    "texts": Array [
+      "是和泉纱雾的同班同学",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      609,
+      362,
+      1314,
+      465,
+    ],
+    "endFrame": 43,
+    "startFrame": 42,
+    "texts": Array [
+      "是和泉纱雾的同班同学",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      609,
+      362,
+      1314,
+      465,
+    ],
+    "endFrame": 44,
+    "startFrame": 43,
+    "texts": Array [
+      "是和泉纱雾的同班同学",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      609,
+      362,
+      1314,
+      465,
+    ],
+    "endFrame": 45,
+    "startFrame": 44,
+    "texts": Array [
+      "是和泉纱雾的同班同学",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      609,
+      362,
+      1314,
+      465,
+    ],
+    "endFrame": 46,
+    "startFrame": 45,
+    "texts": Array [
+      "是和泉纱雾的同班同学",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      609,
+      362,
+      1314,
+      465,
+    ],
+    "endFrame": 47,
+    "startFrame": 46,
+    "texts": Array [
+      "是和泉纱雾的同班同学",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      609,
+      362,
+      1314,
+      465,
+    ],
+    "endFrame": 48,
+    "startFrame": 47,
+    "texts": Array [
+      "是和泉纱雾的同班同学",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      609,
+      362,
+      1314,
+      465,
+    ],
+    "endFrame": 49,
+    "startFrame": 48,
+    "texts": Array [
+      "是和泉纱雾的同班同学",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      609,
+      362,
+      1314,
+      465,
+    ],
+    "endFrame": 50,
+    "startFrame": 49,
+    "texts": Array [
+      "是和泉纱雾的同班同学",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      609,
+      362,
+      1314,
+      465,
+    ],
+    "endFrame": 51,
+    "startFrame": 50,
+    "texts": Array [
+      "是和泉纱雾的同班同学",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      609,
+      362,
+      1314,
+      465,
+    ],
+    "endFrame": 52,
+    "startFrame": 51,
+    "texts": Array [
+      "是和泉纱雾的同班同学",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      609,
+      362,
+      1314,
+      465,
+    ],
+    "endFrame": 53,
+    "startFrame": 52,
+    "texts": Array [
+      "是和泉纱雾的同班同学",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      609,
+      362,
+      1314,
+      465,
+    ],
+    "endFrame": 54,
+    "startFrame": 53,
+    "texts": Array [
+      "是和泉纱雾的同班同学",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      607,
+      362,
+      1313,
+      462,
+    ],
+    "endFrame": 55,
+    "startFrame": 54,
+    "texts": Array [
+      "是和泉纱雾的同班同学",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      607,
+      362,
+      1313,
+      462,
+    ],
+    "endFrame": 56,
+    "startFrame": 55,
+    "texts": Array [
+      "是和泉纱雾的同班同学",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      606,
+      362,
+      1312,
+      462,
+    ],
+    "endFrame": 57,
+    "startFrame": 56,
+    "texts": Array [
+      "是和泉纱雾的同班同学",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      606,
+      362,
+      1312,
+      462,
+    ],
+    "endFrame": 58,
+    "startFrame": 57,
+    "texts": Array [
+      "是和泉纱雾的同班同学",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      607,
+      362,
+      1312,
+      462,
+    ],
+    "endFrame": 59,
+    "startFrame": 58,
+    "texts": Array [
+      "是和泉纱雾的同班同学",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      607,
+      362,
+      1312,
+      462,
+    ],
+    "endFrame": 60,
+    "startFrame": 59,
+    "texts": Array [
+      "是和泉纱雾的同班同学",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      607,
+      362,
+      1313,
+      462,
+    ],
+    "endFrame": 61,
+    "startFrame": 60,
+    "texts": Array [
+      "是和泉纱雾的同班同学",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      607,
+      362,
+      1313,
+      462,
+    ],
+    "endFrame": 62,
+    "startFrame": 61,
+    "texts": Array [
+      "是和泉纱雾的同班同学",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      608,
+      362,
+      1313,
+      462,
+    ],
+    "endFrame": 63,
+    "startFrame": 62,
+    "texts": Array [
+      "是和泉纱雾的同班同学",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      608,
+      362,
+      1313,
+      462,
+    ],
+    "endFrame": 64,
+    "startFrame": 63,
+    "texts": Array [
+      "是和泉纱雾的同班同学",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      608,
+      362,
+      1309,
+      462,
+    ],
+    "endFrame": 65,
+    "startFrame": 64,
+    "texts": Array [
+      "是和泉纱雾的同班同学",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      608,
+      362,
+      1309,
+      462,
+    ],
+    "endFrame": 66,
+    "startFrame": 65,
+    "texts": Array [
+      "是和泉纱雾的同班同学",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      608,
+      362,
+      1311,
+      462,
+    ],
+    "endFrame": 67,
+    "startFrame": 66,
+    "texts": Array [
+      "是和泉纱雾的同班同学",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      608,
+      362,
+      1310,
+      462,
+    ],
+    "endFrame": 68,
+    "startFrame": 67,
+    "texts": Array [
+      "是和泉纱雾的同班同学",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      607,
+      362,
+      1312,
+      462,
+    ],
+    "endFrame": 69,
+    "startFrame": 68,
+    "texts": Array [
+      "是和泉纱雾的同班同学",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      607,
+      362,
+      1312,
+      462,
+    ],
+    "endFrame": 70,
+    "startFrame": 69,
+    "texts": Array [
+      "是和泉纱雾的同班同学",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      608,
+      362,
+      1310,
+      462,
+    ],
+    "endFrame": 71,
+    "startFrame": 70,
+    "texts": Array [
+      "是和泉纱雾的同班同学",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      608,
+      362,
+      1310,
+      462,
+    ],
+    "endFrame": 72,
+    "startFrame": 71,
+    "texts": Array [
+      "是和泉纱雾的同班同学",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      607,
+      362,
+      1312,
+      462,
+    ],
+    "endFrame": 73,
+    "startFrame": 72,
+    "texts": Array [
+      "是和泉纱雾的同班同学",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      607,
+      362,
+      1312,
+      462,
+    ],
+    "endFrame": 74,
+    "startFrame": 73,
+    "texts": Array [
+      "是和泉纱雾的同班同学",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      607,
+      362,
+      1309,
+      462,
+    ],
+    "endFrame": 75,
+    "startFrame": 74,
+    "texts": Array [
+      "是和泉纱雾的同班同学",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      607,
+      362,
+      1309,
+      462,
+    ],
+    "endFrame": 76,
+    "startFrame": 75,
+    "texts": Array [
+      "是和泉纱雾的同班同学",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      609,
+      362,
+      1316,
+      462,
+    ],
+    "endFrame": 77,
+    "startFrame": 76,
+    "texts": Array [
+      "是和泉纱雾的同班同学",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      609,
+      362,
+      1316,
+      462,
+    ],
+    "endFrame": 78,
+    "startFrame": 77,
+    "texts": Array [
+      "是和泉纱雾的同班同学",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      608,
+      362,
+      1312,
+      462,
+    ],
+    "endFrame": 79,
+    "startFrame": 78,
+    "texts": Array [
+      "是和泉纱雾的同班同学",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      608,
+      362,
+      1312,
+      462,
+    ],
+    "endFrame": 80,
+    "startFrame": 79,
+    "texts": Array [
+      "是和泉纱雾的同班同学",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      608,
+      362,
+      1312,
+      462,
+    ],
+    "endFrame": 81,
+    "startFrame": 80,
+    "texts": Array [
+      "是和泉纱雾的同班同学",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      608,
+      362,
+      1312,
+      462,
+    ],
+    "endFrame": 82,
+    "startFrame": 81,
+    "texts": Array [
+      "是和泉纱雾的同班同学",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      536,
+      361,
+      1378,
+      460,
+    ],
+    "endFrame": 85,
+    "startFrame": 84,
+    "texts": Array [
+      "你为什么要b她进我家啊",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      536,
+      361,
+      1378,
+      460,
+    ],
+    "endFrame": 86,
+    "startFrame": 85,
+    "texts": Array [
+      "你为什么要b她进我家啊",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      534,
+      361,
+      1378,
+      460,
+    ],
+    "endFrame": 87,
+    "startFrame": 86,
+    "texts": Array [
+      "你为什么要b她进我家啊",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      534,
+      361,
+      1378,
+      460,
+    ],
+    "endFrame": 88,
+    "startFrame": 87,
+    "texts": Array [
+      "你为什么要b她进我家啊",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      540,
+      362,
+      1377,
+      461,
+    ],
+    "endFrame": 89,
+    "startFrame": 88,
+    "texts": Array [
+      "你为什么要让她进我们家啊",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      540,
+      362,
+      1377,
+      461,
+    ],
+    "endFrame": 90,
+    "startFrame": 89,
+    "texts": Array [
+      "你为什么要让她进我们家啊",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      540,
+      362,
+      1377,
+      461,
+    ],
+    "endFrame": 91,
+    "startFrame": 90,
+    "texts": Array [
+      "你为什么要让她进我们家啊",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      540,
+      362,
+      1377,
+      461,
+    ],
+    "endFrame": 92,
+    "startFrame": 91,
+    "texts": Array [
+      "你为什么要让她进我们家啊",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      540,
+      362,
+      1377,
+      461,
+    ],
+    "endFrame": 93,
+    "startFrame": 92,
+    "texts": Array [
+      "你为什么要让她进我们家啊",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      540,
+      362,
+      1377,
+      461,
+    ],
+    "endFrame": 94,
+    "startFrame": 93,
+    "texts": Array [
+      "你为什么要让她进我们家啊",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      540,
+      362,
+      1377,
+      461,
+    ],
+    "endFrame": 95,
+    "startFrame": 94,
+    "texts": Array [
+      "你为什么要让她进我们家啊",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      540,
+      362,
+      1377,
+      461,
+    ],
+    "endFrame": 96,
+    "startFrame": 95,
+    "texts": Array [
+      "你为什么要让她进我们家啊",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      540,
+      362,
+      1377,
+      461,
+    ],
+    "endFrame": 97,
+    "startFrame": 96,
+    "texts": Array [
+      "你为什么要让她进我们家啊",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      540,
+      362,
+      1377,
+      461,
+    ],
+    "endFrame": 98,
+    "startFrame": 97,
+    "texts": Array [
+      "你为什么要让她进我们家啊",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      540,
+      362,
+      1377,
+      461,
+    ],
+    "endFrame": 99,
+    "startFrame": 98,
+    "texts": Array [
+      "你为什么要让她进我们家啊",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      539,
+      362,
+      1377,
+      461,
+    ],
+    "endFrame": 100,
+    "startFrame": 99,
+    "texts": Array [
+      "你为什么要让她进我1家啊",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      537,
+      361,
+      1378,
+      460,
+    ],
+    "endFrame": 101,
+    "startFrame": 100,
+    "texts": Array [
+      "你为什么要b她进我们家啊",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      537,
+      361,
+      1378,
+      460,
+    ],
+    "endFrame": 102,
+    "startFrame": 101,
+    "texts": Array [
+      "你为什么要b她进我们家啊",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      537,
+      361,
+      1378,
+      460,
+    ],
+    "endFrame": 103,
+    "startFrame": 102,
+    "texts": Array [
+      "你为什么要b她进我们家啊",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      534,
+      361,
+      1378,
+      460,
+    ],
+    "endFrame": 104,
+    "startFrame": 103,
+    "texts": Array [
+      "你为什么要b她进我家啊",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      534,
+      361,
+      1378,
+      460,
+    ],
+    "endFrame": 105,
+    "startFrame": 104,
+    "texts": Array [
+      "你为什么要b她进我家啊",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      540,
+      362,
+      1377,
+      461,
+    ],
+    "endFrame": 106,
+    "startFrame": 105,
+    "texts": Array [
+      "你为什么要让她进我们家啊",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      540,
+      362,
+      1377,
+      461,
+    ],
+    "endFrame": 107,
+    "startFrame": 106,
+    "texts": Array [
+      "你为什么要让她进我们家啊",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      540,
+      362,
+      1377,
+      461,
+    ],
+    "endFrame": 108,
+    "startFrame": 107,
+    "texts": Array [
+      "你为什么要让她进我们家啊",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      540,
+      362,
+      1377,
+      461,
+    ],
+    "endFrame": 109,
+    "startFrame": 108,
+    "texts": Array [
+      "你为什么要让她进我们家啊",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      540,
+      362,
+      1377,
+      460,
+    ],
+    "endFrame": 110,
+    "startFrame": 109,
+    "texts": Array [
+      "你为什么要让她进我们家啊",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      540,
+      362,
+      1377,
+      461,
+    ],
+    "endFrame": 111,
+    "startFrame": 110,
+    "texts": Array [
+      "你为什么要让她进我们家啊",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      540,
+      362,
+      1377,
+      461,
+    ],
+    "endFrame": 112,
+    "startFrame": 111,
+    "texts": Array [
+      "你为什么要让她进我们家啊",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      540,
+      362,
+      1377,
+      461,
+    ],
+    "endFrame": 113,
+    "startFrame": 112,
+    "texts": Array [
+      "你为什么要让她进我们家啊",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      540,
+      362,
+      1377,
+      461,
+    ],
+    "endFrame": 114,
+    "startFrame": 113,
+    "texts": Array [
+      "你为什么要让她进我们家啊",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      540,
+      362,
+      1377,
+      461,
+    ],
+    "endFrame": 115,
+    "startFrame": 114,
+    "texts": Array [
+      "你为什么要让她进我们家啊",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      540,
+      362,
+      1377,
+      461,
+    ],
+    "endFrame": 116,
+    "startFrame": 115,
+    "texts": Array [
+      "你为什么要让她进我们家啊",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      540,
+      362,
+      1377,
+      461,
+    ],
+    "endFrame": 117,
+    "startFrame": 116,
+    "texts": Array [
+      "你为什么要让她进我们家啊",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      537,
+      361,
+      1378,
+      460,
+    ],
+    "endFrame": 118,
+    "startFrame": 117,
+    "texts": Array [
+      "你为什么要b她进我们家啊",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      537,
+      361,
+      1378,
+      460,
+    ],
+    "endFrame": 119,
+    "startFrame": 118,
+    "texts": Array [
+      "你为什么要b她进我们家啊",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      536,
+      361,
+      1378,
+      460,
+    ],
+    "endFrame": 120,
+    "startFrame": 119,
+    "texts": Array [
+      "你为什么要让她进我家啊",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      534,
+      361,
+      1378,
+      460,
+    ],
+    "endFrame": 121,
+    "startFrame": 120,
+    "texts": Array [
+      "你为什么要b她进我家啊",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      534,
+      361,
+      1378,
+      460,
+    ],
+    "endFrame": 122,
+    "startFrame": 121,
+    "texts": Array [
+      "你为什么要b她进我家啊",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      539,
+      361,
+      1382,
+      460,
+    ],
+    "endFrame": 123,
+    "startFrame": 122,
+    "texts": Array [
+      "你为什么要凶她进我1家啊",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      539,
+      361,
+      1382,
+      460,
+    ],
+    "endFrame": 124,
+    "startFrame": 123,
+    "texts": Array [
+      "你为什么要凶她进我1家啊",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      539,
+      361,
+      1382,
+      460,
+    ],
+    "endFrame": 125,
+    "startFrame": 124,
+    "texts": Array [
+      "你为什么要凶她进我1家啊",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      539,
+      361,
+      1382,
+      460,
+    ],
+    "endFrame": 126,
+    "startFrame": 125,
+    "texts": Array [
+      "你为什么要凶她进我1家啊",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      539,
+      361,
+      1382,
+      460,
+    ],
+    "endFrame": 127,
+    "startFrame": 126,
+    "texts": Array [
+      "你为什么要凶她进我1家啊",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      539,
+      361,
+      1382,
+      460,
+    ],
+    "endFrame": 128,
+    "startFrame": 127,
+    "texts": Array [
+      "你为什么要凶她进我1家啊",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      539,
+      361,
+      1382,
+      460,
+    ],
+    "endFrame": 129,
+    "startFrame": 128,
+    "texts": Array [
+      "你为什么要凶她进我1家啊",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      539,
+      361,
+      1382,
+      460,
+    ],
+    "endFrame": 130,
+    "startFrame": 129,
+    "texts": Array [
+      "你为什么要凶她进我1家啊",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      539,
+      361,
+      1382,
+      460,
+    ],
+    "endFrame": 131,
+    "startFrame": 130,
+    "texts": Array [
+      "你为什么要凶她进我1家啊",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      539,
+      361,
+      1382,
+      460,
+    ],
+    "endFrame": 132,
+    "startFrame": 131,
+    "texts": Array [
+      "你为什么要凶她进我1家啊",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      539,
+      361,
+      1382,
+      460,
+    ],
+    "endFrame": 133,
+    "startFrame": 132,
+    "texts": Array [
+      "你为什么要凶她进我1家啊",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      539,
+      361,
+      1382,
+      460,
+    ],
+    "endFrame": 134,
+    "startFrame": 133,
+    "texts": Array [
+      "你为什么要凶她进我1家啊",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      539,
+      361,
+      1382,
+      459,
+    ],
+    "endFrame": 135,
+    "startFrame": 134,
+    "texts": Array [
+      "你为什么要凶她进我们家啊",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      539,
+      361,
+      1382,
+      460,
+    ],
+    "endFrame": 136,
+    "startFrame": 135,
+    "texts": Array [
+      "你为什么要凶她进我1家啊",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      539,
+      361,
+      1382,
+      460,
+    ],
+    "endFrame": 137,
+    "startFrame": 136,
+    "texts": Array [
+      "你为什么要凶她进我1家啊",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      539,
+      361,
+      1382,
+      460,
+    ],
+    "endFrame": 138,
+    "startFrame": 137,
+    "texts": Array [
+      "你为什么要凶她进我1家啊",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      539,
+      361,
+      1382,
+      460,
+    ],
+    "endFrame": 139,
+    "startFrame": 138,
+    "texts": Array [
+      "你为什么要凶她进我1家啊",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      539,
+      361,
+      1382,
+      460,
+    ],
+    "endFrame": 140,
+    "startFrame": 139,
+    "texts": Array [
+      "你为什么要凶她进我1家啊",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      539,
+      361,
+      1382,
+      460,
+    ],
+    "endFrame": 141,
+    "startFrame": 140,
+    "texts": Array [
+      "你为什么要凶她进我1家啊",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      539,
+      361,
+      1382,
+      460,
+    ],
+    "endFrame": 142,
+    "startFrame": 141,
+    "texts": Array [
+      "你为什么要凶她进我1家啊",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      338,
+      361,
+      1586,
+      461,
+    ],
+    "endFrame": 145,
+    "startFrame": 144,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      338,
+      361,
+      1586,
+      461,
+    ],
+    "endFrame": 146,
+    "startFrame": 145,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      338,
+      361,
+      1586,
+      461,
+    ],
+    "endFrame": 147,
+    "startFrame": 146,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      338,
+      361,
+      1586,
+      461,
+    ],
+    "endFrame": 148,
+    "startFrame": 147,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      338,
+      361,
+      1586,
+      461,
+    ],
+    "endFrame": 149,
+    "startFrame": 148,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      338,
+      361,
+      1586,
+      461,
+    ],
+    "endFrame": 150,
+    "startFrame": 149,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      338,
+      361,
+      1586,
+      461,
+    ],
+    "endFrame": 151,
+    "startFrame": 150,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      338,
+      361,
+      1586,
+      461,
+    ],
+    "endFrame": 152,
+    "startFrame": 151,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      338,
+      361,
+      1586,
+      461,
+    ],
+    "endFrame": 153,
+    "startFrame": 152,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      338,
+      361,
+      1586,
+      461,
+    ],
+    "endFrame": 154,
+    "startFrame": 153,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      338,
+      361,
+      1586,
+      461,
+    ],
+    "endFrame": 155,
+    "startFrame": 154,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      338,
+      361,
+      1586,
+      461,
+    ],
+    "endFrame": 156,
+    "startFrame": 155,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      338,
+      361,
+      1586,
+      461,
+    ],
+    "endFrame": 157,
+    "startFrame": 156,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      338,
+      361,
+      1586,
+      461,
+    ],
+    "endFrame": 158,
+    "startFrame": 157,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      338,
+      361,
+      1586,
+      461,
+    ],
+    "endFrame": 159,
+    "startFrame": 158,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      338,
+      361,
+      1586,
+      461,
+    ],
+    "endFrame": 160,
+    "startFrame": 159,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      338,
+      361,
+      1586,
+      461,
+    ],
+    "endFrame": 161,
+    "startFrame": 160,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      337,
+      361,
+      1587,
+      462,
+    ],
+    "endFrame": 162,
+    "startFrame": 161,
+    "texts": Array [
+      "跟我差不多岁数 的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      337,
+      361,
+      1587,
+      462,
+    ],
+    "endFrame": 163,
+    "startFrame": 162,
+    "texts": Array [
+      "跟我差不多岁数 的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      337,
+      361,
+      1587,
+      462,
+    ],
+    "endFrame": 164,
+    "startFrame": 163,
+    "texts": Array [
+      "跟我差不多岁数 的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      337,
+      361,
+      1585,
+      461,
+    ],
+    "endFrame": 165,
+    "startFrame": 164,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      337,
+      361,
+      1585,
+      461,
+    ],
+    "endFrame": 166,
+    "startFrame": 165,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      337,
+      361,
+      1585,
+      461,
+    ],
+    "endFrame": 167,
+    "startFrame": 166,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      337,
+      362,
+      1584,
+      461,
+    ],
+    "endFrame": 168,
+    "startFrame": 167,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      337,
+      362,
+      1584,
+      461,
+    ],
+    "endFrame": 169,
+    "startFrame": 168,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      337,
+      362,
+      1584,
+      461,
+    ],
+    "endFrame": 170,
+    "startFrame": 169,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      337,
+      362,
+      1584,
+      461,
+    ],
+    "endFrame": 171,
+    "startFrame": 170,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      337,
+      362,
+      1584,
+      461,
+    ],
+    "endFrame": 172,
+    "startFrame": 171,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      337,
+      362,
+      1584,
+      461,
+    ],
+    "endFrame": 173,
+    "startFrame": 172,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      337,
+      362,
+      1583,
+      461,
+    ],
+    "endFrame": 174,
+    "startFrame": 173,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      337,
+      362,
+      1583,
+      461,
+    ],
+    "endFrame": 175,
+    "startFrame": 174,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      337,
+      362,
+      1584,
+      461,
+    ],
+    "endFrame": 176,
+    "startFrame": 175,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      337,
+      362,
+      1584,
+      461,
+    ],
+    "endFrame": 177,
+    "startFrame": 176,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      337,
+      362,
+      1584,
+      461,
+    ],
+    "endFrame": 178,
+    "startFrame": 177,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      337,
+      362,
+      1584,
+      461,
+    ],
+    "endFrame": 179,
+    "startFrame": 178,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      337,
+      362,
+      1584,
+      461,
+    ],
+    "endFrame": 180,
+    "startFrame": 179,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      337,
+      362,
+      1584,
+      461,
+    ],
+    "endFrame": 181,
+    "startFrame": 180,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      337,
+      362,
+      1584,
+      461,
+    ],
+    "endFrame": 182,
+    "startFrame": 181,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      337,
+      362,
+      1584,
+      461,
+    ],
+    "endFrame": 183,
+    "startFrame": 182,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      337,
+      362,
+      1584,
+      461,
+    ],
+    "endFrame": 184,
+    "startFrame": 183,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      337,
+      362,
+      1584,
+      461,
+    ],
+    "endFrame": 185,
+    "startFrame": 184,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      337,
+      362,
+      1584,
+      461,
+    ],
+    "endFrame": 186,
+    "startFrame": 185,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      337,
+      362,
+      1584,
+      461,
+    ],
+    "endFrame": 187,
+    "startFrame": 186,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      337,
+      362,
+      1584,
+      461,
+    ],
+    "endFrame": 188,
+    "startFrame": 187,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      337,
+      362,
+      1584,
+      461,
+    ],
+    "endFrame": 189,
+    "startFrame": 188,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      337,
+      362,
+      1584,
+      461,
+    ],
+    "endFrame": 190,
+    "startFrame": 189,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      337,
+      362,
+      1584,
+      461,
+    ],
+    "endFrame": 191,
+    "startFrame": 190,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      337,
+      362,
+      1584,
+      461,
+    ],
+    "endFrame": 192,
+    "startFrame": 191,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      337,
+      362,
+      1584,
+      461,
+    ],
+    "endFrame": 193,
+    "startFrame": 192,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      337,
+      362,
+      1584,
+      461,
+    ],
+    "endFrame": 194,
+    "startFrame": 193,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      337,
+      362,
+      1584,
+      461,
+    ],
+    "endFrame": 195,
+    "startFrame": 194,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      337,
+      362,
+      1584,
+      461,
+    ],
+    "endFrame": 196,
+    "startFrame": 195,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      337,
+      362,
+      1584,
+      461,
+    ],
+    "endFrame": 197,
+    "startFrame": 196,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      328,
+      362,
+      1584,
+      460,
+    ],
+    "endFrame": 198,
+    "startFrame": 197,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      329,
+      362,
+      1584,
+      460,
+    ],
+    "endFrame": 199,
+    "startFrame": 198,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      329,
+      362,
+      1584,
+      460,
+    ],
+    "endFrame": 200,
+    "startFrame": 199,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      329,
+      362,
+      1584,
+      460,
+    ],
+    "endFrame": 201,
+    "startFrame": 200,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      329,
+      362,
+      1584,
+      460,
+    ],
+    "endFrame": 202,
+    "startFrame": 201,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      329,
+      362,
+      1584,
+      460,
+    ],
+    "endFrame": 203,
+    "startFrame": 202,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      329,
+      362,
+      1584,
+      460,
+    ],
+    "endFrame": 204,
+    "startFrame": 203,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      329,
+      362,
+      1584,
+      460,
+    ],
+    "endFrame": 205,
+    "startFrame": 204,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      329,
+      362,
+      1584,
+      460,
+    ],
+    "endFrame": 206,
+    "startFrame": 205,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      329,
+      362,
+      1584,
+      460,
+    ],
+    "endFrame": 207,
+    "startFrame": 206,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      329,
+      362,
+      1584,
+      460,
+    ],
+    "endFrame": 208,
+    "startFrame": 207,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      329,
+      362,
+      1584,
+      460,
+    ],
+    "endFrame": 209,
+    "startFrame": 208,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      329,
+      362,
+      1584,
+      460,
+    ],
+    "endFrame": 210,
+    "startFrame": 209,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      329,
+      362,
+      1584,
+      460,
+    ],
+    "endFrame": 211,
+    "startFrame": 210,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      329,
+      362,
+      1584,
+      460,
+    ],
+    "endFrame": 212,
+    "startFrame": 211,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      329,
+      362,
+      1584,
+      460,
+    ],
+    "endFrame": 213,
+    "startFrame": 212,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      329,
+      362,
+      1584,
+      460,
+    ],
+    "endFrame": 214,
+    "startFrame": 213,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      329,
+      362,
+      1584,
+      460,
+    ],
+    "endFrame": 215,
+    "startFrame": 214,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      329,
+      362,
+      1584,
+      460,
+    ],
+    "endFrame": 216,
+    "startFrame": 215,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      329,
+      362,
+      1584,
+      460,
+    ],
+    "endFrame": 217,
+    "startFrame": 216,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      329,
+      362,
+      1584,
+      460,
+    ],
+    "endFrame": 218,
+    "startFrame": 217,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      329,
+      362,
+      1584,
+      460,
+    ],
+    "endFrame": 219,
+    "startFrame": 218,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      329,
+      362,
+      1584,
+      460,
+    ],
+    "endFrame": 220,
+    "startFrame": 219,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      329,
+      362,
+      1584,
+      460,
+    ],
+    "endFrame": 221,
+    "startFrame": 220,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      329,
+      362,
+      1584,
+      460,
+    ],
+    "endFrame": 222,
+    "startFrame": 221,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      329,
+      362,
+      1584,
+      460,
+    ],
+    "endFrame": 223,
+    "startFrame": 222,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      329,
+      362,
+      1584,
+      460,
+    ],
+    "endFrame": 224,
+    "startFrame": 223,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      329,
+      362,
+      1584,
+      460,
+    ],
+    "endFrame": 225,
+    "startFrame": 224,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      329,
+      362,
+      1584,
+      460,
+    ],
+    "endFrame": 226,
+    "startFrame": 225,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      329,
+      362,
+      1584,
+      460,
+    ],
+    "endFrame": 227,
+    "startFrame": 226,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      329,
+      362,
+      1584,
+      460,
+    ],
+    "endFrame": 228,
+    "startFrame": 227,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      329,
+      362,
+      1584,
+      460,
+    ],
+    "endFrame": 229,
+    "startFrame": 228,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      329,
+      362,
+      1584,
+      460,
+    ],
+    "endFrame": 230,
+    "startFrame": 229,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      329,
+      362,
+      1584,
+      460,
+    ],
+    "endFrame": 231,
+    "startFrame": 230,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      329,
+      362,
+      1584,
+      460,
+    ],
+    "endFrame": 232,
+    "startFrame": 231,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      329,
+      362,
+      1584,
+      460,
+    ],
+    "endFrame": 233,
+    "startFrame": 232,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      329,
+      362,
+      1584,
+      460,
+    ],
+    "endFrame": 234,
+    "startFrame": 233,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      329,
+      362,
+      1584,
+      460,
+    ],
+    "endFrame": 235,
+    "startFrame": 234,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      329,
+      362,
+      1584,
+      460,
+    ],
+    "endFrame": 236,
+    "startFrame": 235,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      329,
+      362,
+      1584,
+      460,
+    ],
+    "endFrame": 237,
+    "startFrame": 236,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      329,
+      362,
+      1584,
+      460,
+    ],
+    "endFrame": 238,
+    "startFrame": 237,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      329,
+      362,
+      1584,
+      460,
+    ],
+    "endFrame": 239,
+    "startFrame": 238,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      329,
+      362,
+      1584,
+      460,
+    ],
+    "endFrame": 240,
+    "startFrame": 239,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      329,
+      362,
+      1584,
+      460,
+    ],
+    "endFrame": 241,
+    "startFrame": 240,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      329,
+      362,
+      1584,
+      460,
+    ],
+    "endFrame": 242,
+    "startFrame": 241,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      329,
+      362,
+      1584,
+      460,
+    ],
+    "endFrame": 243,
+    "startFrame": 242,
+    "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      742,
+      367,
+      1144,
+      459,
+    ],
+    "endFrame": 247,
+    "startFrame": 246,
+    "texts": Array [
+      "最…最喜欢？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      742,
+      367,
+      1144,
+      459,
+    ],
+    "endFrame": 248,
+    "startFrame": 247,
+    "texts": Array [
+      "最…最喜欢？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      742,
+      367,
+      1142,
+      458,
+    ],
+    "endFrame": 249,
+    "startFrame": 248,
+    "texts": Array [
+      "最…最喜欢？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      742,
+      367,
+      1142,
+      458,
+    ],
+    "endFrame": 250,
+    "startFrame": 249,
+    "texts": Array [
+      "最…最喜欢？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      742,
+      367,
+      1146,
+      459,
+    ],
+    "endFrame": 251,
+    "startFrame": 250,
+    "texts": Array [
+      "最…最喜欢？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      742,
+      367,
+      1146,
+      459,
+    ],
+    "endFrame": 252,
+    "startFrame": 251,
+    "texts": Array [
+      "最…最喜欢？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      742,
+      367,
+      1146,
+      459,
+    ],
+    "endFrame": 253,
+    "startFrame": 252,
+    "texts": Array [
+      "最…最喜欢？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      742,
+      366,
+      1147,
+      459,
+    ],
+    "endFrame": 254,
+    "startFrame": 253,
+    "texts": Array [
+      "最…最喜欢？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      742,
+      366,
+      1147,
+      459,
+    ],
+    "endFrame": 255,
+    "startFrame": 254,
+    "texts": Array [
+      "最…最喜欢？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      742,
+      366,
+      1148,
+      459,
+    ],
+    "endFrame": 256,
+    "startFrame": 255,
+    "texts": Array [
+      "最…最喜欢？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      742,
+      366,
+      1145,
+      458,
+    ],
+    "endFrame": 257,
+    "startFrame": 256,
+    "texts": Array [
+      "最…最喜欢？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      742,
+      366,
+      1145,
+      458,
+    ],
+    "endFrame": 258,
+    "startFrame": 257,
+    "texts": Array [
+      "最…最喜欢？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      742,
+      366,
+      1145,
+      458,
+    ],
+    "endFrame": 259,
+    "startFrame": 258,
+    "texts": Array [
+      "最…最喜欢？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      742,
+      366,
+      1145,
+      458,
+    ],
+    "endFrame": 260,
+    "startFrame": 259,
+    "texts": Array [
+      "最…最喜欢？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      742,
+      366,
+      1145,
+      458,
+    ],
+    "endFrame": 261,
+    "startFrame": 260,
+    "texts": Array [
+      "最…最喜欢？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      742,
+      366,
+      1145,
+      459,
+    ],
+    "endFrame": 262,
+    "startFrame": 261,
+    "texts": Array [
+      "最…最喜欢？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      742,
+      366,
+      1145,
+      459,
+    ],
+    "endFrame": 263,
+    "startFrame": 262,
+    "texts": Array [
+      "最…最喜欢？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      742,
+      366,
+      1145,
+      459,
+    ],
+    "endFrame": 264,
+    "startFrame": 263,
+    "texts": Array [
+      "最…最喜欢？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      742,
+      366,
+      1145,
+      459,
+    ],
+    "endFrame": 265,
+    "startFrame": 264,
+    "texts": Array [
+      "最…最喜欢？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      742,
+      366,
+      1145,
+      459,
+    ],
+    "endFrame": 266,
+    "startFrame": 265,
+    "texts": Array [
+      "最…最喜欢？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      742,
+      366,
+      1145,
+      459,
+    ],
+    "endFrame": 267,
+    "startFrame": 266,
+    "texts": Array [
+      "最…最喜欢？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      742,
+      366,
+      1145,
+      459,
+    ],
+    "endFrame": 268,
+    "startFrame": 267,
+    "texts": Array [
+      "最…最喜欢？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      742,
+      366,
+      1145,
+      459,
+    ],
+    "endFrame": 269,
+    "startFrame": 268,
+    "texts": Array [
+      "最…最喜欢？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      742,
+      366,
+      1145,
+      459,
+    ],
+    "endFrame": 270,
+    "startFrame": 269,
+    "texts": Array [
+      "最…最喜欢？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      742,
+      366,
+      1145,
+      459,
+    ],
+    "endFrame": 271,
+    "startFrame": 270,
+    "texts": Array [
+      "最…最喜欢？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      742,
+      366,
+      1145,
+      459,
+    ],
+    "endFrame": 272,
+    "startFrame": 271,
+    "texts": Array [
+      "最…最喜欢？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      742,
+      366,
+      1145,
+      459,
+    ],
+    "endFrame": 273,
+    "startFrame": 272,
+    "texts": Array [
+      "最…最喜欢？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      742,
+      366,
+      1145,
+      459,
+    ],
+    "endFrame": 274,
+    "startFrame": 273,
+    "texts": Array [
+      "最…最喜欢？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      742,
+      366,
+      1145,
+      459,
+    ],
+    "endFrame": 275,
+    "startFrame": 274,
+    "texts": Array [
+      "最…最喜欢？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      742,
+      366,
+      1145,
+      459,
+    ],
+    "endFrame": 276,
+    "startFrame": 275,
+    "texts": Array [
+      "最…最喜欢？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      742,
+      366,
+      1145,
+      459,
+    ],
+    "endFrame": 277,
+    "startFrame": 276,
+    "texts": Array [
+      "最…最喜欢？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      742,
+      366,
+      1145,
+      459,
+    ],
+    "endFrame": 278,
+    "startFrame": 277,
+    "texts": Array [
+      "最…最喜欢？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      274,
+      360,
+      1661,
+      464,
+    ],
+    "endFrame": 285,
+    "startFrame": 284,
+    "texts": Array [
+      "名字就叫 x和泉从房里拖出求ll同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      272,
+      360,
+      1665,
+      465,
+    ],
+    "endFrame": 286,
+    "startFrame": 285,
+    "texts": Array [
+      "名字就i叫 k和泉从房里施出来y 」同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      272,
+      360,
+      1665,
+      465,
+    ],
+    "endFrame": 287,
+    "startFrame": 286,
+    "texts": Array [
+      "名字就i叫 k和泉从房里施出来y 」同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      262,
+      361,
+      1664,
+      465,
+    ],
+    "endFrame": 288,
+    "startFrame": 287,
+    "texts": Array [
+      "名字 txk 泉从房间里抽也求！」同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      262,
+      361,
+      1664,
+      465,
+    ],
+    "endFrame": 289,
+    "startFrame": 288,
+    "texts": Array [
+      "名字 txk 泉从房间里抽也求！」同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      275,
+      360,
+      1663,
+      464,
+    ],
+    "endFrame": 290,
+    "startFrame": 289,
+    "texts": Array [
+      "名字就叫「 tk和泉从房间里拖出来求！l同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      275,
+      360,
+      1663,
+      464,
+    ],
+    "endFrame": 291,
+    "startFrame": 290,
+    "texts": Array [
+      "名字就叫「 tk和泉从房间里拖出来求！l同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      276,
+      360,
+      1663,
+      464,
+    ],
+    "endFrame": 292,
+    "startFrame": 291,
+    "texts": Array [
+      "名字就叫「 小和泉从房间里拖出来！ln题",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      276,
+      360,
+      1663,
+      464,
+    ],
+    "endFrame": 293,
+    "startFrame": 292,
+    "texts": Array [
+      "名字就叫「 小和泉从房间里拖出来！ln题",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      267,
+      361,
+      1664,
+      465,
+    ],
+    "endFrame": 294,
+    "startFrame": 293,
+    "texts": Array [
+      "名字就叫 把ky和最从房间里拖出求l」同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      267,
+      361,
+      1664,
+      465,
+    ],
+    "endFrame": 295,
+    "startFrame": 294,
+    "texts": Array [
+      "名字就叫 把ky和最从房间里拖出求l」同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      262,
+      361,
+      1666,
+      464,
+    ],
+    "endFrame": 296,
+    "startFrame": 295,
+    "texts": Array [
+      "名字m「把小和泉从房间里拖出来lJ同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      262,
+      361,
+      1666,
+      464,
+    ],
+    "endFrame": 297,
+    "startFrame": 296,
+    "texts": Array [
+      "名字m「把小和泉从房间里拖出来lJ同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      262,
+      361,
+      1666,
+      464,
+    ],
+    "endFrame": 298,
+    "startFrame": 297,
+    "texts": Array [
+      "名字m「把小和泉从房间里拖出来lJ同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      262,
+      361,
+      1666,
+      464,
+    ],
+    "endFrame": 299,
+    "startFrame": 298,
+    "texts": Array [
+      "名字m「把小和泉从房间里拖出来lJ同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      262,
+      361,
+      1666,
+      464,
+    ],
+    "endFrame": 300,
+    "startFrame": 299,
+    "texts": Array [
+      "名字m「把小和泉从房间里拖出来lJ同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      262,
+      361,
+      1666,
+      464,
+    ],
+    "endFrame": 301,
+    "startFrame": 300,
+    "texts": Array [
+      "名字m「把小和泉从房间里拖出来lJ同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      262,
+      361,
+      1666,
+      464,
+    ],
+    "endFrame": 302,
+    "startFrame": 301,
+    "texts": Array [
+      "名字m「把小和泉从房间里拖出来lJ同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      262,
+      361,
+      1666,
+      464,
+    ],
+    "endFrame": 303,
+    "startFrame": 302,
+    "texts": Array [
+      "名字m「把小和泉从房间里拖出来lJ同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      262,
+      361,
+      1666,
+      464,
+    ],
+    "endFrame": 304,
+    "startFrame": 303,
+    "texts": Array [
+      "名字m「把小和泉从房间里拖出来lJ同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      262,
+      361,
+      1666,
+      464,
+    ],
+    "endFrame": 305,
+    "startFrame": 304,
+    "texts": Array [
+      "名字m「把小和泉从房间里拖出来lJ同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      262,
+      361,
+      1666,
+      464,
+    ],
+    "endFrame": 306,
+    "startFrame": 305,
+    "texts": Array [
+      "名字m「把小和泉从房间里拖出来lJ同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      262,
+      361,
+      1666,
+      464,
+    ],
+    "endFrame": 307,
+    "startFrame": 306,
+    "texts": Array [
+      "名字m「把小和泉从房间里拖出来lJ同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      262,
+      361,
+      1666,
+      464,
+    ],
+    "endFrame": 308,
+    "startFrame": 307,
+    "texts": Array [
+      "名字m「把小和泉从房间里拖出来lJ同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      262,
+      361,
+      1666,
+      464,
+    ],
+    "endFrame": 309,
+    "startFrame": 308,
+    "texts": Array [
+      "名字m「把小和泉从房间里拖出来lJ同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      262,
+      361,
+      1666,
+      464,
+    ],
+    "endFrame": 310,
+    "startFrame": 309,
+    "texts": Array [
+      "名字m「把小和泉从房间里拖出来lJ同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      262,
+      361,
+      1666,
+      464,
+    ],
+    "endFrame": 311,
+    "startFrame": 310,
+    "texts": Array [
+      "名字m「把小和泉从房间里拖出来lJ同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      262,
+      361,
+      1666,
+      464,
+    ],
+    "endFrame": 312,
+    "startFrame": 311,
+    "texts": Array [
+      "名字m「把小和泉从房间里拖出来lJ同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      262,
+      361,
+      1666,
+      464,
+    ],
+    "endFrame": 313,
+    "startFrame": 312,
+    "texts": Array [
+      "名字m「把小和泉从房间里拖出来lJ同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      262,
+      360,
+      1666,
+      464,
+    ],
+    "endFrame": 314,
+    "startFrame": 313,
+    "texts": Array [
+      "名字 把xk和最从房里抽出汝！」同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      262,
+      360,
+      1666,
+      464,
+    ],
+    "endFrame": 315,
+    "startFrame": 314,
+    "texts": Array [
+      "名字 把xk和最从房里抽出汝！」同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      262,
+      360,
+      1666,
+      464,
+    ],
+    "endFrame": 316,
+    "startFrame": 315,
+    "texts": Array [
+      "名字 把xk和最从房里抽出汝！」同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      262,
+      360,
+      1666,
+      464,
+    ],
+    "endFrame": 317,
+    "startFrame": 316,
+    "texts": Array [
+      "名字 把xk和最从房里抽出汝！」同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      262,
+      360,
+      1666,
+      464,
+    ],
+    "endFrame": 318,
+    "startFrame": 317,
+    "texts": Array [
+      "名字 把xk和最从房里抽出汝！」同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      262,
+      361,
+      1666,
+      464,
+    ],
+    "endFrame": 319,
+    "startFrame": 318,
+    "texts": Array [
+      "名字m「把小和泉从房间里拖出来lJ同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      262,
+      360,
+      1666,
+      464,
+    ],
+    "endFrame": 320,
+    "startFrame": 319,
+    "texts": Array [
+      "名字 把xk和最从房里抽出汝！」同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      262,
+      360,
+      1666,
+      464,
+    ],
+    "endFrame": 321,
+    "startFrame": 320,
+    "texts": Array [
+      "名字 把xk和最从房里抽出汝！」同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      262,
+      360,
+      1666,
+      464,
+    ],
+    "endFrame": 322,
+    "startFrame": 321,
+    "texts": Array [
+      "名字 把xk和最从房里抽出汝！」同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      262,
+      361,
+      1666,
+      464,
+    ],
+    "endFrame": 323,
+    "startFrame": 322,
+    "texts": Array [
+      "名字m「把小和泉从房间里拖出来lJ同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      262,
+      361,
+      1666,
+      464,
+    ],
+    "endFrame": 324,
+    "startFrame": 323,
+    "texts": Array [
+      "名字m「把小和泉从房间里拖出来lJ同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      262,
+      361,
+      1666,
+      464,
+    ],
+    "endFrame": 325,
+    "startFrame": 324,
+    "texts": Array [
+      "名字m「把小和泉从房间里拖出来lJ同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      262,
+      361,
+      1666,
+      464,
+    ],
+    "endFrame": 326,
+    "startFrame": 325,
+    "texts": Array [
+      "名字m「把小和泉从房间里拖出来lJ同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      262,
+      361,
+      1666,
+      464,
+    ],
+    "endFrame": 327,
+    "startFrame": 326,
+    "texts": Array [
+      "名字m「把小和泉从房间里拖出来lJ同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      262,
+      361,
+      1666,
+      464,
+    ],
+    "endFrame": 328,
+    "startFrame": 327,
+    "texts": Array [
+      "名字m「把小和泉从房间里拖出来lJ同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      262,
+      361,
+      1666,
+      464,
+    ],
+    "endFrame": 329,
+    "startFrame": 328,
+    "texts": Array [
+      "名字m「把小和泉从房间里拖出来lJ同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      262,
+      361,
+      1665,
+      464,
+    ],
+    "endFrame": 330,
+    "startFrame": 329,
+    "texts": Array [
+      "名字m「把小和泉从房间里拖出来lJ同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      262,
+      361,
+      1666,
+      464,
+    ],
+    "endFrame": 331,
+    "startFrame": 330,
+    "texts": Array [
+      "名字m「把小和泉从房间里拖出来lJ同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      262,
+      361,
+      1666,
+      464,
+    ],
+    "endFrame": 332,
+    "startFrame": 331,
+    "texts": Array [
+      "名字m「把小和泉从房间里拖出来lJ同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      262,
+      361,
+      1666,
+      464,
+    ],
+    "endFrame": 333,
+    "startFrame": 332,
+    "texts": Array [
+      "名字m「把小和泉从房间里拖出来lJ同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      262,
+      360,
+      1666,
+      464,
+    ],
+    "endFrame": 334,
+    "startFrame": 333,
+    "texts": Array [
+      "名字 把xk和最从房里抽出汝！」同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      262,
+      360,
+      1666,
+      464,
+    ],
+    "endFrame": 335,
+    "startFrame": 334,
+    "texts": Array [
+      "名字 把xk和最从房里抽出汝！」同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      262,
+      360,
+      1666,
+      464,
+    ],
+    "endFrame": 336,
+    "startFrame": 335,
+    "texts": Array [
+      "名字 把xk和最从房里抽出汝！」同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      262,
+      360,
+      1666,
+      464,
+    ],
+    "endFrame": 337,
+    "startFrame": 336,
+    "texts": Array [
+      "名字 把xk和最从房里抽出汝！」同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      262,
+      361,
+      1666,
+      464,
+    ],
+    "endFrame": 338,
+    "startFrame": 337,
+    "texts": Array [
+      "名字m「把小和泉从房间里拖出来lJ同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      262,
+      361,
+      1666,
+      464,
+    ],
+    "endFrame": 339,
+    "startFrame": 338,
+    "texts": Array [
+      "名字m「把小和泉从房间里拖出来lJ同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      262,
+      361,
+      1666,
+      464,
+    ],
+    "endFrame": 340,
+    "startFrame": 339,
+    "texts": Array [
+      "名字m「把小和泉从房间里拖出来lJ同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      262,
+      361,
+      1666,
+      464,
+    ],
+    "endFrame": 341,
+    "startFrame": 340,
+    "texts": Array [
+      "名字m「把小和泉从房间里拖出来lJ同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      262,
+      361,
+      1666,
+      464,
+    ],
+    "endFrame": 342,
+    "startFrame": 341,
+    "texts": Array [
+      "名字m「把小和泉从房间里拖出来lJ同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      262,
+      360,
+      1666,
+      464,
+    ],
+    "endFrame": 343,
+    "startFrame": 342,
+    "texts": Array [
+      "名字 把xk和最从房里抽出汝！」同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      262,
+      361,
+      1665,
+      464,
+    ],
+    "endFrame": 344,
+    "startFrame": 343,
+    "texts": Array [
+      "名字m「把小和泉从房间里拖出来lJ同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      262,
+      361,
+      1665,
+      464,
+    ],
+    "endFrame": 345,
+    "startFrame": 344,
+    "texts": Array [
+      "名字m「把小和泉从房间里拖出来lJ同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      262,
+      361,
+      1665,
+      464,
+    ],
+    "endFrame": 346,
+    "startFrame": 345,
+    "texts": Array [
+      "名字m「把小和泉从房间里拖出来lJ同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      262,
+      360,
+      1666,
+      464,
+    ],
+    "endFrame": 347,
+    "startFrame": 346,
+    "texts": Array [
+      "名字 把xk和最从房里抽出汝！」同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      262,
+      360,
+      1666,
+      464,
+    ],
+    "endFrame": 348,
+    "startFrame": 347,
+    "texts": Array [
+      "名字 把xk和最从房里抽出汝！」同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      262,
+      360,
+      1666,
+      464,
+    ],
+    "endFrame": 349,
+    "startFrame": 348,
+    "texts": Array [
+      "名字 把xk和最从房里抽出汝！」同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      262,
+      360,
+      1666,
+      464,
+    ],
+    "endFrame": 350,
+    "startFrame": 349,
+    "texts": Array [
+      "名字 把xk和最从房里抽出汝！」同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      262,
+      360,
+      1666,
+      464,
+    ],
+    "endFrame": 351,
+    "startFrame": 350,
+    "texts": Array [
+      "名字 把xk和最从房里抽出汝！」同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      262,
+      360,
+      1666,
+      464,
+    ],
+    "endFrame": 352,
+    "startFrame": 351,
+    "texts": Array [
+      "名字 把xk和最从房里抽出汝！」同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      268,
+      361,
+      1654,
+      460,
+    ],
+    "endFrame": 353,
+    "startFrame": 352,
+    "texts": Array [
+      "名字就叫「把小和泉从房间里拖出来l！」同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      268,
+      361,
+      1654,
+      460,
+    ],
+    "endFrame": 354,
+    "startFrame": 353,
+    "texts": Array [
+      "名字就叫「把小和泉从房间里拖出来l！」同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      268,
+      361,
+      1654,
+      460,
+    ],
+    "endFrame": 355,
+    "startFrame": 354,
+    "texts": Array [
+      "名字就叫「把小和泉从房间里拖出来l！」同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      268,
+      361,
+      1654,
+      460,
+    ],
+    "endFrame": 356,
+    "startFrame": 355,
+    "texts": Array [
+      "名字就叫「把小和泉从房间里拖出来l！」同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      268,
+      361,
+      1651,
+      460,
+    ],
+    "endFrame": 357,
+    "startFrame": 356,
+    "texts": Array [
+      "名字就叫「把小和泉从房间里拖出来！」同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      268,
+      361,
+      1651,
+      460,
+    ],
+    "endFrame": 358,
+    "startFrame": 357,
+    "texts": Array [
+      "名字就叫「把小和泉从房间里拖出来！」同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      269,
+      360,
+      1657,
+      460,
+    ],
+    "endFrame": 359,
+    "startFrame": 358,
+    "texts": Array [
+      "名字就叫「把小和泉从房间里拖出求！」同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      269,
+      360,
+      1657,
+      460,
+    ],
+    "endFrame": 360,
+    "startFrame": 359,
+    "texts": Array [
+      "名字就叫「把小和泉从房间里拖出求！」同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      269,
+      360,
+      1657,
+      460,
+    ],
+    "endFrame": 361,
+    "startFrame": 360,
+    "texts": Array [
+      "名字就叫「把小和泉从房间里拖出求！」同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      270,
+      361,
+      1655,
+      460,
+    ],
+    "endFrame": 362,
+    "startFrame": 361,
+    "texts": Array [
+      "名字就叫「把k小和泉从房间里拖出来！」同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      269,
+      361,
+      1655,
+      460,
+    ],
+    "endFrame": 363,
+    "startFrame": 362,
+    "texts": Array [
+      "名字就叫「把小和泉从房间里拖出来！」同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      268,
+      361,
+      1657,
+      460,
+    ],
+    "endFrame": 364,
+    "startFrame": 363,
+    "texts": Array [
+      "名字就叫「把小和泉从房间里拖出来l！」同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      268,
+      361,
+      1657,
+      460,
+    ],
+    "endFrame": 365,
+    "startFrame": 364,
+    "texts": Array [
+      "名字就叫「把小和泉从房间里拖出来l！」同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      267,
+      361,
+      1658,
+      460,
+    ],
+    "endFrame": 366,
+    "startFrame": 365,
+    "texts": Array [
+      "名字就叫「把小和泉从房间里拖出来！」同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      266,
+      361,
+      1658,
+      460,
+    ],
+    "endFrame": 367,
+    "startFrame": 366,
+    "texts": Array [
+      "名字就叫「把小和泉从房间里拖出来！」同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      269,
+      361,
+      1659,
+      460,
+    ],
+    "endFrame": 368,
+    "startFrame": 367,
+    "texts": Array [
+      "名字就叫「把小和泉从房间里拖出来！」同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      269,
+      361,
+      1659,
+      460,
+    ],
+    "endFrame": 369,
+    "startFrame": 368,
+    "texts": Array [
+      "名字就叫「把小和泉从房间里拖出来！」同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      268,
+      361,
+      1659,
+      460,
+    ],
+    "endFrame": 370,
+    "startFrame": 369,
+    "texts": Array [
+      "名字诫叫「把小和泉从房间里拖出来l！」同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      266,
+      361,
+      1633,
+      460,
+    ],
+    "endFrame": 371,
+    "startFrame": 370,
+    "texts": Array [
+      "名字就叫「把小和泉从房间里拖出来l！」同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      266,
+      361,
+      1633,
+      460,
+    ],
+    "endFrame": 372,
+    "startFrame": 371,
+    "texts": Array [
+      "名字就叫「把小和泉从房间里拖出来l！」同盟",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      741,
+      363,
+      1186,
+      458,
+    ],
+    "endFrame": 378,
+    "startFrame": 377,
+    "texts": Array [
+      "不出去 不出去",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      738,
+      362,
+      1186,
+      458,
+    ],
+    "endFrame": 379,
+    "startFrame": 378,
+    "texts": Array [
+      "不出去 不出去",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      738,
+      362,
+      1186,
+      458,
+    ],
+    "endFrame": 380,
+    "startFrame": 379,
+    "texts": Array [
+      "不出去 不出去",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      738,
+      362,
+      1186,
+      458,
+    ],
+    "endFrame": 381,
+    "startFrame": 380,
+    "texts": Array [
+      "不出去 不出去",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      740,
+      363,
+      1186,
+      459,
+    ],
+    "endFrame": 382,
+    "startFrame": 381,
+    "texts": Array [
+      "不出去 不出去",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      740,
+      363,
+      1186,
+      459,
+    ],
+    "endFrame": 383,
+    "startFrame": 382,
+    "texts": Array [
+      "不出去 不出去",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      740,
+      363,
+      1186,
+      459,
+    ],
+    "endFrame": 384,
+    "startFrame": 383,
+    "texts": Array [
+      "不出去 不出去",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      739,
+      362,
+      1186,
+      459,
+    ],
+    "endFrame": 385,
+    "startFrame": 384,
+    "texts": Array [
+      "不出去 不出去",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      739,
+      362,
+      1186,
+      459,
+    ],
+    "endFrame": 386,
+    "startFrame": 385,
+    "texts": Array [
+      "不出去 不出去",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      739,
+      362,
+      1186,
+      459,
+    ],
+    "endFrame": 387,
+    "startFrame": 386,
+    "texts": Array [
+      "不出去 不出去",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      735,
+      363,
+      1187,
+      458,
+    ],
+    "endFrame": 388,
+    "startFrame": 387,
+    "texts": Array [
+      "不出去 不出去",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      735,
+      363,
+      1187,
+      458,
+    ],
+    "endFrame": 389,
+    "startFrame": 388,
+    "texts": Array [
+      "不出去 不出去",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      735,
+      363,
+      1187,
+      458,
+    ],
+    "endFrame": 390,
+    "startFrame": 389,
+    "texts": Array [
+      "不出去 不出去",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      739,
+      363,
+      1187,
+      459,
+    ],
+    "endFrame": 391,
+    "startFrame": 390,
+    "texts": Array [
+      "不出去 不出去",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      739,
+      363,
+      1187,
+      459,
+    ],
+    "endFrame": 392,
+    "startFrame": 391,
+    "texts": Array [
+      "不出去 不出去",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      739,
+      363,
+      1187,
+      459,
+    ],
+    "endFrame": 393,
+    "startFrame": 392,
+    "texts": Array [
+      "不出去 不出去",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      738,
+      362,
+      1187,
+      460,
+    ],
+    "endFrame": 394,
+    "startFrame": 393,
+    "texts": Array [
+      "不出去 不出去",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      738,
+      362,
+      1187,
+      460,
+    ],
+    "endFrame": 395,
+    "startFrame": 394,
+    "texts": Array [
+      "不出去 不出去",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      738,
+      362,
+      1187,
+      460,
+    ],
+    "endFrame": 396,
+    "startFrame": 395,
+    "texts": Array [
+      "不出去 不出去",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      735,
+      363,
+      1187,
+      457,
+    ],
+    "endFrame": 397,
+    "startFrame": 396,
+    "texts": Array [
+      "不出去 不出去",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      735,
+      363,
+      1187,
+      457,
+    ],
+    "endFrame": 398,
+    "startFrame": 397,
+    "texts": Array [
+      "不出去 不出去",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      735,
+      363,
+      1187,
+      457,
+    ],
+    "endFrame": 399,
+    "startFrame": 398,
+    "texts": Array [
+      "不出去 不出去",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      741,
+      363,
+      1186,
+      458,
+    ],
+    "endFrame": 400,
+    "startFrame": 399,
+    "texts": Array [
+      "不出去 不出去",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      741,
+      363,
+      1186,
+      458,
+    ],
+    "endFrame": 401,
+    "startFrame": 400,
+    "texts": Array [
+      "不出去 不出去",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      741,
+      363,
+      1186,
+      458,
+    ],
+    "endFrame": 402,
+    "startFrame": 401,
+    "texts": Array [
+      "不出去 不出去",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      738,
+      362,
+      1186,
+      458,
+    ],
+    "endFrame": 403,
+    "startFrame": 402,
+    "texts": Array [
+      "不出去 不出去",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      608,
+      362,
+      1312,
+      458,
+    ],
+    "endFrame": 404,
+    "startFrame": 403,
+    "texts": Array [
+      "我说不出去就是不出去",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      608,
+      362,
+      1312,
+      458,
+    ],
+    "endFrame": 405,
+    "startFrame": 404,
+    "texts": Array [
+      "我说不出去就是不出去",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      604,
+      362,
+      1311,
+      459,
+    ],
+    "endFrame": 406,
+    "startFrame": 405,
+    "texts": Array [
+      "我说不出去就是不出去",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      604,
+      362,
+      1311,
+      459,
+    ],
+    "endFrame": 407,
+    "startFrame": 406,
+    "texts": Array [
+      "我说不出去就是不出去",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      604,
+      362,
+      1311,
+      459,
+    ],
+    "endFrame": 408,
+    "startFrame": 407,
+    "texts": Array [
+      "我说不出去就是不出去",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      606,
+      362,
+      1312,
+      459,
+    ],
+    "endFrame": 409,
+    "startFrame": 408,
+    "texts": Array [
+      "我说不出去就是不出去",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      606,
+      362,
+      1312,
+      459,
+    ],
+    "endFrame": 410,
+    "startFrame": 409,
+    "texts": Array [
+      "我说不出去就是不出去",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      606,
+      362,
+      1312,
+      459,
+    ],
+    "endFrame": 411,
+    "startFrame": 410,
+    "texts": Array [
+      "我说不出去就是不出去",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      608,
+      362,
+      1312,
+      458,
+    ],
+    "endFrame": 412,
+    "startFrame": 411,
+    "texts": Array [
+      "我说不出去就是不出去",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      608,
+      362,
+      1312,
+      458,
+    ],
+    "endFrame": 413,
+    "startFrame": 412,
+    "texts": Array [
+      "我说不出去就是不出去",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      608,
+      362,
+      1312,
+      458,
+    ],
+    "endFrame": 414,
+    "startFrame": 413,
+    "texts": Array [
+      "我说不出去就是不出去",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      608,
+      362,
+      1313,
+      458,
+    ],
+    "endFrame": 415,
+    "startFrame": 414,
+    "texts": Array [
+      "我说不出去就是不出去",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      608,
+      362,
+      1313,
+      458,
+    ],
+    "endFrame": 416,
+    "startFrame": 415,
+    "texts": Array [
+      "我说不出去就是不出去",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      608,
+      362,
+      1313,
+      458,
+    ],
+    "endFrame": 417,
+    "startFrame": 416,
+    "texts": Array [
+      "我说不出去就是不出去",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      608,
+      362,
+      1312,
+      458,
+    ],
+    "endFrame": 418,
+    "startFrame": 417,
+    "texts": Array [
+      "我说不出去就是不出去",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      608,
+      362,
+      1312,
+      458,
+    ],
+    "endFrame": 419,
+    "startFrame": 418,
+    "texts": Array [
+      "我说不出去就是不出去",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      608,
+      362,
+      1312,
+      458,
+    ],
+    "endFrame": 420,
+    "startFrame": 419,
+    "texts": Array [
+      "我说不出去就是不出去",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      608,
+      362,
+      1312,
+      458,
+    ],
+    "endFrame": 421,
+    "startFrame": 420,
+    "texts": Array [
+      "我说不出去就是不出去",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      608,
+      362,
+      1312,
+      458,
+    ],
+    "endFrame": 422,
+    "startFrame": 421,
+    "texts": Array [
+      "我说不出去就是不出去",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      608,
+      362,
+      1312,
+      458,
+    ],
+    "endFrame": 423,
+    "startFrame": 422,
+    "texts": Array [
+      "我说不出去就是不出去",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      606,
+      362,
+      1312,
+      458,
+    ],
+    "endFrame": 424,
+    "startFrame": 423,
+    "texts": Array [
+      "我说不出去就是不出去",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      606,
+      362,
+      1312,
+      458,
+    ],
+    "endFrame": 425,
+    "startFrame": 424,
+    "texts": Array [
+      "我说不出去就是不出去",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      606,
+      362,
+      1312,
+      458,
+    ],
+    "endFrame": 426,
+    "startFrame": 425,
+    "texts": Array [
+      "我说不出去就是不出去",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      608,
+      362,
+      1312,
+      458,
+    ],
+    "endFrame": 427,
+    "startFrame": 426,
+    "texts": Array [
+      "我说不出去就是不出去",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      608,
+      362,
+      1312,
+      458,
+    ],
+    "endFrame": 428,
+    "startFrame": 427,
+    "texts": Array [
+      "我说不出去就是不出去",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      608,
+      362,
+      1312,
+      458,
+    ],
+    "endFrame": 429,
+    "startFrame": 428,
+    "texts": Array [
+      "我说不出去就是不出去",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      605,
+      362,
+      1311,
+      459,
+    ],
+    "endFrame": 430,
+    "startFrame": 429,
+    "texts": Array [
+      "我说不出去就是不出去",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      605,
+      362,
+      1311,
+      459,
+    ],
+    "endFrame": 431,
+    "startFrame": 430,
+    "texts": Array [
+      "我说不出去就是不出去",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      605,
+      362,
+      1311,
+      459,
+    ],
+    "endFrame": 432,
+    "startFrame": 431,
+    "texts": Array [
+      "我说不出去就是不出去",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      606,
+      362,
+      1312,
+      459,
+    ],
+    "endFrame": 433,
+    "startFrame": 432,
+    "texts": Array [
+      "我说不出去就是不出去",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      606,
+      362,
+      1312,
+      459,
+    ],
+    "endFrame": 434,
+    "startFrame": 433,
+    "texts": Array [
+      "我说不出去就是不出去",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      606,
+      362,
+      1312,
+      459,
+    ],
+    "endFrame": 435,
+    "startFrame": 434,
+    "texts": Array [
+      "我说不出去就是不出去",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      607,
+      362,
+      1312,
+      458,
+    ],
+    "endFrame": 436,
+    "startFrame": 435,
+    "texts": Array [
+      "我说不出去就是不出去",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      607,
+      362,
+      1312,
+      458,
+    ],
+    "endFrame": 437,
+    "startFrame": 436,
+    "texts": Array [
+      "我说不出去就是不出去",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      608,
+      362,
+      1312,
+      458,
+    ],
+    "endFrame": 438,
+    "startFrame": 437,
+    "texts": Array [
+      "我说不出去就是不出去",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      536,
+      362,
+      1349,
+      460,
+    ],
+    "endFrame": 442,
+    "startFrame": 441,
+    "texts": Array [
+      "哥哥想凶妹妹变成什么样？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      535,
+      362,
+      1349,
+      460,
+    ],
+    "endFrame": 443,
+    "startFrame": 442,
+    "texts": Array [
+      "哥哥想凶妹妹变成什么样？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      535,
+      362,
+      1349,
+      460,
+    ],
+    "endFrame": 444,
+    "startFrame": 443,
+    "texts": Array [
+      "哥哥想凶妹妹变成什么样？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      535,
+      362,
+      1349,
+      460,
+    ],
+    "endFrame": 445,
+    "startFrame": 444,
+    "texts": Array [
+      "哥哥想凶妹妹变成什么样？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      538,
+      361,
+      1348,
+      461,
+    ],
+    "endFrame": 446,
+    "startFrame": 445,
+    "texts": Array [
+      "哥哥想b妹妹变成什么样?",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      538,
+      361,
+      1348,
+      461,
+    ],
+    "endFrame": 447,
+    "startFrame": 446,
+    "texts": Array [
+      "哥哥想b妹妹变成什么样?",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      538,
+      361,
+      1348,
+      461,
+    ],
+    "endFrame": 448,
+    "startFrame": 447,
+    "texts": Array [
+      "哥哥想b妹妹变成什么样?",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      536,
+      361,
+      1351,
+      460,
+    ],
+    "endFrame": 449,
+    "startFrame": 448,
+    "texts": Array [
+      "哥哥想tb妹眯变成什么样？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      536,
+      361,
+      1351,
+      460,
+    ],
+    "endFrame": 450,
+    "startFrame": 449,
+    "texts": Array [
+      "哥哥想tb妹眯变成什么样？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      536,
+      361,
+      1351,
+      460,
+    ],
+    "endFrame": 451,
+    "startFrame": 450,
+    "texts": Array [
+      "哥哥想tb妹眯变成什么样？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      537,
+      361,
+      1352,
+      460,
+    ],
+    "endFrame": 452,
+    "startFrame": 451,
+    "texts": Array [
+      "哥哥想tb妹妹变成什么样？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      537,
+      361,
+      1352,
+      460,
+    ],
+    "endFrame": 453,
+    "startFrame": 452,
+    "texts": Array [
+      "哥哥想tb妹妹变成什么样？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      537,
+      361,
+      1352,
+      460,
+    ],
+    "endFrame": 454,
+    "startFrame": 453,
+    "texts": Array [
+      "哥哥想tb妹妹变成什么样？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      537,
+      361,
+      1349,
+      460,
+    ],
+    "endFrame": 455,
+    "startFrame": 454,
+    "texts": Array [
+      "哥哥想t止妹妹变成什么样？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      537,
+      361,
+      1349,
+      460,
+    ],
+    "endFrame": 456,
+    "startFrame": 455,
+    "texts": Array [
+      "哥哥想t止妹妹变成什么样？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      537,
+      361,
+      1349,
+      460,
+    ],
+    "endFrame": 457,
+    "startFrame": 456,
+    "texts": Array [
+      "哥哥想t止妹妹变成什么样？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      536,
+      361,
+      1348,
+      460,
+    ],
+    "endFrame": 458,
+    "startFrame": 457,
+    "texts": Array [
+      "哥哥想tb妹妹变成什么样？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      536,
+      361,
+      1348,
+      460,
+    ],
+    "endFrame": 459,
+    "startFrame": 458,
+    "texts": Array [
+      "哥哥想tb妹妹变成什么样？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      536,
+      361,
+      1348,
+      460,
+    ],
+    "endFrame": 460,
+    "startFrame": 459,
+    "texts": Array [
+      "哥哥想tb妹妹变成什么样？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      536,
+      361,
+      1348,
+      460,
+    ],
+    "endFrame": 461,
+    "startFrame": 460,
+    "texts": Array [
+      "哥哥想tb妹妹变成什么样？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      536,
+      361,
+      1348,
+      460,
+    ],
+    "endFrame": 462,
+    "startFrame": 461,
+    "texts": Array [
+      "哥哥想tb妹妹变成什么样？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      535,
+      361,
+      1348,
+      460,
+    ],
+    "endFrame": 463,
+    "startFrame": 462,
+    "texts": Array [
+      "哥哥想tb妹妹变成什么样？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      540,
+      362,
+      1347,
+      459,
+    ],
+    "endFrame": 464,
+    "startFrame": 463,
+    "texts": Array [
+      "哥哥想凶妹妹变成什么样？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      540,
+      361,
+      1347,
+      459,
+    ],
+    "endFrame": 465,
+    "startFrame": 464,
+    "texts": Array [
+      "哥哥想凶妹妹变成什么样？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      541,
+      362,
+      1347,
+      459,
+    ],
+    "endFrame": 466,
+    "startFrame": 465,
+    "texts": Array [
+      "哥哥想凶妹妹变成什么样？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      541,
+      362,
+      1347,
+      459,
+    ],
+    "endFrame": 467,
+    "startFrame": 466,
+    "texts": Array [
+      "哥哥想凶妹妹变成什么样？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      541,
+      362,
+      1346,
+      459,
+    ],
+    "endFrame": 468,
+    "startFrame": 467,
+    "texts": Array [
+      "哥哥想凶妹妹变成什么样？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      541,
+      362,
+      1346,
+      459,
+    ],
+    "endFrame": 469,
+    "startFrame": 468,
+    "texts": Array [
+      "哥哥想凶妹妹变成什么样？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      541,
+      362,
+      1346,
+      459,
+    ],
+    "endFrame": 470,
+    "startFrame": 469,
+    "texts": Array [
+      "哥哥想凶妹妹变成什么样？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      541,
+      362,
+      1346,
+      459,
+    ],
+    "endFrame": 471,
+    "startFrame": 470,
+    "texts": Array [
+      "哥哥想凶妹妹变成什么样？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      541,
+      362,
+      1347,
+      460,
+    ],
+    "endFrame": 472,
+    "startFrame": 471,
+    "texts": Array [
+      "哥哥想凶妹妹变成什么样？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      541,
+      362,
+      1347,
+      460,
+    ],
+    "endFrame": 473,
+    "startFrame": 472,
+    "texts": Array [
+      "哥哥想凶妹妹变成什么样？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      541,
+      362,
+      1347,
+      460,
+    ],
+    "endFrame": 474,
+    "startFrame": 473,
+    "texts": Array [
+      "哥哥想凶妹妹变成什么样？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      541,
+      362,
+      1347,
+      460,
+    ],
+    "endFrame": 475,
+    "startFrame": 474,
+    "texts": Array [
+      "哥哥想凶妹妹变成什么样？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      541,
+      362,
+      1348,
+      460,
+    ],
+    "endFrame": 476,
+    "startFrame": 475,
+    "texts": Array [
+      "哥哥想凶妹妹变成什么样？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      541,
+      362,
+      1348,
+      459,
+    ],
+    "endFrame": 477,
+    "startFrame": 476,
+    "texts": Array [
+      "哥哥想凶妹妹变成什么样？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      540,
+      362,
+      1347,
+      459,
+    ],
+    "endFrame": 478,
+    "startFrame": 477,
+    "texts": Array [
+      "哥哥想凶妹妹变成什么样？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      540,
+      362,
+      1347,
+      459,
+    ],
+    "endFrame": 479,
+    "startFrame": 478,
+    "texts": Array [
+      "哥哥想凶妹妹变成什么样？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      540,
+      362,
+      1348,
+      459,
+    ],
+    "endFrame": 480,
+    "startFrame": 479,
+    "texts": Array [
+      "哥哥想凶妹妹变成什么样？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      540,
+      362,
+      1347,
+      459,
+    ],
+    "endFrame": 481,
+    "startFrame": 480,
+    "texts": Array [
+      "哥哥想凶妹妹变成什么样？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      541,
+      362,
+      1348,
+      460,
+    ],
+    "endFrame": 482,
+    "startFrame": 481,
+    "texts": Array [
+      "哥哥想凶妹妹变成什么样？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      541,
+      362,
+      1348,
+      460,
+    ],
+    "endFrame": 483,
+    "startFrame": 482,
+    "texts": Array [
+      "哥哥想凶妹妹变成什么样？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      540,
+      362,
+      1348,
+      459,
+    ],
+    "endFrame": 484,
+    "startFrame": 483,
+    "texts": Array [
+      "哥哥想凶妹妹变成什么样？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      540,
+      362,
+      1348,
+      460,
+    ],
+    "endFrame": 485,
+    "startFrame": 484,
+    "texts": Array [
+      "哥哥想止妹妹变成什么样？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      540,
+      362,
+      1348,
+      460,
+    ],
+    "endFrame": 486,
+    "startFrame": 485,
+    "texts": Array [
+      "哥哥想止妹妹变成什么样？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      540,
+      361,
+      1347,
+      459,
+    ],
+    "endFrame": 487,
+    "startFrame": 486,
+    "texts": Array [
+      "哥哥想凶妹妹变成什么样？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      540,
+      361,
+      1347,
+      459,
+    ],
+    "endFrame": 488,
+    "startFrame": 487,
+    "texts": Array [
+      "哥哥想凶妹妹变成什么样？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      540,
+      361,
+      1347,
+      459,
+    ],
+    "endFrame": 489,
+    "startFrame": 488,
+    "texts": Array [
+      "哥哥想凶妹妹变成什么样？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      540,
+      361,
+      1347,
+      459,
+    ],
+    "endFrame": 490,
+    "startFrame": 489,
+    "texts": Array [
+      "哥哥想凶妹妹变成什么样？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      539,
+      362,
+      1347,
+      459,
+    ],
+    "endFrame": 491,
+    "startFrame": 490,
+    "texts": Array [
+      "哥哥想凶妹妹变成什么样",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      540,
+      362,
+      1346,
+      459,
+    ],
+    "endFrame": 492,
+    "startFrame": 491,
+    "texts": Array [
+      "哥哥想凶妹妹变成什么样？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      541,
+      362,
+      1348,
+      459,
+    ],
+    "endFrame": 493,
+    "startFrame": 492,
+    "texts": Array [
+      "哥哥想凶妹妹变成什么样？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      541,
+      362,
+      1348,
+      459,
+    ],
+    "endFrame": 494,
+    "startFrame": 493,
+    "texts": Array [
+      "哥哥想凶妹妹变成什么样？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      541,
+      362,
+      1348,
+      459,
+    ],
+    "endFrame": 495,
+    "startFrame": 494,
+    "texts": Array [
+      "哥哥想凶妹妹变成什么样？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      542,
+      362,
+      1348,
+      459,
+    ],
+    "endFrame": 496,
+    "startFrame": 495,
+    "texts": Array [
+      "哥哥想让妹妹变成什么样？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      542,
+      362,
+      1348,
+      459,
+    ],
+    "endFrame": 497,
+    "startFrame": 496,
+    "texts": Array [
+      "哥哥想让妹妹变成什么样？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      543,
+      361,
+      1348,
+      459,
+    ],
+    "endFrame": 498,
+    "startFrame": 497,
+    "texts": Array [
+      "哥哥想让妹妹变成什么样?",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      539,
+      361,
+      1346,
+      459,
+    ],
+    "endFrame": 499,
+    "startFrame": 498,
+    "texts": Array [
+      "哥哥想凶妹妹变成什么样？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      539,
+      361,
+      1346,
+      459,
+    ],
+    "endFrame": 500,
+    "startFrame": 499,
+    "texts": Array [
+      "哥哥想凶妹妹变成什么样？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      538,
+      360,
+      1345,
+      459,
+    ],
+    "endFrame": 501,
+    "startFrame": 500,
+    "texts": Array [
+      "哥哥想凶妹妹变成什么样？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      538,
+      360,
+      1346,
+      459,
+    ],
+    "endFrame": 502,
+    "startFrame": 501,
+    "texts": Array [
+      "哥哥想凶妹妹变成什么样？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      536,
+      360,
+      1346,
+      459,
+    ],
+    "endFrame": 503,
+    "startFrame": 502,
+    "texts": Array [
+      "哥哥想凶妹妹变成什么样？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      537,
+      361,
+      1347,
+      459,
+    ],
+    "endFrame": 504,
+    "startFrame": 503,
+    "texts": Array [
+      "哥哥想凶妹妹变成什么样？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      538,
+      361,
+      1346,
+      459,
+    ],
+    "endFrame": 505,
+    "startFrame": 504,
+    "texts": Array [
+      "哥哥想凶妹妹变成什么样？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      538,
+      361,
+      1347,
+      459,
+    ],
+    "endFrame": 506,
+    "startFrame": 505,
+    "texts": Array [
+      "哥哥想凶妹妹变成什么样？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      538,
+      361,
+      1347,
+      459,
+    ],
+    "endFrame": 507,
+    "startFrame": 506,
+    "texts": Array [
+      "哥哥想凶妹妹变成什么样？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      539,
+      361,
+      1347,
+      459,
+    ],
+    "endFrame": 508,
+    "startFrame": 507,
+    "texts": Array [
+      "哥哥想凶妹妹变成什么样？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      541,
+      361,
+      1350,
+      459,
+    ],
+    "endFrame": 509,
+    "startFrame": 508,
+    "texts": Array [
+      "哥哥想b妹妹变成什么样？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      541,
+      361,
+      1351,
+      459,
+    ],
+    "endFrame": 510,
+    "startFrame": 509,
+    "texts": Array [
+      "哥哥想b妹妹变成什么样？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      540,
+      361,
+      1348,
+      459,
+    ],
+    "endFrame": 511,
+    "startFrame": 510,
+    "texts": Array [
+      "哥哥想凶妹妹变成什么样？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      539,
+      361,
+      1348,
+      459,
+    ],
+    "endFrame": 512,
+    "startFrame": 511,
+    "texts": Array [
+      "哥哥想凶妹妹变成什么样？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      542,
+      361,
+      1352,
+      459,
+    ],
+    "endFrame": 513,
+    "startFrame": 512,
+    "texts": Array [
+      "哥哥想妹妹变成什么样？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      773,
+      362,
+      1108,
+      461,
+    ],
+    "endFrame": 532,
+    "startFrame": 531,
+    "texts": Array [
+      "和泉政宗?",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      773,
+      362,
+      1108,
+      461,
+    ],
+    "endFrame": 533,
+    "startFrame": 532,
+    "texts": Array [
+      "和泉政宗?",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      773,
+      362,
+      1108,
+      461,
+    ],
+    "endFrame": 534,
+    "startFrame": 533,
+    "texts": Array [
+      "和泉政宗?",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      775,
+      362,
+      1108,
+      461,
+    ],
+    "endFrame": 535,
+    "startFrame": 534,
+    "texts": Array [
+      "和泉政宗？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      775,
+      362,
+      1108,
+      461,
+    ],
+    "endFrame": 536,
+    "startFrame": 535,
+    "texts": Array [
+      "和泉政宗？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      775,
+      362,
+      1108,
+      461,
+    ],
+    "endFrame": 537,
+    "startFrame": 536,
+    "texts": Array [
+      "和泉政宗？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      777,
+      361,
+      1107,
+      461,
+    ],
+    "endFrame": 538,
+    "startFrame": 537,
+    "texts": Array [
+      "和泉政宗？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      777,
+      361,
+      1107,
+      461,
+    ],
+    "endFrame": 539,
+    "startFrame": 538,
+    "texts": Array [
+      "和泉政宗？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      777,
+      361,
+      1107,
+      461,
+    ],
+    "endFrame": 540,
+    "startFrame": 539,
+    "texts": Array [
+      "和泉政宗？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      773,
+      361,
+      1108,
+      461,
+    ],
+    "endFrame": 541,
+    "startFrame": 540,
+    "texts": Array [
+      "和泉政宗?？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      773,
+      361,
+      1108,
+      461,
+    ],
+    "endFrame": 542,
+    "startFrame": 541,
+    "texts": Array [
+      "和泉政宗?？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      773,
+      361,
+      1108,
+      461,
+    ],
+    "endFrame": 543,
+    "startFrame": 542,
+    "texts": Array [
+      "和泉政宗?？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      776,
+      361,
+      1108,
+      461,
+    ],
+    "endFrame": 544,
+    "startFrame": 543,
+    "texts": Array [
+      "和泉政宗?？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      775,
+      361,
+      1108,
+      461,
+    ],
+    "endFrame": 545,
+    "startFrame": 544,
+    "texts": Array [
+      "和泉政宗?",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      775,
+      361,
+      1108,
+      461,
+    ],
+    "endFrame": 546,
+    "startFrame": 545,
+    "texts": Array [
+      "和泉政宗?",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      774,
+      361,
+      1107,
+      461,
+    ],
+    "endFrame": 547,
+    "startFrame": 546,
+    "texts": Array [
+      "和泉政宗？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      775,
+      361,
+      1107,
+      461,
+    ],
+    "endFrame": 548,
+    "startFrame": 547,
+    "texts": Array [
+      "和泉政宗?？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      775,
+      361,
+      1107,
+      461,
+    ],
+    "endFrame": 549,
+    "startFrame": 548,
+    "texts": Array [
+      "和泉政宗?？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      775,
+      361,
+      1107,
+      461,
+    ],
+    "endFrame": 550,
+    "startFrame": 549,
+    "texts": Array [
+      "和泉政宗?？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      775,
+      361,
+      1107,
+      461,
+    ],
+    "endFrame": 551,
+    "startFrame": 550,
+    "texts": Array [
+      "和泉政宗?？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      775,
+      361,
+      1107,
+      461,
+    ],
+    "endFrame": 552,
+    "startFrame": 551,
+    "texts": Array [
+      "和泉政宗?？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      775,
+      361,
+      1107,
+      461,
+    ],
+    "endFrame": 553,
+    "startFrame": 552,
+    "texts": Array [
+      "和泉政宗?？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      775,
+      361,
+      1107,
+      461,
+    ],
+    "endFrame": 554,
+    "startFrame": 553,
+    "texts": Array [
+      "和泉政宗?？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      775,
+      361,
+      1107,
+      461,
+    ],
+    "endFrame": 555,
+    "startFrame": 554,
+    "texts": Array [
+      "和泉政宗?？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      775,
+      361,
+      1107,
+      461,
+    ],
+    "endFrame": 556,
+    "startFrame": 555,
+    "texts": Array [
+      "和泉政宗?？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      775,
+      361,
+      1107,
+      461,
+    ],
+    "endFrame": 557,
+    "startFrame": 556,
+    "texts": Array [
+      "和泉政宗?？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      774,
+      361,
+      1107,
+      461,
+    ],
+    "endFrame": 558,
+    "startFrame": 557,
+    "texts": Array [
+      "和泉政宗？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      774,
+      361,
+      1107,
+      461,
+    ],
+    "endFrame": 559,
+    "startFrame": 558,
+    "texts": Array [
+      "和泉政宗？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      774,
+      361,
+      1107,
+      461,
+    ],
+    "endFrame": 560,
+    "startFrame": 559,
+    "texts": Array [
+      "和泉政宗？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      774,
+      361,
+      1107,
+      461,
+    ],
+    "endFrame": 561,
+    "startFrame": 560,
+    "texts": Array [
+      "和泉政宗？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      537,
+      362,
+      1343,
+      460,
+    ],
+    "endFrame": 572,
+    "startFrame": 571,
+    "texts": Array [
+      "居然是如此年轻的女孩子？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      538,
+      362,
+      1345,
+      460,
+    ],
+    "endFrame": 573,
+    "startFrame": 572,
+    "texts": Array [
+      "居然是如此年轻的女孩子？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      537,
+      362,
+      1345,
+      460,
+    ],
+    "endFrame": 574,
+    "startFrame": 573,
+    "texts": Array [
+      "居然是如此年轻的女孩子？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      537,
+      362,
+      1347,
+      460,
+    ],
+    "endFrame": 575,
+    "startFrame": 574,
+    "texts": Array [
+      "居然是如此年轻的女孩子？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      535,
+      362,
+      1352,
+      460,
+    ],
+    "endFrame": 576,
+    "startFrame": 575,
+    "texts": Array [
+      "居然是如此年轻的女孩子？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      535,
+      362,
+      1351,
+      460,
+    ],
+    "endFrame": 577,
+    "startFrame": 576,
+    "texts": Array [
+      "居然是如此年轻的女孩子？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      536,
+      362,
+      1350,
+      460,
+    ],
+    "endFrame": 578,
+    "startFrame": 577,
+    "texts": Array [
+      "居然是如此年轻的女孩子？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      537,
+      363,
+      1353,
+      460,
+    ],
+    "endFrame": 579,
+    "startFrame": 578,
+    "texts": Array [
+      "居然是如此年轻的女孩子？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      535,
+      363,
+      1354,
+      460,
+    ],
+    "endFrame": 580,
+    "startFrame": 579,
+    "texts": Array [
+      "居然是如此年轻的女孩子？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      535,
+      364,
+      1352,
+      460,
+    ],
+    "endFrame": 581,
+    "startFrame": 580,
+    "texts": Array [
+      "居然是如此年轻的女孩子？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      534,
+      363,
+      1349,
+      461,
+    ],
+    "endFrame": 582,
+    "startFrame": 581,
+    "texts": Array [
+      "居然是如此年轻的女孩子？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      534,
+      362,
+      1350,
+      461,
+    ],
+    "endFrame": 583,
+    "startFrame": 582,
+    "texts": Array [
+      "居然是如此年轻的女孩子？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      544,
+      362,
+      1348,
+      460,
+    ],
+    "endFrame": 584,
+    "startFrame": 583,
+    "texts": Array [
+      "居然是如此年轻的女孩？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      546,
+      362,
+      1349,
+      460,
+    ],
+    "endFrame": 585,
+    "startFrame": 584,
+    "texts": Array [
+      "居然是如此年轻的女孩子？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      546,
+      362,
+      1344,
+      460,
+    ],
+    "endFrame": 586,
+    "startFrame": 585,
+    "texts": Array [
+      "居然是如此年轻的女孩子？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      547,
+      362,
+      1343,
+      460,
+    ],
+    "endFrame": 587,
+    "startFrame": 586,
+    "texts": Array [
+      "居然是如此年轻的女孩子？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      536,
+      363,
+      1349,
+      460,
+    ],
+    "endFrame": 588,
+    "startFrame": 587,
+    "texts": Array [
+      "居然是如此年轻的女孩子？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      547,
+      363,
+      1346,
+      460,
+    ],
+    "endFrame": 589,
+    "startFrame": 588,
+    "texts": Array [
+      "居然是如此年轻的女孩子？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      537,
+      362,
+      1355,
+      462,
+    ],
+    "endFrame": 590,
+    "startFrame": 589,
+    "texts": Array [
+      "居然是如此年轻的女孩子？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      538,
+      361,
+      1351,
+      464,
+    ],
+    "endFrame": 591,
+    "startFrame": 590,
+    "texts": Array [
+      "居然是如此年轻的女孩子?",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      544,
+      362,
+      1343,
+      462,
+    ],
+    "endFrame": 592,
+    "startFrame": 591,
+    "texts": Array [
+      "居然是如此年轻的女孩子？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      546,
+      362,
+      1344,
+      461,
+    ],
+    "endFrame": 593,
+    "startFrame": 592,
+    "texts": Array [
+      "居然是如此年轻的女孩子？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      548,
+      362,
+      1348,
+      461,
+    ],
+    "endFrame": 594,
+    "startFrame": 593,
+    "texts": Array [
+      "居然是如此年轻的女孩子?",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      547,
+      362,
+      1347,
+      461,
+    ],
+    "endFrame": 595,
+    "startFrame": 594,
+    "texts": Array [
+      "居然是如此年轻的女孩子？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      544,
+      362,
+      1344,
+      461,
+    ],
+    "endFrame": 596,
+    "startFrame": 595,
+    "texts": Array [
+      "居然是如此年轻的女孩子？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      533,
+      362,
+      1346,
+      463,
+    ],
+    "endFrame": 597,
+    "startFrame": 596,
+    "texts": Array [
+      "居然是如此年轻的女孩子？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      536,
+      361,
+      1350,
+      463,
+    ],
+    "endFrame": 598,
+    "startFrame": 597,
+    "texts": Array [
+      "居然是如此年轻女孩子？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      533,
+      362,
+      1352,
+      462,
+    ],
+    "endFrame": 599,
+    "startFrame": 598,
+    "texts": Array [
+      "居然是如此年轻的女孩子？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      535,
+      362,
+      1349,
+      463,
+    ],
+    "endFrame": 600,
+    "startFrame": 599,
+    "texts": Array [
+      "居然是如此年轻的女孩子？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      542,
+      361,
+      1351,
+      463,
+    ],
+    "endFrame": 601,
+    "startFrame": 600,
+    "texts": Array [
+      "居然是如此年轻的女孩子？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      536,
+      362,
+      1350,
+      462,
+    ],
+    "endFrame": 602,
+    "startFrame": 601,
+    "texts": Array [
+      "居然是如此年轻的女孩子？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      535,
+      362,
+      1349,
+      462,
+    ],
+    "endFrame": 603,
+    "startFrame": 602,
+    "texts": Array [
+      "居然是如此年轻的女孩子？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      539,
+      362,
+      1347,
+      462,
+    ],
+    "endFrame": 604,
+    "startFrame": 603,
+    "texts": Array [
+      "居然是如此年轻的女孩子？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      533,
+      362,
+      1348,
+      462,
+    ],
+    "endFrame": 605,
+    "startFrame": 604,
+    "texts": Array [
+      "居然是如此年轻的女孩子？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      544,
+      362,
+      1345,
+      461,
+    ],
+    "endFrame": 606,
+    "startFrame": 605,
+    "texts": Array [
+      "居然是如此年轻的女孩子？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      537,
+      362,
+      1347,
+      460,
+    ],
+    "endFrame": 607,
+    "startFrame": 606,
+    "texts": Array [
+      "居然是如此年轻的女孩子？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      542,
+      362,
+      1343,
+      460,
+    ],
+    "endFrame": 608,
+    "startFrame": 607,
+    "texts": Array [
+      "居然是如此年轻的女孩子？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      541,
+      362,
+      1343,
+      460,
+    ],
+    "endFrame": 609,
+    "startFrame": 608,
+    "texts": Array [
+      "居然是如此年轻的女孩子？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      541,
+      362,
+      1342,
+      460,
+    ],
+    "endFrame": 610,
+    "startFrame": 609,
+    "texts": Array [
+      "居然是如此年轻的女孩子？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      541,
+      362,
+      1343,
+      461,
+    ],
+    "endFrame": 611,
+    "startFrame": 610,
+    "texts": Array [
+      "居然是如此年轻的女孩子？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      542,
+      362,
+      1343,
+      461,
+    ],
+    "endFrame": 612,
+    "startFrame": 611,
+    "texts": Array [
+      "居然是如此年轻的女孩子？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      539,
+      362,
+      1343,
+      460,
+    ],
+    "endFrame": 613,
+    "startFrame": 612,
+    "texts": Array [
+      "居然是如此y年轻的女孩子？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      535,
+      361,
+      1349,
+      462,
+    ],
+    "endFrame": 614,
+    "startFrame": 613,
+    "texts": Array [
+      "居然是如此年轻的女孩子？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      536,
+      361,
+      1350,
+      462,
+    ],
+    "endFrame": 615,
+    "startFrame": 614,
+    "texts": Array [
+      "居然是如此年轻的女孩子？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      536,
+      361,
+      1349,
+      462,
+    ],
+    "endFrame": 616,
+    "startFrame": 615,
+    "texts": Array [
+      "居然是如此年轻的女孩子？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      536,
+      361,
+      1349,
+      462,
+    ],
+    "endFrame": 617,
+    "startFrame": 616,
+    "texts": Array [
+      "居然是如此年轻的女孩子？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      536,
+      361,
+      1349,
+      462,
+    ],
+    "endFrame": 618,
+    "startFrame": 617,
+    "texts": Array [
+      "居然是如此年轻的女孩子？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      536,
+      361,
+      1349,
+      462,
+    ],
+    "endFrame": 619,
+    "startFrame": 618,
+    "texts": Array [
+      "居然是如此年轻的女孩子？",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      234,
+      362,
+      1701,
+      460,
+    ],
+    "endFrame": 629,
+    "startFrame": 628,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      234,
+      362,
+      1701,
+      460,
+    ],
+    "endFrame": 630,
+    "startFrame": 629,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      230,
+      361,
+      1703,
+      460,
+    ],
+    "endFrame": 631,
+    "startFrame": 630,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      231,
+      361,
+      1703,
+      460,
+    ],
+    "endFrame": 632,
+    "startFrame": 631,
+    "texts": Array [
+      "我的下一个作昆要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      231,
+      361,
+      1703,
+      460,
+    ],
+    "endFrame": 633,
+    "startFrame": 632,
+    "texts": Array [
+      "我的下一个作昆要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      237,
+      362,
+      1703,
+      460,
+    ],
+    "endFrame": 634,
+    "startFrame": 633,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      237,
+      362,
+      1702,
+      460,
+    ],
+    "endFrame": 635,
+    "startFrame": 634,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      237,
+      362,
+      1702,
+      460,
+    ],
+    "endFrame": 636,
+    "startFrame": 635,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      236,
+      362,
+      1702,
+      460,
+    ],
+    "endFrame": 637,
+    "startFrame": 636,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      236,
+      362,
+      1702,
+      460,
+    ],
+    "endFrame": 638,
+    "startFrame": 637,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      236,
+      362,
+      1702,
+      460,
+    ],
+    "endFrame": 639,
+    "startFrame": 638,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      234,
+      362,
+      1706,
+      460,
+    ],
+    "endFrame": 640,
+    "startFrame": 639,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      233,
+      362,
+      1706,
+      460,
+    ],
+    "endFrame": 641,
+    "startFrame": 640,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      233,
+      362,
+      1706,
+      460,
+    ],
+    "endFrame": 642,
+    "startFrame": 641,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      233,
+      362,
+      1706,
+      460,
+    ],
+    "endFrame": 643,
+    "startFrame": 642,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      233,
+      362,
+      1706,
+      460,
+    ],
+    "endFrame": 644,
+    "startFrame": 643,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      233,
+      362,
+      1706,
+      460,
+    ],
+    "endFrame": 645,
+    "startFrame": 644,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      234,
+      362,
+      1706,
+      460,
+    ],
+    "endFrame": 646,
+    "startFrame": 645,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      234,
+      362,
+      1706,
+      460,
+    ],
+    "endFrame": 647,
+    "startFrame": 646,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      234,
+      362,
+      1706,
+      460,
+    ],
+    "endFrame": 648,
+    "startFrame": 647,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      233,
+      362,
+      1706,
+      460,
+    ],
+    "endFrame": 649,
+    "startFrame": 648,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      234,
+      362,
+      1706,
+      460,
+    ],
+    "endFrame": 650,
+    "startFrame": 649,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      233,
+      362,
+      1706,
+      460,
+    ],
+    "endFrame": 651,
+    "startFrame": 650,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      233,
+      362,
+      1706,
+      460,
+    ],
+    "endFrame": 652,
+    "startFrame": 651,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      233,
+      362,
+      1706,
+      460,
+    ],
+    "endFrame": 653,
+    "startFrame": 652,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      233,
+      362,
+      1706,
+      460,
+    ],
+    "endFrame": 654,
+    "startFrame": 653,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      233,
+      362,
+      1706,
+      460,
+    ],
+    "endFrame": 655,
+    "startFrame": 654,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      233,
+      362,
+      1706,
+      460,
+    ],
+    "endFrame": 656,
+    "startFrame": 655,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      233,
+      362,
+      1706,
+      460,
+    ],
+    "endFrame": 657,
+    "startFrame": 656,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      233,
+      362,
+      1706,
+      460,
+    ],
+    "endFrame": 658,
+    "startFrame": 657,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      233,
+      362,
+      1706,
+      460,
+    ],
+    "endFrame": 659,
+    "startFrame": 658,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      233,
+      362,
+      1706,
+      460,
+    ],
+    "endFrame": 660,
+    "startFrame": 659,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      233,
+      362,
+      1706,
+      460,
+    ],
+    "endFrame": 661,
+    "startFrame": 660,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      233,
+      362,
+      1706,
+      460,
+    ],
+    "endFrame": 662,
+    "startFrame": 661,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      233,
+      362,
+      1706,
+      460,
+    ],
+    "endFrame": 663,
+    "startFrame": 662,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      233,
+      362,
+      1706,
+      460,
+    ],
+    "endFrame": 664,
+    "startFrame": 663,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      233,
+      362,
+      1706,
+      460,
+    ],
+    "endFrame": 665,
+    "startFrame": 664,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      234,
+      362,
+      1706,
+      460,
+    ],
+    "endFrame": 666,
+    "startFrame": 665,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      233,
+      362,
+      1706,
+      460,
+    ],
+    "endFrame": 667,
+    "startFrame": 666,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      233,
+      362,
+      1706,
+      460,
+    ],
+    "endFrame": 668,
+    "startFrame": 667,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      233,
+      362,
+      1706,
+      460,
+    ],
+    "endFrame": 669,
+    "startFrame": 668,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      233,
+      362,
+      1706,
+      460,
+    ],
+    "endFrame": 670,
+    "startFrame": 669,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      233,
+      362,
+      1706,
+      460,
+    ],
+    "endFrame": 671,
+    "startFrame": 670,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      234,
+      362,
+      1706,
+      460,
+    ],
+    "endFrame": 672,
+    "startFrame": 671,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      233,
+      362,
+      1706,
+      460,
+    ],
+    "endFrame": 673,
+    "startFrame": 672,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      234,
+      362,
+      1706,
+      460,
+    ],
+    "endFrame": 674,
+    "startFrame": 673,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      233,
+      362,
+      1706,
+      460,
+    ],
+    "endFrame": 675,
+    "startFrame": 674,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      219,
+      362,
+      1703,
+      460,
+    ],
+    "endFrame": 676,
+    "startFrame": 675,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      222,
+      362,
+      1709,
+      461,
+    ],
+    "endFrame": 677,
+    "startFrame": 676,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      218,
+      362,
+      1710,
+      461,
+    ],
+    "endFrame": 678,
+    "startFrame": 677,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      228,
+      363,
+      1704,
+      460,
+    ],
+    "endFrame": 679,
+    "startFrame": 678,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      225,
+      363,
+      1705,
+      461,
+    ],
+    "endFrame": 680,
+    "startFrame": 679,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      227,
+      362,
+      1706,
+      461,
+    ],
+    "endFrame": 681,
+    "startFrame": 680,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      217,
+      362,
+      1706,
+      461,
+    ],
+    "endFrame": 682,
+    "startFrame": 681,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      220,
+      362,
+      1705,
+      460,
+    ],
+    "endFrame": 683,
+    "startFrame": 682,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      225,
+      362,
+      1703,
+      460,
+    ],
+    "endFrame": 684,
+    "startFrame": 683,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      227,
+      362,
+      1706,
+      460,
+    ],
+    "endFrame": 685,
+    "startFrame": 684,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      227,
+      362,
+      1705,
+      460,
+    ],
+    "endFrame": 686,
+    "startFrame": 685,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      225,
+      362,
+      1706,
+      460,
+    ],
+    "endFrame": 687,
+    "startFrame": 686,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      220,
+      362,
+      1710,
+      460,
+    ],
+    "endFrame": 688,
+    "startFrame": 687,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      221,
+      362,
+      1709,
+      460,
+    ],
+    "endFrame": 689,
+    "startFrame": 688,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老I师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      221,
+      362,
+      1710,
+      460,
+    ],
+    "endFrame": 690,
+    "startFrame": 689,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老I师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      224,
+      362,
+      1708,
+      460,
+    ],
+    "endFrame": 691,
+    "startFrame": 690,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      224,
+      362,
+      1708,
+      460,
+    ],
+    "endFrame": 692,
+    "startFrame": 691,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      224,
+      362,
+      1708,
+      460,
+    ],
+    "endFrame": 693,
+    "startFrame": 692,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      215,
+      362,
+      1711,
+      461,
+    ],
+    "endFrame": 694,
+    "startFrame": 693,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      215,
+      362,
+      1711,
+      461,
+    ],
+    "endFrame": 695,
+    "startFrame": 694,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      215,
+      362,
+      1711,
+      461,
+    ],
+    "endFrame": 696,
+    "startFrame": 695,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      239,
+      362,
+      1710,
+      462,
+    ],
+    "endFrame": 697,
+    "startFrame": 696,
+    "texts": Array [
+      "我的下一个作要请情色漫画老师来担任擂画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      239,
+      362,
+      1710,
+      462,
+    ],
+    "endFrame": 698,
+    "startFrame": 697,
+    "texts": Array [
+      "我的下一个作要请情色漫画老师来担任插擂画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      239,
+      362,
+      1710,
+      462,
+    ],
+    "endFrame": 699,
+    "startFrame": 698,
+    "texts": Array [
+      "我的下一个作要请情色漫画老师来担任插擂画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      234,
+      362,
+      1715,
+      461,
+    ],
+    "endFrame": 700,
+    "startFrame": 699,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      234,
+      362,
+      1715,
+      461,
+    ],
+    "endFrame": 701,
+    "startFrame": 700,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      234,
+      362,
+      1715,
+      461,
+    ],
+    "endFrame": 702,
+    "startFrame": 701,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      235,
+      362,
+      1702,
+      461,
+    ],
+    "endFrame": 703,
+    "startFrame": 702,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      235,
+      362,
+      1702,
+      461,
+    ],
+    "endFrame": 704,
+    "startFrame": 703,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      235,
+      362,
+      1702,
+      461,
+    ],
+    "endFrame": 705,
+    "startFrame": 704,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      235,
+      362,
+      1702,
+      461,
+    ],
+    "endFrame": 706,
+    "startFrame": 705,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      235,
+      362,
+      1702,
+      461,
+    ],
+    "endFrame": 707,
+    "startFrame": 706,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      234,
+      362,
+      1702,
+      461,
+    ],
+    "endFrame": 708,
+    "startFrame": 707,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      235,
+      362,
+      1702,
+      461,
+    ],
+    "endFrame": 709,
+    "startFrame": 708,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      235,
+      362,
+      1702,
+      461,
+    ],
+    "endFrame": 710,
+    "startFrame": 709,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      234,
+      362,
+      1702,
+      461,
+    ],
+    "endFrame": 711,
+    "startFrame": 710,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      234,
+      362,
+      1702,
+      461,
+    ],
+    "endFrame": 712,
+    "startFrame": 711,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      234,
+      362,
+      1702,
+      461,
+    ],
+    "endFrame": 713,
+    "startFrame": 712,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      235,
+      362,
+      1702,
+      461,
+    ],
+    "endFrame": 714,
+    "startFrame": 713,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      234,
+      362,
+      1702,
+      461,
+    ],
+    "endFrame": 715,
+    "startFrame": 714,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      235,
+      362,
+      1702,
+      461,
+    ],
+    "endFrame": 716,
+    "startFrame": 715,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      234,
+      362,
+      1702,
+      461,
+    ],
+    "endFrame": 717,
+    "startFrame": 716,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      235,
+      362,
+      1702,
+      461,
+    ],
+    "endFrame": 718,
+    "startFrame": 717,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      235,
+      362,
+      1702,
+      461,
+    ],
+    "endFrame": 719,
+    "startFrame": 718,
+    "texts": Array [
+      "我的下一个作品要请情色漫画老师来担任插画师",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      572,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 730,
+    "startFrame": 729,
+    "texts": Array [
+      "？ 乃…与  人 t",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      572,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 731,
+    "startFrame": 730,
+    "texts": Array [
+      "？ 乃…与  人 t",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      572,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 732,
+    "startFrame": 731,
+    "texts": Array [
+      "？ 乃…与  人 t",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      572,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 733,
+    "startFrame": 732,
+    "texts": Array [
+      "？ 乃…与  人 t",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      572,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 734,
+    "startFrame": 733,
+    "texts": Array [
+      "？ 乃…与  人 t",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      572,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 735,
+    "startFrame": 734,
+    "texts": Array [
+      "？ 乃…与  人 t",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      572,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 736,
+    "startFrame": 735,
+    "texts": Array [
+      "？ 乃…与  人 t",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      572,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 737,
+    "startFrame": 736,
+    "texts": Array [
+      "？ 乃…与  人 t",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      573,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 738,
+    "startFrame": 737,
+    "texts": Array [
+      "耻 …与  人 t:",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      572,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 739,
+    "startFrame": 738,
+    "texts": Array [
+      "？ 乃…与  人 t",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      572,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 740,
+    "startFrame": 739,
+    "texts": Array [
+      "？ 乃…与  人 t",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      572,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 741,
+    "startFrame": 740,
+    "texts": Array [
+      "？ 乃…与  人 t",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      572,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 742,
+    "startFrame": 741,
+    "texts": Array [
+      "？ 乃…与  人 t",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      572,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 743,
+    "startFrame": 742,
+    "texts": Array [
+      "？ 乃…与  人 t",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      572,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 744,
+    "startFrame": 743,
+    "texts": Array [
+      "？ 乃…与  人 t",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      573,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 745,
+    "startFrame": 744,
+    "texts": Array [
+      "耻 …与  人 t:",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      573,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 746,
+    "startFrame": 745,
+    "texts": Array [
+      "耻 …与  人 t:",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      573,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 747,
+    "startFrame": 746,
+    "texts": Array [
+      "耻 …与  人 t:",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      573,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 748,
+    "startFrame": 747,
+    "texts": Array [
+      "耻 …与  人 t:",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      573,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 749,
+    "startFrame": 748,
+    "texts": Array [
+      "耻 …与  人 t:",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      573,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 750,
+    "startFrame": 749,
+    "texts": Array [
+      "耻 …与  人 t:",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      573,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 751,
+    "startFrame": 750,
+    "texts": Array [
+      "耻 …与  人 t:",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      573,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 752,
+    "startFrame": 751,
+    "texts": Array [
+      "耻 …与  人 t:",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      573,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 753,
+    "startFrame": 752,
+    "texts": Array [
+      "耻 …与  人 t:",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      573,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 754,
+    "startFrame": 753,
+    "texts": Array [
+      "耻 欠…与  人 t",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      573,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 755,
+    "startFrame": 754,
+    "texts": Array [
+      "耻 欠…与  人 t:",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      573,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 756,
+    "startFrame": 755,
+    "texts": Array [
+      "耻 欠…与  人 t:",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      573,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 757,
+    "startFrame": 756,
+    "texts": Array [
+      "耻 欠…与  人 t:",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      573,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 758,
+    "startFrame": 757,
+    "texts": Array [
+      "耻 欠…与  人 t:",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      573,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 759,
+    "startFrame": 758,
+    "texts": Array [
+      "耻 …与  人 t:",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      573,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 760,
+    "startFrame": 759,
+    "texts": Array [
+      "耻 …与  人 t:",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      573,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 761,
+    "startFrame": 760,
+    "texts": Array [
+      "耻 …与  人 t:",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      573,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 762,
+    "startFrame": 761,
+    "texts": Array [
+      "耻 …与  人 t:",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      573,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 763,
+    "startFrame": 762,
+    "texts": Array [
+      "耻 …与  人 t:",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      573,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 764,
+    "startFrame": 763,
+    "texts": Array [
+      "耻 …与  人 t:",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      573,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 765,
+    "startFrame": 764,
+    "texts": Array [
+      "耻 …与  人 t:",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      573,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 766,
+    "startFrame": 765,
+    "texts": Array [
+      "耻 …与  人 t:",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      572,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 767,
+    "startFrame": 766,
+    "texts": Array [
+      "？ 乃…与  人 t",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      573,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 768,
+    "startFrame": 767,
+    "texts": Array [
+      "耻 …与  人 t:",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      573,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 769,
+    "startFrame": 768,
+    "texts": Array [
+      "耻 …与  人 t:",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      573,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 770,
+    "startFrame": 769,
+    "texts": Array [
+      "耻 …与  人 t:",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      573,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 771,
+    "startFrame": 770,
+    "texts": Array [
+      "耻 …与  人 t:",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      573,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 772,
+    "startFrame": 771,
+    "texts": Array [
+      "耻 …与  人 t:",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      573,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 773,
+    "startFrame": 772,
+    "texts": Array [
+      "耻 …与  人 t:",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      573,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 774,
+    "startFrame": 773,
+    "texts": Array [
+      "耻 …与  人 t:",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      573,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 775,
+    "startFrame": 774,
+    "texts": Array [
+      "耻 …与  人 t:",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      573,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 776,
+    "startFrame": 775,
+    "texts": Array [
+      "耻 …与  人 t:",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      573,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 777,
+    "startFrame": 776,
+    "texts": Array [
+      "耻 …与  人 t:",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      573,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 778,
+    "startFrame": 777,
+    "texts": Array [
+      "耻 …与  人 t:",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      573,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 779,
+    "startFrame": 778,
+    "texts": Array [
+      "耻 …与  人 t:",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      573,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 780,
+    "startFrame": 779,
+    "texts": Array [
+      "耻 …与  人 t:",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      573,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 781,
+    "startFrame": 780,
+    "texts": Array [
+      "耻 …与  人 t:",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      573,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 782,
+    "startFrame": 781,
+    "texts": Array [
+      "耻 …与  人 t:",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      573,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 783,
+    "startFrame": 782,
+    "texts": Array [
+      "耻 …与  人 t:",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      573,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 784,
+    "startFrame": 783,
+    "texts": Array [
+      "耻 …与  人 t:",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      573,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 785,
+    "startFrame": 784,
+    "texts": Array [
+      "耻 …与  人 t:",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      572,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 786,
+    "startFrame": 785,
+    "texts": Array [
+      "？ 乃…与  人 t",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      572,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 787,
+    "startFrame": 786,
+    "texts": Array [
+      "？ 乃…与  人 t",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      572,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 788,
+    "startFrame": 787,
+    "texts": Array [
+      "？ 乃…与  人 t",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      572,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 789,
+    "startFrame": 788,
+    "texts": Array [
+      "？ 乃…与  人 t",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      572,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 790,
+    "startFrame": 789,
+    "texts": Array [
+      "？ 乃…与  人 t",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      572,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 791,
+    "startFrame": 790,
+    "texts": Array [
+      "？ 乃…与  人 t",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      572,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 792,
+    "startFrame": 791,
+    "texts": Array [
+      "？ 乃…与  人 t",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      572,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 793,
+    "startFrame": 792,
+    "texts": Array [
+      "？ 乃…与  人 t",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      572,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 794,
+    "startFrame": 793,
+    "texts": Array [
+      "？ 乃…与  人 t",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      572,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 795,
+    "startFrame": 794,
+    "texts": Array [
+      "？ 乃…与  人 t",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      572,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 796,
+    "startFrame": 795,
+    "texts": Array [
+      "？ 乃…与  人 t",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      572,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 797,
+    "startFrame": 796,
+    "texts": Array [
+      "？ 乃…与  人 t",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      572,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 798,
+    "startFrame": 797,
+    "texts": Array [
+      "？ 乃…与  人 t",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      572,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 799,
+    "startFrame": 798,
+    "texts": Array [
+      "？ 乃…与  人 t",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      572,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 800,
+    "startFrame": 799,
+    "texts": Array [
+      "？ 乃…与  人 t",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      572,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 801,
+    "startFrame": 800,
+    "texts": Array [
+      "？ 乃…与  人 t",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      572,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 802,
+    "startFrame": 801,
+    "texts": Array [
+      "？ 乃…与  人 t",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      572,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 803,
+    "startFrame": 802,
+    "texts": Array [
+      "？ 乃…与  人 t",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      572,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 804,
+    "startFrame": 803,
+    "texts": Array [
+      "？ 乃…与  人 t",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      572,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 805,
+    "startFrame": 804,
+    "texts": Array [
+      "？ 乃…与  人 t",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      572,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 806,
+    "startFrame": 805,
+    "texts": Array [
+      "？ 乃…与  人 t",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      572,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 807,
+    "startFrame": 806,
+    "texts": Array [
+      "？ 乃…与  人 t",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      572,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 808,
+    "startFrame": 807,
+    "texts": Array [
+      "？ 乃…与  人 t",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      572,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 809,
+    "startFrame": 808,
+    "texts": Array [
+      "？ 乃…与  人 t",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      572,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 810,
+    "startFrame": 809,
+    "texts": Array [
+      "？ 乃…与  人 t",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      572,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 811,
+    "startFrame": 810,
+    "texts": Array [
+      "？ 乃…与  人 t",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      572,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 812,
+    "startFrame": 811,
+    "texts": Array [
+      "？ 乃…与  人 t",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      572,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 813,
+    "startFrame": 812,
+    "texts": Array [
+      "？ 乃…与  人 t",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      572,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 814,
+    "startFrame": 813,
+    "texts": Array [
+      "？ 乃…与  人 t",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      572,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 815,
+    "startFrame": 814,
+    "texts": Array [
+      "？ 乃…与  人 t",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      572,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 816,
+    "startFrame": 815,
+    "texts": Array [
+      "？ 乃…与  人 t",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      572,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 817,
+    "startFrame": 816,
+    "texts": Array [
+      "？ 乃…与  人 t",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      572,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 818,
+    "startFrame": 817,
+    "texts": Array [
+      "？ 乃…与  人 t",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      572,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 819,
+    "startFrame": 818,
+    "texts": Array [
+      "？ 乃…与  人 t",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      572,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 820,
+    "startFrame": 819,
+    "texts": Array [
+      "？ 乃…与  人 t",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      572,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 821,
+    "startFrame": 820,
+    "texts": Array [
+      "？ 乃…与  人 t",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      572,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 822,
+    "startFrame": 821,
+    "texts": Array [
+      "？ 乃…与  人 t",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      572,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 823,
+    "startFrame": 822,
+    "texts": Array [
+      "？ 乃…与  人 t",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      572,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 824,
+    "startFrame": 823,
+    "texts": Array [
+      "？ 乃…与  人 t",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      572,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 825,
+    "startFrame": 824,
+    "texts": Array [
+      "？ 乃…与  人 t",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      572,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 826,
+    "startFrame": 825,
+    "texts": Array [
+      "？ 乃…与  人 t",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      572,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 827,
+    "startFrame": 826,
+    "texts": Array [
+      "？ 乃…与  人 t",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      572,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 828,
+    "startFrame": 827,
+    "texts": Array [
+      "？ 乃…与  人 t",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      572,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 829,
+    "startFrame": 828,
+    "texts": Array [
+      "？ 乃…与  人 t",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      572,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 830,
+    "startFrame": 829,
+    "texts": Array [
+      "？ 乃…与  人 t",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      572,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 831,
+    "startFrame": 830,
+    "texts": Array [
+      "？ 乃…与  人 t",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      573,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 832,
+    "startFrame": 831,
+    "texts": Array [
+      "耻 欠…与  人 t:",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      572,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 833,
+    "startFrame": 832,
+    "texts": Array [
+      "？ 乃…与  人 t",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      572,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 834,
+    "startFrame": 833,
+    "texts": Array [
+      "？ 乃…与  人 t",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      572,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 835,
+    "startFrame": 834,
+    "texts": Array [
+      "？ 乃…与  人 t",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      573,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 836,
+    "startFrame": 835,
+    "texts": Array [
+      "耻 …与  人 t:",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      572,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 837,
+    "startFrame": 836,
+    "texts": Array [
+      "？ 乃…与  人 t",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      572,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 838,
+    "startFrame": 837,
+    "texts": Array [
+      "？ 乃…与  人 t",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      572,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 839,
+    "startFrame": 838,
+    "texts": Array [
+      "？ 乃…与  人 t",
+    ],
+  },
+  SubtitleInfo {
+    "box": Int32Array [
+      573,
+      31,
+      1443,
+      123,
+    ],
+    "endFrame": 840,
+    "startFrame": 839,
+    "texts": Array [
+      "耻 欠…与  人 t:",
+    ],
+  },
+]
+`;
+
+exports[`TorchOCRTaskScheduler.ts task test 2`] = `
+Array [
+  SubtitleInfo {
+    "endFrame": 27,
     "startFrame": 2,
     "texts": Array [
       "我是神野惠",
@@ -12,11 +9923,30 @@ Array [
       "我是神野惠",
       "我是神野惠",
       "我是神野惠",
+      "我是神野惠",
+      "我是神野惠",
+      "我是神野惠",
+      "我是神野惠",
+      "我是神野惠",
+      "我是神野惠",
+      "我是神野惠",
+      "我是神野惠",
+      "我是神野惠",
+      "我是神野惠",
+      "我是神野惠",
+      "我是神野惠",
+      "我是神野惠",
+      "我是神野惠",
+      "我是神野惠",
+      "我是神野惠",
+      "我是神野惠",
+      "我是神野惠",
+      "我是神野惠",
     ],
   },
   SubtitleInfo {
-    "endFrame": 101,
-    "startFrame": 6,
+    "endFrame": 82,
+    "startFrame": 35,
     "texts": Array [
       "是和泉纱雾的同班同学",
       "是和泉纱雾的同班同学",
@@ -28,18 +9958,103 @@ Array [
       "是和泉纱雾的同班同学",
       "是和泉纱雾的同班同学",
       "是和泉纱雾的同班同学",
+      "是和泉纱雾的同班同学",
+      "是和泉纱雾的同班同学",
+      "是和泉纱雾的同班同学",
+      "是和泉纱雾的同班同学",
+      "是和泉纱雾的同班同学",
+      "是和泉纱雾的同班同学",
+      "是和泉纱雾的同班同学",
+      "是和泉纱雾的同班同学",
+      "是和泉纱雾的同班同学",
+      "是和泉纱雾的同班同学",
+      "是和泉纱雾的同班同学",
+      "是和泉纱雾的同班同学",
+      "是和泉纱雾的同班同学",
+      "是和泉纱雾的同班同学",
+      "是和泉纱雾的同班同学",
+      "是和泉纱雾的同班同学",
+      "是和泉纱雾的同班同学",
+      "是和泉纱雾的同班同学",
+      "是和泉纱雾的同班同学",
+      "是和泉纱雾的同班同学",
+      "是和泉纱雾的同班同学",
+      "是和泉纱雾的同班同学",
+      "是和泉纱雾的同班同学",
+      "是和泉纱雾的同班同学",
+      "是和泉纱雾的同班同学",
+      "是和泉纱雾的同班同学",
+      "是和泉纱雾的同班同学",
+      "是和泉纱雾的同班同学",
+      "是和泉纱雾的同班同学",
+      "是和泉纱雾的同班同学",
+      "是和泉纱雾的同班同学",
+      "是和泉纱雾的同班同学",
+      "是和泉纱雾的同班同学",
+      "是和泉纱雾的同班同学",
+      "是和泉纱雾的同班同学",
+      "是和泉纱雾的同班同学",
+      "是和泉纱雾的同班同学",
     ],
   },
   SubtitleInfo {
-    "endFrame": 161,
-    "startFrame": 16,
+    "endFrame": 142,
+    "startFrame": 84,
     "texts": Array [
+      "你为什么要b她进我家啊",
+      "你为什么要b她进我家啊",
+      "你为什么要b她进我家啊",
+      "你为什么要b她进我家啊",
+      "你为什么要让她进我们家啊",
+      "你为什么要让她进我们家啊",
+      "你为什么要让她进我们家啊",
+      "你为什么要让她进我们家啊",
+      "你为什么要让她进我们家啊",
+      "你为什么要让她进我们家啊",
+      "你为什么要让她进我们家啊",
+      "你为什么要让她进我们家啊",
+      "你为什么要让她进我们家啊",
+      "你为什么要让她进我们家啊",
+      "你为什么要让她进我们家啊",
+      "你为什么要让她进我1家啊",
       "你为什么要b她进我们家啊",
       "你为什么要b她进我们家啊",
       "你为什么要b她进我们家啊",
       "你为什么要b她进我家啊",
       "你为什么要b她进我家啊",
+      "你为什么要让她进我们家啊",
+      "你为什么要让她进我们家啊",
+      "你为什么要让她进我们家啊",
+      "你为什么要让她进我们家啊",
+      "你为什么要让她进我们家啊",
+      "你为什么要让她进我们家啊",
+      "你为什么要让她进我们家啊",
+      "你为什么要让她进我们家啊",
+      "你为什么要让她进我们家啊",
+      "你为什么要让她进我们家啊",
+      "你为什么要让她进我们家啊",
+      "你为什么要让她进我们家啊",
+      "你为什么要b她进我们家啊",
+      "你为什么要b她进我们家啊",
+      "你为什么要让她进我家啊",
       "你为什么要b她进我家啊",
+      "你为什么要b她进我家啊",
+      "你为什么要凶她进我1家啊",
+      "你为什么要凶她进我1家啊",
+      "你为什么要凶她进我1家啊",
+      "你为什么要凶她进我1家啊",
+      "你为什么要凶她进我1家啊",
+      "你为什么要凶她进我1家啊",
+      "你为什么要凶她进我1家啊",
+      "你为什么要凶她进我1家啊",
+      "你为什么要凶她进我1家啊",
+      "你为什么要凶她进我1家啊",
+      "你为什么要凶她进我1家啊",
+      "你为什么要凶她进我1家啊",
+      "你为什么要凶她进我们家啊",
+      "你为什么要凶她进我1家啊",
+      "你为什么要凶她进我1家啊",
+      "你为什么要凶她进我1家啊",
       "你为什么要凶她进我1家啊",
       "你为什么要凶她进我1家啊",
       "你为什么要凶她进我1家啊",
@@ -47,13 +10062,93 @@ Array [
     ],
   },
   SubtitleInfo {
-    "endFrame": 261,
-    "startFrame": 26,
+    "endFrame": 243,
+    "startFrame": 144,
     "texts": Array [
+      "跟我差不多岁数的女孩子都最喜欢鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡了",
       "跟我差不多岁数的女孩子都最喜欢鸡了",
       "跟我差不多岁数 的女孩子都最喜欢鸡鸡了",
       "跟我差不多岁数 的女孩子都最喜欢鸡鸡了",
       "跟我差不多岁数 的女孩子都最喜欢鸡鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+      "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
       "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
       "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
       "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
@@ -72,9 +10167,37 @@ Array [
     ],
   },
   SubtitleInfo {
-    "endFrame": 301,
-    "startFrame": 45,
+    "endFrame": 278,
+    "startFrame": 246,
     "texts": Array [
+      "最…最喜欢？",
+      "最…最喜欢？",
+      "最…最喜欢？",
+      "最…最喜欢？",
+      "最…最喜欢？",
+      "最…最喜欢？",
+      "最…最喜欢？",
+      "最…最喜欢？",
+      "最…最喜欢？",
+      "最…最喜欢？",
+      "最…最喜欢？",
+      "最…最喜欢？",
+      "最…最喜欢？",
+      "最…最喜欢？",
+      "最…最喜欢？",
+      "最…最喜欢？",
+      "最…最喜欢？",
+      "最…最喜欢？",
+      "最…最喜欢？",
+      "最…最喜欢？",
+      "最…最喜欢？",
+      "最…最喜欢？",
+      "最…最喜欢？",
+      "最…最喜欢？",
+      "最…最喜欢？",
+      "最…最喜欢？",
+      "最…最喜欢？",
+      "最…最喜欢？",
       "最…最喜欢？",
       "最…最喜欢？",
       "最…最喜欢？",
@@ -82,9 +10205,70 @@ Array [
     ],
   },
   SubtitleInfo {
-    "endFrame": 321,
-    "startFrame": 49,
+    "endFrame": 0,
+    "startFrame": 284,
     "texts": Array [
+      "名字就叫 x和泉从房里拖出求ll同盟",
+    ],
+  },
+  SubtitleInfo {
+    "endFrame": 287,
+    "startFrame": 285,
+    "texts": Array [
+      "名字就i叫 k和泉从房里施出来y 」同盟",
+      "名字就i叫 k和泉从房里施出来y 」同盟",
+    ],
+  },
+  SubtitleInfo {
+    "endFrame": 289,
+    "startFrame": 287,
+    "texts": Array [
+      "名字 txk 泉从房间里抽也求！」同盟",
+      "名字 txk 泉从房间里抽也求！」同盟",
+    ],
+  },
+  SubtitleInfo {
+    "endFrame": 291,
+    "startFrame": 289,
+    "texts": Array [
+      "名字就叫「 tk和泉从房间里拖出来求！l同盟",
+      "名字就叫「 tk和泉从房间里拖出来求！l同盟",
+    ],
+  },
+  SubtitleInfo {
+    "endFrame": 293,
+    "startFrame": 291,
+    "texts": Array [
+      "名字就叫「 小和泉从房间里拖出来！ln题",
+      "名字就叫「 小和泉从房间里拖出来！ln题",
+    ],
+  },
+  SubtitleInfo {
+    "endFrame": 295,
+    "startFrame": 293,
+    "texts": Array [
+      "名字就叫 把ky和最从房间里拖出求l」同盟",
+      "名字就叫 把ky和最从房间里拖出求l」同盟",
+    ],
+  },
+  SubtitleInfo {
+    "endFrame": 313,
+    "startFrame": 295,
+    "texts": Array [
+      "名字m「把小和泉从房间里拖出来lJ同盟",
+      "名字m「把小和泉从房间里拖出来lJ同盟",
+      "名字m「把小和泉从房间里拖出来lJ同盟",
+      "名字m「把小和泉从房间里拖出来lJ同盟",
+      "名字m「把小和泉从房间里拖出来lJ同盟",
+      "名字m「把小和泉从房间里拖出来lJ同盟",
+      "名字m「把小和泉从房间里拖出来lJ同盟",
+      "名字m「把小和泉从房间里拖出来lJ同盟",
+      "名字m「把小和泉从房间里拖出来lJ同盟",
+      "名字m「把小和泉从房间里拖出来lJ同盟",
+      "名字m「把小和泉从房间里拖出来lJ同盟",
+      "名字m「把小和泉从房间里拖出来lJ同盟",
+      "名字m「把小和泉从房间里拖出来lJ同盟",
+      "名字m「把小和泉从房间里拖出来lJ同盟",
       "名字m「把小和泉从房间里拖出来lJ同盟",
       "名字m「把小和泉从房间里拖出来lJ同盟",
       "名字m「把小和泉从房间里拖出来lJ同盟",
@@ -92,17 +10276,64 @@ Array [
     ],
   },
   SubtitleInfo {
-    "endFrame": 323,
-    "startFrame": 53,
+    "endFrame": 318,
+    "startFrame": 313,
     "texts": Array [
+      "名字 把xk和最从房里抽出汝！」同盟",
+      "名字 把xk和最从房里抽出汝！」同盟",
+      "名字 把xk和最从房里抽出汝！」同盟",
+      "名字 把xk和最从房里抽出汝！」同盟",
+      "名字 把xk和最从房里抽出汝！」同盟",
+    ],
+  },
+  SubtitleInfo {
+    "endFrame": 0,
+    "startFrame": 318,
+    "texts": Array [
+      "名字m「把小和泉从房间里拖出来lJ同盟",
+    ],
+  },
+  SubtitleInfo {
+    "endFrame": 322,
+    "startFrame": 319,
+    "texts": Array [
+      "名字 把xk和最从房里抽出汝！」同盟",
+      "名字 把xk和最从房里抽出汝！」同盟",
+      "名字 把xk和最从房里抽出汝！」同盟",
+    ],
+  },
+  SubtitleInfo {
+    "endFrame": 333,
+    "startFrame": 322,
+    "texts": Array [
+      "名字m「把小和泉从房间里拖出来lJ同盟",
+      "名字m「把小和泉从房间里拖出来lJ同盟",
+      "名字m「把小和泉从房间里拖出来lJ同盟",
+      "名字m「把小和泉从房间里拖出来lJ同盟",
+      "名字m「把小和泉从房间里拖出来lJ同盟",
+      "名字m「把小和泉从房间里拖出来lJ同盟",
+      "名字m「把小和泉从房间里拖出来lJ同盟",
+      "名字m「把小和泉从房间里拖出来lJ同盟",
+      "名字m「把小和泉从房间里拖出来lJ同盟",
+      "名字m「把小和泉从房间里拖出来lJ同盟",
+      "名字m「把小和泉从房间里拖出来lJ同盟",
+    ],
+  },
+  SubtitleInfo {
+    "endFrame": 337,
+    "startFrame": 333,
+    "texts": Array [
+      "名字 把xk和最从房里抽出汝！」同盟",
+      "名字 把xk和最从房里抽出汝！」同盟",
       "名字 把xk和最从房里抽出汝！」同盟",
       "名字 把xk和最从房里抽出汝！」同盟",
     ],
   },
   SubtitleInfo {
-    "endFrame": 343,
-    "startFrame": 55,
+    "endFrame": 342,
+    "startFrame": 337,
     "texts": Array [
+      "名字m「把小和泉从房间里拖出来lJ同盟",
       "名字m「把小和泉从房间里拖出来lJ同盟",
       "名字m「把小和泉从房间里拖出来lJ同盟",
       "名字m「把小和泉从房间里拖出来lJ同盟",
@@ -110,32 +10341,62 @@ Array [
     ],
   },
   SubtitleInfo {
-    "endFrame": 344,
-    "startFrame": 59,
+    "endFrame": 0,
+    "startFrame": 342,
     "texts": Array [
       "名字 把xk和最从房里抽出汝！」同盟",
     ],
   },
   SubtitleInfo {
-    "endFrame": 361,
-    "startFrame": 60,
+    "endFrame": 346,
+    "startFrame": 343,
     "texts": Array [
+      "名字m「把小和泉从房间里拖出来lJ同盟",
+      "名字m「把小和泉从房间里拖出来lJ同盟",
       "名字m「把小和泉从房间里拖出来lJ同盟",
     ],
   },
   SubtitleInfo {
-    "endFrame": 381,
-    "startFrame": 61,
+    "endFrame": 352,
+    "startFrame": 346,
     "texts": Array [
+      "名字 把xk和最从房里抽出汝！」同盟",
+      "名字 把xk和最从房里抽出汝！」同盟",
+      "名字 把xk和最从房里抽出汝！」同盟",
+      "名字 把xk和最从房里抽出汝！」同盟",
+      "名字 把xk和最从房里抽出汝！」同盟",
+      "名字 把xk和最从房里抽出汝！」同盟",
+    ],
+  },
+  SubtitleInfo {
+    "endFrame": 372,
+    "startFrame": 352,
+    "texts": Array [
+      "名字就叫「把小和泉从房间里拖出来l！」同盟",
+      "名字就叫「把小和泉从房间里拖出来l！」同盟",
+      "名字就叫「把小和泉从房间里拖出来l！」同盟",
+      "名字就叫「把小和泉从房间里拖出来l！」同盟",
+      "名字就叫「把小和泉从房间里拖出来！」同盟",
+      "名字就叫「把小和泉从房间里拖出来！」同盟",
+      "名字就叫「把小和泉从房间里拖出求！」同盟",
+      "名字就叫「把小和泉从房间里拖出求！」同盟",
       "名字就叫「把小和泉从房间里拖出求！」同盟",
       "名字就叫「把k小和泉从房间里拖出来！」同盟",
       "名字就叫「把小和泉从房间里拖出来！」同盟",
       "名字就叫「把小和泉从房间里拖出来l！」同盟",
+      "名字就叫「把小和泉从房间里拖出来l！」同盟",
+      "名字就叫「把小和泉从房间里拖出来！」同盟",
+      "名字就叫「把小和泉从房间里拖出来！」同盟",
+      "名字就叫「把小和泉从房间里拖出来！」同盟",
+      "名字就叫「把小和泉从房间里拖出来！」同盟",
+      "名字诫叫「把小和泉从房间里拖出来l！」同盟",
+      "名字就叫「把小和泉从房间里拖出来l！」同盟",
+      "名字就叫「把小和泉从房间里拖出来l！」同盟",
     ],
   },
   SubtitleInfo {
-    "endFrame": 404,
-    "startFrame": 65,
+    "endFrame": 403,
+    "startFrame": 377,
     "texts": Array [
       "不出去 不出去",
       "不出去 不出去",
@@ -144,26 +10405,91 @@ Array [
       "不出去 不出去",
       "不出去 不出去",
       "不出去 不出去",
+      "不出去 不出去",
+      "不出去 不出去",
+      "不出去 不出去",
+      "不出去 不出去",
+      "不出去 不出去",
+      "不出去 不出去",
+      "不出去 不出去",
+      "不出去 不出去",
+      "不出去 不出去",
+      "不出去 不出去",
+      "不出去 不出去",
+      "不出去 不出去",
+      "不出去 不出去",
+      "不出去 不出去",
+      "不出去 不出去",
+      "不出去 不出去",
+      "不出去 不出去",
+      "不出去 不出去",
+      "不出去 不出去",
     ],
   },
   SubtitleInfo {
-    "endFrame": 442,
-    "startFrame": 72,
+    "endFrame": 438,
+    "startFrame": 403,
     "texts": Array [
       "我说不出去就是不出去",
       "我说不出去就是不出去",
       "我说不出去就是不出去",
       "我说不出去就是不出去",
       "我说不出去就是不出去",
+      "我说不出去就是不出去",
+      "我说不出去就是不出去",
+      "我说不出去就是不出去",
+      "我说不出去就是不出去",
+      "我说不出去就是不出去",
+      "我说不出去就是不出去",
+      "我说不出去就是不出去",
+      "我说不出去就是不出去",
+      "我说不出去就是不出去",
+      "我说不出去就是不出去",
+      "我说不出去就是不出去",
+      "我说不出去就是不出去",
+      "我说不出去就是不出去",
+      "我说不出去就是不出去",
+      "我说不出去就是不出去",
+      "我说不出去就是不出去",
+      "我说不出去就是不出去",
+      "我说不出去就是不出去",
+      "我说不出去就是不出去",
+      "我说不出去就是不出去",
+      "我说不出去就是不出去",
+      "我说不出去就是不出去",
+      "我说不出去就是不出去",
+      "我说不出去就是不出去",
+      "我说不出去就是不出去",
+      "我说不出去就是不出去",
+      "我说不出去就是不出去",
+      "我说不出去就是不出去",
+      "我说不出去就是不出去",
+      "我说不出去就是不出去",
     ],
   },
   SubtitleInfo {
-    "endFrame": 541,
-    "startFrame": 77,
+    "endFrame": 513,
+    "startFrame": 441,
     "texts": Array [
       "哥哥想凶妹妹变成什么样？",
       "哥哥想凶妹妹变成什么样？",
       "哥哥想凶妹妹变成什么样？",
+      "哥哥想凶妹妹变成什么样？",
+      "哥哥想b妹妹变成什么样?",
+      "哥哥想b妹妹变成什么样?",
+      "哥哥想b妹妹变成什么样?",
+      "哥哥想tb妹眯变成什么样？",
+      "哥哥想tb妹眯变成什么样？",
+      "哥哥想tb妹眯变成什么样？",
+      "哥哥想tb妹妹变成什么样？",
+      "哥哥想tb妹妹变成什么样？",
+      "哥哥想tb妹妹变成什么样？",
+      "哥哥想t止妹妹变成什么样？",
+      "哥哥想t止妹妹变成什么样？",
+      "哥哥想t止妹妹变成什么样？",
+      "哥哥想tb妹妹变成什么样？",
+      "哥哥想tb妹妹变成什么样？",
+      "哥哥想tb妹妹变成什么样？",
       "哥哥想tb妹妹变成什么样？",
       "哥哥想tb妹妹变成什么样？",
       "哥哥想tb妹妹变成什么样？",
@@ -176,23 +10502,98 @@ Array [
       "哥哥想凶妹妹变成什么样？",
       "哥哥想凶妹妹变成什么样？",
       "哥哥想凶妹妹变成什么样？",
+      "哥哥想凶妹妹变成什么样？",
+      "哥哥想凶妹妹变成什么样？",
+      "哥哥想凶妹妹变成什么样？",
+      "哥哥想凶妹妹变成什么样？",
+      "哥哥想凶妹妹变成什么样？",
+      "哥哥想凶妹妹变成什么样？",
+      "哥哥想凶妹妹变成什么样？",
+      "哥哥想凶妹妹变成什么样？",
+      "哥哥想凶妹妹变成什么样？",
+      "哥哥想凶妹妹变成什么样？",
+      "哥哥想凶妹妹变成什么样？",
+      "哥哥想凶妹妹变成什么样？",
+      "哥哥想止妹妹变成什么样？",
+      "哥哥想止妹妹变成什么样？",
+      "哥哥想凶妹妹变成什么样？",
+      "哥哥想凶妹妹变成什么样？",
+      "哥哥想凶妹妹变成什么样？",
+      "哥哥想凶妹妹变成什么样？",
+      "哥哥想凶妹妹变成什么样",
+      "哥哥想凶妹妹变成什么样？",
+      "哥哥想凶妹妹变成什么样？",
+      "哥哥想凶妹妹变成什么样？",
+      "哥哥想凶妹妹变成什么样？",
+      "哥哥想让妹妹变成什么样？",
+      "哥哥想让妹妹变成什么样？",
+      "哥哥想让妹妹变成什么样?",
+      "哥哥想凶妹妹变成什么样？",
+      "哥哥想凶妹妹变成什么样？",
+      "哥哥想凶妹妹变成什么样？",
+      "哥哥想凶妹妹变成什么样？",
+      "哥哥想凶妹妹变成什么样？",
+      "哥哥想凶妹妹变成什么样？",
+      "哥哥想凶妹妹变成什么样？",
+      "哥哥想凶妹妹变成什么样？",
+      "哥哥想凶妹妹变成什么样？",
+      "哥哥想凶妹妹变成什么样？",
+      "哥哥想b妹妹变成什么样？",
+      "哥哥想b妹妹变成什么样？",
+      "哥哥想凶妹妹变成什么样？",
+      "哥哥想凶妹妹变成什么样？",
+      "哥哥想妹妹变成什么样？",
     ],
   },
   SubtitleInfo {
-    "endFrame": 581,
-    "startFrame": 92,
+    "endFrame": 561,
+    "startFrame": 531,
     "texts": Array [
+      "和泉政宗?",
+      "和泉政宗?",
+      "和泉政宗?",
+      "和泉政宗？",
+      "和泉政宗？",
+      "和泉政宗？",
+      "和泉政宗？",
+      "和泉政宗？",
+      "和泉政宗？",
+      "和泉政宗?？",
+      "和泉政宗?？",
+      "和泉政宗?？",
+      "和泉政宗?？",
+      "和泉政宗?",
+      "和泉政宗?",
+      "和泉政宗？",
+      "和泉政宗?？",
+      "和泉政宗?？",
+      "和泉政宗?？",
+      "和泉政宗?？",
+      "和泉政宗?？",
+      "和泉政宗?？",
       "和泉政宗?？",
       "和泉政宗?？",
       "和泉政宗?？",
       "和泉政宗?？",
       "和泉政宗？",
+      "和泉政宗？",
+      "和泉政宗？",
+      "和泉政宗？",
     ],
   },
   SubtitleInfo {
-    "endFrame": 641,
-    "startFrame": 97,
+    "endFrame": 619,
+    "startFrame": 571,
     "texts": Array [
+      "居然是如此年轻的女孩子？",
+      "居然是如此年轻的女孩子？",
+      "居然是如此年轻的女孩子？",
+      "居然是如此年轻的女孩子？",
+      "居然是如此年轻的女孩子？",
+      "居然是如此年轻的女孩子？",
+      "居然是如此年轻的女孩子？",
+      "居然是如此年轻的女孩子？",
+      "居然是如此年轻的女孩子？",
       "居然是如此年轻的女孩子？",
       "居然是如此年轻的女孩子？",
       "居然是如此年轻的女孩子？",
@@ -201,15 +10602,121 @@ Array [
       "居然是如此年轻的女孩子？",
       "居然是如此年轻的女孩子？",
       "居然是如此年轻的女孩子？",
+      "居然是如此年轻的女孩子？",
+      "居然是如此年轻的女孩子？",
+      "居然是如此年轻的女孩子?",
+      "居然是如此年轻的女孩子？",
+      "居然是如此年轻的女孩子？",
+      "居然是如此年轻的女孩子?",
+      "居然是如此年轻的女孩子？",
+      "居然是如此年轻的女孩子？",
+      "居然是如此年轻的女孩子？",
+      "居然是如此年轻女孩子？",
+      "居然是如此年轻的女孩子？",
+      "居然是如此年轻的女孩子？",
+      "居然是如此年轻的女孩子？",
+      "居然是如此年轻的女孩子？",
+      "居然是如此年轻的女孩子？",
+      "居然是如此年轻的女孩子？",
+      "居然是如此年轻的女孩子？",
+      "居然是如此年轻的女孩子？",
+      "居然是如此年轻的女孩子？",
+      "居然是如此年轻的女孩子？",
+      "居然是如此年轻的女孩子？",
+      "居然是如此年轻的女孩子？",
+      "居然是如此年轻的女孩子？",
+      "居然是如此年轻的女孩子？",
+      "居然是如此y年轻的女孩子？",
+      "居然是如此年轻的女孩子？",
+      "居然是如此年轻的女孩子？",
+      "居然是如此年轻的女孩子？",
+      "居然是如此年轻的女孩子？",
+      "居然是如此年轻的女孩子？",
+      "居然是如此年轻的女孩子？",
     ],
   },
   SubtitleInfo {
-    "endFrame": 741,
-    "startFrame": 105,
+    "endFrame": 719,
+    "startFrame": 628,
     "texts": Array [
       "我的下一个作品要请情色漫画老师来担任插画师",
       "我的下一个作品要请情色漫画老师来担任插画师",
       "我的下一个作品要请情色漫画老师来担任插画师",
+      "我的下一个作昆要请情色漫画老师来担任插画师",
+      "我的下一个作昆要请情色漫画老师来担任插画师",
+      "我的下一个作品要请情色漫画老师来担任插画师",
+      "我的下一个作品要请情色漫画老师来担任插画师",
+      "我的下一个作品要请情色漫画老师来担任插画师",
+      "我的下一个作品要请情色漫画老师来担任插画师",
+      "我的下一个作品要请情色漫画老师来担任插画师",
+      "我的下一个作品要请情色漫画老师来担任插画师",
+      "我的下一个作品要请情色漫画老师来担任插画师",
+      "我的下一个作品要请情色漫画老师来担任插画师",
+      "我的下一个作品要请情色漫画老师来担任插画师",
+      "我的下一个作品要请情色漫画老师来担任插画师",
+      "我的下一个作品要请情色漫画老师来担任插画师",
+      "我的下一个作品要请情色漫画老师来担任插画师",
+      "我的下一个作品要请情色漫画老师来担任插画师",
+      "我的下一个作品要请情色漫画老师来担任插画师",
+      "我的下一个作品要请情色漫画老师来担任插画师",
+      "我的下一个作品要请情色漫画老师来担任插画师",
+      "我的下一个作品要请情色漫画老师来担任插画师",
+      "我的下一个作品要请情色漫画老师来担任插画师",
+      "我的下一个作品要请情色漫画老师来担任插画师",
+      "我的下一个作品要请情色漫画老师来担任插画师",
+      "我的下一个作品要请情色漫画老师来担任插画师",
+      "我的下一个作品要请情色漫画老师来担任插画师",
+      "我的下一个作品要请情色漫画老师来担任插画师",
+      "我的下一个作品要请情色漫画老师来担任插画师",
+      "我的下一个作品要请情色漫画老师来担任插画师",
+      "我的下一个作品要请情色漫画老师来担任插画师",
+      "我的下一个作品要请情色漫画老师来担任插画师",
+      "我的下一个作品要请情色漫画老师来担任插画师",
+      "我的下一个作品要请情色漫画老师来担任插画师",
+      "我的下一个作品要请情色漫画老师来担任插画师",
+      "我的下一个作品要请情色漫画老师来担任插画师",
+      "我的下一个作品要请情色漫画老师来担任插画师",
+      "我的下一个作品要请情色漫画老师来担任插画师",
+      "我的下一个作品要请情色漫画老师来担任插画师",
+      "我的下一个作品要请情色漫画老师来担任插画师",
+      "我的下一个作品要请情色漫画老师来担任插画师",
+      "我的下一个作品要请情色漫画老师来担任插画师",
+      "我的下一个作品要请情色漫画老师来担任插画师",
+      "我的下一个作品要请情色漫画老师来担任插画师",
+      "我的下一个作品要请情色漫画老师来担任插画师",
+      "我的下一个作品要请情色漫画老师来担任插画师",
+      "我的下一个作品要请情色漫画老师来担任插画师",
+      "我的下一个作品要请情色漫画老师来担任插画师",
+      "我的下一个作品要请情色漫画老师来担任插画师",
+      "我的下一个作品要请情色漫画老师来担任插画师",
+      "我的下一个作品要请情色漫画老师来担任插画师",
+      "我的下一个作品要请情色漫画老师来担任插画师",
+      "我的下一个作品要请情色漫画老师来担任插画师",
+      "我的下一个作品要请情色漫画老师来担任插画师",
+      "我的下一个作品要请情色漫画老师来担任插画师",
+      "我的下一个作品要请情色漫画老师来担任插画师",
+      "我的下一个作品要请情色漫画老师来担任插画师",
+      "我的下一个作品要请情色漫画老师来担任插画师",
+      "我的下一个作品要请情色漫画老师来担任插画师",
+      "我的下一个作品要请情色漫画老师来担任插画师",
+      "我的下一个作品要请情色漫画老I师来担任插画师",
+      "我的下一个作品要请情色漫画老I师来担任插画师",
+      "我的下一个作品要请情色漫画老师来担任插画师",
+      "我的下一个作品要请情色漫画老师来担任插画师",
+      "我的下一个作品要请情色漫画老师来担任插画师",
+      "我的下一个作品要请情色漫画老师来担任插画师",
+      "我的下一个作品要请情色漫画老师来担任插画师",
+      "我的下一个作品要请情色漫画老师来担任插画师",
+      "我的下一个作要请情色漫画老师来担任擂画师",
+      "我的下一个作要请情色漫画老师来担任插擂画师",
+      "我的下一个作要请情色漫画老师来担任插擂画师",
+      "我的下一个作品要请情色漫画老师来担任插画师",
+      "我的下一个作品要请情色漫画老师来担任插画师",
+      "我的下一个作品要请情色漫画老师来担任插画师",
+      "我的下一个作品要请情色漫画老师来担任插画师",
+      "我的下一个作品要请情色漫画老师来担任插画师",
+      "我的下一个作品要请情色漫画老师来担任插画师",
+      "我的下一个作品要请情色漫画老师来担任插画师",
       "我的下一个作品要请情色漫画老师来担任插画师",
       "我的下一个作品要请情色漫画老师来担任插画师",
       "我的下一个作品要请情色漫画老师来担任插画师",
@@ -226,13 +10733,57 @@ Array [
     ],
   },
   SubtitleInfo {
-    "endFrame": 824,
-    "startFrame": 121,
+    "endFrame": 840,
+    "startFrame": 729,
     "texts": Array [
       "？ 乃…与  人 t",
       "？ 乃…与  人 t",
       "？ 乃…与  人 t",
       "？ 乃…与  人 t",
+      "？ 乃…与  人 t",
+      "？ 乃…与  人 t",
+      "？ 乃…与  人 t",
+      "？ 乃…与  人 t",
+      "耻 …与  人 t:",
+      "？ 乃…与  人 t",
+      "？ 乃…与  人 t",
+      "？ 乃…与  人 t",
+      "？ 乃…与  人 t",
+      "？ 乃…与  人 t",
+      "？ 乃…与  人 t",
+      "耻 …与  人 t:",
+      "耻 …与  人 t:",
+      "耻 …与  人 t:",
+      "耻 …与  人 t:",
+      "耻 …与  人 t:",
+      "耻 …与  人 t:",
+      "耻 …与  人 t:",
+      "耻 …与  人 t:",
+      "耻 …与  人 t:",
+      "耻 欠…与  人 t",
+      "耻 欠…与  人 t:",
+      "耻 欠…与  人 t:",
+      "耻 欠…与  人 t:",
+      "耻 欠…与  人 t:",
+      "耻 …与  人 t:",
+      "耻 …与  人 t:",
+      "耻 …与  人 t:",
+      "耻 …与  人 t:",
+      "耻 …与  人 t:",
+      "耻 …与  人 t:",
+      "耻 …与  人 t:",
+      "耻 …与  人 t:",
+      "？ 乃…与  人 t",
+      "耻 …与  人 t:",
+      "耻 …与  人 t:",
+      "耻 …与  人 t:",
+      "耻 …与  人 t:",
+      "耻 …与  人 t:",
+      "耻 …与  人 t:",
+      "耻 …与  人 t:",
+      "耻 …与  人 t:",
+      "耻 …与  人 t:",
+      "耻 …与  人 t:",
       "耻 …与  人 t:",
       "耻 …与  人 t:",
       "耻 …与  人 t:",
@@ -249,6 +10800,53 @@ Array [
       "？ 乃…与  人 t",
       "？ 乃…与  人 t",
       "？ 乃…与  人 t",
+      "？ 乃…与  人 t",
+      "？ 乃…与  人 t",
+      "？ 乃…与  人 t",
+      "？ 乃…与  人 t",
+      "？ 乃…与  人 t",
+      "？ 乃…与  人 t",
+      "？ 乃…与  人 t",
+      "？ 乃…与  人 t",
+      "？ 乃…与  人 t",
+      "？ 乃…与  人 t",
+      "？ 乃…与  人 t",
+      "？ 乃…与  人 t",
+      "？ 乃…与  人 t",
+      "？ 乃…与  人 t",
+      "？ 乃…与  人 t",
+      "？ 乃…与  人 t",
+      "？ 乃…与  人 t",
+      "？ 乃…与  人 t",
+      "？ 乃…与  人 t",
+      "？ 乃…与  人 t",
+      "？ 乃…与  人 t",
+      "？ 乃…与  人 t",
+      "？ 乃…与  人 t",
+      "？ 乃…与  人 t",
+      "？ 乃…与  人 t",
+      "？ 乃…与  人 t",
+      "？ 乃…与  人 t",
+      "？ 乃…与  人 t",
+      "？ 乃…与  人 t",
+      "？ 乃…与  人 t",
+      "？ 乃…与  人 t",
+      "？ 乃…与  人 t",
+      "？ 乃…与  人 t",
+      "？ 乃…与  人 t",
+      "？ 乃…与  人 t",
+      "？ 乃…与  人 t",
+      "？ 乃…与  人 t",
+      "？ 乃…与  人 t",
+      "耻 欠…与  人 t:",
+      "？ 乃…与  人 t",
+      "？ 乃…与  人 t",
+      "？ 乃…与  人 t",
+      "耻 …与  人 t:",
+      "？ 乃…与  人 t",
+      "？ 乃…与  人 t",
+      "？ 乃…与  人 t",
+      "耻 欠…与  人 t:",
     ],
   },
 ]

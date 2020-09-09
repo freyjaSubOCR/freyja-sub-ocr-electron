@@ -1,11 +1,12 @@
 import TorchOCRTaskScheduler from '@/backends/TorchOCRTaskScheduler'
 
 describe('TorchOCRTaskScheduler.ts', () => {
-    it('Intergration test', async () => {
+    it('task test', async () => {
         const task = new TorchOCRTaskScheduler()
         await task.Init('tests/files/sample.mp4')
-        await task.Start()
-        const result = task.CleanUpSubtitleInfos()
+        let result = await task.Start()
+        expect(result).toMatchSnapshot()
+        result = task.CleanUpSubtitleInfos()
         expect(result).toMatchSnapshot()
     }, 100000)
 })

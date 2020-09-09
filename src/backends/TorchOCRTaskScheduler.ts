@@ -53,7 +53,7 @@ class TorchOCRTaskScheduler {
     }
 
     async Start(): Promise<SubtitleInfo[]> {
-        let step = Config.BatchSize
+        const step = Config.BatchSize
         let tensorDataPromise = new Promise(resolve => resolve())
         let rcnnPromise = new Promise(resolve => resolve())
         let ocrPromise = new Promise(resolve => resolve())
@@ -63,16 +63,18 @@ class TorchOCRTaskScheduler {
         }
 
         for (let frame = 0; frame <= this.torchOCR.videoProperties.lastFrame; frame += step) {
+            const currentFrame = frame
+            let localStep = step
             if (this.torchOCR.videoProperties.lastFrame + 1 - frame < step) {
-                step = this.torchOCR.videoProperties.lastFrame + 1 - frame
+                localStep = this.torchOCR.videoProperties.lastFrame + 1 - frame
             }
 
             tensorDataPromise = Promise.all([tensorDataPromise, ocrPromiseBuffer[0]]).then(async () => {
                 const rawImg: Buffer[] = []
-                for (const i of Array(step).keys()) {
-                    rawImg.push(await this.torchOCR.ReadRawFrame(i + frame))
+                for (const i of Array(localStep).keys()) {
+                    rawImg.push(await this.torchOCR.ReadRawFrame(i + currentFrame))
                 }
-                this.currentProcessingFrame = frame
+                this.currentProcessingFrame = currentFrame
                 const inputTensor = this.torchOCR.BufferToImgTensor(rawImg, 600)
                 return inputTensor
             })
@@ -93,8 +95,8 @@ class TorchOCRTaskScheduler {
 
                     for (const i of subtitleInfos.keys()) {
                         subtitleInfos[i].texts = [ocrResults[i]]
-                        subtitleInfos[i].startFrame = subtitleInfos[i].startFrame + frame
-                        subtitleInfos[i].endFrame = subtitleInfos[i].endFrame + frame
+                        subtitleInfos[i].startFrame = subtitleInfos[i].startFrame + currentFrame
+                        subtitleInfos[i].endFrame = subtitleInfos[i].endFrame + currentFrame
                         this.subtitleInfos.push(subtitleInfos[i])
                     }
                     boxesTensor.free()
@@ -118,9 +120,10 @@ class TorchOCRTaskScheduler {
             }
             if (subtitleInfo.text !== undefined && currentSubtitleInfo.text !== undefined) {
                 if (levenshtein(subtitleInfo.text, currentSubtitleInfo.text) > 3) {
-                    subtitleInfo.endFrame = currentSubtitleInfo.endFrame
                     subtitleInfos.push(subtitleInfo)
-                    subtitleInfo = new SubtitleInfo(i, 0)
+                    subtitleInfo = new SubtitleInfo(currentSubtitleInfo.startFrame, 0)
+                } else {
+                    subtitleInfo.endFrame = currentSubtitleInfo.endFrame
                 }
             }
             if (currentSubtitleInfo.text !== undefined) {
