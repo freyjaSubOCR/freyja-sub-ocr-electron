@@ -120,13 +120,13 @@ class TorchOCRTaskScheduler {
         for (const i of this.subtitleInfos.keys()) {
             const currentSubtitleInfo = this.subtitleInfos[i]
             if (subtitleInfo === undefined) {
-                subtitleInfo = new SubtitleInfo(currentSubtitleInfo.startFrame, 0)
+                subtitleInfo = new SubtitleInfo(currentSubtitleInfo.startFrame, currentSubtitleInfo.endFrame)
             }
             if (subtitleInfo.text !== undefined && currentSubtitleInfo.text !== undefined) {
                 if (levenshtein(subtitleInfo.text, currentSubtitleInfo.text) > 3) {
                     subtitleInfo.GenerateTime(this.torchOCR.videoProperties?.fps[0] / this.torchOCR.videoProperties?.fps[1])
                     subtitleInfos.push(subtitleInfo)
-                    subtitleInfo = new SubtitleInfo(currentSubtitleInfo.startFrame, 0)
+                    subtitleInfo = new SubtitleInfo(currentSubtitleInfo.startFrame, currentSubtitleInfo.endFrame)
                 } else {
                     subtitleInfo.endFrame = currentSubtitleInfo.endFrame
                 }

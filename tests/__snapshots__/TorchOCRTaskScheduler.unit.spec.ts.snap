@@ -10215,8 +10215,8 @@ Array [
     ],
   },
   SubtitleInfo {
-    "endFrame": 0,
-    "endTime": "00:00:00.00",
+    "endFrame": 285,
+    "endTime": "00:00:11.88",
     "startFrame": 284,
     "startTime": "00:00:11.84",
     "texts": Array [
@@ -10313,8 +10313,8 @@ Array [
     ],
   },
   SubtitleInfo {
-    "endFrame": 0,
-    "endTime": "00:00:00.00",
+    "endFrame": 319,
+    "endTime": "00:00:13.30",
     "startFrame": 318,
     "startTime": "00:00:13.26",
     "texts": Array [
@@ -10377,8 +10377,8 @@ Array [
     ],
   },
   SubtitleInfo {
-    "endFrame": 0,
-    "endTime": "00:00:00.00",
+    "endFrame": 343,
+    "endTime": "00:00:14.30",
     "startFrame": 342,
     "startTime": "00:00:14.26",
     "texts": Array [
