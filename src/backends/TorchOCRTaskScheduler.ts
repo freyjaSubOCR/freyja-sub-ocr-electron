@@ -124,7 +124,7 @@ class TorchOCRTaskScheduler {
             }
             if (subtitleInfo.text !== undefined && currentSubtitleInfo.text !== undefined) {
                 if (levenshtein(subtitleInfo.text, currentSubtitleInfo.text) > 3) {
-                    subtitleInfo.GenerateTime(this.torchOCR.videoProperties?.fps[0] / this.torchOCR.videoProperties?.fps[1])
+                    subtitleInfo.GenerateTime(this.torchOCR.videoProperties.fps[0] / this.torchOCR.videoProperties.fps[1])
                     subtitleInfos.push(subtitleInfo)
                     subtitleInfo = new SubtitleInfo(currentSubtitleInfo.startFrame, currentSubtitleInfo.endFrame)
                 } else {
@@ -137,7 +137,7 @@ class TorchOCRTaskScheduler {
         }
         if (subtitleInfo !== undefined) {
             subtitleInfo.endFrame = this.subtitleInfos[this.subtitleInfos.length - 1].endFrame
-            subtitleInfo.GenerateTime(this.torchOCR.videoProperties?.fps[0] / this.torchOCR.videoProperties?.fps[1])
+            subtitleInfo.GenerateTime(this.torchOCR.videoProperties.fps[0] / this.torchOCR.videoProperties.fps[1])
             subtitleInfos.push(subtitleInfo)
         }
         this.subtitleInfos = subtitleInfos
