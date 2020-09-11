@@ -1,5 +1,7 @@
 import { ipcMain } from 'electron'
-import { VideoProperties, SubtitleInfo, ASSStyle } from '@/interfaces'
+import { ASSStyle } from '@/interfaces'
+import { SubtitleInfo } from '@/SubtitleInfo'
+import { VideoProperties } from '@/VideoProperties'
 import logger from '@/logger'
 
 class ASSGenerator {

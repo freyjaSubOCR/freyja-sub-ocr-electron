@@ -27,7 +27,7 @@
 
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator'
-import { SubtitleInfo } from '@/interfaces'
+import { SubtitleInfo } from '@/SubtitleInfo'
 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore: cannot find a type definition file for simplebar-vue
 import simplebar from 'simplebar-vue'

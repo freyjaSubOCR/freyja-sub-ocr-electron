@@ -33,7 +33,8 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import lodash from 'lodash'
-import { RenderedVideo, VideoProperties } from '@/interfaces'
+import { RenderedVideo } from '@/interfaces'
+import { VideoProperties } from '@/VideoProperties'
 
 // TODO: Drag and drop
 

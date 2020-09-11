@@ -3,7 +3,7 @@ import { ipcMain } from 'electron'
 import logger from '@/logger'
 import { Tensor } from 'torch-js'
 import Config from '@/config'
-import { SubtitleInfo } from '@/interfaces'
+import { SubtitleInfo } from '@/SubtitleInfo'
 import levenshtein from 'js-levenshtein'
 
 class TorchOCRTaskScheduler {

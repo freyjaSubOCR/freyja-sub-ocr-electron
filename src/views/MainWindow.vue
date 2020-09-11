@@ -5,13 +5,13 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import SubtitleInfoTable from '@/components/SubtitleInfoTable.vue'
-import { SubtitleInfo, ISubtitleInfo } from '@/interfaces'
+import { SubtitleInfo, ISubtitleInfo } from '@/SubtitleInfo'
 
 @Component({
     components: { SubtitleInfoTable }
 })
 class Mainwindow extends Vue {
-  subtitleInfos: SubtitleInfo[] = [];
+    subtitleInfos: SubtitleInfo[] = [];
 }
 
 export default Mainwindow

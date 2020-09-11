@@ -2,7 +2,8 @@ import { ScriptModule, ObjectTensor, Tensor } from 'torch-js'
 import Config from '@/config'
 import fs_ from 'fs'
 import RawVideoPlayer from './RawVideoPlayer'
-import { VideoProperties, SubtitleInfo } from '@/interfaces'
+import { SubtitleInfo } from '@/SubtitleInfo'
+import { VideoProperties } from '@/VideoProperties'
 import lodash from 'lodash'
 
 const fs = fs_.promises

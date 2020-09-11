@@ -1,5 +1,5 @@
 import beamcoder from 'beamcoder'
-import { VideoProperties } from '@/interfaces'
+import { VideoProperties } from '@/VideoProperties'
 import logger from '@/logger'
 
 class VideoPlayer {
