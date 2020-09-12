@@ -1,5 +1,7 @@
 import ASSGenerator from '@/backends/ASSGenerator'
-import { ASSStyle, ISubtitleInfo, SubtitleInfo, VideoProperties } from '@/interfaces'
+import { ASSStyle } from '@/interfaces'
+import { ISubtitleInfo, SubtitleInfo } from '@/SubtitleInfo'
+import { VideoProperties } from '@/VideoProperties'
 import fs_ from 'fs'
 const fs = fs_.promises
 
