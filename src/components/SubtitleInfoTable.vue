@@ -55,7 +55,8 @@ export default SubtitleInfoTable
     display: flex;
     flex-direction: column;
     min-width: 430px;
-    height: 100%;
+    width: 50%;
+    margin: 40px 16px 40px 40px;
 }
 .subtitleInfo-row {
     display: flex;
@@ -71,6 +72,7 @@ export default SubtitleInfoTable
     width: 100%;
     height: 100%;
     overflow-y: auto;
+    margin: 0 0 50px;
 }
 .subtitleInfo-time {
     margin-right: 16px;
@@ -102,5 +104,9 @@ export default SubtitleInfoTable
 }
 .simplebar-scrollbar::before {
     opacity: 0.5;
+}
+
+.simplebar-scrollbar {
+margin-bottom: 50px;
 }
 </style>

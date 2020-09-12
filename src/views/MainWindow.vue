@@ -24,12 +24,20 @@ export default Mainwindow
 </script>
 
 <style lang="scss" scoped>
+.stack {
+    max-width: 50%;
+    display: flex;
+    margin: 40px 40px 40px 16px;
+    flex-direction: column;
+}
+
 .warp {
     display: flex;
     flex-direction: row;
-}
-.stack {
-    display: flex;
-    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
 }
 </style>
