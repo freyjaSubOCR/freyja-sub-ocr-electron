@@ -24,8 +24,9 @@ class RawVideoPlayer extends VideoPlayer {
                 for (const frame of decodedFrames) {
                     this.renderedCache.push({
                         data: frame.data,
-                        timestamp: frame.pts
-                    } as RenderedVideo)
+                        timestamp: frame.pts,
+                        keyFrame: frame.key_frame
+                    })
                 }
             }
             while (!decodedFrames.map(t => t.pts).some(t => t === timestamp))

@@ -8,6 +8,7 @@ import VideoPlayer from './VideoPlayer'
 class BMPVideoPlayer extends VideoPlayer {
     private renderedCache: Array<RenderedVideo> = []
     private rectPositons: Array<RectPos> | null = null
+    private preloadPromise = new Promise((resolve) => resolve())
 
     registerIPCListener(): void {
         ipcMain.handle('VideoPlayer:OpenVideo', async (e, ...args) => {
@@ -18,9 +19,9 @@ class BMPVideoPlayer extends VideoPlayer {
                 return null
             }
         })
-        ipcMain.handle('VideoPlayer:RenderImage', async (e, ...args) => {
+        ipcMain.handle('VideoPlayer:GetImage', async (e, ...args) => {
             try {
-                return await this.RenderImage(args[0])
+                return await this.GetImage(args[0])
             } catch (error) {
                 logger.error(error.message)
                 return null
@@ -28,32 +29,20 @@ class BMPVideoPlayer extends VideoPlayer {
         })
     }
 
-    async RenderImage(timestamp: number): Promise<RenderedVideo> {
-        logger.debug(`start render frame on timestamp ${timestamp}`)
+    async GetImage(timestamp: number): Promise<RenderedVideo> {
         if (!this.renderedCache.some(t => t.timestamp === timestamp)) {
-            await this.SeekByTimestamp(timestamp)
-            let decodedFrames: beamcoder.Frame[]
-            do {
-                decodedFrames = await this.Decode()
-                decodedFrames = await this.convertPixelFormat(decodedFrames)
-
-                if (this.rectPositons !== null) {
-                    decodedFrames = await this.DrawRect(decodedFrames)
-                }
-
-                if (decodedFrames == null) {
-                    throw new Error('Unknown decode error')
-                }
-
-                // Cannot use promise.all since the encode operation must be sequential
-                for (const frame of decodedFrames) {
-                    this.renderedCache.push({
-                        data: (await this.Encode(frame)).data,
-                        timestamp: frame.pts
-                    } as RenderedVideo)
-                }
+            logger.warn(`cache miss on ${timestamp}`)
+            await this.preloadPromise
+            if (!this.renderedCache.some(t => t.timestamp === timestamp)) {
+                await this.RenderImage(timestamp)
+                this.preloadPromise = this.preloadPromise.then(() => this.RenderImage(), (error) => { logger.error(error.message) })
             }
-            while (!decodedFrames.map(t => t.pts).some(t => t === timestamp))
+        } else {
+            const renderedFrame = this.renderedCache.filter(t => t.timestamp === timestamp)
+            if (renderedFrame[0].keyFrame) {
+                logger.debug(`preload on ${timestamp}`)
+                this.preloadPromise = this.preloadPromise.then(() => this.RenderImage(), (error) => { logger.error(error.message) })
+            }
         }
 
         const renderedFrame = this.renderedCache.filter(t => t.timestamp === timestamp)
@@ -70,6 +59,38 @@ class BMPVideoPlayer extends VideoPlayer {
 
         logger.debug(`send frame on timestamp ${timestamp}`)
         return targetFrame
+    }
+
+    async RenderImage(timestamp?: number | undefined): Promise<void> {
+        logger.debug(`start render frame on timestamp ${timestamp}`)
+        if (timestamp !== undefined) {
+            await this.SeekByTimestamp(timestamp)
+        }
+        let decodedFrames: beamcoder.Frame[]
+        do {
+            decodedFrames = await this.Decode()
+            decodedFrames = await this.convertPixelFormat(decodedFrames)
+
+            if (this.rectPositons !== null) {
+                decodedFrames = await this.DrawRect(decodedFrames)
+            }
+
+            if (decodedFrames == null) {
+                throw new Error('Unknown decode error')
+            }
+
+            logger.debug(`decoded frame ${decodedFrames.map(t => t.pts).join(', ')}`)
+            // Cannot use promise.all since the encode operation must be sequential
+            for (const frame of decodedFrames) {
+                this.renderedCache.push({
+                    data: (await this.Encode(frame)).data,
+                    timestamp: frame.pts,
+                    keyFrame: frame.key_frame
+                })
+            }
+        }
+        // eslint-disable-next-line no-unmodified-loop-condition
+        while (timestamp !== undefined && !decodedFrames.map(t => t.pts).some(t => t === timestamp))
     }
 
     private async DrawRect(frames: beamcoder.Frame[]): Promise<beamcoder.Frame[]> {

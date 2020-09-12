@@ -7,6 +7,7 @@ interface RectPos {
 
 interface RenderedVideo {
     timestamp: number;
+    keyFrame: boolean;
     data: Buffer | Buffer[];
 }
 

@@ -1,7 +1,7 @@
 <template>
     <div>
         <div>
-            <img :src="picData">
+            <img :src="picData" width="960" height="540">
         </div>
         <div>
             <button @click="openVideo()" id="openVideo">open video</button>
@@ -75,7 +75,7 @@ export default class VideoPlayer extends Vue {
     }
 
     private async updatePicData(timestamp: number): Promise<void> {
-        const renderedVideo = (await global.ipcRenderer.invoke('VideoPlayer:RenderImage', timestamp)) as RenderedVideo | null
+        const renderedVideo = (await global.ipcRenderer.invoke('VideoPlayer:GetImage', timestamp)) as RenderedVideo | null
         if (renderedVideo != null) {
             this.timestamp = renderedVideo.timestamp
             this.frameData = renderedVideo.data as Buffer
@@ -111,7 +111,7 @@ export default class VideoPlayer extends Vue {
         const timeoutTime = 1000 * this.videoProperties.fps[1] / this.videoProperties.fps[0]
         while (this.currentFrame < this.videoProperties.lastFrame && this.play) {
             const timeout = new Promise(resolve => setTimeout(resolve, timeoutTime))
-            await this.updatePicData(this.timestamp + this.videoProperties.unitFrame)
+            this.updatePicData(this.timestamp + this.videoProperties.unitFrame)
             await timeout
         }
         this.play = false
