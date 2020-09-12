@@ -31,17 +31,16 @@ class BMPVideoPlayer extends VideoPlayer {
 
     async GetImage(timestamp: number): Promise<RenderedVideo> {
         if (!this.renderedCache.some(t => t.timestamp === timestamp)) {
-            logger.warn(`cache miss on ${timestamp}`)
-            await this.preloadPromise
+            logger.debug(`cache miss on ${timestamp}`)
+            try {
+                await this.preloadPromise
+            } catch {
+                this.preloadPromise = new Promise(resolve => resolve())
+            }
             if (!this.renderedCache.some(t => t.timestamp === timestamp)) {
                 await this.RenderImage(timestamp)
-                this.preloadPromise = this.preloadPromise.then(() => this.RenderImage(), (error) => { logger.error(error.message) })
-            }
-        } else {
-            const renderedFrame = this.renderedCache.filter(t => t.timestamp === timestamp)
-            if (renderedFrame[0].keyFrame) {
-                logger.debug(`preload on ${timestamp}`)
-                this.preloadPromise = this.preloadPromise.then(() => this.RenderImage(), (error) => { logger.error(error.message) })
+                this.preloadPromise = this.preloadPromise.then(() => this.RenderImage(),
+                    () => { this.preloadPromise = new Promise(resolve => resolve()) })
             }
         }
 
@@ -49,12 +48,18 @@ class BMPVideoPlayer extends VideoPlayer {
         if (renderedFrame.length === 0) {
             throw new Error('Cannot find rendered timestamp from cache')
         } else if (renderedFrame.length > 1) {
-            logger.info(`duplicate cache for timestamp ${timestamp}`)
+            logger.debug(`duplicate cache for timestamp ${timestamp}`)
         }
         const targetFrame = renderedFrame[0]
 
         while (this.renderedCache.length > Config.cachedFrames) {
             this.renderedCache.shift()
+        }
+
+        if (targetFrame.keyFrame) {
+            logger.debug(`preload on ${timestamp}`)
+            this.preloadPromise = this.preloadPromise.then(() => this.RenderImage(),
+                () => { this.preloadPromise = new Promise(resolve => resolve()) })
         }
 
         logger.debug(`send frame on timestamp ${timestamp}`)
