@@ -1,7 +1,7 @@
 <template>
     <div class="video-wrapper card">
         <div class="video-img">
-            <img src="@/assets/sample.png" />
+            <img :src="picData" />
         </div>
         <VideoBar v-model="currentPercent" :totalFrame="videoProperties.lastFrame" :fps="fps"></VideoBar>
         <div class="video-control">
@@ -59,7 +59,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Vue, Prop, Watch } from 'vue-property-decorator'
 import lodash from 'lodash'
 import { RenderedVideo } from '@/interfaces'
 import { VideoProperties } from '@/VideoProperties'
@@ -71,28 +71,26 @@ import { FrameToTime } from '@/Utils'
 @Component({
     components: {
         VideoBar
+    },
+    model: {
+        prop: 'currentFrame',
+        event: 'change'
     }
 })
 export default class VideoPlayer extends Vue {
-    videoOpened = false
-    videoProperties: VideoProperties = new VideoProperties(0, [1, 1], [1, 1], 0, 0)
-
-    timestamp = 0
-    play = false
+    @Prop(VideoProperties) videoProperties!: VideoProperties
+    @Prop(Number) currentFrame!: number
 
     private frameData: Buffer | null = null
-    private debouncedUpdatePicData?: lodash.DebouncedFunc<(timestamp: number) => Promise<void>>
+    private debouncedUpdatePicData?: lodash.DebouncedFunc<(frame: number) => Promise<void>>
+    play = false
+    videoOpened = true
+    updatePicDataPromise = new Promise((resolve) => resolve())
 
     created(): void {
-        this.debouncedUpdatePicData = lodash.debounce(this.updatePicData, 500, { leading: true })
-        if (process.env.NODE_ENV === 'development') {
-            this.fakeData()
-        }
-    }
-
-    fakeData() {
-        this.videoProperties = new VideoProperties(864864, [1, 24000], [24000, 1001], 1920, 1080)
-        this.timestamp = 357357
+        this.debouncedUpdatePicData = lodash.debounce((frame: number) => {
+            this.updatePicDataPromise = this.updatePicDataPromise.then(() => this.updatePicData(frame))
+        }, 500, { leading: true })
     }
 
     get picData(): string {
@@ -104,27 +102,20 @@ export default class VideoPlayer extends Vue {
         }
     }
 
-    get currentFrame(): number {
-        return lodash.toInteger(this.timestamp / this.videoProperties.unitFrame)
+    get timestamp(): number {
+        return lodash.toInteger(this.currentFrame * this.videoProperties.unitFrame)
     }
 
-    set currentFrame(value) {
-        if (this.debouncedUpdatePicData !== undefined) {
-            if (value < 0) value = 0
-            if (value > this.videoProperties.lastFrame) {
-                value = this.videoProperties.lastFrame
-            }
-            this.timestamp = lodash.toInteger(value * this.videoProperties.unitFrame)
-            this.debouncedUpdatePicData(this.timestamp)
-        }
+    set timestamp(value) {
+        this.$emit('change', lodash.toInteger(value / this.videoProperties.unitFrame))
     }
 
     get currentPercent() {
-        return this.timestamp / this.videoProperties.duration
+        return this.currentFrame / this.videoProperties.lastFrame
     }
 
     set currentPercent(value) {
-        this.currentFrame = value * this.videoProperties.lastFrame
+        this.$emit('change', value * this.videoProperties.lastFrame)
     }
 
     get currentTime() {
@@ -139,7 +130,18 @@ export default class VideoPlayer extends Vue {
         return this.videoProperties.fps[0] / this.videoProperties.fps[1]
     }
 
-    private async updatePicData(timestamp: number): Promise<void> {
+    @Watch('currentFrame')
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    async watchCurrentFrame(currentFrame: number, oldFrame: number) {
+        if (currentFrame !== oldFrame) {
+            if (this.debouncedUpdatePicData !== undefined) {
+                await this.debouncedUpdatePicData(currentFrame)
+            }
+        }
+    }
+
+    private async updatePicData(frame: number): Promise<void> {
+        const timestamp = lodash.toInteger(lodash.toInteger(frame) * this.videoProperties.unitFrame)
         const renderedVideo = (await global.ipcRenderer.invoke('VideoPlayer:GetImage', timestamp)) as RenderedVideo | null
         if (renderedVideo != null) {
             this.timestamp = renderedVideo.timestamp
@@ -147,36 +149,12 @@ export default class VideoPlayer extends Vue {
         }
     }
 
-    async openVideo(): Promise<void> {
-        this.play = false
-        const openVideoBtn = document.querySelector('#openVideo') as HTMLButtonElement
-        openVideoBtn.disabled = true
-
-        const path = (await global.ipcRenderer.invoke('CommonIpc:OpenMovieDialog')) as string | null
-        if (path != null) {
-            const videoProperties = (await global.ipcRenderer.invoke('VideoPlayer:OpenVideo', path)) as VideoProperties | null
-            if (videoProperties != null) {
-                this.videoProperties = new VideoProperties(
-                    videoProperties.duration,
-                    videoProperties.timeBase,
-                    videoProperties.fps,
-                    videoProperties.width,
-                    videoProperties.height
-                )
-                await this.updatePicData(0)
-                this.videoOpened = true
-            }
-        }
-
-        openVideoBtn.disabled = false
-    }
-
     async playVideo(): Promise<void> {
         this.play = true
         const timeoutTime = (1000 * this.videoProperties.fps[1]) / this.videoProperties.fps[0]
         while (this.currentFrame < this.videoProperties.lastFrame && this.play) {
             const timeout = new Promise((resolve) => setTimeout(resolve, timeoutTime))
-            await this.updatePicData(this.timestamp + this.videoProperties.unitFrame)
+            this.updatePicDataPromise = this.updatePicDataPromise.then(() => this.updatePicData(this.currentFrame + 1))
             await timeout
         }
         this.play = false

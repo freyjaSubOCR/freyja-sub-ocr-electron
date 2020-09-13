@@ -98,11 +98,11 @@ class VideoPlayer {
             const packet = await this.demuxer.read()
             if (packet == null) {
                 decodedFrames.push(...(await this.decoder.flush()).frames)
+                // restart a decoder for further processing
+                this.decoder = beamcoder.decoder({ 'demuxer': this.demuxer, 'stream_index': 0 })
                 if (decodedFrames.length === 0) {
                     throw new Error('Reach end of file')
                 }
-                // restart a decoder for further processing
-                this.decoder = beamcoder.decoder({ 'demuxer': this.demuxer, 'stream_index': 0 })
                 break // ignore keyframe optmization
             }
 
