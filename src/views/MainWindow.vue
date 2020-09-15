@@ -1,8 +1,9 @@
 <template>
     <div class="warp">
-        <SubtitleInfoTable :subtitleInfos="subtitleInfos"></SubtitleInfoTable>
+        <SubtitleInfoTable v-model="currentFrame" :subtitleInfos.sync="subtitleInfos"></SubtitleInfoTable>
         <div class="stack">
-            <VideoPlayer v-model="currentFrame" :videoProperties="videoProperties"></VideoPlayer>
+            <VideoPlayer v-model="currentFrame" :videoProperties="videoProperties" @prevSubtitle="prevSubtitleEvent" @nextSubtitle="nextSubtitleEvent"></VideoPlayer>
+            <Timeline v-model="currentFrame" :fps="videoProperties.fps[0] / videoProperties.fps[1]" :totalFrame="videoProperties.lastFrame"></Timeline>
         </div>
         <div><button id="openVideo" @click="openVideo">Open Video</button></div>
     </div>
@@ -14,9 +15,10 @@ import SubtitleInfoTable from '@/components/SubtitleInfoTable.vue'
 import { SubtitleInfo, ISubtitleInfo } from '@/SubtitleInfo'
 import VideoPlayer from '@/components/VideoPlayer.vue'
 import { VideoProperties } from '@/VideoProperties'
+import Timeline from '@/components/Timeline.vue'
 
 @Component({
-    components: { SubtitleInfoTable, VideoPlayer }
+    components: { SubtitleInfoTable, VideoPlayer, Timeline }
 })
 class Mainwindow extends Vue {
     subtitleInfos: SubtitleInfo[] = [];
@@ -33,6 +35,26 @@ class Mainwindow extends Vue {
             value = this.videoProperties.lastFrame
         }
         this.currentFrame_ = value
+    }
+
+    prevSubtitleEvent() {
+        for (const i of this.subtitleInfos.keys()) {
+            // assume sorted
+            if (this.subtitleInfos[i].endFrame >= this.currentFrame) {
+                this.currentFrame = this.subtitleInfos[Math.max(0, i - 1)].startFrame
+                break
+            }
+        }
+    }
+
+    nextSubtitleEvent() {
+        for (const i of this.subtitleInfos.keys()) {
+            // assume sorted
+            if (this.subtitleInfos[i].startFrame > this.currentFrame) {
+                this.currentFrame = this.subtitleInfos[i].startFrame
+                break
+            }
+        }
     }
 
     async openVideo(): Promise<void> {

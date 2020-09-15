@@ -9,7 +9,7 @@
         </table>
         <simplebar force-visible>
             <table class="subtitleInfo-content">
-                <tr class="subtitleInfo-row" v-for="subtitleInfo in subtitleInfos" :key="subtitleInfo.id">
+                <tr :class="{ 'subtitleInfo-row': true, 'active': subtitleInfo.startFrame <= currentFrame && currentFrame < subtitleInfo.endFrame }" v-for="subtitleInfo in subtitleInfos" :key="subtitleInfo.id" :data-key="subtitleInfo.id">
                     <td class="subtitleInfo-time">
                         <input v-model="subtitleInfo.startTimeValidated" @change="updateInput" />
                     </td>
@@ -17,7 +17,7 @@
                         <input v-model="subtitleInfo.endTimeValidated" @change="updateInput" />
                     </td>
                     <td class="subtitleInfo-text">
-                        <input v-model.lazy="subtitleInfo.text" />
+                        <input v-model="subtitleInfo.text" />
                     </td>
                 </tr>
             </table>
@@ -36,13 +36,18 @@ import '@/styles/simplebar.css'
 @Component({
     components: {
         simplebar
+    },
+    model: {
+        prop: 'currentFrame',
+        event: 'change'
     }
 })
 class SubtitleInfoTable extends Vue {
-    @Prop({ type: Array, required: true, default: () => [] })
-    subtitleInfos!: SubtitleInfo[];
+    @Prop({ type: Array, required: true, default: () => [] }) subtitleInfos!: SubtitleInfo[]
+    @Prop(Number) currentFrame!: number
 
     updateInput() {
+        this.$emit('update:subtitleInfos', this.subtitleInfos.sort((a, b) => a.startFrame - b.startFrame))
         this.$forceUpdate()
     }
 }
@@ -62,6 +67,18 @@ export default SubtitleInfoTable
     display: flex;
     flex-direction: row;
     padding: 12px 24px;
+
+    &:nth-child(2n+1) {
+        background: rgba(18, 44, 63, 0.2);
+    }
+
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.8);
+    }
+
+    &.active {
+        background-color: rgba(255, 255, 128, 0.8);
+    }
 }
 .subtitleInfo-header {
     width: 100%;
@@ -92,9 +109,6 @@ export default SubtitleInfoTable
 .subtitleInfo-content .subtitleInfo-text input {
     color: rgba(255, 255, 255, 0.8);
     text-overflow: ellipsis;
-}
-.subtitleInfo-content .subtitleInfo-row:nth-child(2n+1) {
-    background: rgba(18, 44, 63, 0.2);
 }
 </style>
 

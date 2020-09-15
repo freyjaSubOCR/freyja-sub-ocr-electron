@@ -7,7 +7,7 @@
         <div class="video-control">
             <span class="video-control-currentframe">{{currentTime}}</span>
             <div class="video-control-buttons">
-                <button :disabled="!videoOpened">
+                <button :disabled="!videoOpened" @click="prevSubtitleEvent">
                     <img src="@/assets/prev_line.svg" alt />
                 </button>
                 <button @click="currentFrame -= 1" :disabled="!videoOpened || currentFrame <= 0">
@@ -25,7 +25,7 @@
                 >
                     <img src="@/assets/next_frame.svg" alt />
                 </button>
-                <button :disabled="!videoOpened">
+                <button :disabled="!videoOpened" @click="nextSubtitleEvent">
                     <img src="@/assets/next_line.svg" alt />
                 </button>
             </div>
@@ -162,6 +162,14 @@ export default class VideoPlayer extends Vue {
 
     stopVideo(): void {
         this.play = false
+    }
+
+    prevSubtitleEvent() {
+        this.$emit('prevSubtitle')
+    }
+
+    nextSubtitleEvent() {
+        this.$emit('nextSubtitle')
     }
 }
 </script>

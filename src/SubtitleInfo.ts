@@ -1,4 +1,4 @@
-import { isNumber } from 'lodash'
+import { isNumber, toInteger } from 'lodash'
 import { v4 as uuidv4 } from 'uuid'
 
 // eslint-disable-next-line @typescript-eslint/interface-name-prefix
@@ -19,6 +19,7 @@ class SubtitleInfo implements ISubtitleInfo {
     endTime?: string
     box?: Int32Array
     id: string
+    fps?: number
 
     constructor(subtitleInfo: ISubtitleInfo)
 
@@ -68,6 +69,8 @@ class SubtitleInfo implements ISubtitleInfo {
     }
 
     GenerateTime(fps: number) {
+        this.fps = fps
+
         let timeInt = Math.floor(this.startFrame * 1000 / fps)
         let timeStruct = new Date(timeInt)
         this.startTime = `${timeStruct.getUTCHours().toString().padStart(2, '0')}:${timeStruct.getUTCMinutes().toString().padStart(2, '0')}:${timeStruct.getUTCSeconds().toString().padStart(2, '0')}.${Math.floor(timeStruct.getUTCMilliseconds() / 10).toString().padStart(2, '0')}`
@@ -78,28 +81,44 @@ class SubtitleInfo implements ISubtitleInfo {
     }
 
     get startTimeValidated() {
+        if (this.fps !== undefined) {
+            this.GenerateTime(this.fps)
+        }
         return this.startTime
     }
 
     set startTimeValidated(value) {
-        console.log('hit')
         if (value === undefined) {
             this.startTime = undefined
-        } else if (value.match(/^\d{2}:[0-5]\d:[0-5]\d.\d{2}$/)) {
-            this.startTime = value
+        } else {
+            const match = value.match(/^(\d{2}):([0-5]\d):([0-5]\d).(\d{2})$/)
+            if (match) {
+                this.startTime = value
+                if (this.fps !== undefined) {
+                    this.startFrame = Math.round(((toInteger(match[1]) * 60 + toInteger(match[2])) * 60 + toInteger(match[3]) + toInteger(match[4]) / 100) * this.fps)
+                }
+            }
         }
-        console.log(this.startTimeValidated)
     }
 
     get endTimeValidated() {
+        if (this.fps !== undefined) {
+            this.GenerateTime(this.fps)
+        }
         return this.endTime
     }
 
     set endTimeValidated(value) {
         if (value === undefined) {
             this.endTime = undefined
-        } else if (value.match(/^\d{2}:[0-5]\d:[0-5]\d.\d{2}$/)) {
-            this.endTime = value
+        } else {
+            const match = value.match(/^(\d{2}):([0-5]\d):([0-5]\d).(\d{2})$/)
+            if (match) {
+                this.endTime = value
+                if (this.fps !== undefined) {
+                    this.endFrame = Math.round(((toInteger(match[1]) * 60 + toInteger(match[2])) * 60 + toInteger(match[3]) + toInteger(match[4]) / 100) * this.fps)
+                }
+            }
         }
     }
 }
