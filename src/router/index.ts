@@ -1,14 +1,19 @@
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
-import MainWindow from '../views/MainWindow.vue'
+import Start from '../views/Start.vue'
 
 Vue.use(VueRouter)
 
 const routes: Array<RouteConfig> = [
     {
         path: '/',
+        name: 'Start',
+        component: Start
+    },
+    {
+        path: '/MainWindow',
         name: 'MainWindow',
-        component: MainWindow
+        component: () => import(/* webpackChunkName: "about" */ '../views/MainWindow.vue')
     },
     {
         path: '/about',

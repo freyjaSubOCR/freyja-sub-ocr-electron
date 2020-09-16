@@ -44,6 +44,25 @@ class TorchOCRTaskScheduler {
                 return null
             }
         })
+        ipcMain.handle('TorchOCRTaskScheduler:totalFrame', () => {
+            try {
+                if (this.torchOCR.videoProperties === undefined) {
+                    throw new Error('VideoPlayer is not initialized')
+                }
+                return this.torchOCR.videoProperties.lastFrame
+            } catch (error) {
+                logger.error(error.message)
+                return null
+            }
+        })
+        ipcMain.handle('TorchOCRTaskScheduler:subtitleInfos', () => {
+            try {
+                return this.subtitleInfos
+            } catch (error) {
+                logger.error(error.message)
+                return null
+            }
+        })
     }
 
     async Init(path: string): Promise<void> {
