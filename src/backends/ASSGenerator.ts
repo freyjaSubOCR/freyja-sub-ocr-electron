@@ -1,8 +1,10 @@
 import { ipcMain } from 'electron'
 import { ASSStyle } from '@/interfaces'
-import { SubtitleInfo } from '@/SubtitleInfo'
+import { ISubtitleInfo, SubtitleInfo } from '@/SubtitleInfo'
 import { VideoProperties } from '@/VideoProperties'
 import logger from '@/logger'
+import fs_ from 'fs'
+const fs = fs_.promises
 
 class ASSGenerator {
     private style = new ASSStyle()
@@ -10,7 +12,17 @@ class ASSGenerator {
     registerIPCListener(): void {
         ipcMain.handle('ASSGenerator:Generate', async (e, ...args) => {
             try {
-                return this.Generate(args[0], args[1])
+                const subtitleInfos = (args[0] as ISubtitleInfo[]).map(t => new SubtitleInfo(t))
+                return this.Generate(subtitleInfos, args[1])
+            } catch (error) {
+                logger.error(error.message)
+                return null
+            }
+        })
+        ipcMain.handle('ASSGenerator:GenerateAndSave', async (e, ...args) => {
+            try {
+                const subtitleInfos = (args[0] as ISubtitleInfo[]).map(t => new SubtitleInfo(t))
+                return await this.GenerateAndSave(subtitleInfos, args[1], args[2])
             } catch (error) {
                 logger.error(error.message)
                 return null
@@ -34,6 +46,11 @@ class ASSGenerator {
             strings.push(`Dialogue: 0,${subtitleInfo.startTime},${subtitleInfo.endTime},Default,,0,0,0,,${subtitleInfo.text}`)
         }
         return strings.join('\n')
+    }
+
+    async GenerateAndSave(subtitleInfos: SubtitleInfo[], videoProperties: VideoProperties, path: string) {
+        const ass = this.Generate(subtitleInfos, videoProperties)
+        await fs.writeFile(path, ass, { encoding: 'utf-8' })
     }
 
     ApplyStyle(style: ASSStyle) {
