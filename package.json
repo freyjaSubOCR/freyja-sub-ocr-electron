@@ -32,6 +32,7 @@
     },
     "devDependencies": {
         "@jest-runner/electron": "^3.0.0",
+        "@types/d3": "^5.7.2",
         "@types/electron-devtools-installer": "^2.2.0",
         "@types/jest": "^26.0.10",
         "@types/js-levenshtein": "^1.1.0",
