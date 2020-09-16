@@ -49,7 +49,7 @@ class VideoProperties implements IVideoProperties {
     }
 
     get lastFrame(): number {
-        return Math.floor(this.duration / this.unitFrame) - 1
+        return Math.floor(this.duration / this.unitFrame)
     }
 }
 
