@@ -57,11 +57,10 @@ export default SubtitleInfoTable
 
 <style lang="scss" scoped>
 .subtitleInfo-wrapper {
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
-    min-width: 430px;
-    width: 50%;
-    margin: 40px 16px 40px 40px;
+    width: 100%;
 }
 .subtitleInfo-row {
     display: flex;
@@ -121,6 +120,6 @@ export default SubtitleInfoTable
 }
 
 .simplebar-scrollbar {
-margin-bottom: 50px;
+    margin-bottom: 50px;
 }
 </style>

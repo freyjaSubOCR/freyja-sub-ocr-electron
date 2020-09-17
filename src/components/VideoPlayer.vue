@@ -1,7 +1,7 @@
 <template>
     <div class="video-wrapper card">
         <div class="video-img">
-            <img :src="picData" />
+            <img src="@/assets/sample.png" />
         </div>
         <VideoBar v-model="currentPercent" :totalFrame="videoProperties.lastFrame" :fps="fps"></VideoBar>
         <div class="video-control">
@@ -180,18 +180,22 @@ export default class VideoPlayer extends Vue {
     display: flex;
     flex-direction: column;
     position: relative;
+    margin-bottom: 32px;
+    flex-grow: 1;
 }
 
 .video-img {
     background-color: #000000;
     display: flex;
     position: relative;
-    padding: 80px 0;
+    flex-grow: 1;
 }
 
 .video-img img {
     max-width: 100%;
+    max-height: 100%;
     pointer-events: none;
+    margin: auto 0;
 }
 
 .video-control {
