@@ -1,6 +1,5 @@
 <template>
-    <div>
-        <TitleBar />
+    <div class="wrapper">
         <div>
             <button id="openVideo" @click="openVideo" :disabled="processing">Open Video</button>
         </div>
@@ -16,13 +15,8 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import TitleBar from '@/components/TitleBar.vue'
 
-@Component({
-    components: {
-        TitleBar
-    }
-})
+@Component
 class Start extends Vue {
     currentProcessingFrame = 0
     totalFrame = 1
@@ -69,5 +63,14 @@ export default Start
     height:4px;
     background: #18A1B4;
     position: relative;
+}
+
+.wrapper {
+    display: flex;
+    position: fixed;
+    top: 36px;
+    left: 0;
+    bottom: 0;
+    right: 0;
 }
 </style>
