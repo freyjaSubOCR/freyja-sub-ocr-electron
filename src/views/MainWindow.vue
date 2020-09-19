@@ -1,11 +1,13 @@
 <template>
-    <div class="warp">
-        <SubtitleInfoTable v-model="currentFrame" :subtitleInfos.sync="subtitleInfos"></SubtitleInfoTable>
-        <div class="stack">
-            <VideoPlayer v-model="currentFrame" :videoProperties="videoProperties" @prevSubtitle="prevSubtitleEvent" @nextSubtitle="nextSubtitleEvent"></VideoPlayer>
-            <Timeline v-model="currentFrame" :fps="videoProperties.fps[0] / videoProperties.fps[1]" :totalFrame="videoProperties.lastFrame"></Timeline>
+    <div class="wrapper">
+        <div class="stack stack-left">
+            <SubtitleInfoTable v-model="currentFrame" :subtitleInfos.sync="subtitleInfos"></SubtitleInfoTable>
+            <button class="save-sub" @click="saveASS">Save subtitles</button>
         </div>
-        <div><button id="openVideo" @click="openVideo">Open Video</button></div>
+        <div class="stack stack-right">
+            <VideoPlayer v-model="currentFrame" :videoProperties="videoProperties" @prevSubtitle="prevSubtitleEvent" @nextSubtitle="nextSubtitleEvent"></VideoPlayer>
+            <Timeline v-model="currentFrame" :fps="videoProperties.fps[0] / videoProperties.fps[1]" :totalFrame="videoProperties.lastFrame"  :subtitleInfos.sync="subtitleInfos"></Timeline>
+        </div>
     </div>
 </template>
 
@@ -57,32 +59,32 @@ class Mainwindow extends Vue {
         }
     }
 
-    async openVideo(): Promise<void> {
-        const openVideoBtn = document.querySelector('#openVideo') as HTMLButtonElement
-        openVideoBtn.disabled = true
-
-        const path = (await global.ipcRenderer.invoke('CommonIpc:OpenMovieDialog')) as string | null
+    async saveASS() {
+        const path = (await global.ipcRenderer.invoke('CommonIpc:SaveASSDialog')) as string | null
         if (path != null) {
-            const videoProperties = (await global.ipcRenderer.invoke('VideoPlayer:OpenVideo', path)) as VideoProperties | null
-            if (videoProperties != null) {
-                this.videoProperties = new VideoProperties(
-                    videoProperties.duration,
-                    videoProperties.timeBase,
-                    videoProperties.fps,
-                    videoProperties.width,
-                    videoProperties.height
-                )
-                this.currentFrame = 0
-            }
+            await global.ipcRenderer.invoke('ASSGenerator:GenerateAndSave', this.subtitleInfos, this.videoProperties, path)
         }
-
-        openVideoBtn.disabled = false
     }
 
-    created() {
+    async openVideo(path: string | undefined): Promise<void> {
+        if (path === undefined) {
+            throw new Error('Cannot load video from path')
+        }
+        const videoProperties = (await global.ipcRenderer.invoke('VideoPlayer:OpenVideo', path)) as VideoProperties | null
+        if (videoProperties != null) {
+            this.videoProperties = new VideoProperties(videoProperties)
+            this.currentFrame = 0
+        }
+    }
+
+    async created() {
         if (process.env.NODE_ENV === 'development') {
             this.fakeData()
         }
+        this.subtitleInfos = ((await global.ipcRenderer.invoke('TorchOCRTaskScheduler:subtitleInfos')) as SubtitleInfo[])
+            .map(t => new SubtitleInfo(t))
+        const path = this.$route.params.path as string | undefined
+        await this.openVideo(path)
     }
 }
 
@@ -91,17 +93,42 @@ export default Mainwindow
 
 <style lang="scss" scoped>
 .stack {
-    max-width: 50%;
+    width: 50%;
     display: flex;
-    margin: 40px 40px 40px 16px;
     flex-direction: column;
 }
 
-.warp {
+.save-sub {
+    padding: 12px 16px;
+    margin-top: 16px;
+    box-shadow: 0px 2px 16px rgba(0, 0, 0, 0.16);
+    border-radius: 2px;
+    border: none;
+    transition: 0.2s all;
+    background: #0D1F2D;
+    color: rgba(#fff, 0.7);
+}
+
+.save-sub:hover {
+    background: #ffffff20;
+    border: #ffffff20;
+}
+
+.stack-left {
+    min-width: 430px;
+    margin: 40px 16px 40px 40px;
+}
+
+.stack-right {
+    min-width: 520px;
+    margin: 40px 40px 40px 16px;
+}
+
+.wrapper {
     display: flex;
     flex-direction: row;
     position: fixed;
-    top: 0;
+    top: 36px;
     left: 0;
     bottom: 0;
     right: 0;
