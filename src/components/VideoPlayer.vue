@@ -10,7 +10,7 @@
                 <button :disabled="!videoOpened" @click="prevSubtitleEvent">
                     <img src="@/assets/prev_line.svg" alt />
                 </button>
-                <button @click="currentFrame -= 1" :disabled="!videoOpened || currentFrame <= 0">
+                <button @click="prevFrameEvent" :disabled="!videoOpened || currentFrame <= 0">
                     <img src="@/assets/prev_frame.svg" alt />
                 </button>
                 <button v-if="play" @click="stopVideo()" :disabled="!videoOpened">
@@ -20,7 +20,7 @@
                     <img src="@/assets/play.svg" alt />
                 </button>
                 <button
-                    @click="currentFrame += 1"
+                    @click="nextFrameEvent"
                     :disabled="!videoOpened || currentFrame >= videoProperties.lastFrame"
                 >
                     <img src="@/assets/next_frame.svg" alt />
@@ -29,7 +29,7 @@
                     <img src="@/assets/next_line.svg" alt />
                 </button>
             </div>
-            <span class="video-control-duration"> {{durationTime}}</span>
+            <span class="video-control-duration">{{durationTime}}</span>
         </div>
         <div style="display:none">
             <div>
@@ -54,7 +54,6 @@
             <div>TimeBase: {{videoProperties.timeBase[0]}} / {{videoProperties.timeBase[1]}}</div>
             <div>fps: {{videoProperties.fps[0]}} / {{videoProperties.fps[1]}}</div>
         </div>
-
     </div>
 </template>
 
@@ -171,6 +170,14 @@ export default class VideoPlayer extends Vue {
     nextSubtitleEvent() {
         this.$emit('nextSubtitle')
     }
+
+    prevFrameEvent() {
+        this.$emit('change', this.currentFrame - 1)
+    }
+
+    nextFrameEvent() {
+        this.$emit('change', this.currentFrame + 1)
+    }
 }
 </script>
 
@@ -214,7 +221,7 @@ export default class VideoPlayer extends Vue {
 }
 
 .video-control-currentframe {
-    color: #18A1B4;
+    color: #18a1b4;
 }
 
 .video-control-duration {
@@ -236,6 +243,10 @@ export default class VideoPlayer extends Vue {
     background: transparent;
     border: transparent;
     transition: 0.2s all;
+
+    &:focus {
+        outline: none;
+    }
 }
 
 .video-control button:hover {
