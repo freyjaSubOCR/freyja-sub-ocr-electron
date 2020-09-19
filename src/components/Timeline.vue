@@ -29,10 +29,7 @@
                 </g>
             </svg>
         </div>
-        <div class="timeline-control">
-            <div>left: {{leftPos}}</div>
-            <div>right: {{rightPos}}</div>
-        </div>
+        <TimelineBar :totalFrame="totalFrame" :leftPercent.sync="leftPercent" :rightPercent.sync="rightPercent" @move="move" />
     </div>
 </template>
 
@@ -45,9 +42,10 @@ import * as d3Axis from 'd3-axis'
 import { SubtitleInfo } from '@/SubtitleInfo'
 import { FrameToTime } from '@/Utils'
 import EditableDiv from '@/components/EditableDiv.vue'
+import TimelineBar from '@/components/TimelineBar.vue'
 
 @Component({
-    components: { EditableDiv },
+    components: { EditableDiv, TimelineBar },
     model: {
         prop: 'currentFrame',
         event: 'change'
@@ -83,6 +81,32 @@ export default class Timeline extends Vue {
 
     get currentSubtitles() {
         return this.subtitleInfos.filter((t) => t.endFrame >= this.leftPos && t.startFrame <= this.rightPos)
+    }
+
+    get leftPercent() {
+        return this.leftPos / this.totalFrame
+    }
+
+    set leftPercent(value) {
+        this.leftPos = Math.min(1, Math.max(0, value)) * this.totalFrame
+        if (this.rightPos - this.leftPos > 5 * 60 * this.fps) {
+            this.length = 5 * 60 * this.fps
+        } else if (this.rightPos - this.leftPos < 1 * this.fps) {
+            this.length = 1 * this.fps
+        }
+    }
+
+    get rightPercent() {
+        return this.rightPos / this.totalFrame
+    }
+
+    set rightPercent(value) {
+        this.rightPos = Math.min(1, Math.max(0, value)) * this.totalFrame
+        if (this.rightPos - this.leftPos > 5 * 60 * this.fps) {
+            this.length = 5 * 60 * this.fps
+        } else if (this.rightPos - this.leftPos < 1 * this.fps) {
+            this.length = 1 * this.fps
+        }
     }
 
     beforeDestroy() {
@@ -181,20 +205,21 @@ export default class Timeline extends Vue {
         this.move(delta)
     }
 
+    private _lastX = 0
     pointerDownEvent(event: PointerEvent) {
         if (!this.disabled && this._pointerId === undefined) {
             event.preventDefault()
             this._pointerId = event.pointerId
             this._pointerPos = event.pageX
+            this._lastX = event.pageX
         }
     }
 
     pointerMoveEvent(event: PointerEvent) {
         if (this._pointerId === event.pointerId) {
             event.preventDefault()
-            if (lodash.toSafeInteger(event.movementX) !== 0) {
-                this.move(-event.movementX * 0.1)
-            }
+            this.move((this._lastX - event.pageX) / this.timelineMainWidth * this.length)
+            this._lastX = event.pageX
         }
     }
 
@@ -272,11 +297,6 @@ export default class Timeline extends Vue {
     &:active {
         cursor: grabbing;
     }
-}
-
-.timeline-control {
-    height: 28px;
-    display: flex;
 }
 
 #subtitle-svg {
