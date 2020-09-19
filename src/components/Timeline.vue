@@ -87,21 +87,18 @@ export default class Timeline extends Vue {
     beforeDestroy() {
         document.removeEventListener('pointermove', this.pointerMoveEvent)
         document.removeEventListener('pointerup', this.pointerUpEvent)
+        window.removeEventListener('resize', this.updateTimelineSize)
     }
 
     created() {
         this.length = Math.min(this.totalFrame, this.fps * 5)
         document.addEventListener('pointermove', this.pointerMoveEvent)
         document.addEventListener('pointerup', this.pointerUpEvent)
+        window.addEventListener('resize', this.updateTimelineSize)
     }
 
     mounted() {
-        const timelineMain = document.querySelector('.timeline-main')
-        if (timelineMain !== null) {
-            const timelineMainRect = timelineMain.getBoundingClientRect()
-            this.timelineMainWidth = timelineMainRect.width
-            this.timelineMainHeight = timelineMainRect.height
-        }
+        this.updateTimelineSize()
     }
 
     @Watch('leftPos')
@@ -118,6 +115,15 @@ export default class Timeline extends Vue {
 
     frameToTime(frame: number, fps: number) {
         return FrameToTime(frame, fps)
+    }
+
+    updateTimelineSize() {
+        const timelineMain = document.querySelector('.timeline-main')
+        if (timelineMain !== null) {
+            const timelineMainRect = timelineMain.getBoundingClientRect()
+            this.timelineMainWidth = timelineMainRect.width
+            this.timelineMainHeight = timelineMainRect.height
+        }
     }
 
     renderTimeline() {
