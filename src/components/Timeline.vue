@@ -1,13 +1,32 @@
 <template>
     <div class="timeline-wrapper card">
-        <div
-            class="timeline-main"
-            @wheel.alt.prevent="wheelAltEvent"
-            @wheel.exact.prevent="wheelEvent"
-            @pointerdown="pointerDownEvent"
-        >
-            <svg id="timeline-svg" :width="timelineMainWidth + 'px'" height="120px" />
-            <svg id="subtitle-svg" :width="timelineMainWidth + 'px'"/>
+        <div class="timeline-main grabbable" @wheel.alt.prevent="wheelAltEvent" @wheel.exact.prevent="wheelEvent" @pointermove="pointerLocalMoveEvent" @pointerdown="pointerDownEvent">
+            <svg id="timeline-svg" :width="timelineMainWidth + 'px'" height="20px" />
+            <svg id="current-svg" :width="timelineMainWidth + 'px'" height="100%">
+                <g :transform="'translate(' + this.xScale(currentFrame) + ', 0)'">
+                    <line class="current-line" x1="0" x2="0" y1="20" y2="500"></line>
+                    <text class="current-time-text">{{frameToTime(currentFrame, fps)}}</text>
+                </g>
+            </svg>
+            <svg id="current-pointer-svg" :width="timelineMainWidth + 'px'" height="100%">
+                <g :transform="'translate(' + this.timelinePointerX + ', 0)'">
+                    <line class="current-line" x1="0" x2="0" y1="20" y2="500"></line>
+                    <text class="current-time-text">{{frameToTime(this.xScale.invert(Math.floor(this.timelinePointerX)), fps)}}</text>
+                </g>
+            </svg>
+            <svg id="subtitle-svg" :width="timelineMainWidth + 'px'">
+                <g v-for="subtitleInfo in subtitleInfos" :key="subtitleInfo.id" :transform="'translate(' + xScale(subtitleInfo.startFrame) + ', 25)'">
+                    <rect :class="{'subtitle-rect': true, 'subtitle-rect-active': subtitleInfo.endFrame > currentFrame && currentFrame >= subtitleInfo.startFrame}"
+                          :width="xScale(subtitleInfo.endFrame) - xScale(subtitleInfo.startFrame)" height="100" rx="4"></rect>
+                    <foreignObject class="subtitle-text-object" :width="xScale(subtitleInfo.endFrame) - xScale(subtitleInfo.startFrame)" height="100">
+                        <xhtml:div class="subtitle-text-wrapper">
+                            <p class="subtitle-text" @pointerdown.stop="">
+                                <EditableDiv v-model="subtitleInfo.text" />
+                            </p>
+                        </xhtml:div>
+                    </foreignObject>
+                </g>
+            </svg>
         </div>
         <div class="timeline-control">
             <div>left: {{leftPos}}</div>
@@ -24,28 +43,30 @@ import * as d3Selection from 'd3-selection'
 import * as d3Axis from 'd3-axis'
 import { SubtitleInfo } from '@/SubtitleInfo'
 import { FrameToTime } from '@/Utils'
+import EditableDiv from '@/components/EditableDiv.vue'
 
 @Component({
-    components: {},
+    components: { EditableDiv },
     model: {
         prop: 'currentFrame',
         event: 'change'
     }
 })
 export default class Timeline extends Vue {
-    @Prop({ type: Boolean, default: false }) disabled!: boolean;
-    @Prop({ type: Number, default: 0 }) totalFrame!: number;
-    @Prop({ type: Number, default: 1 }) fps!: number;
-    @Prop({ type: Number, default: 0 }) currentFrame!: number;
-    @Prop({ type: Array, default: [] }) subtitleInfos!: SubtitleInfo[];
+    @Prop({ type: Boolean, default: false }) disabled!: boolean
+    @Prop({ type: Number, default: 0 }) totalFrame!: number
+    @Prop({ type: Number, default: 1 }) fps!: number
+    @Prop({ type: Number, default: 0 }) currentFrame!: number
+    @Prop({ type: Array, default: [] }) subtitleInfos!: SubtitleInfo[]
 
-    leftPos = 0;
-    rightPos = 0;
-    renderTimelineDebounced: lodash.DebouncedFunc<() => void> | undefined;
-    timelineMainWidth = 0;
-    timelineMainHeight = 0;
+    leftPos = 0
+    rightPos = 0
+    timelineMainWidth = 0
+    timelineMainHeight = 0
+    timelinePointerX = 0
 
-    private pointerId: number | undefined;
+    private _pointerPos = -1
+    private _pointerId: number | undefined
 
     get length() {
         return this.rightPos - this.leftPos
@@ -53,6 +74,14 @@ export default class Timeline extends Vue {
 
     set length(value) {
         this.rightPos = this.leftPos + value
+    }
+
+    get xScale() {
+        return d3Scale.scaleLinear().domain([this.leftPos, this.rightPos]).range([0, this.timelineMainWidth])
+    }
+
+    get currentSubtitles() {
+        return this.subtitleInfos.filter((t) => t.endFrame >= this.leftPos && t.startFrame <= this.rightPos)
     }
 
     beforeDestroy() {
@@ -64,13 +93,9 @@ export default class Timeline extends Vue {
         this.length = Math.min(this.totalFrame, this.fps * 5)
         document.addEventListener('pointermove', this.pointerMoveEvent)
         document.addEventListener('pointerup', this.pointerUpEvent)
-        this.renderTimelineDebounced = lodash.debounce(this.renderTimeline, 10, {
-            leading: true
-        })
     }
 
     mounted() {
-        this.renderTimeline()
         const timelineMain = document.querySelector('.timeline-main')
         if (timelineMain !== null) {
             const timelineMainRect = timelineMain.getBoundingClientRect()
@@ -82,48 +107,29 @@ export default class Timeline extends Vue {
     @Watch('leftPos')
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     leftPosWatch(newValue: number, oldValue: number) {
-        if (this.renderTimelineDebounced !== undefined) {
-            this.renderTimelineDebounced()
-        }
+        this.renderTimeline()
     }
 
     @Watch('rightPos')
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     rightPosWatch(newValue: number, oldValue: number) {
-        if (this.renderTimelineDebounced !== undefined) {
-            this.renderTimelineDebounced()
-        }
+        this.renderTimeline()
+    }
+
+    frameToTime(frame: number, fps: number) {
+        return FrameToTime(frame, fps)
     }
 
     renderTimeline() {
         d3Selection.select('#timeline-svg').selectAll('g').remove()
-        d3Selection.select('#subtitle-svg').selectAll('g').remove()
-        const timelineMain = document.querySelector('.timeline-main')
-        if (timelineMain !== null) {
-            const timelineMainRect = timelineMain.getBoundingClientRect()
-            this.timelineMainWidth = timelineMainRect.width
-            this.timelineMainHeight = timelineMainRect.height
 
-            const xScale = d3Scale.scaleLinear().domain([this.leftPos, this.rightPos]).range([0, timelineMainRect.width])
-            const xAxis = d3Axis.axisBottom(xScale).ticks(5).tickFormat((f) => FrameToTime(f as number, this.fps))
+        const xAxis = d3Axis.axisBottom(this.xScale).ticks(5).tickFormat((f) => FrameToTime(f as number, this.fps))
+        d3Selection.select('#timeline-svg').append('g').attr('class', 'timeline-axis').call(xAxis).attr('text-anchor', 'left')
+        d3Selection.select('#timeline-svg').select('.timeline-axis').selectAll('g').selectAll('line').attr('y2', '12px')
 
-            d3Selection.select('#timeline-svg').append('g').attr('class', 'timeline-axis').call(xAxis).attr('text-anchor', 'left')
-            d3Selection.select('#timeline-svg').select('.timeline-axis').selectAll('g').selectAll('line').attr('y2', '12px')
-
-            const xAxisLines = d3Axis.axisBottom(xScale).ticks(30)
-            d3Selection.select('#timeline-svg').append('g').attr('class', 'timeline-axis-lines').call(xAxisLines)
-            d3Selection.select('#timeline-svg').select('.timeline-axis-lines').selectAll('g').selectAll('line').attr('y2', '10px')
-
-            const currentSubs = this.subtitleInfos.filter((t) => t.endFrame >= this.leftPos && t.startFrame <= this.rightPos)
-            const subtitleSvg = d3Selection.select('#subtitle-svg').selectAll('g').data(currentSubs).enter().append('g').attr('transform', t => 'translate(' + xScale(t.startFrame) + ',' + '25' + ')')
-
-            subtitleSvg.append('rect').attr('class', 'subtitle-rect')
-                .attr('width', t => xScale(t.endFrame) - xScale(t.startFrame)).attr('height', '100').attr('rx', '4')
-
-            const subtitleFo = subtitleSvg.append('foreignObject').attr('class', 'subtitle-text-object').attr('width', t => xScale(t.endFrame) - xScale(t.startFrame)).attr('height', '100')
-            const subtitleDiv = subtitleFo.append('xhtml:div').attr('class', 'subtitle-text-wrapper')
-            subtitleDiv.append('p').attr('class', 'subtitle-text').html(t => { if (t.text !== undefined) { return t.text } return '' })
-        }
+        const xAxisLines = d3Axis.axisBottom(this.xScale).ticks(30)
+        d3Selection.select('#timeline-svg').append('g').attr('class', 'timeline-axis-lines').call(xAxisLines)
+        d3Selection.select('#timeline-svg').select('.timeline-axis-lines').selectAll('g').selectAll('line').attr('y2', '10px')
     }
 
     wheelAltEvent(event: WheelEvent) {
@@ -137,7 +143,7 @@ export default class Timeline extends Vue {
         }
         delta = 0.001 * delta
 
-        const timeline = document.querySelector('.timeline')
+        const timeline = document.querySelector('.timeline-main')
         if (timeline !== null) {
             const timelinePos = timeline.getBoundingClientRect()
             let percent = 0
@@ -146,9 +152,7 @@ export default class Timeline extends Vue {
             } else if (event.pageX - timelinePos.right > 0) {
                 percent = 1
             } else {
-                percent =
-          (event.pageX - timelinePos.left) /
-          (timelinePos.right - timelinePos.left)
+                percent = (event.pageX - timelinePos.left) / (timelinePos.right - timelinePos.left)
             }
             this.scale(delta, percent)
         } else {
@@ -171,14 +175,15 @@ export default class Timeline extends Vue {
     }
 
     pointerDownEvent(event: PointerEvent) {
-        if (!this.disabled && this.pointerId === undefined) {
+        if (!this.disabled && this._pointerId === undefined) {
             event.preventDefault()
-            this.pointerId = event.pointerId
+            this._pointerId = event.pointerId
+            this._pointerPos = event.pageX
         }
     }
 
     pointerMoveEvent(event: PointerEvent) {
-        if (this.pointerId === event.pointerId) {
+        if (this._pointerId === event.pointerId) {
             event.preventDefault()
             if (lodash.toSafeInteger(event.movementX) !== 0) {
                 this.move(-event.movementX * 0.1)
@@ -187,9 +192,20 @@ export default class Timeline extends Vue {
     }
 
     pointerUpEvent(event: PointerEvent) {
-        if (this.pointerId === event.pointerId) {
+        if (this._pointerId === event.pointerId) {
             event.preventDefault()
-            this.pointerId = undefined
+            this._pointerId = undefined
+            if (this._pointerPos === event.pageX) {
+                this.$emit('change', Math.min(this.totalFrame, Math.max(0, this.xScale.invert(Math.floor(this.timelinePointerX)))))
+            }
+        }
+    }
+
+    pointerLocalMoveEvent(event: PointerEvent) {
+        const timeline = document.querySelector('.timeline-main')
+        if (timeline !== null) {
+            const timelinePos = timeline.getBoundingClientRect()
+            this.timelinePointerX = event.pageX - timelinePos.left
         }
     }
 
@@ -201,9 +217,8 @@ export default class Timeline extends Vue {
         )
         if (this.rightPos - this.leftPos > 5 * 60 * this.fps) {
             this.length = 5 * 60 * this.fps
-        }
-        if (this.rightPos - this.leftPos > 1 * this.fps) {
-            this.length = 5 * 60 * this.fps
+        } else if (this.rightPos - this.leftPos < 1 * this.fps) {
+            this.length = 1 * this.fps
         }
     }
 
@@ -232,24 +247,48 @@ export default class Timeline extends Vue {
     display: flex;
     flex-direction: column;
 }
+
 .timeline-main {
     width: 100%;
     min-height: 150px;
     background-color: #091620;
     flex-grow: 1;
     position: relative;
+
+    &:hover #current-pointer-svg {
+        opacity: 0.6;
+    }
 }
+
+.grabbable {
+    cursor: grab;
+    &:active {
+        cursor: grabbing;
+    }
+}
+
 .timeline-control {
     height: 28px;
     display: flex;
 }
 
 #subtitle-svg {
-    margin: 0;
+    margin: 10px 0 0;
     position: absolute;
     top: 50%;
     left: 0;
     transform: translateY(-50%);
+}
+
+#current-svg, #current-pointer-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#current-pointer-svg{
+    opacity: 0;
+    transition: 0.1s all;
 }
 </style>
 <style lang="scss">
@@ -289,10 +328,14 @@ export default class Timeline extends Vue {
 }
 
 .subtitle-rect {
-    fill: #0D1F2D;
-    stroke: #25587E;
+    fill: rgba(#44ADFF, 0.06);
+    stroke: transparent;
     stroke-linecap: round;
     stroke-width: 2px;
+}
+
+.subtitle-rect-active {
+    stroke: #25587E;
 }
 
 .subtitle-text-object {
@@ -310,6 +353,20 @@ export default class Timeline extends Vue {
     margin: auto;
     font-size: 14px;
     color: rgba(#fff, 0.6);
-    background-color: transparent
+    background-color: transparent;
+    cursor: text;
+    overflow-wrap: break-word;
+    max-width: 100%;
+}
+
+.current-line {
+    stroke:#18A1B4;
+    stroke-width:1;
+}
+
+.current-time-text {
+    transform: translate(4px, 34px);
+    fill:#18A1B4;
+    font-size: 10px;
 }
 </style>
