@@ -63,6 +63,15 @@ class SubtitleInfoTable extends Vue {
 
     selectStart = -1
     selectEnd = -1
+    subtitleInfosBackup: Array<SubtitleInfo[]> = []
+
+    created() {
+        window.addEventListener('keyup', this.undo)
+    }
+
+    beforeDestory() {
+        window.removeEventListener('keyup', this.undo)
+    }
 
     updateInput() {
         this.$emit('update:subtitleInfos', this.subtitleInfos.sort((a, b) => a.startFrame - b.startFrame))
@@ -83,11 +92,22 @@ class SubtitleInfoTable extends Vue {
         if (this.selectStart === -1 || this.selectEnd === -1 || this.selectStart >= this.selectEnd) {
             return
         }
+        this.subtitleInfosBackup.push(this.subtitleInfos.slice())
         this.subtitleInfos[this.selectStart].endFrame = this.subtitleInfos[this.selectEnd].endFrame
         this.subtitleInfos.splice(this.selectStart + 1, this.selectEnd - this.selectStart)
         this.selectStart = -1
         this.selectEnd = -1
         this.updateInput()
+    }
+
+    undo(event: KeyboardEvent) {
+        if (event.ctrlKey && event.key === 'z') {
+            console.log('undo')
+            if (this.subtitleInfosBackup.length !== 0) {
+                this.subtitleInfos = this.subtitleInfosBackup.pop() as SubtitleInfo[]
+                this.updateInput()
+            }
+        }
     }
 }
 
