@@ -102,7 +102,6 @@ class SubtitleInfoTable extends Vue {
 
     undo(event: KeyboardEvent) {
         if (event.ctrlKey && event.key === 'z') {
-            console.log('undo')
             if (this.subtitleInfosBackup.length !== 0) {
                 this.subtitleInfos = this.subtitleInfosBackup.pop() as SubtitleInfo[]
                 this.updateInput()
@@ -126,6 +125,7 @@ export default SubtitleInfoTable
     flex-direction: row;
     padding: 12px 24px;
     cursor: default;
+    min-height: 48px;
 
     &:nth-child(2n+1) {
         background: rgba(18, 44, 63, 0.2);
@@ -158,7 +158,7 @@ export default SubtitleInfoTable
     margin: 0 0 50px;
 }
 .subtitleInfo-time {
-    margin-right: 16px;
+    margin: auto 16px auto 0;
     width: 90px;
 }
 .subtitleInfo-content input {
