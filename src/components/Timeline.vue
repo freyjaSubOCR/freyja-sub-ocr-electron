@@ -20,7 +20,8 @@
                           :width="xScale(subtitleInfo.endFrame) - xScale(subtitleInfo.startFrame)" height="100" rx="4"></rect>
                     <foreignObject class="subtitle-text-object" :width="xScale(subtitleInfo.endFrame) - xScale(subtitleInfo.startFrame)" height="100">
                         <xhtml:div class="subtitle-text-wrapper">
-                            <p class="subtitle-text" @pointerdown.stop="">
+                            <p :class="{'subtitle-text': true, 'subtitle-text-active': subtitleInfo.endFrame > currentFrame && currentFrame >= subtitleInfo.startFrame}"
+                               @pointerdown.stop="">
                                 <EditableDiv v-model="subtitleInfo.text" />
                             </p>
                         </xhtml:div>
@@ -363,6 +364,11 @@ export default class Timeline extends Vue {
     cursor: text;
     overflow-wrap: break-word;
     max-width: 100%;
+    opacity: 0.25;
+}
+
+.subtitle-text-active {
+    opacity: 1;
 }
 
 .current-line {
