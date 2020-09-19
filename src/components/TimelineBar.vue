@@ -10,7 +10,6 @@
 
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator'
-import lodash from 'lodash'
 
 @Component
 export default class TimelineBar extends Vue {
