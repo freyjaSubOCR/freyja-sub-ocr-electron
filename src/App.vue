@@ -9,6 +9,7 @@
 
 import { Component, Vue } from 'vue-property-decorator'
 import TitleBar from '@/components/TitleBar.vue'
+import 'normalize.css'
 
 @Component({
     components: { TitleBar }
@@ -35,7 +36,7 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-size: 16px;
-    line-height: 24px;
+    line-height: normal;
 }
 
 .card {

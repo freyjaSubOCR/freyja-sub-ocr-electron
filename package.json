@@ -21,6 +21,7 @@
         "d3": "^6.1.1",
         "js-levenshtein": "^1.1.6",
         "lodash": "^4.17.20",
+        "normalize.css": "^8.0.1",
         "simplebar-vue": "^2.0.0-beta.5",
         "torch-js": "https://github.com/arition/torch-js",
         "uuid": "^8.3.0",
