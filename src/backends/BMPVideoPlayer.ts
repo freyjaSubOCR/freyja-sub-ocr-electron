@@ -30,21 +30,22 @@ class BMPVideoPlayer extends VideoPlayer {
     }
 
     async GetImage(timestamp: number): Promise<RenderedVideo> {
-        if (!this.renderedCache.some(t => t.timestamp === timestamp)) {
+        timestamp = Math.floor(timestamp)
+        if (!this.renderedCache.some(t => Math.abs(t.timestamp - timestamp) <= 1)) {
             logger.debug(`cache miss on ${timestamp}`)
             try {
                 await this.preloadPromise
             } catch {
                 this.preloadPromise = new Promise(resolve => resolve())
             }
-            if (!this.renderedCache.some(t => t.timestamp === timestamp)) {
+            if (!this.renderedCache.some(t => Math.abs(t.timestamp - timestamp) <= 1)) {
                 await this.RenderImage(timestamp)
                 this.preloadPromise = this.preloadPromise.then(() => this.RenderImage(),
                     () => { this.preloadPromise = new Promise(resolve => resolve()) })
             }
         }
 
-        const renderedFrame = this.renderedCache.filter(t => t.timestamp === timestamp)
+        const renderedFrame = this.renderedCache.filter(t => Math.abs(t.timestamp - timestamp) <= 1)
         if (renderedFrame.length === 0) {
             throw new Error('Cannot find rendered timestamp from cache')
         } else if (renderedFrame.length > 1) {
@@ -69,6 +70,7 @@ class BMPVideoPlayer extends VideoPlayer {
     async RenderImage(timestamp?: number | undefined): Promise<void> {
         logger.debug(`start render frame on timestamp ${timestamp}`)
         if (timestamp !== undefined) {
+            timestamp = Math.floor(timestamp)
             await this.SeekByTimestamp(timestamp)
         }
         let decodedFrames: beamcoder.Frame[]
@@ -93,9 +95,22 @@ class BMPVideoPlayer extends VideoPlayer {
                     keyFrame: frame.key_frame
                 })
             }
+
+            if (timestamp !== undefined) {
+                if (timestamp < this.startTimestamp) {
+                // fake a frame
+                    this.renderedCache.push({
+                        data: decodedFrames[0].data,
+                        timestamp: timestamp,
+                        keyFrame: false
+                    })
+                }
+            }
         }
         // eslint-disable-next-line no-unmodified-loop-condition
-        while (timestamp !== undefined && !decodedFrames.map(t => t.pts).some(t => t === timestamp))
+        while (timestamp !== undefined &&
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+            !this.renderedCache.some(t => Math.abs(t.timestamp - timestamp!) <= 1))
     }
 
     private async DrawRect(frames: beamcoder.Frame[]): Promise<beamcoder.Frame[]> {

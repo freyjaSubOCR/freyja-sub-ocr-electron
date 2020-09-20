@@ -7,6 +7,7 @@ class VideoPlayer {
     private decoder: beamcoder.Decoder | null = null
     private encoder: beamcoder.Encoder | null = null
     private formatFilter: beamcoder.Filterer | null = null
+    protected startTimestamp = 0
 
     async OpenVideo(path: string): Promise<VideoProperties> {
         this.demuxer = await beamcoder.demuxer(path)
@@ -36,8 +37,15 @@ class VideoPlayer {
             ],
             filterSpec: 'format=pix_fmts=bgr24'
         })
+        const startTimestamp = this.demuxer.streams[0].start_time
+        if (startTimestamp === null) {
+            this.startTimestamp = 0
+        } else {
+            logger.debug(`set start timestamp to ${startTimestamp}`)
+            this.startTimestamp = startTimestamp
+        }
         return new VideoProperties(
-            this.demuxer.streams[0].duration as number,
+            this.demuxer.duration as number,
             this.demuxer.streams[0].time_base,
             this.demuxer.streams[0].r_frame_rate,
             this.demuxer.streams[0].codecpar.width,
@@ -53,6 +61,7 @@ class VideoPlayer {
     }
 
     async SeekByTimestamp(timestamp: number): Promise<void> {
+        timestamp = Math.floor(timestamp)
         logger.debug(`seek to timestamp ${timestamp}`)
         if (this.demuxer == null) {
             throw new Error('No video is opened for seek')
