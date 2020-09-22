@@ -45,7 +45,7 @@ class VideoPlayer {
             this.startTimestamp = startTimestamp
         }
         return new VideoProperties(
-            this.demuxer.duration as number,
+            this.demuxer.streams[0].duration !== null ? this.demuxer.streams[0].duration : this.demuxer.duration,
             this.demuxer.streams[0].time_base,
             this.demuxer.streams[0].r_frame_rate,
             this.demuxer.streams[0].codecpar.width,
