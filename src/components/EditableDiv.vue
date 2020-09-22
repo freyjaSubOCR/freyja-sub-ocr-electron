@@ -8,7 +8,7 @@ import { Component, Vue, Prop } from 'vue-property-decorator'
 export default class EditableDiv extends Vue {
     @Prop({ type: String, default: '' }) value!: string
 
-    inputEvent() {
+    inputEvent(): void {
         this.$emit('input', this.$el.textContent)
     }
 }

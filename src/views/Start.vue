@@ -22,7 +22,7 @@ class Start extends Vue {
     totalFrame = 1
     processing = false
 
-    get percent() {
+    get percent(): number {
         return this.currentProcessingFrame / this.totalFrame
     }
 
@@ -31,9 +31,10 @@ class Start extends Vue {
         const path = (await global.ipcRenderer.invoke('CommonIpc:OpenMovieDialog')) as string | null
         if (path != null) {
             await global.ipcRenderer.invoke('TorchOCRTaskScheduler:Init', path)
-            this.totalFrame = await global.ipcRenderer.invoke('TorchOCRTaskScheduler:totalFrame')
+            this.totalFrame = (await global.ipcRenderer.invoke('TorchOCRTaskScheduler:totalFrame')) as number
+            // eslint-disable-next-line @typescript-eslint/no-misused-promises
             const interval = setInterval(async () => {
-                this.currentProcessingFrame = await global.ipcRenderer.invoke('TorchOCRTaskScheduler:currentProcessingFrame')
+                this.currentProcessingFrame = await global.ipcRenderer.invoke('TorchOCRTaskScheduler:currentProcessingFrame') as number
             }, 1000)
             await global.ipcRenderer.invoke('TorchOCRTaskScheduler:Start')
             await global.ipcRenderer.invoke('TorchOCRTaskScheduler:CleanUpSubtitleInfos')

@@ -40,11 +40,12 @@ import * as d3Scale from 'd3-scale'
 import * as d3Selection from 'd3-selection'
 import * as d3Axis from 'd3-axis'
 import { SubtitleInfo } from '@/SubtitleInfo'
-import { FrameToTime } from '@/Utils'
+import { frameToTime } from '@/Utils'
 import EditableDiv from '@/components/EditableDiv.vue'
 import TimelineBar from '@/components/TimelineBar.vue'
 
 @Component({
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     components: { EditableDiv, TimelineBar },
     model: {
         prop: 'currentFrame',
@@ -56,7 +57,7 @@ export default class Timeline extends Vue {
     @Prop({ type: Number, default: 0 }) totalFrame!: number
     @Prop({ type: Number, default: 1 }) fps!: number
     @Prop({ type: Number, default: 0 }) currentFrame!: number
-    @Prop({ type: Array, default: [] }) subtitleInfos!: SubtitleInfo[]
+    @Prop({ type: Array, default: [] }) subtitleInfos!: Array<SubtitleInfo>
 
     leftPos = 0
     rightPos = 0
@@ -67,27 +68,27 @@ export default class Timeline extends Vue {
     private _pointerPos = -1
     private _pointerId: number | undefined
 
-    get length() {
+    get length(): number {
         return this.rightPos - this.leftPos
     }
 
-    set length(value) {
+    set length(value: number) {
         this.rightPos = this.leftPos + value
     }
 
-    get xScale() {
+    get xScale(): d3Scale.ScaleLinear<number, number> {
         return d3Scale.scaleLinear().domain([this.leftPos, this.rightPos]).range([0, this.timelineMainWidth])
     }
 
-    get currentSubtitles() {
+    get currentSubtitles(): Array<SubtitleInfo> {
         return this.subtitleInfos.filter((t) => t.endFrame >= this.leftPos && t.startFrame <= this.rightPos)
     }
 
-    get leftPercent() {
+    get leftPercent(): number {
         return this.leftPos / this.totalFrame
     }
 
-    set leftPercent(value) {
+    set leftPercent(value: number) {
         this.leftPos = Math.min(1, Math.max(0, value)) * this.totalFrame
         if (this.rightPos - this.leftPos > 5 * 60 * this.fps) {
             // this.length = 5 * 60 * this.fps
@@ -96,11 +97,11 @@ export default class Timeline extends Vue {
         }
     }
 
-    get rightPercent() {
+    get rightPercent(): number {
         return this.rightPos / this.totalFrame
     }
 
-    set rightPercent(value) {
+    set rightPercent(value: number) {
         this.rightPos = Math.min(1, Math.max(0, value)) * this.totalFrame
         if (this.rightPos - this.leftPos > 5 * 60 * this.fps) {
             // this.length = 5 * 60 * this.fps
@@ -109,49 +110,51 @@ export default class Timeline extends Vue {
         }
     }
 
-    beforeDestroy() {
+    beforeDestroy(): void {
+        /* eslint-disable @typescript-eslint/unbound-method */
+        // Allow unbound method for global event listener
         document.removeEventListener('pointermove', this.pointerMoveEvent)
         document.removeEventListener('pointerup', this.pointerUpEvent)
         window.removeEventListener('resize', this.updateTimelineSize)
+        /* eslint-enable @typescript-eslint/unbound-method */
     }
 
-    created() {
+    created(): void {
         this.length = Math.min(this.totalFrame, this.fps * 5)
+        /* eslint-disable @typescript-eslint/unbound-method */
+        // Allow unbound method for global event listener
         document.addEventListener('pointermove', this.pointerMoveEvent)
         document.addEventListener('pointerup', this.pointerUpEvent)
         window.addEventListener('resize', this.updateTimelineSize)
+        /* eslint-enable @typescript-eslint/unbound-method */
     }
 
-    mounted() {
+    mounted(): void {
         this.updateTimelineSize()
     }
 
     @Watch('leftPos')
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    leftPosWatch(newValue: number, oldValue: number) {
+    leftPosWatch(newValue: number, oldValue: number): void {
         this.renderTimeline()
     }
 
     @Watch('rightPos')
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    rightPosWatch(newValue: number, oldValue: number) {
+    rightPosWatch(newValue: number, oldValue: number): void {
         this.renderTimeline()
     }
 
     @Watch('currentFrame')
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    currentFrameWatch(newValue: number, oldValue: number) {
+    currentFrameWatch(newValue: number, oldValue: number): void {
         if (this.leftPos > this.currentFrame || this.rightPos < this.currentFrame) {
             const middle = (this.rightPos - this.leftPos) / 2 + this.leftPos
             this.move(this.currentFrame - middle)
         }
     }
 
-    frameToTime(frame: number, fps: number) {
-        return FrameToTime(frame, fps)
-    }
-
-    updateTimelineSize() {
+    updateTimelineSize(): void {
         const timelineMain = document.querySelector('.timeline-main')
         if (timelineMain !== null) {
             const timelineMainRect = timelineMain.getBoundingClientRect()
@@ -160,10 +163,10 @@ export default class Timeline extends Vue {
         }
     }
 
-    renderTimeline() {
+    renderTimeline(): void {
         d3Selection.select('#timeline-svg').selectAll('g').remove()
 
-        const xAxis = d3Axis.axisBottom(this.xScale).ticks(5).tickFormat((f) => FrameToTime(f as number, this.fps))
+        const xAxis = d3Axis.axisBottom(this.xScale).ticks(5).tickFormat((f) => frameToTime(f as number, this.fps))
         d3Selection.select('#timeline-svg').append('g').attr('class', 'timeline-axis').call(xAxis).attr('text-anchor', 'left')
         d3Selection.select('#timeline-svg').select('.timeline-axis').selectAll('g').selectAll('line').attr('y2', '12px')
 
@@ -172,7 +175,7 @@ export default class Timeline extends Vue {
         d3Selection.select('#timeline-svg').select('.timeline-axis-lines').selectAll('g').selectAll('line').attr('y2', '10px')
     }
 
-    wheelAltEvent(event: WheelEvent) {
+    wheelAltEvent(event: WheelEvent): void {
         let delta = 0
         if (lodash.toSafeInteger(event.deltaX) !== 0) {
             delta = event.deltaX
@@ -200,7 +203,7 @@ export default class Timeline extends Vue {
         }
     }
 
-    wheelEvent(event: WheelEvent) {
+    wheelEvent(event: WheelEvent): void {
         let delta = 0
         if (lodash.toSafeInteger(event.deltaX) !== 0) {
             delta = event.deltaX
@@ -215,7 +218,7 @@ export default class Timeline extends Vue {
     }
 
     private _lastX = 0
-    pointerDownEvent(event: PointerEvent) {
+    pointerDownEvent(event: PointerEvent): void {
         if (!this.disabled && this._pointerId === undefined) {
             event.preventDefault()
             this._pointerId = event.pointerId
@@ -224,7 +227,7 @@ export default class Timeline extends Vue {
         }
     }
 
-    pointerMoveEvent(event: PointerEvent) {
+    pointerMoveEvent(event: PointerEvent): void {
         if (this._pointerId === event.pointerId) {
             event.preventDefault()
             this.move((this._lastX - event.pageX) / this.timelineMainWidth * this.length)
@@ -232,7 +235,7 @@ export default class Timeline extends Vue {
         }
     }
 
-    pointerUpEvent(event: PointerEvent) {
+    pointerUpEvent(event: PointerEvent): void {
         if (this._pointerId === event.pointerId) {
             event.preventDefault()
             this._pointerId = undefined
@@ -242,7 +245,7 @@ export default class Timeline extends Vue {
         }
     }
 
-    pointerLocalMoveEvent(event: PointerEvent) {
+    pointerLocalMoveEvent(event: PointerEvent): void {
         const timeline = document.querySelector('.timeline-main')
         if (timeline !== null) {
             const timelinePos = timeline.getBoundingClientRect()
@@ -250,7 +253,7 @@ export default class Timeline extends Vue {
         }
     }
 
-    scale(delta: number, centerPercent: number) {
+    scale(delta: number, centerPercent: number): void {
         this.leftPos = Math.max(0, this.leftPos * (1 - delta * centerPercent))
         this.rightPos = Math.min(
             this.rightPos * (1 + delta * (1 - centerPercent)),
@@ -263,7 +266,7 @@ export default class Timeline extends Vue {
         }
     }
 
-    move(delta: number) {
+    move(delta: number): void {
         if (this.leftPos + delta < 0) {
             const length = this.length
             this.leftPos = 0

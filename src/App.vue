@@ -12,6 +12,7 @@ import TitleBar from '@/components/TitleBar.vue'
 import 'normalize.css'
 
 @Component({
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     components: { TitleBar }
 })
 export default class App extends Vue {

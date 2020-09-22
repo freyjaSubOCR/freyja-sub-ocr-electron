@@ -11,7 +11,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
-import { FrameToTime } from '@/Utils'
+import { frameToTime } from '@/Utils'
 @Component({
     model: {
         prop: 'percent',
@@ -25,26 +25,32 @@ export default class VideoBar extends Vue {
     @Prop(Number) fps: number | undefined
     percentCurrent = 0
 
-    private pointerId: number | undefined
+    private _pointerId: number | undefined
 
-    created() {
+    created(): void {
+        /* eslint-disable @typescript-eslint/unbound-method */
+        // Allow unbound method for global event listener
         document.addEventListener('pointermove', this.pointerMove)
         document.addEventListener('pointerup', this.pointerUp)
+        /* eslint-enable @typescript-eslint/unbound-method */
     }
 
-    beforeDestroy() {
+    beforeDestroy(): void {
+        /* eslint-disable @typescript-eslint/unbound-method */
+        // Allow unbound method for global event listener
         document.removeEventListener('pointermove', this.pointerMove)
         document.removeEventListener('pointerup', this.pointerUp)
+        /* eslint-enable @typescript-eslint/unbound-method */
     }
 
     get currentTime(): string {
         if (this.totalFrame !== undefined && this.fps !== undefined) {
-            return FrameToTime(this.percentCurrent * this.totalFrame, this.fps)
+            return frameToTime(this.percentCurrent * this.totalFrame, this.fps)
         }
         return ''
     }
 
-    updatePos(event: PointerEvent) {
+    updatePos(event: PointerEvent): void {
         const videoBarDOM = document.querySelector('.video-bar')
         if (videoBarDOM !== null) {
             const videoBarPos = videoBarDOM.getBoundingClientRect()
@@ -60,10 +66,10 @@ export default class VideoBar extends Vue {
         }
     }
 
-    pointerDown(event: PointerEvent) {
-        if (!this.disabled && this.pointerId === undefined) {
+    pointerDown(event: PointerEvent): void {
+        if (!this.disabled && this._pointerId === undefined) {
             event.preventDefault()
-            this.pointerId = event.pointerId
+            this._pointerId = event.pointerId
             const videoBarDOM = document.querySelector('.video-bar-handle')
             const videoBarTipDOM = document.querySelector('.video-bar-tooltip')
             if (videoBarDOM !== null) {
@@ -76,18 +82,18 @@ export default class VideoBar extends Vue {
         }
     }
 
-    pointerMove(event: PointerEvent) {
-        if (this.pointerId === event.pointerId) {
+    pointerMove(event: PointerEvent): void {
+        if (this._pointerId === event.pointerId) {
             event.preventDefault()
             this.updatePos(event)
             this.pointerMoveTooltip(event)
         }
     }
 
-    pointerUp(event: PointerEvent) {
-        if (this.pointerId === event.pointerId) {
+    pointerUp(event: PointerEvent): void {
+        if (this._pointerId === event.pointerId) {
             event.preventDefault()
-            this.pointerId = undefined
+            this._pointerId = undefined
             const videoBarDOM = document.querySelector('.video-bar-handle')
             const videoBarTipDOM = document.querySelector('.video-bar-tooltip')
             if (videoBarDOM !== null) {
@@ -99,8 +105,9 @@ export default class VideoBar extends Vue {
         }
     }
 
-    pointerMoveTooltip(event: PointerEvent) {
+    pointerMoveTooltip(event: PointerEvent): void {
         const videoBarDOM = document.querySelector('.video-bar')
+        // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
         const videoBarTooltip = document.querySelector('.video-bar-tooltip') as HTMLElement | null
         if (videoBarDOM !== null && videoBarTooltip !== null) {
             const videoBarPos = videoBarDOM.getBoundingClientRect()

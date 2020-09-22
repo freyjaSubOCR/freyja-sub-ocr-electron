@@ -1,20 +1,19 @@
 import { isNumber, toInteger } from 'lodash'
 import { v4 as uuidv4 } from 'uuid'
 
-// eslint-disable-next-line @typescript-eslint/interface-name-prefix
 interface ISubtitleInfo {
-    startFrame: number;
-    endFrame: number;
-    texts?: string[];
-    startTime?: string;
-    endTime?: string;
-    box?: Int32Array;
+    startFrame: number
+    endFrame: number
+    texts?: Array<string>
+    startTime?: string
+    endTime?: string
+    box?: Int32Array
 }
 
 class SubtitleInfo implements ISubtitleInfo {
     startFrame: number
     endFrame: number
-    texts: string[] = []
+    texts: Array<string> = []
     startTime?: string
     endTime?: string
     box?: Int32Array
@@ -26,16 +25,16 @@ class SubtitleInfo implements ISubtitleInfo {
     constructor(startFrame: number, endFrame?: number)
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    constructor(startFrame: any, endFrame?: number) {
+    constructor(startFrame: number | ISubtitleInfo, endFrame?: number) {
         this.id = uuidv4()
         if (isNumber(startFrame)) {
-            if (startFrame === undefined || endFrame === undefined) {
+            if (endFrame === undefined) {
                 throw new Error('Cannot init class from the provided parameters')
             }
             this.startFrame = startFrame
             this.endFrame = endFrame
         } else {
-            const subtitleInfo = startFrame as ISubtitleInfo
+            const subtitleInfo = startFrame
             this.startFrame = subtitleInfo.startFrame
             this.endFrame = subtitleInfo.endFrame
             this.texts = subtitleInfo.texts === undefined ? [] : subtitleInfo.texts
@@ -49,7 +48,7 @@ class SubtitleInfo implements ISubtitleInfo {
         const freq = {} as Record<string, number>
         let maxFreq = 0
         let maxFreqText = ''
-        if (this.texts === undefined || this.texts.length === 0) {
+        if (this.texts.length === 0) {
             return undefined
         }
         for (const text of this.texts) {
@@ -62,13 +61,13 @@ class SubtitleInfo implements ISubtitleInfo {
         return maxFreqText
     }
 
-    set text(value) {
+    set text(value: string | undefined) {
         if (value !== undefined) {
             this.texts = [value]
         }
     }
 
-    GenerateTime(fps: number) {
+    generateTime(fps: number): void {
         this.fps = fps
 
         let timeInt = Math.floor(this.startFrame * 1000 / fps)
@@ -80,18 +79,18 @@ class SubtitleInfo implements ISubtitleInfo {
         this.endTime = `${timeStruct.getUTCHours().toString().padStart(2, '0')}:${timeStruct.getUTCMinutes().toString().padStart(2, '0')}:${timeStruct.getUTCSeconds().toString().padStart(2, '0')}.${Math.floor(timeStruct.getUTCMilliseconds() / 10).toString().padStart(2, '0')}`
     }
 
-    get startTimeValidated() {
+    get startTimeValidated(): string | undefined {
         if (this.fps !== undefined) {
-            this.GenerateTime(this.fps)
+            this.generateTime(this.fps)
         }
         return this.startTime
     }
 
-    set startTimeValidated(value) {
+    set startTimeValidated(value: string | undefined) {
         if (value === undefined) {
             this.startTime = undefined
         } else {
-            const match = value.match(/^(\d{2}):([0-5]\d):([0-5]\d).(\d{2})$/)
+            const match = /^(\d{2}):([0-5]\d):([0-5]\d).(\d{2})$/.exec(value)
             if (match) {
                 this.startTime = value
                 if (this.fps !== undefined) {
@@ -101,18 +100,18 @@ class SubtitleInfo implements ISubtitleInfo {
         }
     }
 
-    get endTimeValidated() {
+    get endTimeValidated(): string | undefined {
         if (this.fps !== undefined) {
-            this.GenerateTime(this.fps)
+            this.generateTime(this.fps)
         }
         return this.endTime
     }
 
-    set endTimeValidated(value) {
+    set endTimeValidated(value: string | undefined) {
         if (value === undefined) {
             this.endTime = undefined
         } else {
-            const match = value.match(/^(\d{2}):([0-5]\d):([0-5]\d).(\d{2})$/)
+            const match = /^(\d{2}):([0-5]\d):([0-5]\d).(\d{2})$/.exec(value)
             if (match) {
                 this.endTime = value
                 if (this.fps !== undefined) {

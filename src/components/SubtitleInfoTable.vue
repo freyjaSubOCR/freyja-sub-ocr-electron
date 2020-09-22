@@ -49,13 +49,15 @@
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator'
 import { SubtitleInfo } from '@/SubtitleInfo'
-// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-// @ts-ignore: cannot find a type definition file for simplebar-vue
+// no simplebar-vue type definition
+// @ts-expect-error: cannot find a type definition file for simplebar-vue
 import simplebar from 'simplebar-vue'
 import '@/styles/simplebar.css'
 
 @Component({
     components: {
+        // no simplebar-vue type definition
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         simplebar
     },
     model: {
@@ -64,40 +66,46 @@ import '@/styles/simplebar.css'
     }
 })
 class SubtitleInfoTable extends Vue {
-    @Prop({ type: Array, required: true, default: () => [] }) subtitleInfos!: SubtitleInfo[]
+    @Prop({ type: Array, required: true, default: () => [] }) subtitleInfos!: Array<SubtitleInfo>
     @Prop(Number) currentFrame!: number
 
     selectStart = -1
     selectEnd = -1
-    subtitleInfosUndo: Array<SubtitleInfo[]> = []
-    subtitleInfosRedo: Array<SubtitleInfo[]> = []
+    subtitleInfosUndo: Array<Array<SubtitleInfo>> = []
+    subtitleInfosRedo: Array<Array<SubtitleInfo>> = []
 
-    created() {
+    created(): void {
+        /* eslint-disable @typescript-eslint/unbound-method */
+        // Allow unbound method for global event listener
         window.addEventListener('keyup', this.undo)
         window.addEventListener('keyup', this.redo)
+        /* eslint-enable @typescript-eslint/unbound-method */
     }
 
-    beforeDestory() {
+    beforeDestory(): void {
+        /* eslint-disable @typescript-eslint/unbound-method */
+        // Allow unbound method for global event listener
         window.removeEventListener('keyup', this.undo)
         window.removeEventListener('keyup', this.redo)
+        /* eslint-enable @typescript-eslint/unbound-method */
     }
 
-    updateInput() {
+    updateInput(): void {
         this.$emit('update:subtitleInfos', this.subtitleInfos.sort((a, b) => a.startFrame - b.startFrame))
         this.$forceUpdate()
     }
 
-    setCurrentFrame(frame: number) {
+    setCurrentFrame(frame: number): void {
         this.$emit('change', frame)
     }
 
-    setSelectEnd(index: number) {
+    setSelectEnd(index: number): void {
         if (this.selectStart !== -1) {
             this.selectEnd = index
         }
     }
 
-    addSubtitle(index: number) {
+    addSubtitle(index: number): void {
         this.subtitleInfosRedo = []
         this.subtitleInfosUndo.push(this.subtitleInfos.slice())
         const subtitleInfo = new SubtitleInfo(this.subtitleInfos[index])
@@ -106,20 +114,20 @@ class SubtitleInfoTable extends Vue {
         }
         subtitleInfo.startFrame = subtitleInfo.endFrame
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        subtitleInfo.GenerateTime(this.subtitleInfos[index].fps!)
+        subtitleInfo.generateTime(this.subtitleInfos[index].fps!)
         subtitleInfo.text = ''
         this.subtitleInfos.splice(index, 0, subtitleInfo)
         this.updateInput()
     }
 
-    removeSubtitle(index: number) {
+    removeSubtitle(index: number): void {
         this.subtitleInfosRedo = []
         this.subtitleInfosUndo.push(this.subtitleInfos.slice())
         this.subtitleInfos.splice(index, 1)
         this.updateInput()
     }
 
-    mergeSubtitles() {
+    mergeSubtitles(): void {
         if (this.selectStart === -1 || this.selectEnd === -1 || this.selectStart >= this.selectEnd) {
             return
         }
@@ -132,21 +140,21 @@ class SubtitleInfoTable extends Vue {
         this.updateInput()
     }
 
-    undo(event: KeyboardEvent) {
+    undo(event: KeyboardEvent): void {
         if (event.ctrlKey && event.key === 'z') {
             if (this.subtitleInfosUndo.length !== 0) {
                 this.subtitleInfosRedo.push(this.subtitleInfos.slice())
-                this.subtitleInfos = this.subtitleInfosUndo.pop() as SubtitleInfo[]
+                this.subtitleInfos = this.subtitleInfosUndo.pop() as Array<SubtitleInfo>
                 this.updateInput()
             }
         }
     }
 
-    redo(event: KeyboardEvent) {
+    redo(event: KeyboardEvent): void {
         if (event.ctrlKey && event.key === 'y') {
             if (this.subtitleInfosRedo.length !== 0) {
                 this.subtitleInfosUndo.push(this.subtitleInfos.slice())
-                this.subtitleInfos = this.subtitleInfosRedo.pop() as SubtitleInfo[]
+                this.subtitleInfos = this.subtitleInfosRedo.pop() as Array<SubtitleInfo>
                 this.updateInput()
             }
         }

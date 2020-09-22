@@ -9,78 +9,80 @@ import levenshtein from 'js-levenshtein'
 import lodash from 'lodash'
 
 class TorchOCRTaskScheduler {
-    private torchOCR: TorchOCR = new TorchOCR()
-    private currentProcessingFrame = 0
-    private subtitleInfos: SubtitleInfo[] = []
+    private _torchOCR: TorchOCR = new TorchOCR()
+    currentProcessingFrame = 0
+    subtitleInfos: Array<SubtitleInfo> = []
 
     registerWorkerListener(): void {
         if (parentPortNull === null) {
             throw new Error('Not in a worker thread')
         }
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        const parentPort = parentPortNull!
-        parentPort.on('message', async (args) => {
-            if (args[0] as string === 'Init') {
+        const parentPort = parentPortNull
+        // eslint-disable-next-line @typescript-eslint/no-misused-promises
+        parentPort.on('message', async (args: [string, string]) => {
+            if (args[0] === 'Init') {
                 try {
-                    const result = await this.Init(args[1])
+                    const result = await this.init(args[1])
                     parentPort.postMessage(['Init', result])
                 } catch (error) {
-                    logger.error(error.message)
+                    logger.error((error as Error).message)
                     parentPort.postMessage(['Init', null])
                 }
             }
         })
-        parentPort.on('message', async (args) => {
-            if (args[0] as string === 'Start') {
+        // eslint-disable-next-line @typescript-eslint/no-misused-promises
+        parentPort.on('message', async (args: [string]) => {
+            if (args[0] === 'Start') {
                 try {
-                    const result = await this.Start()
+                    const result = await this.start()
                     parentPort.postMessage(['Start', result])
                 } catch (error) {
-                    logger.error(error.message)
+                    logger.error((error as Error).message)
                     parentPort.postMessage(['Start', null])
                 }
             }
         })
-        parentPort.on('message', (args) => {
-            if (args[0] as string === 'CleanUpSubtitleInfos') {
+        parentPort.on('message', (args: [string]) => {
+            if (args[0] === 'CleanUpSubtitleInfos') {
                 try {
-                    const result = this.CleanUpSubtitleInfos()
+                    const result = this.cleanUpSubtitleInfos()
                     parentPort.postMessage(['CleanUpSubtitleInfos', result])
                 } catch (error) {
-                    logger.error(error.message)
+                    logger.error((error as Error).message)
                     parentPort.postMessage(['CleanUpSubtitleInfos', null])
                 }
             }
         })
-        parentPort.on('message', (args) => {
-            if (args[0] as string === 'currentProcessingFrame') {
+        parentPort.on('message', (args: [string]) => {
+            if (args[0] === 'currentProcessingFrame') {
                 try {
                     parentPort.postMessage(['currentProcessingFrame', this.currentProcessingFrame])
                 } catch (error) {
-                    logger.error(error.message)
+                    logger.error((error as Error).message)
                     parentPort.postMessage(['currentProcessingFrame', null])
                 }
             }
         })
-        parentPort.on('message', (args) => {
-            if (args[0] as string === 'totalFrame') {
+        parentPort.on('message', (args: [string]) => {
+            if (args[0] === 'totalFrame') {
                 try {
-                    if (this.torchOCR.videoProperties === undefined) {
+                    if (this._torchOCR.videoProperties === undefined) {
                         throw new Error('VideoPlayer is not initialized')
                     }
-                    parentPort.postMessage(['totalFrame', this.torchOCR.videoProperties.lastFrame])
+                    parentPort.postMessage(['totalFrame', this._torchOCR.videoProperties.lastFrame])
                 } catch (error) {
-                    logger.error(error.message)
+                    logger.error((error as Error).message)
                     parentPort.postMessage(['totalFrame', null])
                 }
             }
         })
-        parentPort.on('message', (args) => {
-            if (args[0] as string === 'subtitleInfos') {
+        parentPort.on('message', (args: [string]) => {
+            if (args[0] === 'subtitleInfos') {
                 try {
                     parentPort.postMessage(['subtitleInfos', this.subtitleInfos])
                 } catch (error) {
-                    logger.error(error.message)
+                    logger.error((error as Error).message)
                     parentPort.postMessage(['subtitleInfos', null])
                 }
             }
@@ -90,25 +92,25 @@ class TorchOCRTaskScheduler {
     registerIPCListener(): void {
         ipcMain.handle('TorchOCRTaskScheduler:Init', async (e, ...args) => {
             try {
-                return await this.Init(args[0])
+                return await this.init(args[0])
             } catch (error) {
-                logger.error(error.message)
+                logger.error((error as Error).message)
                 return null
             }
         })
         ipcMain.handle('TorchOCRTaskScheduler:Start', async () => {
             try {
-                return await this.Start()
+                return await this.start()
             } catch (error) {
-                logger.error(error.message)
+                logger.error((error as Error).message)
                 return null
             }
         })
         ipcMain.handle('TorchOCRTaskScheduler:CleanUpSubtitleInfos', () => {
             try {
-                return this.CleanUpSubtitleInfos()
+                return this.cleanUpSubtitleInfos()
             } catch (error) {
-                logger.error(error.message)
+                logger.error((error as Error).message)
                 return null
             }
         })
@@ -116,18 +118,18 @@ class TorchOCRTaskScheduler {
             try {
                 return this.currentProcessingFrame
             } catch (error) {
-                logger.error(error.message)
+                logger.error((error as Error).message)
                 return null
             }
         })
         ipcMain.handle('TorchOCRTaskScheduler:totalFrame', () => {
             try {
-                if (this.torchOCR.videoProperties === undefined) {
+                if (this._torchOCR.videoProperties === undefined) {
                     throw new Error('VideoPlayer is not initialized')
                 }
-                return this.torchOCR.videoProperties.lastFrame
+                return this._torchOCR.videoProperties.lastFrame
             } catch (error) {
-                logger.error(error.message)
+                logger.error((error as Error).message)
                 return null
             }
         })
@@ -135,63 +137,63 @@ class TorchOCRTaskScheduler {
             try {
                 return this.subtitleInfos
             } catch (error) {
-                logger.error(error.message)
+                logger.error((error as Error).message)
                 return null
             }
         })
     }
 
-    async Init(path: string): Promise<void> {
-        this.torchOCR.InitRCNN()
-        await this.torchOCR.InitOCR()
-        await this.torchOCR.InitVideoPlayer(path)
+    async init(path: string): Promise<void> {
+        this._torchOCR.initRCNN()
+        await this._torchOCR.initOCR()
+        await this._torchOCR.initVideoPlayer(path)
     }
 
-    async Start(): Promise<SubtitleInfo[]> {
-        const step = Config.BatchSize
+    async start(): Promise<Array<SubtitleInfo>> {
+        const step = Config.batchSize
         let tensorDataPromise = new Promise(resolve => resolve())
         let rcnnPromise = new Promise(resolve => resolve())
         let ocrPromise = new Promise(resolve => resolve())
         const ocrPromiseBuffer = [ocrPromise, ocrPromise, ocrPromise, ocrPromise]
-        if (this.torchOCR.videoProperties === undefined) {
+        if (this._torchOCR.videoProperties === undefined) {
             throw new Error('VideoPlayer is not initialized')
         }
 
-        for (let frame = 0; frame <= this.torchOCR.videoProperties.lastFrame; frame += step) {
+        for (let frame = 0; frame <= this._torchOCR.videoProperties.lastFrame; frame += step) {
             const currentFrame = frame
             let localStep = step
-            if (this.torchOCR.videoProperties.lastFrame + 1 - frame < step) {
-                localStep = this.torchOCR.videoProperties.lastFrame + 1 - frame
+            if (this._torchOCR.videoProperties.lastFrame + 1 - frame < step) {
+                localStep = this._torchOCR.videoProperties.lastFrame + 1 - frame
             }
 
             tensorDataPromise = Promise.all([tensorDataPromise, ocrPromiseBuffer[0]]).then(async () => {
                 logger.debug(`loading tensor data on frame ${currentFrame}...`)
-                const rawImg: Buffer[] = []
+                const rawImg: Array<Buffer> = []
                 for (const i of Array(localStep).keys()) {
-                    rawImg.push(await this.torchOCR.ReadRawFrame(i + currentFrame))
+                    rawImg.push(await this._torchOCR.readRawFrame(i + currentFrame))
                 }
                 this.currentProcessingFrame = currentFrame
                 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                const cropTop = lodash.toInteger(this.torchOCR.videoProperties!.height * 0.7)
-                const inputTensor = this.torchOCR.BufferToImgTensor(rawImg, cropTop)
+                const cropTop = lodash.toInteger(this._torchOCR.videoProperties!.height * 0.7)
+                const inputTensor = this._torchOCR.bufferToImgTensor(rawImg, cropTop)
                 return inputTensor
             })
 
             rcnnPromise = Promise.all([rcnnPromise, tensorDataPromise]).then(async (values) => {
                 logger.debug(`rcnn on frame ${currentFrame}...`)
                 const inputTensor = values[1] as Tensor
-                const rcnnResults = await this.torchOCR.RCNNForward(inputTensor)
+                const rcnnResults = await this._torchOCR.rcnnForward(inputTensor)
                 return rcnnResults
             })
 
             ocrPromise = Promise.all([ocrPromise, tensorDataPromise, rcnnPromise]).then(async (values) => {
                 logger.debug(`ocr on frame ${currentFrame}...`)
                 const inputTensor = values[1] as Tensor
-                const rcnnResults = values[2] as Record<string, Tensor>[]
-                const subtitleInfos = this.torchOCR.RCNNParse(rcnnResults)
+                const rcnnResults = values[2] as Array<Record<string, Tensor>>
+                const subtitleInfos = this._torchOCR.rcnnParse(rcnnResults)
                 if (subtitleInfos.length !== 0) {
-                    const boxesTensor = this.torchOCR.SubtitleInfoToTensor(subtitleInfos)
-                    const ocrResults = this.torchOCR.OCRParse(await this.torchOCR.OCRForward(inputTensor, boxesTensor))
+                    const boxesTensor = this._torchOCR.subtitleInfoToTensor(subtitleInfos)
+                    const ocrResults = this._torchOCR.ocrParse(await this._torchOCR.ocrForward(inputTensor, boxesTensor))
 
                     for (const i of subtitleInfos.keys()) {
                         subtitleInfos[i].texts = [ocrResults[i]]
@@ -203,20 +205,20 @@ class TorchOCRTaskScheduler {
                 }
                 inputTensor.free()
             })
-            ocrPromiseBuffer.shift()
+            void ocrPromiseBuffer.shift()
             ocrPromiseBuffer.push(ocrPromise)
         }
         await Promise.all([tensorDataPromise, rcnnPromise, ocrPromise])
         return this.subtitleInfos
     }
 
-    CleanUpSubtitleInfos() {
-        if (this.torchOCR.videoProperties === undefined) {
+    cleanUpSubtitleInfos(): Array<SubtitleInfo> {
+        if (this._torchOCR.videoProperties === undefined) {
             throw new Error('VideoPlayer is not initialized')
         }
 
         let subtitleInfo: SubtitleInfo | undefined
-        const subtitleInfos: SubtitleInfo[] = []
+        const subtitleInfos: Array<SubtitleInfo> = []
         for (const i of this.subtitleInfos.keys()) {
             const currentSubtitleInfo = this.subtitleInfos[i]
             if (subtitleInfo === undefined) {
@@ -224,7 +226,7 @@ class TorchOCRTaskScheduler {
             }
             if (subtitleInfo.text !== undefined && currentSubtitleInfo.text !== undefined) {
                 if (levenshtein(subtitleInfo.text, currentSubtitleInfo.text) > 3) {
-                    subtitleInfo.GenerateTime(this.torchOCR.videoProperties.fps[0] / this.torchOCR.videoProperties.fps[1])
+                    subtitleInfo.generateTime(this._torchOCR.videoProperties.fps[0] / this._torchOCR.videoProperties.fps[1])
                     subtitleInfos.push(subtitleInfo)
                     subtitleInfo = new SubtitleInfo(currentSubtitleInfo.startFrame, currentSubtitleInfo.endFrame)
                 } else {
@@ -237,7 +239,7 @@ class TorchOCRTaskScheduler {
         }
         if (subtitleInfo !== undefined) {
             subtitleInfo.endFrame = this.subtitleInfos[this.subtitleInfos.length - 1].endFrame
-            subtitleInfo.GenerateTime(this.torchOCR.videoProperties.fps[0] / this.torchOCR.videoProperties.fps[1])
+            subtitleInfo.generateTime(this._torchOCR.videoProperties.fps[0] / this._torchOCR.videoProperties.fps[1])
             subtitleInfos.push(subtitleInfo)
         }
         this.subtitleInfos = subtitleInfos

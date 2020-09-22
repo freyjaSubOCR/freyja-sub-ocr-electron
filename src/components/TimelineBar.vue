@@ -20,18 +20,24 @@ export default class TimelineBar extends Vue {
     private _pointerId: number | undefined
     private _pointerDragging: 'left' | 'right' | 'bar' = 'bar'
 
-    beforeDestroy() {
+    beforeDestroy(): void {
+        /* eslint-disable @typescript-eslint/unbound-method */
+        // Allow unbound method for global event listener
         document.removeEventListener('pointermove', this.pointerMoveEvent)
         document.removeEventListener('pointerup', this.pointerUpEvent)
+        /* eslint-enable @typescript-eslint/unbound-method */
     }
 
-    created() {
+    created(): void {
+        /* eslint-disable @typescript-eslint/unbound-method */
+        // Allow unbound method for global event listener
         document.addEventListener('pointermove', this.pointerMoveEvent)
         document.addEventListener('pointerup', this.pointerUpEvent)
+        /* eslint-enable @typescript-eslint/unbound-method */
     }
 
     private _lastX = 0
-    barPointerDownEvent(event: PointerEvent) {
+    barPointerDownEvent(event: PointerEvent): void {
         if (this._pointerId === undefined) {
             event.preventDefault()
             this._pointerId = event.pointerId
@@ -40,7 +46,7 @@ export default class TimelineBar extends Vue {
         }
     }
 
-    leftHandlePointerDownEvent(event: PointerEvent) {
+    leftHandlePointerDownEvent(event: PointerEvent): void {
         if (this._pointerId === undefined) {
             event.preventDefault()
             this._pointerId = event.pointerId
@@ -48,7 +54,7 @@ export default class TimelineBar extends Vue {
         }
     }
 
-    rightHandlePointerDownEvent(event: PointerEvent) {
+    rightHandlePointerDownEvent(event: PointerEvent): void {
         if (this._pointerId === undefined) {
             event.preventDefault()
             this._pointerId = event.pointerId
@@ -56,7 +62,7 @@ export default class TimelineBar extends Vue {
         }
     }
 
-    pointerMoveEvent(event: PointerEvent) {
+    pointerMoveEvent(event: PointerEvent): void {
         if (this._pointerId === event.pointerId) {
             event.preventDefault()
             const timeline = document.querySelector('.timeline-control')
@@ -80,7 +86,7 @@ export default class TimelineBar extends Vue {
         }
     }
 
-    pointerUpEvent(event: PointerEvent) {
+    pointerUpEvent(event: PointerEvent): void {
         if (this._pointerId === event.pointerId) {
             event.preventDefault()
             this._pointerId = undefined

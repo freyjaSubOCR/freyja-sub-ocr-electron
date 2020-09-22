@@ -26,7 +26,7 @@ class TorchOCRTaskSchedulerWorker {
                     })
                 })
             } catch (error) {
-                logger.error(error.message)
+                logger.error((error as Error).message)
                 return null
             }
         })
@@ -43,7 +43,7 @@ class TorchOCRTaskSchedulerWorker {
                     })
                 })
             } catch (error) {
-                logger.error(error.message)
+                logger.error((error as Error).message)
                 return null
             }
         })
@@ -60,7 +60,7 @@ class TorchOCRTaskSchedulerWorker {
                     })
                 })
             } catch (error) {
-                logger.error(error.message)
+                logger.error((error as Error).message)
                 return null
             }
         })
@@ -77,7 +77,7 @@ class TorchOCRTaskSchedulerWorker {
                     })
                 })
             } catch (error) {
-                logger.error(error.message)
+                logger.error((error as Error).message)
                 return null
             }
         })
@@ -94,7 +94,7 @@ class TorchOCRTaskSchedulerWorker {
                     })
                 })
             } catch (error) {
-                logger.error(error.message)
+                logger.error((error as Error).message)
                 return null
             }
         })
@@ -111,7 +111,7 @@ class TorchOCRTaskSchedulerWorker {
                     })
                 })
             } catch (error) {
-                logger.error(error.message)
+                logger.error((error as Error).message)
                 return null
             }
         })

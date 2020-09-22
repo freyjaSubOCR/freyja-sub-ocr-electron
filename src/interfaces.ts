@@ -1,40 +1,40 @@
 interface RectPos {
-    top: number;
-    left: number;
-    bottom: number;
-    right: number;
+    top: number
+    left: number
+    bottom: number
+    right: number
 }
 
 interface RenderedVideo {
-    timestamp: number;
-    keyFrame: boolean;
-    data: Buffer | Buffer[];
+    timestamp: number
+    keyFrame: boolean
+    data: Buffer | Array<Buffer>
 }
 
 class ASSStyle {
-    Name = 'Default'
-    Fontname = '方正准圆_GBK'
-    Fontsize = '75'
-    PrimaryColour = '&H00FFFFFF'
-    SecondaryColour = '&HF0000000'
-    OutlineColour = '&H00193768'
-    BackColour = '&HF0000000'
-    Bold = false
-    Italic = false
-    Underline = false
-    StrikeOut = false
-    ScaleX = 100
-    ScaleY = 100
-    Spacing = 0
-    Angle = 0
-    BorderStyle = 1
-    Outline = 2
-    Shadow = 0
-    Alignment = 2
-    MarginL = 10
-    MarginR = 10
-    MarginV = 15
-    Encoding = 1
+    name = 'Default'
+    fontname = '方正准圆_GBK'
+    fontsize = '75'
+    primaryColour = '&H00FFFFFF'
+    secondaryColour = '&HF0000000'
+    outlineColour = '&H00193768'
+    backColour = '&HF0000000'
+    bold = false
+    italic = false
+    underline = false
+    strikeOut = false
+    scaleX = 100
+    scaleY = 100
+    spacing = 0
+    angle = 0
+    borderStyle = 1
+    outline = 2
+    shadow = 0
+    alignment = 2
+    marginL = 10
+    marginR = 10
+    marginV = 15
+    encoding = 1
 }
 
 export { RectPos, RenderedVideo, ASSStyle }

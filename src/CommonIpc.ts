@@ -2,101 +2,102 @@ import { dialog, BrowserWindow, ipcMain } from 'electron'
 import logger from '@/logger'
 
 class CommonIpc {
-    registerIPCListener() {
+    registerIPCListener(): void {
         ipcMain.handle('CommonIpc:OpenMovieDialog', async () => {
             try {
-                return await this.OpenMovieDialog()
+                return await this.openMovieDialog()
             } catch (error) {
-                logger.error(error.message)
+                logger.error((error as Error).message)
                 return null
             }
         })
         ipcMain.handle('CommonIpc:SaveASSDialog', async () => {
             try {
-                return await this.SaveASSDialog()
+                return await this.saveASSDialog()
             } catch (error) {
-                logger.error(error.message)
+                logger.error((error as Error).message)
                 return null
             }
         })
         ipcMain.handle('CommonIpc:Minimize', () => {
             try {
-                return this.Minimize()
+                return this.minimize()
             } catch (error) {
-                logger.error(error.message)
+                logger.error((error as Error).message)
                 return null
             }
         })
         ipcMain.handle('CommonIpc:Unmaximize', () => {
             try {
-                return this.Unmaximize()
+                return this.unmaximize()
             } catch (error) {
-                logger.error(error.message)
+                logger.error((error as Error).message)
                 return null
             }
         })
         ipcMain.handle('CommonIpc:Maximize', () => {
             try {
-                return this.Maximize()
+                return this.maximize()
             } catch (error) {
-                logger.error(error.message)
+                logger.error((error as Error).message)
                 return null
             }
         })
         ipcMain.handle('CommonIpc:IsMaximized', () => {
             try {
-                return this.IsMaximized()
+                return this.isMaximized()
             } catch (error) {
-                logger.error(error.message)
+                logger.error((error as Error).message)
                 return null
             }
         })
         ipcMain.handle('CommonIpc:Close', () => {
             try {
-                return this.Close()
+                return this.close()
             } catch (error) {
-                logger.error(error.message)
+                logger.error((error as Error).message)
                 return null
             }
         })
     }
 
-    async Minimize() {
+    minimize(): void {
         const browserWindow = BrowserWindow.getFocusedWindow()
         if (browserWindow !== null) {
             browserWindow.minimize()
         }
     }
 
-    async Unmaximize() {
+    unmaximize(): void {
         const browserWindow = BrowserWindow.getFocusedWindow()
         if (browserWindow !== null) {
             browserWindow.unmaximize()
         }
     }
 
-    async Maximize() {
+    maximize(): void {
         const browserWindow = BrowserWindow.getFocusedWindow()
         if (browserWindow !== null) {
             browserWindow.maximize()
         }
     }
 
-    async IsMaximized() {
+    isMaximized(): boolean {
         const browserWindow = BrowserWindow.getFocusedWindow()
         if (browserWindow !== null) {
             return browserWindow.isMaximized()
         }
+        return false
     }
 
-    async Close() {
+    close(): void {
         const browserWindow = BrowserWindow.getFocusedWindow()
         if (browserWindow !== null) {
             browserWindow.close()
         }
     }
 
-    async OpenMovieDialog() {
+    async openMovieDialog(): Promise<string | null> {
         const dialogResult = await dialog.showOpenDialog(BrowserWindow.getFocusedWindow() as BrowserWindow, {
             filters: [
                 { name: 'Movies', extensions: ['mkv', 'mp4', 'avi', 'flv', 'm2ts'] },
@@ -108,7 +109,7 @@ class CommonIpc {
         return dialogResult.filePaths[0]
     }
 
-    async SaveASSDialog() {
+    async saveASSDialog(): Promise<string | null> {
         const dialogResult = await dialog.showSaveDialog(BrowserWindow.getFocusedWindow() as BrowserWindow, {
             filters: [
                 { name: 'Subtitles', extensions: ['ass'] },
@@ -116,7 +117,7 @@ class CommonIpc {
             ]
         })
         if (dialogResult.canceled) return null
-        return dialogResult.filePath
+        return dialogResult.filePath ?? null
     }
 }
 

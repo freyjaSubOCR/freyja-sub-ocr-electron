@@ -6,46 +6,46 @@ import Config from '@/config'
 import VideoPlayer from './VideoPlayer'
 
 class BMPVideoPlayer extends VideoPlayer {
-    private renderedCache: Array<RenderedVideo> = []
-    private rectPositons: Array<RectPos> | null = null
-    private preloadPromise = new Promise((resolve) => resolve())
+    private _renderedCache: Array<RenderedVideo> = []
+    private _rectPositons: Array<RectPos> | null = null
+    private _preloadPromise = new Promise((resolve) => resolve())
 
     registerIPCListener(): void {
         ipcMain.handle('VideoPlayer:OpenVideo', async (e, ...args) => {
             try {
-                return await this.OpenVideo(args[0])
+                return await this.openVideo(args[0])
             } catch (error) {
-                logger.error(error.message)
+                logger.error((error as Error).message)
                 return null
             }
         })
         ipcMain.handle('VideoPlayer:GetImage', async (e, ...args) => {
             try {
-                return await this.GetImage(args[0])
+                return await this.getImage(args[0])
             } catch (error) {
-                logger.error(error.message)
+                logger.error((error as Error).message)
                 return null
             }
         })
     }
 
-    async GetImage(timestamp: number): Promise<RenderedVideo> {
+    async getImage(timestamp: number): Promise<RenderedVideo> {
         timestamp = Math.floor(timestamp)
-        if (!this.renderedCache.some(t => Math.abs(t.timestamp - timestamp) <= 1)) {
+        if (!this._renderedCache.some(t => Math.abs(t.timestamp - timestamp) <= 1)) {
             logger.debug(`cache miss on ${timestamp}`)
             try {
-                await this.preloadPromise
+                await this._preloadPromise
             } catch {
-                this.preloadPromise = new Promise(resolve => resolve())
+                this._preloadPromise = new Promise(resolve => resolve())
             }
-            if (!this.renderedCache.some(t => Math.abs(t.timestamp - timestamp) <= 1)) {
-                await this.RenderImage(timestamp)
-                this.preloadPromise = this.preloadPromise.then(() => this.RenderImage(),
-                    () => { this.preloadPromise = new Promise(resolve => resolve()) })
+            if (!this._renderedCache.some(t => Math.abs(t.timestamp - timestamp) <= 1)) {
+                await this.renderImage(timestamp)
+                this._preloadPromise = this._preloadPromise.then(() => this.renderImage(),
+                    () => { this._preloadPromise = new Promise(resolve => resolve()) })
             }
         }
 
-        const renderedFrame = this.renderedCache.filter(t => Math.abs(t.timestamp - timestamp) <= 1)
+        const renderedFrame = this._renderedCache.filter(t => Math.abs(t.timestamp - timestamp) <= 1)
         if (renderedFrame.length === 0) {
             throw new Error('Cannot find rendered timestamp from cache')
         } else if (renderedFrame.length > 1) {
@@ -53,35 +53,37 @@ class BMPVideoPlayer extends VideoPlayer {
         }
         const targetFrame = renderedFrame[0]
 
-        while (this.renderedCache.length > Config.cachedFrames) {
-            this.renderedCache.shift()
+        while (this._renderedCache.length > Config.cachedFrames) {
+            this._renderedCache.shift()
         }
 
         if (targetFrame.keyFrame) {
             logger.debug(`preload on ${timestamp}`)
-            this.preloadPromise = this.preloadPromise.then(() => this.RenderImage(),
-                () => { this.preloadPromise = new Promise(resolve => resolve()) })
+            this._preloadPromise = this._preloadPromise.then(() => this.renderImage(),
+                () => { this._preloadPromise = new Promise(resolve => resolve()) })
         }
 
         logger.debug(`send frame on timestamp ${timestamp}`)
         return targetFrame
     }
 
-    async RenderImage(timestamp?: number | undefined): Promise<void> {
-        logger.debug(`start render frame on timestamp ${timestamp}`)
+    async renderImage(timestamp?: number | undefined): Promise<void> {
+        logger.debug(`start render frame on timestamp ${timestamp ?? ''}`)
         if (timestamp !== undefined) {
             timestamp = Math.floor(timestamp)
-            await this.SeekByTimestamp(timestamp)
+            await this.seekByTimestamp(timestamp)
         }
-        let decodedFrames: beamcoder.Frame[]
+        let decodedFrames: Array<beamcoder.Frame>
         do {
-            decodedFrames = await this.Decode()
+            decodedFrames = await this.decode()
             decodedFrames = await this.convertPixelFormat(decodedFrames)
 
-            if (this.rectPositons !== null) {
-                decodedFrames = await this.DrawRect(decodedFrames)
+            if (this._rectPositons !== null) {
+                decodedFrames = this.drawRect(decodedFrames)
             }
 
+            // error upstream type definitions
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
             if (decodedFrames == null) {
                 throw new Error('Unknown decode error')
             }
@@ -89,8 +91,8 @@ class BMPVideoPlayer extends VideoPlayer {
             logger.debug(`decoded frame ${decodedFrames.map(t => t.pts).join(', ')}`)
             // Cannot use promise.all since the encode operation must be sequential
             for (const frame of decodedFrames) {
-                this.renderedCache.push({
-                    data: (await this.Encode(frame)).data,
+                this._renderedCache.push({
+                    data: (await this.encode(frame)).data,
                     timestamp: frame.pts,
                     keyFrame: frame.key_frame
                 })
@@ -99,7 +101,7 @@ class BMPVideoPlayer extends VideoPlayer {
             if (timestamp !== undefined) {
                 if (timestamp < this.startTimestamp) {
                 // fake a frame
-                    this.renderedCache.push({
+                    this._renderedCache.push({
                         data: decodedFrames[0].data,
                         timestamp: timestamp,
                         keyFrame: false
@@ -110,10 +112,10 @@ class BMPVideoPlayer extends VideoPlayer {
         // eslint-disable-next-line no-unmodified-loop-condition
         while (timestamp !== undefined &&
             // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            !this.renderedCache.some(t => Math.abs(t.timestamp - timestamp!) <= 1))
+            !this._renderedCache.some(t => Math.abs(t.timestamp - timestamp!) <= 1))
     }
 
-    private async DrawRect(frames: beamcoder.Frame[]): Promise<beamcoder.Frame[]> {
+    drawRect(frames: Array<beamcoder.Frame>): Array<beamcoder.Frame> {
         return frames
     }
 }

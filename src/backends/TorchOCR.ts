@@ -9,41 +9,41 @@ import lodash from 'lodash'
 const fs = fs_.promises
 
 class TorchOCR {
-    private rcnnModule: ScriptModule | undefined
-    private ocrModule: ScriptModule | undefined
-    private ocrChars: string | undefined
+    private _rcnnModule: ScriptModule | undefined
+    private _ocrModule: ScriptModule | undefined
+    private _ocrChars: string | undefined
     private _videoPlayer: RawVideoPlayer | undefined
     private _videoProperties: VideoProperties | undefined
 
-    public get videoProperties() {
+    public get videoProperties(): VideoProperties | undefined {
         return this._videoProperties
     }
 
-    public get videoPlayer() {
+    public get videoPlayer(): RawVideoPlayer | undefined {
         return this._videoPlayer
     }
 
-    InitRCNN(path: string | null = null): void {
-        if (path == null) { path = Config.RCNNModulePath }
-        this.rcnnModule = new ScriptModule(path)
-        if (Config.EnableCuda && ScriptModule.isCudaAvailable()) { this.rcnnModule = this.rcnnModule.cuda() }
+    initRCNN(path: string | null = null): void {
+        if (path == null) { path = Config.rcnnModulePath }
+        this._rcnnModule = new ScriptModule(path)
+        if (Config.enableCuda && ScriptModule.isCudaAvailable()) { this._rcnnModule = this._rcnnModule.cuda() }
     }
 
-    async InitOCR(modulePath: string | null = null, charsPath: string | null = null): Promise<void> {
-        if (modulePath == null) { modulePath = Config.OCRModulePath }
-        if (charsPath == null) { charsPath = Config.OCRCharsPath }
-        this.ocrModule = new ScriptModule(modulePath)
-        this.ocrChars = await fs.readFile(charsPath, { encoding: 'utf-8' })
-        if (Config.EnableCuda && ScriptModule.isCudaAvailable()) { this.ocrModule = this.ocrModule.cuda() }
+    async initOCR(modulePath: string | null = null, charsPath: string | null = null): Promise<void> {
+        if (modulePath == null) { modulePath = Config.ocrModulePath }
+        if (charsPath == null) { charsPath = Config.ocrCharsPath }
+        this._ocrModule = new ScriptModule(modulePath)
+        this._ocrChars = await fs.readFile(charsPath, { encoding: 'utf-8' })
+        if (Config.enableCuda && ScriptModule.isCudaAvailable()) { this._ocrModule = this._ocrModule.cuda() }
     }
 
-    async InitVideoPlayer(path: string): Promise<VideoProperties> {
+    async initVideoPlayer(path: string): Promise<VideoProperties> {
         this._videoPlayer = new RawVideoPlayer()
-        this._videoProperties = await this._videoPlayer.OpenVideo(path)
+        this._videoProperties = await this._videoPlayer.openVideo(path)
         return this.videoProperties as VideoProperties
     }
 
-    async ReadRawFrame(frame: number): Promise<Buffer> {
+    async readRawFrame(frame: number): Promise<Buffer> {
         if (this.videoPlayer === undefined || this.videoProperties === undefined) {
             throw new Error('VideoPlayer is not initialized')
         }
@@ -52,13 +52,13 @@ class TorchOCR {
                 this.videoProperties.timeBase[0] /
                 this.videoProperties.fps[0]
         const timestamp = lodash.toInteger(frame * unitFrame)
-        const rawFrame = await this.videoPlayer.RenderImage(timestamp)
+        const rawFrame = await this.videoPlayer.renderImage(timestamp)
         let rawData = rawFrame.data[0] as Buffer
         rawData = rawData.slice(0, 3 * this.videoProperties.height * this.videoProperties.width)
         return rawData
     }
 
-    BufferToImgTensor(buffers: Buffer[], cropTop = 0): Tensor {
+    bufferToImgTensor(buffers: Array<Buffer>, cropTop = 0): Tensor {
         if (this.videoProperties === undefined) {
             throw new Error('VideoPlayer is not initialized')
         }
@@ -71,9 +71,6 @@ class TorchOCR {
 
         for (let j = 0; j < buffers.length; j++) {
             const buffer = buffers[j]
-            if (this.videoProperties === undefined) {
-                throw new Error('VideoPlayer is not initialized')
-            }
             if (buffer.length !== 3 * this.videoProperties.height * this.videoProperties.width) {
                 throw new Error(`Buffer length mismatch. Should be ${3 * this.videoProperties.height * this.videoProperties.width}, got ${buffer.length}`)
             }
@@ -84,23 +81,23 @@ class TorchOCR {
         return Tensor.fromObject(imgObjTensor)
     }
 
-    async RCNNForward(input: Tensor): Promise<Array<Record<string, Tensor>>> {
-        if (this.rcnnModule === undefined) {
+    async rcnnForward(input: Tensor): Promise<Array<Record<string, Tensor>>> {
+        if (this._rcnnModule === undefined) {
             throw new Error('RCNN Module is not initialized')
         }
         if (ScriptModule.isCudaAvailable()) {
             const inputCUDA = input.cuda()
-            const result = await this.rcnnModule.forward(inputCUDA) as Array<Record<string, Tensor>>
+            const result = await this._rcnnModule.forward(inputCUDA) as Array<Record<string, Tensor>>
             inputCUDA.free()
             return result
         } else {
-            return await this.rcnnModule.forward(input) as Array<Record<string, Tensor>>
+            return await this._rcnnModule.forward(input) as Array<Record<string, Tensor>>
         }
     }
 
-    RCNNParse(rcnnResults: Array<Record<string, Tensor>>): SubtitleInfo[] {
+    rcnnParse(rcnnResults: Array<Record<string, Tensor>>): Array<SubtitleInfo> {
         let subtitleInfo: SubtitleInfo | undefined
-        const subtitleInfos: SubtitleInfo[] = []
+        const subtitleInfos: Array<SubtitleInfo> = []
         for (const i of rcnnResults.keys()) {
             if (rcnnResults[i].boxes.cpu().toObject().shape[0] !== 0) {
                 const boxObjectTensor = rcnnResults[i].boxes.cpu().toObject()
@@ -117,7 +114,7 @@ class TorchOCR {
         return subtitleInfos
     }
 
-    SubtitleInfoToTensor(subtitleInfos: SubtitleInfo[]): Tensor {
+    subtitleInfoToTensor(subtitleInfos: Array<SubtitleInfo>): Tensor {
         const boxesObjectTensor = { data: new Int32Array(subtitleInfos.length * 5), shape: [subtitleInfos.length, 5] }
         for (const i of subtitleInfos.keys()) {
             const box = subtitleInfos[i].box
@@ -132,27 +129,27 @@ class TorchOCR {
         return Tensor.fromObject(boxesObjectTensor)
     }
 
-    async OCRForward(input: Tensor, boxes: Tensor): Promise<Array<Array<number>>> {
-        if (this.ocrModule === undefined) {
+    async ocrForward(input: Tensor, boxes: Tensor): Promise<Array<Array<number>>> {
+        if (this._ocrModule === undefined) {
             throw new Error('OCR Module is not initialized')
         }
 
         if (ScriptModule.isCudaAvailable()) {
             const inputCUDA = input.cuda()
-            const result = await this.ocrModule.forward(inputCUDA, boxes) as Array<Array<number>>
+            const result = await this._ocrModule.forward(inputCUDA, boxes) as Array<Array<number>>
             inputCUDA.free()
             return result
         } else {
-            return await this.ocrModule.forward(input, boxes) as Array<Array<number>>
+            return await this._ocrModule.forward(input, boxes) as Array<Array<number>>
         }
     }
 
-    OCRParse(OCRResults: Array<Array<number>>): Array<string> {
-        return OCRResults.map(t => t.map(d => {
-            if (this.ocrChars === undefined) {
+    ocrParse(ocrResults: Array<Array<number>>): Array<string> {
+        return ocrResults.map(t => t.map(d => {
+            if (this._ocrChars === undefined) {
                 throw new Error('OCR Module is not initialized')
             }
-            return this.ocrChars[d]
+            return this._ocrChars[d]
         }).join('').trim())
     }
 }

@@ -1,24 +1,23 @@
 import TorchOCR from '@/backends/TorchOCR'
-import { Tensor } from 'torch-js'
 
 describe('TorchOCR.ts', () => {
     it('Intergration test', async () => {
         const torchOCR = new TorchOCR()
-        torchOCR.InitRCNN()
-        await torchOCR.InitOCR()
-        await torchOCR.InitVideoPlayer('tests/files/sample.mp4')
-        const rawImg = await torchOCR.ReadRawFrame(10)
-        const inputTensor = torchOCR.BufferToImgTensor([rawImg])
-        const rcnnResult = await torchOCR.RCNNForward(inputTensor)
-        const resultTensor = (rcnnResult[0].boxes as Tensor).cpu()
+        torchOCR.initRCNN()
+        await torchOCR.initOCR()
+        await torchOCR.initVideoPlayer('tests/files/sample.mp4')
+        const rawImg = await torchOCR.readRawFrame(10)
+        const inputTensor = torchOCR.bufferToImgTensor([rawImg])
+        const rcnnResult = await torchOCR.rcnnForward(inputTensor)
+        const resultTensor = (rcnnResult[0].boxes).cpu()
         const resultObjectTensor = resultTensor.toObject()
         expect(resultObjectTensor).toMatchSnapshot()
 
-        const subtitleInfos = torchOCR.RCNNParse(rcnnResult)
+        const subtitleInfos = torchOCR.rcnnParse(rcnnResult)
         expect(subtitleInfos).toMatchSnapshot()
 
-        const boxesTensor = torchOCR.SubtitleInfoToTensor(subtitleInfos)
-        const result = torchOCR.OCRParse(await torchOCR.OCRForward(inputTensor, boxesTensor))
+        const boxesTensor = torchOCR.subtitleInfoToTensor(subtitleInfos)
+        const result = torchOCR.ocrParse(await torchOCR.ocrForward(inputTensor, boxesTensor))
         expect(result).toMatchSnapshot()
         inputTensor.free()
         boxesTensor.free()

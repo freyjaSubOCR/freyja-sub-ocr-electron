@@ -1,29 +1,27 @@
 import { isNumber } from 'lodash'
 
-// eslint-disable-next-line @typescript-eslint/interface-name-prefix
 interface IVideoProperties {
-    duration: number;
-    timeBase: number[];
-    fps: number[];
-    width: number;
-    height: number;
+    duration: number
+    timeBase: Array<number>
+    fps: Array<number>
+    width: number
+    height: number
 }
 
 class VideoProperties implements IVideoProperties {
     duration: number
-    timeBase: number[]
-    fps: number[]
+    timeBase: Array<number>
+    fps: Array<number>
     width: number
     height: number
 
     constructor(videoProperties: IVideoProperties)
 
-    constructor(duration: number, timeBase?: number[], fps?: number[], width?: number, height?: number)
+    constructor(duration: number, timeBase?: Array<number>, fps?: Array<number>, width?: number, height?: number)
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    constructor(duration: any, timeBase?: number[], fps?: number[], width?: number, height?: number) {
+    constructor(duration: number | IVideoProperties, timeBase?: Array<number>, fps?: Array<number>, width?: number, height?: number) {
         if (isNumber(duration)) {
-            if (duration === undefined || timeBase === undefined || fps === undefined || width === undefined || height === undefined) {
+            if (timeBase === undefined || fps === undefined || width === undefined || height === undefined) {
                 throw new Error('Cannot init class from the provided parameters')
             }
             this.duration = duration
@@ -32,7 +30,7 @@ class VideoProperties implements IVideoProperties {
             this.width = width
             this.height = height
         } else {
-            const videoProperties = duration as IVideoProperties
+            const videoProperties = duration
             this.duration = videoProperties.duration
             this.timeBase = videoProperties.timeBase
             this.fps = videoProperties.fps

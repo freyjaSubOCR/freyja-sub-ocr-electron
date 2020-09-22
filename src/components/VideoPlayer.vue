@@ -63,12 +63,13 @@ import lodash from 'lodash'
 import { RenderedVideo } from '@/interfaces'
 import { VideoProperties } from '@/VideoProperties'
 import VideoBar from '@/components/VideoBar.vue'
-import { FrameToTime } from '@/Utils'
+import { frameToTime } from '@/Utils'
 
 // TODO: Drag and drop
 
 @Component({
     components: {
+        // eslint-disable-next-line @typescript-eslint/naming-convention
         VideoBar
     },
     model: {
@@ -80,8 +81,8 @@ export default class VideoPlayer extends Vue {
     @Prop(VideoProperties) videoProperties!: VideoProperties
     @Prop(Number) currentFrame!: number
 
-    private frameData: Buffer | null = null
-    private debouncedUpdatePicData?: lodash.DebouncedFunc<(frame: number) => Promise<void>>
+    frameData: Buffer | null = null
+    debouncedUpdatePicData?: lodash.DebouncedFunc<(frame: number) => Promise<void>>
     play = false
     videoOpened = true
     updatePicDataPromise = new Promise((resolve) => resolve())
@@ -105,33 +106,32 @@ export default class VideoPlayer extends Vue {
         return lodash.toInteger(this.currentFrame * this.videoProperties.unitFrame)
     }
 
-    set timestamp(value) {
+    set timestamp(value: number) {
         this.$emit('change', lodash.toInteger(value / this.videoProperties.unitFrame))
     }
 
-    get currentPercent() {
+    get currentPercent(): number {
         return this.currentFrame / this.videoProperties.lastFrame
     }
 
-    set currentPercent(value) {
+    set currentPercent(value: number) {
         this.$emit('change', value * this.videoProperties.lastFrame)
     }
 
-    get currentTime() {
-        return FrameToTime(this.currentFrame, this.fps)
+    get currentTime(): string {
+        return frameToTime(this.currentFrame, this.fps)
     }
 
-    get durationTime() {
-        return FrameToTime(this.videoProperties.duration / this.videoProperties.unitFrame, this.fps)
+    get durationTime(): string {
+        return frameToTime(this.videoProperties.duration / this.videoProperties.unitFrame, this.fps)
     }
 
-    get fps() {
+    get fps(): number {
         return this.videoProperties.fps[0] / this.videoProperties.fps[1]
     }
 
     @Watch('currentFrame')
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    async watchCurrentFrame(currentFrame: number, oldFrame: number) {
+    async watchCurrentFrame(currentFrame: number, oldFrame: number): Promise<void> {
         if (currentFrame !== oldFrame) {
             if (this.debouncedUpdatePicData !== undefined) {
                 await this.debouncedUpdatePicData(currentFrame)
@@ -139,7 +139,7 @@ export default class VideoPlayer extends Vue {
         }
     }
 
-    private async updatePicData(frame: number): Promise<void> {
+    async updatePicData(frame: number): Promise<void> {
         const timestamp = lodash.toInteger(lodash.toInteger(frame) * this.videoProperties.unitFrame)
         const renderedVideo = (await global.ipcRenderer.invoke('VideoPlayer:GetImage', timestamp)) as RenderedVideo | null
         if (renderedVideo != null) {
@@ -151,6 +151,8 @@ export default class VideoPlayer extends Vue {
     async playVideo(): Promise<void> {
         this.play = true
         const timeoutTime = (1000 * this.videoProperties.fps[1]) / this.videoProperties.fps[0]
+        // The condition is valid. Since the function is async, other function can change the value
+        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
         while (this.currentFrame < this.videoProperties.lastFrame && this.play) {
             const timeout = new Promise((resolve) => setTimeout(resolve, timeoutTime))
             this.updatePicDataPromise = this.updatePicDataPromise.then(() => this.updatePicData(this.currentFrame + 1))
@@ -163,19 +165,19 @@ export default class VideoPlayer extends Vue {
         this.play = false
     }
 
-    prevSubtitleEvent() {
-        this.$emit('prevSubtitle')
+    prevSubtitleEvent(): void {
+        this.$emit('prev-subtitle')
     }
 
-    nextSubtitleEvent() {
-        this.$emit('nextSubtitle')
+    nextSubtitleEvent(): void {
+        this.$emit('next-subtitle')
     }
 
-    prevFrameEvent() {
+    prevFrameEvent(): void {
         this.$emit('change', this.currentFrame - 1)
     }
 
-    nextFrameEvent() {
+    nextFrameEvent(): void {
         this.$emit('change', this.currentFrame + 1)
     }
 }

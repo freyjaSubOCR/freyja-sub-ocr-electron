@@ -25,29 +25,29 @@ import { Component, Vue } from 'vue-property-decorator'
 
 @Component
 export default class TitleBar extends Vue {
-  maximized = false;
+    maximized = false
 
-  async created() {
-      this.maximized = await global.ipcRenderer.invoke('CommonIpc:IsMaximized')
-  }
+    async created(): Promise<void> {
+        this.maximized = await global.ipcRenderer.invoke('CommonIpc:IsMaximized') as boolean
+    }
 
-  async maximize() {
-      await global.ipcRenderer.invoke('CommonIpc:Maximize')
-      this.maximized = true
-  }
+    async maximize(): Promise<void> {
+        await global.ipcRenderer.invoke('CommonIpc:Maximize')
+        this.maximized = true
+    }
 
-  async unmaximize() {
-      await global.ipcRenderer.invoke('CommonIpc:Unmaximize')
-      this.maximized = false
-  }
+    async unmaximize(): Promise<void> {
+        await global.ipcRenderer.invoke('CommonIpc:Unmaximize')
+        this.maximized = false
+    }
 
-  async minimize() {
-      await global.ipcRenderer.invoke('CommonIpc:Minimize')
-  }
+    async minimize(): Promise<void> {
+        await global.ipcRenderer.invoke('CommonIpc:Minimize')
+    }
 
-  async close() {
-      await global.ipcRenderer.invoke('CommonIpc:Close')
-  }
+    async close(): Promise<void> {
+        await global.ipcRenderer.invoke('CommonIpc:Close')
+    }
 }
 </script>
 

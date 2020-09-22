@@ -7,54 +7,54 @@ import fs_ from 'fs'
 const fs = fs_.promises
 
 class ASSGenerator {
-    private style = new ASSStyle()
+    private _style = new ASSStyle()
 
     registerIPCListener(): void {
-        ipcMain.handle('ASSGenerator:Generate', async (e, ...args) => {
+        ipcMain.handle('ASSGenerator:Generate', (e, ...args) => {
             try {
-                const subtitleInfos = (args[0] as ISubtitleInfo[]).map(t => new SubtitleInfo(t))
-                return this.Generate(subtitleInfos, args[1])
+                const subtitleInfos = (args[0] as Array<ISubtitleInfo>).map(t => new SubtitleInfo(t))
+                return this.generate(subtitleInfos, args[1])
             } catch (error) {
-                logger.error(error.message)
+                logger.error((error as Error).message)
                 return null
             }
         })
         ipcMain.handle('ASSGenerator:GenerateAndSave', async (e, ...args) => {
             try {
-                const subtitleInfos = (args[0] as ISubtitleInfo[]).map(t => new SubtitleInfo(t))
-                return await this.GenerateAndSave(subtitleInfos, args[1], args[2])
+                const subtitleInfos = (args[0] as Array<ISubtitleInfo>).map(t => new SubtitleInfo(t))
+                return await this.generateAndSave(subtitleInfos, args[1], args[2])
             } catch (error) {
-                logger.error(error.message)
+                logger.error((error as Error).message)
                 return null
             }
         })
     }
 
-    Generate(subtitleInfos: SubtitleInfo[], videoProperties: VideoProperties): string {
-        const strings: string[] = []
+    generate(subtitleInfos: Array<SubtitleInfo>, videoProperties: VideoProperties): string {
+        const strings: Array<string> = []
         strings.push('[Script Info]')
         strings.push('ScriptType: v4.00+')
         strings.push(`PlayResX: ${videoProperties.width}`)
         strings.push(`PlayResY: ${videoProperties.height}`)
         strings.push('[V4+ Styles]')
         strings.push('Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding')
-        strings.push(`Style: ${this.style.Name},${this.style.Fontname},${this.style.Fontsize},${this.style.PrimaryColour},${this.style.SecondaryColour},${this.style.OutlineColour},${this.style.BackColour},${this.style.Bold ? -1 : 0},${this.style.Italic ? -1 : 0},${this.style.Underline ? -1 : 0},${this.style.StrikeOut ? -1 : 0},${this.style.ScaleX},${this.style.ScaleY},${this.style.Spacing},${this.style.Angle},${this.style.BorderStyle},${this.style.Outline},${this.style.Shadow},${this.style.Alignment},${this.style.MarginL},${this.style.MarginR},${this.style.MarginV},${this.style.Encoding}`)
+        strings.push(`Style: ${this._style.name},${this._style.fontname},${this._style.fontsize},${this._style.primaryColour},${this._style.secondaryColour},${this._style.outlineColour},${this._style.backColour},${this._style.bold ? -1 : 0},${this._style.italic ? -1 : 0},${this._style.underline ? -1 : 0},${this._style.strikeOut ? -1 : 0},${this._style.scaleX},${this._style.scaleY},${this._style.spacing},${this._style.angle},${this._style.borderStyle},${this._style.outline},${this._style.shadow},${this._style.alignment},${this._style.marginL},${this._style.marginR},${this._style.marginV},${this._style.encoding}`)
 
         strings.push('[Events]')
         strings.push('Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text')
         for (const subtitleInfo of subtitleInfos) {
-            strings.push(`Dialogue: 0,${subtitleInfo.startTime},${subtitleInfo.endTime},Default,,0,0,0,,${subtitleInfo.text}`)
+            strings.push(`Dialogue: 0,${subtitleInfo.startTime ?? ''},${subtitleInfo.endTime ?? ''},Default,,0,0,0,,${subtitleInfo.text ?? ''}`)
         }
         return strings.join('\n')
     }
 
-    async GenerateAndSave(subtitleInfos: SubtitleInfo[], videoProperties: VideoProperties, path: string) {
-        const ass = this.Generate(subtitleInfos, videoProperties)
+    async generateAndSave(subtitleInfos: Array<SubtitleInfo>, videoProperties: VideoProperties, path: string): Promise<void> {
+        const ass = this.generate(subtitleInfos, videoProperties)
         await fs.writeFile(path, ass, { encoding: 'utf-8' })
     }
 
-    ApplyStyle(style: ASSStyle) {
-        this.style = style
+    applyStyle(style: ASSStyle): void {
+        this._style = style
     }
 }
 
