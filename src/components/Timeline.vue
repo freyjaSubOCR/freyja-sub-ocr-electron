@@ -90,9 +90,9 @@ export default class Timeline extends Vue {
     set leftPercent(value) {
         this.leftPos = Math.min(1, Math.max(0, value)) * this.totalFrame
         if (this.rightPos - this.leftPos > 5 * 60 * this.fps) {
-            this.length = 5 * 60 * this.fps
+            // this.length = 5 * 60 * this.fps
         } else if (this.rightPos - this.leftPos < 1 * this.fps) {
-            this.length = 1 * this.fps
+            this.leftPos = this.rightPos - 1 * this.fps
         }
     }
 
@@ -103,7 +103,7 @@ export default class Timeline extends Vue {
     set rightPercent(value) {
         this.rightPos = Math.min(1, Math.max(0, value)) * this.totalFrame
         if (this.rightPos - this.leftPos > 5 * 60 * this.fps) {
-            this.length = 5 * 60 * this.fps
+            // this.length = 5 * 60 * this.fps
         } else if (this.rightPos - this.leftPos < 1 * this.fps) {
             this.length = 1 * this.fps
         }
@@ -136,6 +136,15 @@ export default class Timeline extends Vue {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     rightPosWatch(newValue: number, oldValue: number) {
         this.renderTimeline()
+    }
+
+    @Watch('currentFrame')
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    currentFrameWatch(newValue: number, oldValue: number) {
+        if (this.leftPos > this.currentFrame || this.rightPos < this.currentFrame) {
+            const middle = (this.rightPos - this.leftPos) / 2 + this.leftPos
+            this.move(this.currentFrame - middle)
+        }
     }
 
     frameToTime(frame: number, fps: number) {
@@ -248,7 +257,7 @@ export default class Timeline extends Vue {
             this.totalFrame
         )
         if (this.rightPos - this.leftPos > 5 * 60 * this.fps) {
-            this.length = 5 * 60 * this.fps
+            // this.length = 5 * 60 * this.fps
         } else if (this.rightPos - this.leftPos < 1 * this.fps) {
             this.length = 1 * this.fps
         }
