@@ -4,7 +4,7 @@ module.exports = {
     },
     pluginOptions: {
         electronBuilder: {
-            preload: 'src/preload.js',
+            preload: { 'preload': 'src/preload.js', 'TorchOCRTaskSchedulerWorkerStarter': 'src/backends/TorchOCRTaskSchedulerWorkerStarter.js' },
             mainProcessWatch: ['src/backends/*.ts', 'src/*.ts', 'src/preload.js']
         }
     }

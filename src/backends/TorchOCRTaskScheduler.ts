@@ -1,15 +1,91 @@
 import TorchOCR from './TorchOCR'
 import { ipcMain } from 'electron'
+import { parentPort as parentPortNull } from 'worker_threads'
 import logger from '@/logger'
 import { Tensor } from 'torch-js'
 import Config from '@/config'
 import { SubtitleInfo } from '@/SubtitleInfo'
 import levenshtein from 'js-levenshtein'
+import lodash from 'lodash'
 
 class TorchOCRTaskScheduler {
     private torchOCR: TorchOCR = new TorchOCR()
     private currentProcessingFrame = 0
     private subtitleInfos: SubtitleInfo[] = []
+
+    registerWorkerListener(): void {
+        if (parentPortNull === null) {
+            throw new Error('Not in a worker thread')
+        }
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        const parentPort = parentPortNull!
+        parentPort.on('message', async (args) => {
+            if (args[0] as string === 'Init') {
+                try {
+                    const result = await this.Init(args[1])
+                    parentPort.postMessage(['Init', result])
+                } catch (error) {
+                    logger.error(error.message)
+                    parentPort.postMessage(['Init', null])
+                }
+            }
+        })
+        parentPort.on('message', async (args) => {
+            if (args[0] as string === 'Start') {
+                try {
+                    const result = await this.Start()
+                    parentPort.postMessage(['Start', result])
+                } catch (error) {
+                    logger.error(error.message)
+                    parentPort.postMessage(['Start', null])
+                }
+            }
+        })
+        parentPort.on('message', (args) => {
+            if (args[0] as string === 'CleanUpSubtitleInfos') {
+                try {
+                    const result = this.CleanUpSubtitleInfos()
+                    parentPort.postMessage(['CleanUpSubtitleInfos', result])
+                } catch (error) {
+                    logger.error(error.message)
+                    parentPort.postMessage(['CleanUpSubtitleInfos', null])
+                }
+            }
+        })
+        parentPort.on('message', (args) => {
+            if (args[0] as string === 'currentProcessingFrame') {
+                try {
+                    parentPort.postMessage(['currentProcessingFrame', this.currentProcessingFrame])
+                } catch (error) {
+                    logger.error(error.message)
+                    parentPort.postMessage(['currentProcessingFrame', null])
+                }
+            }
+        })
+        parentPort.on('message', (args) => {
+            if (args[0] as string === 'totalFrame') {
+                try {
+                    if (this.torchOCR.videoProperties === undefined) {
+                        throw new Error('VideoPlayer is not initialized')
+                    }
+                    parentPort.postMessage(['totalFrame', this.torchOCR.videoProperties.lastFrame])
+                } catch (error) {
+                    logger.error(error.message)
+                    parentPort.postMessage(['totalFrame', null])
+                }
+            }
+        })
+        parentPort.on('message', (args) => {
+            if (args[0] as string === 'subtitleInfos') {
+                try {
+                    parentPort.postMessage(['subtitleInfos', this.subtitleInfos])
+                } catch (error) {
+                    logger.error(error.message)
+                    parentPort.postMessage(['subtitleInfos', null])
+                }
+            }
+        })
+    }
 
     registerIPCListener(): void {
         ipcMain.handle('TorchOCRTaskScheduler:Init', async (e, ...args) => {
@@ -89,22 +165,27 @@ class TorchOCRTaskScheduler {
             }
 
             tensorDataPromise = Promise.all([tensorDataPromise, ocrPromiseBuffer[0]]).then(async () => {
+                logger.debug(`loading tensor data on frame ${currentFrame}...`)
                 const rawImg: Buffer[] = []
                 for (const i of Array(localStep).keys()) {
                     rawImg.push(await this.torchOCR.ReadRawFrame(i + currentFrame))
                 }
                 this.currentProcessingFrame = currentFrame
-                const inputTensor = this.torchOCR.BufferToImgTensor(rawImg, 600)
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                const cropTop = lodash.toInteger(this.torchOCR.videoProperties!.height * 0.7)
+                const inputTensor = this.torchOCR.BufferToImgTensor(rawImg, cropTop)
                 return inputTensor
             })
 
             rcnnPromise = Promise.all([rcnnPromise, tensorDataPromise]).then(async (values) => {
+                logger.debug(`rcnn on frame ${currentFrame}...`)
                 const inputTensor = values[1] as Tensor
                 const rcnnResults = await this.torchOCR.RCNNForward(inputTensor)
                 return rcnnResults
             })
 
             ocrPromise = Promise.all([ocrPromise, tensorDataPromise, rcnnPromise]).then(async (values) => {
+                logger.debug(`ocr on frame ${currentFrame}...`)
                 const inputTensor = values[1] as Tensor
                 const rcnnResults = values[2] as Record<string, Tensor>[]
                 const subtitleInfos = this.torchOCR.RCNNParse(rcnnResults)
