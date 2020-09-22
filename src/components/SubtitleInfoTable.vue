@@ -18,22 +18,28 @@
                         <input v-model="subtitleInfo.endTimeValidated" @change="updateInput" />
                     </td>
                     <td class="subtitleInfo-text">
-                        <input v-model="subtitleInfo.text" />
-                        <div class="subtitleInfo-buttons">
-                            <button @click="setCurrentFrame(subtitleInfo.startFrame)">
-                                <img src="@/assets/subtitle-locate.svg" alt />
-                            </button>
-                            <button @click="selectStart = index; selectEnd = index;" v-if="selectStart === -1">
-                                <img src="@/assets/subtitle-merge-start.svg" alt />
-                            </button>
-                            <button @click="selectStart = -1; selectEnd = -1" v-else-if="selectStart === index">
-                                <img src="@/assets/subtitle-merge-start.svg" alt />
-                            </button>
-                            <button @click="merge" v-else-if="index > selectStart">
-                                <img src="@/assets/subtitle-merge-end.svg" alt />
-                            </button>
-                        </div>
+                        <input v-model="subtitleInfo.text" placeholder="Enter subtitle here" />
                     </td>
+                    <div class="subtitleInfo-buttons">
+                        <button @click="addSubtitle(index)">
+                            <img src="@/assets/subtitle-add.svg" alt />
+                        </button>
+                        <button @click="removeSubtitle(index)">
+                            <img src="@/assets/subtitle-delete.svg" alt />
+                        </button>
+                        <button @click="setCurrentFrame((subtitleInfo.endFrame - subtitleInfo.startFrame) / 2 + subtitleInfo.startFrame)">
+                            <img src="@/assets/subtitle-locate.svg" alt />
+                        </button>
+                        <button @click="selectStart = index; selectEnd = index;" v-if="selectStart === -1">
+                            <img src="@/assets/subtitle-merge-start.svg" alt />
+                        </button>
+                        <button @click="selectStart = -1; selectEnd = -1" v-else-if="selectStart === index">
+                            <img src="@/assets/subtitle-merge-start.svg" alt />
+                        </button>
+                        <button @click="mergeSubtitles" v-else-if="index > selectStart">
+                            <img src="@/assets/subtitle-merge-end.svg" alt />
+                        </button>
+                    </div>
                 </tr>
             </table>
         </simplebar>
@@ -63,14 +69,17 @@ class SubtitleInfoTable extends Vue {
 
     selectStart = -1
     selectEnd = -1
-    subtitleInfosBackup: Array<SubtitleInfo[]> = []
+    subtitleInfosUndo: Array<SubtitleInfo[]> = []
+    subtitleInfosRedo: Array<SubtitleInfo[]> = []
 
     created() {
         window.addEventListener('keyup', this.undo)
+        window.addEventListener('keyup', this.redo)
     }
 
     beforeDestory() {
         window.removeEventListener('keyup', this.undo)
+        window.removeEventListener('keyup', this.redo)
     }
 
     updateInput() {
@@ -88,11 +97,34 @@ class SubtitleInfoTable extends Vue {
         }
     }
 
-    merge() {
+    addSubtitle(index: number) {
+        this.subtitleInfosRedo = []
+        this.subtitleInfosUndo.push(this.subtitleInfos.slice())
+        const subtitleInfo = new SubtitleInfo(this.subtitleInfos[index])
+        if (this.subtitleInfos[index].fps === undefined) {
+            throw new Error('cannot get fps from other subtitles')
+        }
+        subtitleInfo.startFrame = subtitleInfo.endFrame
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        subtitleInfo.GenerateTime(this.subtitleInfos[index].fps!)
+        subtitleInfo.text = ''
+        this.subtitleInfos.splice(index, 0, subtitleInfo)
+        this.updateInput()
+    }
+
+    removeSubtitle(index: number) {
+        this.subtitleInfosRedo = []
+        this.subtitleInfosUndo.push(this.subtitleInfos.slice())
+        this.subtitleInfos.splice(index, 1)
+        this.updateInput()
+    }
+
+    mergeSubtitles() {
         if (this.selectStart === -1 || this.selectEnd === -1 || this.selectStart >= this.selectEnd) {
             return
         }
-        this.subtitleInfosBackup.push(this.subtitleInfos.slice())
+        this.subtitleInfosRedo = []
+        this.subtitleInfosUndo.push(this.subtitleInfos.slice())
         this.subtitleInfos[this.selectStart].endFrame = this.subtitleInfos[this.selectEnd].endFrame
         this.subtitleInfos.splice(this.selectStart + 1, this.selectEnd - this.selectStart)
         this.selectStart = -1
@@ -102,8 +134,19 @@ class SubtitleInfoTable extends Vue {
 
     undo(event: KeyboardEvent) {
         if (event.ctrlKey && event.key === 'z') {
-            if (this.subtitleInfosBackup.length !== 0) {
-                this.subtitleInfos = this.subtitleInfosBackup.pop() as SubtitleInfo[]
+            if (this.subtitleInfosUndo.length !== 0) {
+                this.subtitleInfosRedo.push(this.subtitleInfos.slice())
+                this.subtitleInfos = this.subtitleInfosUndo.pop() as SubtitleInfo[]
+                this.updateInput()
+            }
+        }
+    }
+
+    redo(event: KeyboardEvent) {
+        if (event.ctrlKey && event.key === 'y') {
+            if (this.subtitleInfosRedo.length !== 0) {
+                this.subtitleInfosUndo.push(this.subtitleInfos.slice())
+                this.subtitleInfos = this.subtitleInfosRedo.pop() as SubtitleInfo[]
                 this.updateInput()
             }
         }
@@ -120,17 +163,20 @@ export default SubtitleInfoTable
     flex-direction: column;
     width: 100%;
 }
+
 .subtitleInfo-row {
     display: flex;
     flex-direction: row;
     padding: 12px 24px;
     cursor: default;
     min-height: 48px;
+    position: relative;
 
     &:nth-child(2n+1) {
         background: rgba(18, 44, 63, 0.2);
     }
 }
+
 .subtitleInfo-content .subtitleInfo-row {
     &:hover {
         background-color: #1C425F;
@@ -151,53 +197,83 @@ export default SubtitleInfoTable
     background: #091620;
     color: rgba(255, 255, 255, 0.3);
 }
+
+.subtitleInfo-header .subtitleInfo-row .subtitleInfo-text {
+    margin: auto 0;
+}
+
 .subtitleInfo-content {
     width: 100%;
     height: 100%;
     overflow-y: auto;
     margin: 0 0 50px;
 }
+
 .subtitleInfo-time {
     margin: auto 16px auto 0;
     width: 90px;
 }
+
 .subtitleInfo-content input {
     background: transparent;
     width: 100%;
     border: none;
 }
+
 .subtitleInfo-content .subtitleInfo-time input {
     color: rgba(255, 255, 255, 0.4);
 }
+
 .subtitleInfo-content .subtitleInfo-text {
     flex-grow: 2;
     display: flex;
 }
+
 .subtitleInfo-content .subtitleInfo-text input {
     color: rgba(255, 255, 255, 0.8);
     text-overflow: ellipsis;
     flex-grow: 1;
+    &::placeholder {
+        opacity: 0.5;
+    }
 }
 
-.subtitleInfo-content .subtitleInfo-text input:focus + .subtitleInfo-buttons{
+.subtitleInfo-content .subtitleInfo-text input:focus + .subtitleInfo-buttons {
     display: none;
 }
 
 .subtitleInfo-buttons {
     display: none;
+    position: absolute;
+    // left: 50%;
+    bottom:-14px;
+    // transform: translateX(-50%);
+    right: 16px;
+    background: #1C425F;
+    border: 1px solid rgba(0, 0, 0, 0.37);
+    border-radius: 4px;
+    padding: 2px 4px;
+    z-index:10;
 }
 
 .subtitleInfo-buttons button {
     border: transparent;
     border-radius: 2px;
-    padding: 2px 6px;
     display: flex;
-    background-color: rgba($color: #fff, $alpha: 0.6);
-    margin-left: 12px;
+    background-color: transparent;
+    padding: 3px 4px;
     img {
+        width: 16px;
+        height: 16px;
         margin: auto;
     }
+    transition: 0.2s all;
     cursor: pointer;
+}
+
+.subtitleInfo-buttons button:hover {
+    background: #ffffff20;
+    border: #ffffff20;
 }
 
 .subtitleInfo-content .subtitleInfo-row:hover .subtitleInfo-buttons {
@@ -209,6 +285,7 @@ export default SubtitleInfoTable
 [data-simplebar] {
     height: 100%;
 }
+
 .simplebar-scrollbar::before {
     opacity: 0.5;
 }
