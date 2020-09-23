@@ -23,7 +23,7 @@ void (async () => {
                 const rawImg: Array<Buffer> = []
                 // eslint-disable-next-line @typescript-eslint/no-unused-vars
                 for (const i of Array(step).keys()) {
-                    const frame = await this._torchOCR.readRawFrame(undefined)
+                    const frame = await torchOCR.readRawFrame(undefined)
                     if (frame === null) {
                         continue
                     }
