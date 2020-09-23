@@ -24,28 +24,28 @@ class BMPVideoPlayer extends VideoPlayer {
                 return await this.getImage(args[0])
             } catch (error) {
                 logger.error((error as Error).message)
-                return null
+                return (error as Error)
             }
         })
     }
 
     async getImage(timestamp: number): Promise<RenderedVideo> {
         timestamp = Math.floor(timestamp)
-        if (!this._renderedCache.some(t => Math.abs(t.timestamp - timestamp) <= 1)) {
+        if (!this._renderedCache.some(t => t.timestamp === timestamp)) {
             logger.debug(`cache miss on ${timestamp}`)
             try {
                 await this._preloadPromise
             } catch {
                 this._preloadPromise = new Promise(resolve => resolve())
             }
-            if (!this._renderedCache.some(t => Math.abs(t.timestamp - timestamp) <= 1)) {
+            if (!this._renderedCache.some(t => t.timestamp === timestamp)) {
                 await this.renderImage(timestamp)
                 this._preloadPromise = this._preloadPromise.then(() => this.renderImage(),
                     () => { this._preloadPromise = new Promise(resolve => resolve()) })
             }
         }
 
-        const renderedFrame = this._renderedCache.filter(t => Math.abs(t.timestamp - timestamp) <= 1)
+        const renderedFrame = this._renderedCache.filter(t => t.timestamp === timestamp)
         if (renderedFrame.length === 0) {
             throw new Error('Cannot find rendered timestamp from cache')
         } else if (renderedFrame.length > 1) {
@@ -106,13 +106,13 @@ class BMPVideoPlayer extends VideoPlayer {
                         timestamp: timestamp,
                         keyFrame: false
                     })
+                } else if (decodedFrames.length > 0 && decodedFrames[0].pts > timestamp) {
+                    throw new Error('Unsupported variable frame rate video. Try to transcode the video using ffmpeg.')
                 }
             }
         }
         // eslint-disable-next-line no-unmodified-loop-condition
-        while (timestamp !== undefined &&
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            !this._renderedCache.some(t => Math.abs(t.timestamp - timestamp!) <= 1))
+        while (timestamp !== undefined && !this._renderedCache.some(t => t.timestamp === timestamp))
     }
 
     drawRect(frames: Array<beamcoder.Frame>): Array<beamcoder.Frame> {

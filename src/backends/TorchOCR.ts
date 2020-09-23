@@ -5,6 +5,7 @@ import RawVideoPlayer from './RawVideoPlayer'
 import { SubtitleInfo } from '@/SubtitleInfo'
 import { VideoProperties } from '@/VideoProperties'
 import lodash from 'lodash'
+import { RenderedVideo } from '@/interfaces'
 
 const fs = fs_.promises
 
@@ -43,7 +44,7 @@ class TorchOCR {
         return this.videoProperties as VideoProperties
     }
 
-    async readRawFrame(frame: number): Promise<Buffer> {
+    async readRawFrame(frame: number | undefined): Promise<Buffer | null> {
         if (this.videoPlayer === undefined || this.videoProperties === undefined) {
             throw new Error('VideoPlayer is not initialized')
         }
@@ -51,8 +52,18 @@ class TorchOCR {
                 this.videoProperties.fps[1] /
                 this.videoProperties.timeBase[0] /
                 this.videoProperties.fps[0]
-        const timestamp = lodash.toInteger(frame * unitFrame)
-        const rawFrame = await this.videoPlayer.renderImage(timestamp)
+        let rawFrame: RenderedVideo
+        if (frame === undefined) {
+            const rawFrameNullable = await this.videoPlayer.renderImageSeq()
+            if (rawFrameNullable === null) {
+                return null
+            } else {
+                rawFrame = rawFrameNullable
+            }
+        } else {
+            const timestamp = lodash.toInteger(frame * unitFrame)
+            rawFrame = await this.videoPlayer.renderImage(timestamp)
+        }
         let rawData = rawFrame.data[0] as Buffer
         rawData = rawData.slice(0, 3 * this.videoProperties.height * this.videoProperties.width)
         return rawData

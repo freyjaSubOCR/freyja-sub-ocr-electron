@@ -1,6 +1,7 @@
 <template>
     <div class="video-wrapper card">
         <div class="video-img">
+            <div v-if="errorMessage !== ''">{{ errorMessage }}</div>
             <img src="@/assets/sample.png" />
         </div>
         <VideoBar v-model="currentPercent" :totalFrame="videoProperties.lastFrame" :fps="fps"></VideoBar>
@@ -86,6 +87,7 @@ export default class VideoPlayer extends Vue {
     play = false
     videoOpened = true
     updatePicDataPromise = new Promise((resolve) => resolve())
+    errorMessage = ''
 
     created(): void {
         this.debouncedUpdatePicData = lodash.debounce((frame: number) => {
@@ -141,10 +143,13 @@ export default class VideoPlayer extends Vue {
 
     async updatePicData(frame: number): Promise<void> {
         const timestamp = lodash.toInteger(lodash.toInteger(frame) * this.videoProperties.unitFrame)
-        const renderedVideo = (await global.ipcRenderer.invoke('VideoPlayer:GetImage', timestamp)) as RenderedVideo | null
-        if (renderedVideo != null) {
+        const renderedVideo = (await global.ipcRenderer.invoke('VideoPlayer:GetImage', timestamp)) as RenderedVideo | Error
+        if (renderedVideo instanceof Error) {
+            this.errorMessage = renderedVideo.message
+        } else {
             this.timestamp = renderedVideo.timestamp
             this.frameData = renderedVideo.data as Buffer
+            this.errorMessage = ''
         }
     }
 

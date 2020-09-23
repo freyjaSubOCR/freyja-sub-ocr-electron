@@ -169,8 +169,13 @@ class TorchOCRTaskScheduler {
             tensorDataPromise = Promise.all([tensorDataPromise, ocrPromiseBuffer[0]]).then(async () => {
                 logger.debug(`loading tensor data on frame ${currentFrame}...`)
                 const rawImg: Array<Buffer> = []
+                // eslint-disable-next-line @typescript-eslint/no-unused-vars
                 for (const i of Array(localStep).keys()) {
-                    rawImg.push(await this._torchOCR.readRawFrame(i + currentFrame))
+                    const frame = await this._torchOCR.readRawFrame(undefined)
+                    if (frame === null) {
+                        continue
+                    }
+                    rawImg.push(frame)
                 }
                 this.currentProcessingFrame = currentFrame
                 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
