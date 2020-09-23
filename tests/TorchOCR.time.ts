@@ -21,8 +21,13 @@ void (async () => {
             tensorDataPromise = Promise.all([tensorDataPromise, ocrPromiseBuffer[0]]).then(async () => {
                 tStart = performance.now()
                 const rawImg: Array<Buffer> = []
+                // eslint-disable-next-line @typescript-eslint/no-unused-vars
                 for (const i of Array(step).keys()) {
-                    rawImg.push(await torchOCR.readRawFrame(i + frame))
+                    const frame = await this._torchOCR.readRawFrame(undefined)
+                    if (frame === null) {
+                        continue
+                    }
+                    rawImg.push(frame)
                 }
                 const inputTensor = torchOCR.bufferToImgTensor(rawImg, 600)
                 console.log(`Copy Tensor data (img) ${frame}: ${(performance.now() - tStart)}ms`)

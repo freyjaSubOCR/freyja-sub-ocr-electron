@@ -20,8 +20,8 @@ describe('TorchOCR.ts', () => {
         const torchOCR = new TorchOCR()
         await torchOCR.initVideoPlayer('tests/files/sample.mp4')
         const result = await torchOCR.readRawFrame(10)
-        expect(result.length).toMatchSnapshot()
+        expect(result?.length).toMatchSnapshot()
         // Total samples are too large, only record first 20 value
-        expect(result.slice(0, 20)).toMatchSnapshot()
+        expect(result?.slice(0, 20)).toMatchSnapshot()
     }, 100000)
 })
