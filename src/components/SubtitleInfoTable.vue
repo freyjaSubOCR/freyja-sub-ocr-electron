@@ -187,17 +187,17 @@ export default SubtitleInfoTable
 
 .subtitleInfo-content .subtitleInfo-row {
     &:hover {
-        background-color: #1C425F;
+        background-color: #1c425f;
     }
 
     &.active {
-        background-color: rgba($color: #18a2b4, $alpha: .8);
+        background-color: rgba($color: #18a2b4, $alpha: 0.8);
         // background-color: rgba(255, 255, 128, 0.8);
     }
 }
 
 .subtitleInfo-row-merge-highlight {
-    background-color: #133047!important;
+    background-color: #133047 !important;
 }
 
 .subtitleInfo-header {
@@ -206,15 +206,20 @@ export default SubtitleInfoTable
     color: rgba(255, 255, 255, 0.3);
 }
 
-.subtitleInfo-header .subtitleInfo-row .subtitleInfo-text {
-    margin: auto 0;
-}
-
 .subtitleInfo-content {
     width: 100%;
     height: 100%;
     overflow-y: auto;
     margin: 0 0 50px;
+}
+
+.subtitleInfo-content .subtitleInfo-text {
+    flex-grow: 2;
+    display: flex;
+}
+
+.subtitleInfo-header .subtitleInfo-row .subtitleInfo-text {
+    margin: auto 0;
 }
 
 .subtitleInfo-time {
@@ -232,36 +237,28 @@ export default SubtitleInfoTable
     color: rgba(255, 255, 255, 0.4);
 }
 
-.subtitleInfo-content .subtitleInfo-text {
-    flex-grow: 2;
-    display: flex;
-}
-
 .subtitleInfo-content .subtitleInfo-text input {
     color: rgba(255, 255, 255, 0.8);
     text-overflow: ellipsis;
     flex-grow: 1;
+
     &::placeholder {
         opacity: 0.5;
     }
-}
-
-.subtitleInfo-content .subtitleInfo-text input:focus + .subtitleInfo-buttons {
-    display: none;
 }
 
 .subtitleInfo-buttons {
     display: none;
     position: absolute;
     // left: 50%;
-    bottom:-14px;
+    bottom: -14px;
     // transform: translateX(-50%);
     right: 16px;
-    background: #1C425F;
+    background: #1c425f;
     border: 1px solid rgba(0, 0, 0, 0.37);
     border-radius: 4px;
     padding: 2px 4px;
-    z-index:10;
+    z-index: 10;
 }
 
 .subtitleInfo-buttons button {
@@ -270,11 +267,13 @@ export default SubtitleInfoTable
     display: flex;
     background-color: transparent;
     padding: 3px 4px;
+
     img {
         width: 16px;
         height: 16px;
         margin: auto;
     }
+
     transition: 0.2s all;
     cursor: pointer;
 }
@@ -286,6 +285,10 @@ export default SubtitleInfoTable
 
 .subtitleInfo-content .subtitleInfo-row:hover .subtitleInfo-buttons {
     display: flex;
+}
+
+.subtitleInfo-content .subtitleInfo-text input:focus + .subtitleInfo-buttons {
+    display: none;
 }
 </style>
 

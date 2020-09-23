@@ -32,7 +32,7 @@
             </div>
             <span class="video-control-duration">{{durationTime}}</span>
         </div>
-        <div style="display:none">
+        <div style="display: none;">
             <div>
                 <button @click="openVideo()" id="openVideo">open video</button>
             </div>
@@ -199,7 +199,7 @@ export default class VideoPlayer extends Vue {
 }
 
 .video-img {
-    background-color: #000000;
+    background-color: #000;
     display: flex;
     position: relative;
     flex-grow: 1;
@@ -219,7 +219,8 @@ export default class VideoPlayer extends Vue {
     padding: 8px 24px;
 }
 
-.video-control-currentframe, .video-control-duration {
+.video-control-currentframe,
+.video-control-duration {
     font-size: 14px;
     line-height: 24px;
     margin: auto 0;

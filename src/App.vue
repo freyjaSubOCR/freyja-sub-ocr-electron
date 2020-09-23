@@ -23,9 +23,11 @@ export default class App extends Vue {
 * {
     box-sizing: border-box;
 }
+
 table {
     border-spacing: 0;
 }
+
 body {
     display: flex;
     background: #162835;
@@ -42,18 +44,18 @@ body {
 
 .card {
     background: #0d1f2d;
-    box-shadow: 0px 2px 16px rgba(0, 0, 0, 0.16);
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.16);
     border-radius: 4px;
     overflow: hidden;
 }
 
 .noselect {
-  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
-     -khtml-user-select: none; /* Konqueror HTML */
-       -moz-user-select: none; /* Old versions of Firefox */
-        -ms-user-select: none; /* Internet Explorer/Edge */
-            user-select: none; /* Non-prefixed version, currently
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Edge, Opera and Firefox */
 }
 </style>

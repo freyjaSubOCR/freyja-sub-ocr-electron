@@ -292,6 +292,18 @@ export default class Timeline extends Vue {
     flex-direction: column;
 }
 
+#current-svg,
+#current-pointer-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#current-pointer-svg {
+    opacity: 0;
+    transition: 0.1s all;
+}
+
 .timeline-main {
     width: 100%;
     min-height: 150px;
@@ -306,6 +318,7 @@ export default class Timeline extends Vue {
 
 .grabbable {
     cursor: grab;
+
     &:active {
         cursor: grabbing;
     }
@@ -317,17 +330,6 @@ export default class Timeline extends Vue {
     top: 50%;
     left: 0;
     transform: translateY(-50%);
-}
-
-#current-svg, #current-pointer-svg {
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-
-#current-pointer-svg{
-    opacity: 0;
-    transition: 0.1s all;
 }
 </style>
 <style lang="scss">
@@ -359,22 +361,24 @@ export default class Timeline extends Vue {
     stroke-linecap: round;
     stroke-width: 1px;
 }
+
 .timeline-axis line {
     stroke: rgba($color: #fff, $alpha: 0.24);
 }
+
 .timeline-axis-lines line {
     stroke: rgba($color: #fff, $alpha: 0.16);
 }
 
 .subtitle-rect {
-    fill: rgba(#44ADFF, 0.06);
+    fill: rgba(#44adff, 0.06);
     stroke: transparent;
     stroke-linecap: round;
     stroke-width: 2px;
 }
 
 .subtitle-rect-active {
-    stroke: #25587E;
+    stroke: #25587e;
 }
 
 .subtitle-text-object {
@@ -382,8 +386,8 @@ export default class Timeline extends Vue {
 }
 
 .subtitle-text-wrapper {
-    width:100%;
-    height:100%;
+    width: 100%;
+    height: 100%;
     display: flex;
 }
 
@@ -404,13 +408,13 @@ export default class Timeline extends Vue {
 }
 
 .current-line {
-    stroke:#18A1B4;
-    stroke-width:1;
+    stroke: #18a1b4;
+    stroke-width: 1;
 }
 
 .current-time-text {
     transform: translate(4px, 34px);
-    fill:#18A1B4;
+    fill: #18a1b4;
     font-size: 10px;
 }
 </style>

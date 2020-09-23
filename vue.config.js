@@ -1,6 +1,14 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const StyleLintPlugin = require('stylelint-webpack-plugin')
+
 module.exports = {
     configureWebpack: {
-        devtool: 'source-map'
+        devtool: 'source-map',
+        plugins: [
+            new StyleLintPlugin({
+                files: ['**/*.{vue,htm,html,css,sss,less,scss,sass}']
+            })
+        ]
     },
     pluginOptions: {
         electronBuilder: {

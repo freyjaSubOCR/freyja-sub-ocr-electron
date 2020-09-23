@@ -61,8 +61,8 @@ export default Start
 }
 
 .process-bar-current {
-    height:4px;
-    background: #18A1B4;
+    height: 4px;
+    background: #18a1b4;
     position: relative;
 }
 

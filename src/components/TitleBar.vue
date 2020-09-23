@@ -53,54 +53,55 @@ export default class TitleBar extends Vue {
 
 <style lang="scss" scoped>
 .titlebar-wrapper {
-  width: 100%;
-  height: 36px;
-  background-color: #091620;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  display: flex;
+    width: 100%;
+    height: 36px;
+    background-color: #091620;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
 }
 
 .titlebar {
-  margin: auto 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: space-between;
-  -webkit-app-region: drag;
+    margin: auto 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    -webkit-app-region: drag;
 }
 
 .titlebar-title {
-  color: rgba($color: #fff, $alpha: 0.9);
-  font-size: 12px;
-  line-height: 12px;
-  margin: auto 0 auto 12px;
+    color: rgba($color: #fff, $alpha: 0.9);
+    font-size: 12px;
+    line-height: 12px;
+    margin: auto 0 auto 12px;
 }
 
 .titlebar-button button {
-  background-color: transparent;
-  border: none;
-  border-radius: 0;
-  height: 100%;
-  -webkit-app-region: no-drag;
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    height: 100%;
+    -webkit-app-region: no-drag;
 
-  &:focus {
-      outline: none;
-  }
-
+    &:focus {
+        outline: none;
+    }
 }
 
-.minimize, .maximize, .unmaximize {
+.minimize,
+.maximize,
+.unmaximize {
     &:hover {
-      background-color: rgba($color: #fff, $alpha: 0.2);
-  }
+        background-color: rgba($color: #fff, $alpha: 0.2);
+    }
 }
 
 .close {
     &:hover {
-        background-color: #E81123;
+        background-color: #e81123;
     }
 }
 

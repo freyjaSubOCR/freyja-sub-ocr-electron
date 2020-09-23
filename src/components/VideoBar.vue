@@ -144,18 +144,18 @@ export default class VideoBar extends Vue {
 }
 
 .video-bar-current {
-    height:4px;
-    background: #18A1B4;
+    height: 4px;
+    background: #18a1b4;
     position: relative;
 }
 
 .video-bar-handle {
     content: "";
-    width: 0px;
-    height: 0px;
+    width: 0;
+    height: 0;
     background: white;
     position: absolute;
-    right: 0px;
+    right: 0;
     border-radius: 50%;
     transform: translate(50%, -25%);
     opacity: 0;
@@ -182,7 +182,7 @@ export default class VideoBar extends Vue {
     top: 0;
     transform: translate(-50%, -24px);
     color: white;
-    text-shadow: 0 1px 8px #000000ff;
+    text-shadow: 0 1px 8px #000f;
     opacity: 0;
     transition: opacity 0.3s;
 }
@@ -197,10 +197,10 @@ export default class VideoBar extends Vue {
 
 .video-bar-placeholder {
     position: absolute;
-    width:100%;
+    width: 100%;
     height: 16px;
     transform: translateY(-50%);
-    left:0;
+    left: 0;
 }
 
 </style>

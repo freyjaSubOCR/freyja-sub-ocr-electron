@@ -108,7 +108,7 @@ export default class TimelineBar extends Vue {
     left: 8px;
     right: 8px;
     top: 8px;
-    height:8px;
+    height: 8px;
     background-color: rgba($color: #091620, $alpha: 0.6);
     border-radius: 10px;
 }
@@ -116,17 +116,17 @@ export default class TimelineBar extends Vue {
 .timeline-control-handle {
     position: absolute;
     top: -2px;
-    height:12px;
+    height: 12px;
     width: 12px;
     border-radius: 50%;
-    border: 2px solid rgba($color: #1C425F, $alpha: 1.0);
-    background-color: #122C3F;
+    border: 2px solid rgba($color: #1c425f, $alpha: 1);
+    background-color: #122c3f;
     cursor: pointer;
     transform: translateX(-50%);
 }
 
 .timeline-control-bar {
-    background-color: #122C3F;
+    background-color: #122c3f;
     position: absolute;
     height: 8px;
     width: 80px;
