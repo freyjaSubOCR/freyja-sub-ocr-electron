@@ -14511,9 +14511,10 @@ toposort@^1.0.0:
   resolved "https://registry.yarnpkg.com/toposort/-/toposort-1.0.7.tgz#2e68442d9f64ec720b8cc89e6443ac6caa950029"
   integrity sha1-LmhELZ9k7HILjMieZEOsbKqVACk=
 
-"torch-js@https://github.com/arition/torch-js":
-  version "0.1.0"
-  resolved "https://github.com/arition/torch-js#38c3a04255accc304551f05e9bdfd7a1f3567355"
+"torch-js@npm:@arition/torch-js@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@arition/torch-js/-/torch-js-0.2.0.tgz#617a1b527200cd212040a8d28de04e0fc66b4190"
+  integrity sha512-67E84/0R1OGZjl5kOUXmFwtIXDn2dTcO9cBtVtWYlqvHfyFq7eEmU/YMNtnnaO/2XOgCok09nIt27jsJsezHqw==
   dependencies:
     bindings "^1.5.0"
     cmake-js "^6.1.0"
