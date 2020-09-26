@@ -154,6 +154,10 @@ export default class Timeline extends Vue {
         }
     }
 
+    frameToTime(frame: number, fps: number): string {
+        return frameToTime(frame, fps)
+    }
+
     updateTimelineSize(): void {
         const timelineMain = document.querySelector('.timeline-main')
         if (timelineMain !== null) {
