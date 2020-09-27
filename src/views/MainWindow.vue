@@ -14,7 +14,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import SubtitleInfoTable from '@/components/SubtitleInfoTable.vue'
-import { SubtitleInfo, ISubtitleInfo } from '@/SubtitleInfo'
+import { SubtitleInfo } from '@/SubtitleInfo'
 import VideoPlayer from '@/components/VideoPlayer.vue'
 import { VideoProperties } from '@/VideoProperties'
 import Timeline from '@/components/Timeline.vue'
