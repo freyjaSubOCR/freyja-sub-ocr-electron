@@ -5,7 +5,7 @@
             <button class="save-sub" @click="saveASS">Save subtitles</button>
         </div>
         <div class="stack stack-right">
-            <VideoPlayer v-model="currentFrame" :videoProperties="videoProperties" @prevSubtitle="prevSubtitleEvent" @nextSubtitle="nextSubtitleEvent"></VideoPlayer>
+            <VideoPlayer v-model="currentFrame" :videoProperties="videoProperties" @prev-subtitle="prevSubtitleEvent" @next-subtitle="nextSubtitleEvent"></VideoPlayer>
             <Timeline v-model="currentFrame" :fps="videoProperties.fps[0] / videoProperties.fps[1]" :totalFrame="videoProperties.lastFrame"  :subtitleInfos.sync="subtitleInfos"></Timeline>
         </div>
     </div>
@@ -20,10 +20,11 @@ import { VideoProperties } from '@/VideoProperties'
 import Timeline from '@/components/Timeline.vue'
 
 @Component({
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     components: { SubtitleInfoTable, VideoPlayer, Timeline }
 })
 class Mainwindow extends Vue {
-    subtitleInfos: SubtitleInfo[] = [];
+    subtitleInfos: Array<SubtitleInfo> = []
     videoProperties = new VideoProperties(0, [1, 1], [1, 1], 0, 0)
     currentFrame_ = 0
 
@@ -31,7 +32,7 @@ class Mainwindow extends Vue {
         return this.currentFrame_
     }
 
-    set currentFrame(value) {
+    set currentFrame(value: number) {
         if (value < 0) value = 0
         if (value > this.videoProperties.lastFrame) {
             value = this.videoProperties.lastFrame
@@ -39,7 +40,7 @@ class Mainwindow extends Vue {
         this.currentFrame_ = value
     }
 
-    prevSubtitleEvent() {
+    prevSubtitleEvent(): void {
         for (const i of this.subtitleInfos.keys()) {
             // assume sorted
             if (this.subtitleInfos[i].endFrame >= this.currentFrame) {
@@ -49,7 +50,7 @@ class Mainwindow extends Vue {
         }
     }
 
-    nextSubtitleEvent() {
+    nextSubtitleEvent(): void {
         for (const i of this.subtitleInfos.keys()) {
             // assume sorted
             if (this.subtitleInfos[i].startFrame > this.currentFrame) {
@@ -59,7 +60,7 @@ class Mainwindow extends Vue {
         }
     }
 
-    async saveASS() {
+    async saveASS(): Promise<void> {
         const path = (await global.ipcRenderer.invoke('CommonIpc:SaveASSDialog')) as string | null
         if (path != null) {
             await global.ipcRenderer.invoke('ASSGenerator:GenerateAndSave', this.subtitleInfos, this.videoProperties, path)
@@ -77,11 +78,8 @@ class Mainwindow extends Vue {
         }
     }
 
-    async created() {
-        if (process.env.NODE_ENV === 'development') {
-            this.fakeData()
-        }
-        this.subtitleInfos = ((await global.ipcRenderer.invoke('TorchOCRTaskScheduler:subtitleInfos')) as SubtitleInfo[])
+    async created(): Promise<void> {
+        this.subtitleInfos = ((await global.ipcRenderer.invoke('TorchOCRTaskScheduler:subtitleInfos')) as Array<SubtitleInfo>)
             .map(t => new SubtitleInfo(t))
         const path = this.$route.params.path as string | undefined
         await this.openVideo(path)
@@ -101,17 +99,17 @@ export default Mainwindow
 .save-sub {
     padding: 12px 16px;
     margin-top: 16px;
-    box-shadow: 0px 2px 16px rgba(0, 0, 0, 0.16);
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.16);
     border-radius: 2px;
     border: none;
     transition: 0.2s all;
-    background: #0D1F2D;
+    background: #0d1f2d;
     color: rgba(#fff, 0.7);
 }
 
 .save-sub:hover {
-    background: #ffffff20;
-    border: #ffffff20;
+    background: #18a1b420;
+    border: #18a1b420;
 }
 
 .stack-left {
