@@ -1,5 +1,5 @@
 <template>
-    <div class="video-bar" @pointerdown="pointerDown" @pointermove="pointerMoveTooltip">
+    <div :class="{ 'video-bar': true, 'disabled': disabled }" @pointerdown="pointerDown" @pointermove="pointerMoveTooltip">
         <div class="video-bar-current" :style="{width: percent * 100 + '%'}">
             <div class="video-bar-tooltip">{{currentTime}}</div>
             <div class="video-bar-handle"></div>
@@ -20,7 +20,7 @@ import { frameToTime } from '@/Utils'
 })
 export default class VideoBar extends Vue {
     @Prop(Number) percent: number | undefined
-    @Prop(Boolean) disabled: boolean | undefined
+    @Prop({ type: Boolean, default: false }) disabled!: boolean
     @Prop(Number) totalFrame: number | undefined
     @Prop(Number) fps: number | undefined
     percentCurrent = 0
@@ -141,6 +141,10 @@ export default class VideoBar extends Vue {
     cursor: pointer;
     position: relative;
     background: rgba(255, 255, 255, 0.1);
+
+    &.disabled {
+        cursor: not-allowed;
+    }
 }
 
 .video-bar-current {
@@ -174,6 +178,12 @@ export default class VideoBar extends Vue {
     height: 10px;
 }
 
+.video-bar.disabled:hover .video-bar-handle {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
 .video-bar-tooltip {
     font-size: 12px;
     font-weight: 500;
@@ -189,6 +199,10 @@ export default class VideoBar extends Vue {
 
 .video-bar:hover .video-bar-tooltip {
     opacity: 1;
+}
+
+.video-bar.disabled:hover .video-bar-tooltip {
+    opacity: 0;
 }
 
 .video-bar-tooltip-active {

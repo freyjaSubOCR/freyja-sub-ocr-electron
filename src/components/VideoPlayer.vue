@@ -2,58 +2,36 @@
     <div class="video-wrapper card">
         <div class="video-img">
             <div v-if="errorMessage !== ''">{{ errorMessage }}</div>
-            <img src="@/assets/sample.png" />
+            <img :src="picData" />
+            <!-- <img src="@/assets/sample.png" /> -->
         </div>
-        <VideoBar v-model="currentPercent" :totalFrame="videoProperties.lastFrame" :fps="fps"></VideoBar>
+        <VideoBar v-model="currentPercent" :totalFrame="videoProperties.lastFrame" :fps="fps" :disabled="disabled"></VideoBar>
         <div class="video-control">
             <span class="video-control-currentframe">{{currentTime}}</span>
             <div class="video-control-buttons">
-                <button :disabled="!videoOpened" @click="prevSubtitleEvent">
+                <button :disabled="disabled" @click="prevSubtitleEvent" v-if="showSubtitleJumpButton">
                     <img src="@/assets/prev_line.svg" alt />
                 </button>
-                <button @click="prevFrameEvent" :disabled="!videoOpened || currentFrame <= 0">
+                <button @click="prevFrameEvent" :disabled="disabled || currentFrame <= 0">
                     <img src="@/assets/prev_frame.svg" alt />
                 </button>
-                <button v-if="play" @click="stopVideo()" :disabled="!videoOpened">
+                <button v-if="play" @click="stopVideo()" :disabled="disabled">
                     <img src="@/assets/pause.svg" alt />
                 </button>
-                <button v-else @click="playVideo()" :disabled="!videoOpened">
+                <button v-else @click="playVideo()" :disabled="disabled">
                     <img src="@/assets/play.svg" alt />
                 </button>
                 <button
                     @click="nextFrameEvent"
-                    :disabled="!videoOpened || currentFrame >= videoProperties.lastFrame"
+                    :disabled="disabled || currentFrame >= videoProperties.lastFrame"
                 >
                     <img src="@/assets/next_frame.svg" alt />
                 </button>
-                <button :disabled="!videoOpened" @click="nextSubtitleEvent">
+                <button :disabled="disabled" @click="nextSubtitleEvent" v-if="showSubtitleJumpButton">
                     <img src="@/assets/next_line.svg" alt />
                 </button>
             </div>
             <span class="video-control-duration">{{durationTime}}</span>
-        </div>
-        <div style="display: none;">
-            <div>
-                <button @click="openVideo()" id="openVideo">open video</button>
-            </div>
-            <div>
-                <label for="currentFrame">Current frame:</label>
-                <input
-                    id="currentName"
-                    name="currentName"
-                    type="number"
-                    min="0"
-                    :max="videoProperties.lastFrame"
-                    step="1"
-                    :disabled="!videoOpened"
-                    v-model.number="currentFrame"
-                />
-            </div>
-            <div>Duration: {{videoProperties.duration}}</div>
-            <div>unitFrame: {{videoProperties.unitFrame}}</div>
-            <div>lastFrame: {{videoProperties.lastFrame}}</div>
-            <div>TimeBase: {{videoProperties.timeBase[0]}} / {{videoProperties.timeBase[1]}}</div>
-            <div>fps: {{videoProperties.fps[0]}} / {{videoProperties.fps[1]}}</div>
         </div>
     </div>
 </template>
@@ -81,11 +59,12 @@ import { frameToTime } from '@/Utils'
 export default class VideoPlayer extends Vue {
     @Prop(VideoProperties) videoProperties!: VideoProperties
     @Prop(Number) currentFrame!: number
+    @Prop({ type: Boolean, default: true }) showSubtitleJumpButton!: boolean
+    @Prop({ type: Boolean, default: false }) disabled!: boolean
 
     frameData: Buffer | null = null
     debouncedUpdatePicData?: lodash.DebouncedFunc<(frame: number) => Promise<void>>
     play = false
-    videoOpened = true
     updatePicDataPromise = new Promise((resolve) => resolve())
     errorMessage = ''
 
@@ -150,6 +129,7 @@ export default class VideoPlayer extends Vue {
             this.timestamp = renderedVideo.timestamp
             this.frameData = renderedVideo.data as Buffer
             this.errorMessage = ''
+            this.$emit('update-frame')
         }
     }
 
@@ -251,14 +231,22 @@ export default class VideoPlayer extends Vue {
     background: transparent;
     border: transparent;
     transition: 0.2s all;
+    cursor: pointer;
 
     &:focus {
         outline: none;
     }
+
+    &:hover {
+        background: #ffffff20;
+        border: #ffffff20;
+    }
+
+    &:disabled {
+        cursor: not-allowed;
+        background: transparent;
+        border: transparent;
+    }
 }
 
-.video-control button:hover {
-    background: #ffffff20;
-    border: #ffffff20;
-}
 </style>
