@@ -6,7 +6,7 @@ module.exports = {
         devtool: 'source-map',
         plugins: [
             new StyleLintPlugin({
-                files: ['**/*.{vue,htm,html,css,sss,less,scss,sass}']
+                files: ['src/**/*.{vue,htm,html,css,sss,less,scss,sass}']
             })
         ]
     },
