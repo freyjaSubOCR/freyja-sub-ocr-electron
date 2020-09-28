@@ -2,6 +2,7 @@ import { Worker } from 'worker_threads'
 import path from 'path'
 import { ipcMain } from 'electron'
 import logger from '@/logger'
+import fs from 'fs'
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import TorchOCRTaskScheduler from '@/backends/TorchOCRTaskScheduler'
 
@@ -9,7 +10,8 @@ class TorchOCRTaskSchedulerWorker {
     worker: Worker
 
     constructor() {
-        this.worker = new Worker(path.join(__dirname, 'TorchOCRTaskSchedulerWorkerStarter.js'))
+        const workerContents = fs.readFileSync(path.resolve(__dirname, 'TorchOCRTaskSchedulerWorkerStarter.js'), { encoding: 'utf8' })
+        this.worker = new Worker(workerContents, { eval: true })
     }
 
     registerIPCListener(): void {
