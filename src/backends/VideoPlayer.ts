@@ -1,5 +1,5 @@
 import beamcoder from 'beamcoder'
-import { VideoProperties } from '@/VideoProperties'
+import { IVideoProperties, VideoProperties } from '@/VideoProperties'
 import logger from '@/logger'
 
 class VideoPlayer {
@@ -47,12 +47,18 @@ class VideoPlayer {
             logger.debug(`set start timestamp to ${startTimestamp}`)
             this.startTimestamp = startTimestamp
         }
-        return new VideoProperties(
-            this._demuxer.streams[0].duration !== null ? this._demuxer.streams[0].duration : this._demuxer.duration,
-            this._demuxer.streams[0].time_base,
-            this._demuxer.streams[0].r_frame_rate,
-            this._demuxer.streams[0].codecpar.width,
-            this._demuxer.streams[0].codecpar.height)
+        const videoProperties: IVideoProperties = {
+            duration: this._demuxer.streams[0].duration !== null ? this._demuxer.streams[0].duration : this._demuxer.duration,
+            timeBase: this._demuxer.streams[0].time_base,
+            fps: this._demuxer.streams[0].avg_frame_rate,
+            width: this._demuxer.streams[0].codecpar.width,
+            height: this._demuxer.streams[0].codecpar.height
+        }
+
+        logger.debug(`Opened Video: ${path}`)
+        logger.debug(videoProperties)
+
+        return new VideoProperties(videoProperties)
     }
 
     async seekByTime(time: number): Promise<void> {
