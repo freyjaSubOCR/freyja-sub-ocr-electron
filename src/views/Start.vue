@@ -39,13 +39,13 @@
                     <div class="settings-section-header">Settings</div>
                     <div class="settings-section">
                         <label for="languages">Language</label>
-                        <select name="languages" id="languages" v-model="language">
+                        <select name="languages" id="languages" v-model="language" :disabled="processing">
                             <option v-for="(value, name) in languages" :key="name" :value="value">{{ name }}</option>
                         </select>
                     </div>
                     <div class="settings-section settings-font">
                         <label for="fonts">Font</label>
-                        <select name="fonts" id="fonts" v-model="font">
+                        <select name="fonts" id="fonts" v-model="font" :disabled="processing">
                             <option v-for="(value, name) in fonts" :key="name" :value="value">{{ name }}</option>
                         </select>
                     </div>
@@ -53,27 +53,26 @@
                     <div v-if="advancedSettingsExpand">
                         <div class="settings-section settings-cuda">
                             <label for="enableCuda">Enable CUDA</label>
-                            <input type="checkbox" name="enableCuda" id="enableCuda" v-model="enableCuda">
+                            <input type="checkbox" name="enableCuda" id="enableCuda" v-model="enableCuda" :disabled="processing">
                         </div>
                         <div class="settings-section">
                             <label for="batchSize">Batch size</label>
-                            <input type="number" name="batchSize" id="batchSize" v-model.number="batchSize">
+                            <input type="number" name="batchSize" id="batchSize" v-model.number="batchSize" :disabled="processing">
                         </div>
                         <div class="settings-section">
                             <label for="cachedFrames">Frame cache size</label>
-                            <input type="number" name="cachedFrames" id="cachedFrames" v-model.number="cachedFrames">
+                            <input type="number" name="cachedFrames" id="cachedFrames" v-model.number="cachedFrames" :disabled="processing">
                         </div>
                     </div>
                 </div>
-                <button class="start-button" :click="start" :disabled="!videoOpened">Start</button>
+                <button class="start-button" @click="start" :disabled="!videoOpened || processing">Start</button>
             </div>
         </div>
     </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
-import Config from '@/config'
+import { Component, Vue, Watch } from 'vue-property-decorator'
 import VideoPlayer from '@/components/VideoPlayer.vue'
 import { VideoProperties } from '@/VideoProperties'
 import lodash from 'lodash'
@@ -92,24 +91,77 @@ class Start extends Vue {
     advancedSettingsExpand = false
     blackBarHeight = 0
     videoHeight = 0
-    cropTop = Config.cropTop
-    cropBottom = Config.cropBottom
+
+    languages: Record<string, string> = {}
+    fonts: Record<string, string> = {}
+    language = 'SC3500Chars'
+    font = 'yuan'
+    enableCuda = true
+    batchSize = 24
+    cropTop = 0
+    cropBottom = 0
+    cachedFrames = 100
 
     private _pointerId: number | undefined
 
-    created(): void {
+    async created(): Promise<void> {
         /* eslint-disable @typescript-eslint/unbound-method */
         // Allow unbound method for global event listener
         document.addEventListener('pointermove', this.pointerMove)
         document.addEventListener('pointerup', this.pointerUp)
         /* eslint-enable @typescript-eslint/unbound-method */
+
+        this.languages = await global.ipcRenderer.invoke('Config:languages') as Record<string, string>
+        this.fonts = await global.ipcRenderer.invoke('Config:fonts') as Record<string, string>
+        this.language = await global.ipcRenderer.invoke('Config:language') as string
+        this.font = await global.ipcRenderer.invoke('Config:font') as string
+        this.enableCuda = await global.ipcRenderer.invoke('Config:enableCuda') as boolean
+        this.batchSize = await global.ipcRenderer.invoke('Config:batchSize') as number
+        this.cropTop = await global.ipcRenderer.invoke('Config:cropTop') as number
+        this.cropBottom = await global.ipcRenderer.invoke('Config:cropBottom') as number
+        this.cachedFrames = await global.ipcRenderer.invoke('Config:cachedFrames') as number
     }
 
-    mounted(): void {
-        setTimeout(() => {
-            this.computeBlackBarHeight()
-            this.computeVideoHeight()
-        }, 1000)
+    @Watch('language')
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    async watchLanguage(newValue: string, oldValue: string): Promise<void> {
+        await global.ipcRenderer.invoke('Config:language', newValue)
+    }
+
+    @Watch('font')
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    async watchFont(newValue: string, oldValue: string): Promise<void> {
+        await global.ipcRenderer.invoke('Config:font', newValue)
+    }
+
+    @Watch('enableCuda')
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    async watchEnableCuda(newValue: boolean, oldValue: boolean): Promise<void> {
+        await global.ipcRenderer.invoke('Config:enableCuda', newValue)
+    }
+
+    @Watch('batchSize')
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    async watchBatchSize(newValue: number, oldValue: number): Promise<void> {
+        await global.ipcRenderer.invoke('Config:batchSize', newValue)
+    }
+
+    @Watch('cropTop')
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    async watchCropTop(newValue: number, oldValue: number): Promise<void> {
+        await global.ipcRenderer.invoke('Config:cropTop', Math.round(newValue))
+    }
+
+    @Watch('cropBottom')
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    async watchCropBottom(newValue: number, oldValue: number): Promise<void> {
+        await global.ipcRenderer.invoke('Config:cropBottom', Math.round(newValue))
+    }
+
+    @Watch('cachedFrames')
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    async watchCachedFrames(newValue: number, oldValue: number): Promise<void> {
+        await global.ipcRenderer.invoke('Config:cachedFrames', newValue)
     }
 
     beforeDestroy(): void {
@@ -118,54 +170,6 @@ class Start extends Vue {
         document.removeEventListener('pointermove', this.pointerMove)
         document.removeEventListener('pointerup', this.pointerUp)
         /* eslint-enable @typescript-eslint/unbound-method */
-    }
-
-    get languages(): Record<string, string> {
-        return Config.languages
-    }
-
-    get fonts(): Record<string, string> {
-        return Config.fonts
-    }
-
-    set language(value: string) {
-        Config.language = value
-    }
-
-    get language(): string {
-        return Config.language
-    }
-
-    set font(value: string) {
-        Config.language = value
-    }
-
-    get font(): string {
-        return Config.font
-    }
-
-    set enableCuda(value: boolean) {
-        Config.enableCuda = value
-    }
-
-    get enableCuda(): boolean {
-        return Config.enableCuda
-    }
-
-    set batchSize(value: number) {
-        Config.batchSize = value
-    }
-
-    get batchSize(): number {
-        return Config.batchSize
-    }
-
-    set cachedFrames(value: number) {
-        Config.cachedFrames = value
-    }
-
-    get cachedFrames(): number {
-        return Config.cachedFrames
     }
 
     get cropTopComputed(): number {
@@ -179,7 +183,6 @@ class Start extends Vue {
         if (value < 0) {
             value = 0
         }
-        Config.cropTop = Math.round(value / this.videoHeight * this.videoProperties.height)
         this.cropTop = value / this.videoHeight * this.videoProperties.height
     }
 
@@ -194,7 +197,6 @@ class Start extends Vue {
         if (value < 0) {
             value = 0
         }
-        Config.cropBottom = Math.round(value / this.videoHeight * this.videoProperties.height)
         this.cropBottom = value / this.videoHeight * this.videoProperties.height
     }
 
@@ -239,11 +241,9 @@ class Start extends Vue {
             event.preventDefault()
             if (this._pointerBtn === 'top') {
                 this.cropTopComputed = (event.pageY - this._lastY) + this.cropTopComputed
-                // console.log('dddd' + this.cropTopComputed.toString())
             } else if (this._pointerBtn === 'bottom') {
                 this.cropBottomComputed -= (event.pageY - this._lastY)
             }
-            // console.log((event.pageY - this._lastY))
             this._lastY = event.pageY
         }
     }
@@ -306,7 +306,7 @@ class Start extends Vue {
         await global.ipcRenderer.invoke('TorchOCRTaskScheduler:Init', this.path)
         // eslint-disable-next-line @typescript-eslint/no-misused-promises
         const interval = setInterval(async () => {
-            this.currentFrame = await global.ipcRenderer.invoke('TorchOCRTaskScheduler:currentProcessingFrame') as number
+            // this.currentFrame = await global.ipcRenderer.invoke('TorchOCRTaskScheduler:currentProcessingFrame') as number
         }, 1000)
         await global.ipcRenderer.invoke('TorchOCRTaskScheduler:Start')
         await global.ipcRenderer.invoke('TorchOCRTaskScheduler:CleanUpSubtitleInfos')

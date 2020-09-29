@@ -4,10 +4,11 @@ import { app, protocol, BrowserWindow } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
 import path from 'path'
-import CommonIpc from './CommonIpc'
-import TorchOCRTaskSchedulerWorker from './backends/TorchOCRTaskSchedulerWorker'
-import BMPVideoPlayer from './backends/BMPVideoPlayer'
-import ASSGenerator from './backends/ASSGenerator'
+import CommonIpc from '@/CommonIpc'
+import TorchOCRTaskSchedulerWorker from '@/backends/TorchOCRTaskSchedulerWorker'
+import BMPVideoPlayer from '@/backends/BMPVideoPlayer'
+import ASSGenerator from '@/backends/ASSGenerator'
+import Config from '@/config'
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -90,6 +91,7 @@ app.on('ready', async () => {
     assGenerator.registerIPCListener()
     const torchOCRTaskSchedulerWorker = new TorchOCRTaskSchedulerWorker()
     torchOCRTaskSchedulerWorker.registerIPCListener()
+    Config.registerIPCListener()
 
     createWindow()
 })
