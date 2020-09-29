@@ -3,6 +3,7 @@ import path from 'path'
 import { ipcMain } from 'electron'
 import logger from '@/logger'
 import fs from 'fs'
+import Config from '@/config'
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import TorchOCRTaskScheduler from '@/backends/TorchOCRTaskScheduler'
 
@@ -18,7 +19,7 @@ class TorchOCRTaskSchedulerWorker {
         ipcMain.handle('TorchOCRTaskScheduler:Init', async (e, ...args) => {
             try {
                 const worker = this.worker
-                this.worker.postMessage(['Init', args[0]])
+                this.worker.postMessage(['Init', args[0], Config.export()])
                 return await new Promise((resolve) => {
                     this.worker.on('message', function handler(rargs: Array<unknown>) {
                         if (rargs[0] as string === 'Init') {

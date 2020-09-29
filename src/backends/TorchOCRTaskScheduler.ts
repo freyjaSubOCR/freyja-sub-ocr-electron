@@ -3,7 +3,7 @@ import { ipcMain } from 'electron'
 import { parentPort as parentPortNull } from 'worker_threads'
 import logger from '@/logger'
 import { Tensor } from 'torch-js'
-import Config from '@/config'
+import { IConfig, Config } from '@/config'
 import { SubtitleInfo } from '@/SubtitleInfo'
 import levenshtein from 'js-levenshtein'
 import lodash from 'lodash'
@@ -20,9 +20,12 @@ class TorchOCRTaskScheduler {
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         const parentPort = parentPortNull
         // eslint-disable-next-line @typescript-eslint/no-misused-promises
-        parentPort.on('message', async (args: [string, string]) => {
+        parentPort.on('message', async (args: [string, string, IConfig]) => {
             if (args[0] === 'Init') {
                 try {
+                    Config.import(args[2])
+                    logger.debug(args[2])
+                    logger.debug(Config.export())
                     const result = await this.init(args[1])
                     parentPort.postMessage(['Init', result])
                 } catch (error) {
@@ -178,22 +181,23 @@ class TorchOCRTaskScheduler {
                     rawImg.push(frame)
                 }
                 this.currentProcessingFrame = currentFrame
-                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                const cropTop = lodash.toInteger(this._torchOCR.videoProperties!.height * 0.7)
-                const inputTensor = this._torchOCR.bufferToImgTensor(rawImg, cropTop)
+                if (rawImg.length === 0) return null
+                const inputTensor = this._torchOCR.bufferToImgTensor(rawImg, Config.cropTop, Config.cropBottom)
                 return inputTensor
             })
 
             rcnnPromise = Promise.all([rcnnPromise, tensorDataPromise]).then(async (values) => {
                 logger.debug(`rcnn on frame ${currentFrame}...`)
-                const inputTensor = values[1] as Tensor
+                const inputTensor = values[1] as Tensor | null
+                if (inputTensor === null) return null
                 const rcnnResults = await this._torchOCR.rcnnForward(inputTensor)
                 return rcnnResults
             })
 
             ocrPromise = Promise.all([ocrPromise, tensorDataPromise, rcnnPromise]).then(async (values) => {
                 logger.debug(`ocr on frame ${currentFrame}...`)
-                const inputTensor = values[1] as Tensor
+                const inputTensor = values[1] as Tensor | null
+                if (inputTensor === null) return null
                 const rcnnResults = values[2] as Array<Record<string, Tensor>>
                 const subtitleInfos = this._torchOCR.rcnnParse(rcnnResults)
                 if (subtitleInfos.length !== 0) {
