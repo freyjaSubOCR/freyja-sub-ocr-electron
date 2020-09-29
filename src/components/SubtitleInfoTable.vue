@@ -18,7 +18,7 @@
                         <input v-model="subtitleInfo.endTimeValidated" @change="updateInput" />
                     </td>
                     <td class="subtitleInfo-text">
-                        <input v-model="subtitleInfo.text" placeholder="Enter subtitle here" />
+                        <input :title="subtitleInfo.text" v-model="subtitleInfo.text" placeholder="Enter subtitle here" />
                     </td>
                     <div class="subtitleInfo-buttons">
                         <button @click="addSubtitle(index)">

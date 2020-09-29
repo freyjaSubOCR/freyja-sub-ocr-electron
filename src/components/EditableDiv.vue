@@ -1,5 +1,5 @@
 <template>
-    <div contenteditable="true" @input="inputEvent">{{value}}</div>
+    <div :title="value" contenteditable="true" @input="inputEvent">{{value}}</div>
 </template>
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator'
