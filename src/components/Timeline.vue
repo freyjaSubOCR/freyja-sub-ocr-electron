@@ -154,6 +154,18 @@ export default class Timeline extends Vue {
         }
     }
 
+    @Watch('totalFrame')
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    totalFrameWatch(newValue: number, oldValue: number): void {
+        this.length = Math.min(this.totalFrame, this.fps * 5)
+    }
+
+    @Watch('fps')
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    fpsWatch(newValue: number, oldValue: number): void {
+        this.length = Math.min(this.totalFrame, this.fps * 5)
+    }
+
     frameToTime(frame: number, fps: number): string {
         return frameToTime(frame, fps)
     }
