@@ -305,6 +305,18 @@ class Start extends Vue {
         }
     }
 
+    @Watch('currentFrame')
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    watchCurrentFrame(newValue: number, oldValue: number): void {
+        const interval = setInterval(() => {
+            this.computeBlackBarHeight()
+            this.computeVideoHeight()
+            if (this.videoHeight > 0) {
+                clearInterval(interval)
+            }
+        }, 100)
+    }
+
     async start(): Promise<void> {
         if (this.path === undefined) {
             throw new Error('Cannot load video from path')
