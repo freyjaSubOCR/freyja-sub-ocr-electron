@@ -30,7 +30,7 @@
                                 <div class="dark-bottom"></div>
                             </div>
                         </div>
-                        <VideoPlayer v-model="currentFrame" :videoProperties="videoProperties" :showSubtitleJumpButton="false" :disabled="processing" @update-frame="() => {computeBlackBarHeight(); computeVideoHeight();}"></VideoPlayer>
+                        <VideoPlayer v-model="currentFrame" :videoProperties="videoProperties" :showSubtitleJumpButton="false" :disabled="processing"></VideoPlayer>
                     </div>
                 </div>
             </div>
@@ -295,6 +295,13 @@ class Start extends Vue {
             this.videoProperties = new VideoProperties(videoProperties)
             this.currentFrame = 0
             this.videoOpened = true
+            const interval = setInterval(() => {
+                this.computeBlackBarHeight()
+                this.computeVideoHeight()
+                if (this.videoHeight > 0) {
+                    clearInterval(interval)
+                }
+            }, 100)
         }
     }
 
@@ -306,7 +313,7 @@ class Start extends Vue {
         await global.ipcRenderer.invoke('TorchOCRTaskScheduler:Init', this.path)
         // eslint-disable-next-line @typescript-eslint/no-misused-promises
         const interval = setInterval(async () => {
-            // this.currentFrame = await global.ipcRenderer.invoke('TorchOCRTaskScheduler:currentProcessingFrame') as number
+            this.currentFrame = (await global.ipcRenderer.invoke('TorchOCRTaskScheduler:currentProcessingFrame') as number | null) ?? this.currentFrame
         }, 1000)
         await global.ipcRenderer.invoke('TorchOCRTaskScheduler:Start')
         await global.ipcRenderer.invoke('TorchOCRTaskScheduler:CleanUpSubtitleInfos')
