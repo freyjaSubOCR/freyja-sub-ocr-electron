@@ -5,7 +5,7 @@
             <img :src="picData" />
             <!-- <img src="@/assets/sample.png" /> -->
         </div>
-        <VideoBar v-model="currentPercent" :totalFrame="videoProperties.lastFrame" :fps="fps" :disabled="disabled"></VideoBar>
+        <VideoBar v-model="currentPercent" :totalFrame="videoProperties.lastFrame" :fps="fps" :disabled="disabled" @bar-drag-start="play = false"></VideoBar>
         <div class="video-control">
             <span class="video-control-currentframe">{{currentTime}}</span>
             <div class="video-control-buttons">
@@ -67,6 +67,7 @@ export default class VideoPlayer extends Vue {
     play = false
     updatePicDataPromise = new Promise((resolve) => resolve())
     errorMessage = ''
+    currentDisplayFrame = 0
 
     created(): void {
         this.debouncedUpdatePicData = lodash.debounce((frame: number) => {
@@ -83,13 +84,13 @@ export default class VideoPlayer extends Vue {
         }
     }
 
-    get timestamp(): number {
-        return lodash.toInteger(this.currentFrame * this.videoProperties.unitFrame)
-    }
+    // get timestamp(): number {
+    //     return lodash.toInteger(this.currentFrame * this.videoProperties.unitFrame)
+    // }
 
-    set timestamp(value: number) {
-        this.$emit('change', lodash.toInteger(value / this.videoProperties.unitFrame))
-    }
+    // set timestamp(value: number) {
+    //     this.$emit('change', lodash.toInteger(value / this.videoProperties.unitFrame))
+    // }
 
     get currentPercent(): number {
         return this.currentFrame / this.videoProperties.lastFrame
@@ -114,21 +115,29 @@ export default class VideoPlayer extends Vue {
     @Watch('currentFrame')
     async watchCurrentFrame(currentFrame: number, oldFrame: number): Promise<void> {
         if (currentFrame !== oldFrame) {
-            if (this.debouncedUpdatePicData !== undefined) {
-                await this.debouncedUpdatePicData(currentFrame)
-            }
+            await new Promise((resolve) => resolve())
+            this.updatePicDataPromise = this.updatePicDataPromise.then(() => this.updatePicData(currentFrame))
+            // if (currentFrame - oldFrame === 1) {
+            //     this.updatePicDataPromise = this.updatePicDataPromise.then(() => this.updatePicData(currentFrame))
+            // } else {
+            //     this.play = false
+            //     if (this.debouncedUpdatePicData !== undefined) {
+            //         await this.debouncedUpdatePicData(currentFrame)
+            //     }
+            // }
         }
     }
 
     async updatePicData(frame: number): Promise<void> {
         const timestamp = lodash.toInteger(lodash.toInteger(frame) * this.videoProperties.unitFrame)
+        if (frame !== this.currentFrame || frame === this.currentDisplayFrame) return
         const renderedVideo = (await global.ipcRenderer.invoke('VideoPlayer:GetImage', timestamp)) as RenderedVideo | Error
         if (renderedVideo instanceof Error) {
             this.errorMessage = renderedVideo.message
         } else {
-            this.timestamp = renderedVideo.timestamp
             this.frameData = renderedVideo.data as Buffer
             this.errorMessage = ''
+            this.currentDisplayFrame = lodash.toInteger(renderedVideo.timestamp / this.videoProperties.unitFrame)
             this.$emit('update-frame')
         }
     }
@@ -139,8 +148,10 @@ export default class VideoPlayer extends Vue {
         // The condition is valid. Since the function is async, other function can change the value
         // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
         while (this.currentFrame < this.videoProperties.lastFrame && this.play) {
+            this.$emit('change', this.currentFrame + 1)
             const timeout = new Promise((resolve) => setTimeout(resolve, timeoutTime))
-            this.updatePicDataPromise = this.updatePicDataPromise.then(() => this.updatePicData(this.currentFrame + 1))
+            // this.updatePicDataPromise = this.updatePicDataPromise.then(() => this.updatePicData(this.currentFrame + 1))
+            // await this.updatePicDataPromise
             await timeout
         }
         this.play = false

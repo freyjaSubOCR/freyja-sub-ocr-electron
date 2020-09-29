@@ -84,6 +84,7 @@ export default class VideoBar extends Vue {
 
     pointerMove(event: PointerEvent): void {
         if (this._pointerId === event.pointerId) {
+            this.$emit('bar-drag-start')
             event.preventDefault()
             this.updatePos(event)
             this.pointerMoveTooltip(event)
