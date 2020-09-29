@@ -136,7 +136,7 @@ export default class VideoPlayer extends Vue {
     }
 
     async updatePicData(frame: number): Promise<void> {
-        const timestamp = lodash.toInteger(lodash.toInteger(frame) * this.videoProperties.unitFrame)
+        const timestamp = Math.round(Math.round(frame) * this.videoProperties.unitFrame)
         if (frame !== this.currentFrame || frame === this.currentDisplayFrame) return
         const renderedVideo = (await global.ipcRenderer.invoke('VideoPlayer:GetImage', timestamp)) as RenderedVideo | Error
         if (renderedVideo instanceof Error) {
@@ -144,7 +144,7 @@ export default class VideoPlayer extends Vue {
         } else {
             this.frameData = renderedVideo.data as Buffer
             this.errorMessage = ''
-            this.currentDisplayFrame = lodash.toInteger(renderedVideo.timestamp / this.videoProperties.unitFrame)
+            this.currentDisplayFrame = Math.round(renderedVideo.timestamp / this.videoProperties.unitFrame)
         }
     }
 
