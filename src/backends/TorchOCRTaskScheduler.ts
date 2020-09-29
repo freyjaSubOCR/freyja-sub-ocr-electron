@@ -6,7 +6,6 @@ import { Tensor } from 'torch-js'
 import { IConfig, Config } from '@/config'
 import { SubtitleInfo } from '@/SubtitleInfo'
 import levenshtein from 'js-levenshtein'
-import lodash from 'lodash'
 
 class TorchOCRTaskScheduler {
     private _torchOCR: TorchOCR = new TorchOCR()
