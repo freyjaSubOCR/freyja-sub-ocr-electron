@@ -69,15 +69,19 @@ class TorchOCR {
         return rawData
     }
 
-    bufferToImgTensor(buffers: Array<Buffer>, cropTop = 0): Tensor {
+    bufferToImgTensor(buffers: Array<Buffer>, cropTop = 0, cropBottom = 0): Tensor {
         if (this.videoProperties === undefined) {
             throw new Error('VideoPlayer is not initialized')
         }
+        if (cropTop < 0) cropTop = 0
+        cropTop = lodash.toInteger(cropTop)
+        if (cropBottom < 0) cropBottom = 0
+        cropBottom = lodash.toInteger(cropBottom)
 
-        const oneImgLength = 3 * (this.videoProperties.height - cropTop) * this.videoProperties.width
+        const oneImgLength = 3 * (this.videoProperties.height - cropTop - cropBottom) * this.videoProperties.width
         const imgObjTensor = {
             data: new Float32Array(buffers.length * oneImgLength),
-            shape: [buffers.length, this.videoProperties.height - cropTop, this.videoProperties.width, 3]
+            shape: [buffers.length, this.videoProperties.height - cropTop - cropBottom, this.videoProperties.width, 3]
         } as ObjectTensor
 
         for (let j = 0; j < buffers.length; j++) {
@@ -85,9 +89,7 @@ class TorchOCR {
             if (buffer.length !== 3 * this.videoProperties.height * this.videoProperties.width) {
                 throw new Error(`Buffer length mismatch. Should be ${3 * this.videoProperties.height * this.videoProperties.width}, got ${buffer.length}`)
             }
-            if (cropTop < 0) cropTop = 0
-            cropTop = lodash.toInteger(cropTop)
-            imgObjTensor.data.set(buffer.slice(cropTop * this.videoProperties.width * 3), j * oneImgLength)
+            imgObjTensor.data.set(buffer.slice(cropTop * this.videoProperties.width * 3, buffer.length - cropBottom * this.videoProperties.width * 3), j * oneImgLength)
         }
         return Tensor.fromObject(imgObjTensor)
     }
