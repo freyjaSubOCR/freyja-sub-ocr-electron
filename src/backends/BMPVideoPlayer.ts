@@ -31,7 +31,6 @@ class BMPVideoPlayer extends VideoPlayer {
     }
 
     async getImage2(timestamp: number): Promise<RenderedVideo> {
-        timestamp = Math.floor(timestamp)
         if (timestamp < this.startTimestamp) {
             // fake a frame
             return {
@@ -40,7 +39,7 @@ class BMPVideoPlayer extends VideoPlayer {
                 keyFrame: false
             }
         }
-        if (!this._decodedCache.some(t => t.pts === timestamp)) {
+        if (!this._decodedCache.some(t => t.best_effort_timestamp === timestamp)) {
             await this.seekByTimestamp(timestamp)
             let decodedFrames: Array<beamcoder.Frame>
             do {
@@ -57,23 +56,23 @@ class BMPVideoPlayer extends VideoPlayer {
                     throw new Error('Unknown decode error')
                 }
 
-                logger.debug(`decoded frame ${decodedFrames.map(t => t.pts).join(', ')}`)
+                logger.debug(`decoded frame ${decodedFrames.map(t => t.best_effort_timestamp).join(', ')}`)
 
-                // if (decodedFrames.length > 0 && decodedFrames[0].pts > timestamp) {
+                // if (decodedFrames.length > 0 && decodedFrames[0].best_effort_timestamp > timestamp) {
                 //     throw new Error('Unsupported variable frame rate video. Try to transcode the video using ffmpeg.\n' +
-                //         `Requested timestamp: ${timestamp}, receive timestamp ${decodedFrames[0].pts}`)
+                //         `Requested timestamp: ${timestamp}, receive timestamp ${decodedFrames[0].best_effort_timestamp}`)
                 // }
             }
             // eslint-disable-next-line no-unmodified-loop-condition
-            while (!decodedFrames.some(t => t.pts === timestamp))
+            while (!decodedFrames.some(t => t.best_effort_timestamp === timestamp))
 
             this._decodedCache = decodedFrames
         }
 
-        const decodedFrame = this._decodedCache.filter(t => t.pts === timestamp)
+        const decodedFrame = this._decodedCache.filter(t => t.best_effort_timestamp === timestamp)
         const renderedFrame: RenderedVideo = {
             data: (await this.encode(decodedFrame[0])).data,
-            timestamp: decodedFrame[0].pts,
+            timestamp: decodedFrame[0].best_effort_timestamp,
             keyFrame: decodedFrame[0].key_frame
         }
         logger.debug(`send frame on timestamp ${timestamp}`)
@@ -81,7 +80,14 @@ class BMPVideoPlayer extends VideoPlayer {
     }
 
     async getImage(timestamp: number): Promise<RenderedVideo> {
-        timestamp = Math.floor(timestamp)
+        if (timestamp < this.startTimestamp) {
+            // fake a frame
+            return {
+                data: Buffer.from([]),
+                timestamp: timestamp,
+                keyFrame: false
+            }
+        }
         if (!this._renderedCache.some(t => t.timestamp === timestamp)) {
             logger.debug(`cache miss on ${timestamp}`)
             try {
@@ -119,9 +125,8 @@ class BMPVideoPlayer extends VideoPlayer {
     }
 
     async renderImage(timestamp?: number | undefined): Promise<void> {
-        logger.debug(`start render frame on timestamp ${timestamp ?? ''}`)
+        logger.debug(`start render frame on timestamp ${timestamp ?? 'undefined'}`)
         if (timestamp !== undefined) {
-            timestamp = Math.floor(timestamp)
             await this.seekByTimestamp(timestamp)
         }
         let decodedFrames: Array<beamcoder.Frame>
@@ -139,27 +144,14 @@ class BMPVideoPlayer extends VideoPlayer {
                 throw new Error('Unknown decode error')
             }
 
-            logger.debug(`decoded frame ${decodedFrames.map(t => t.pts).join(', ')}`)
+            logger.debug(`decoded frame ${decodedFrames.map(t => t.best_effort_timestamp).join(', ')}`)
             // Cannot use promise.all since the encode operation must be sequential
             for (const frame of decodedFrames) {
                 this._renderedCache.push({
                     data: (await this.encode(frame)).data,
-                    timestamp: frame.pts,
+                    timestamp: frame.best_effort_timestamp,
                     keyFrame: frame.key_frame
                 })
-            }
-
-            if (timestamp !== undefined) {
-                if (timestamp < this.startTimestamp) {
-                // fake a frame
-                    this._renderedCache.push({
-                        data: decodedFrames[0].data,
-                        timestamp: timestamp,
-                        keyFrame: false
-                    })
-                } else if (decodedFrames.length > 0 && decodedFrames[0].pts > timestamp) {
-                    throw new Error('Unsupported variable frame rate video. Try to transcode the video using ffmpeg.')
-                }
             }
         }
         // eslint-disable-next-line no-unmodified-loop-condition

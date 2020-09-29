@@ -9,7 +9,7 @@ class RawVideoPlayer extends VideoPlayer {
 
     async renderImage(timestamp: number): Promise<RenderedVideo> {
         timestamp = Math.floor(timestamp)
-        logger.debug(`start render frame on timestamp ${timestamp}`)
+        logger.debug(`RawVideoPlayer: start render frame on timestamp ${timestamp}`)
         if (!this._renderedCache.some(t => t.timestamp === timestamp)) {
             await this.seekByTimestamp(timestamp)
             let decodedFrames: Array<beamcoder.Frame>
@@ -27,7 +27,7 @@ class RawVideoPlayer extends VideoPlayer {
                 for (const frame of decodedFrames) {
                     this._renderedCache.push({
                         data: frame.data,
-                        timestamp: frame.pts,
+                        timestamp: frame.best_effort_timestamp,
                         keyFrame: frame.key_frame
                     })
                 }
@@ -39,7 +39,7 @@ class RawVideoPlayer extends VideoPlayer {
                         timestamp: timestamp,
                         keyFrame: false
                     })
-                } else if (decodedFrames.length > 0 && decodedFrames[0].pts > timestamp) {
+                } else if (decodedFrames.length > 0 && decodedFrames[0].best_effort_timestamp > timestamp) {
                     throw new Error('Unsupported variable frame rate video. Try to transcode the video using ffmpeg.')
                 }
             }
@@ -58,12 +58,12 @@ class RawVideoPlayer extends VideoPlayer {
             this._renderedCache.shift()
         }
 
-        logger.debug(`send frame on timestamp ${timestamp}`)
+        logger.debug(`RawVideoPlayer: send frame on timestamp ${timestamp}`)
         return targetFrame
     }
 
     async renderImageSeq(): Promise<RenderedVideo | null> {
-        logger.debug('start render frame')
+        logger.debug('RawVideoPlayer: start render frame')
         if (this._renderedCache.length === 0) {
             let decodedFrames: Array<beamcoder.Frame>
             try {
@@ -85,7 +85,7 @@ class RawVideoPlayer extends VideoPlayer {
             for (const frame of decodedFrames) {
                 this._renderedCache.push({
                     data: frame.data,
-                    timestamp: frame.pts,
+                    timestamp: frame.best_effort_timestamp,
                     keyFrame: frame.key_frame
                 })
             }
@@ -93,7 +93,7 @@ class RawVideoPlayer extends VideoPlayer {
 
         const targetFrame = this._renderedCache.shift()
 
-        logger.debug('send frame')
+        logger.debug(`RawVideoPlayer: send frame on timestamp ${targetFrame?.timestamp ?? 'null'}`)
         return targetFrame ?? null
     }
 }
