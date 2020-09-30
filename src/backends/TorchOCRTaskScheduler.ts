@@ -1,5 +1,4 @@
 import TorchOCR from './TorchOCR'
-import { ipcMain } from 'electron'
 import { parentPort as parentPortNull } from 'worker_threads'
 import logger from '@/logger'
 import { Tensor } from 'torch-js'
@@ -23,7 +22,15 @@ class TorchOCRTaskScheduler {
             if (args[0] === 'Init') {
                 try {
                     Config.import(args[2])
-                    logger.debug(args[2])
+                    if (/\.asar[/\\]/.exec(Config.rcnnModulePath)) {
+                        Config.rcnnModulePath = Config.rcnnModulePath.replace(/\.asar([/\\])/, '.asar.unpacked$1')
+                    }
+                    if (/\.asar[/\\]/.exec(Config.ocrModulePath)) {
+                        Config.ocrModulePath = Config.ocrModulePath.replace(/\.asar([/\\])/, '.asar.unpacked$1')
+                    }
+                    if (/\.asar[/\\]/.exec(Config.ocrCharsPath)) {
+                        Config.ocrCharsPath = Config.ocrCharsPath.replace(/\.asar([/\\])/, '.asar.unpacked$1')
+                    }
                     logger.debug(Config.export())
                     const result = await this.init(args[1])
                     parentPort.postMessage(['Init', result])
@@ -87,60 +94,6 @@ class TorchOCRTaskScheduler {
                     logger.error((error as Error).message)
                     parentPort.postMessage(['subtitleInfos', null])
                 }
-            }
-        })
-    }
-
-    registerIPCListener(): void {
-        ipcMain.handle('TorchOCRTaskScheduler:Init', async (e, ...args) => {
-            try {
-                return await this.init(args[0])
-            } catch (error) {
-                logger.error((error as Error).message)
-                return null
-            }
-        })
-        ipcMain.handle('TorchOCRTaskScheduler:Start', async () => {
-            try {
-                return await this.start()
-            } catch (error) {
-                logger.error((error as Error).message)
-                return null
-            }
-        })
-        ipcMain.handle('TorchOCRTaskScheduler:CleanUpSubtitleInfos', () => {
-            try {
-                return this.cleanUpSubtitleInfos()
-            } catch (error) {
-                logger.error((error as Error).message)
-                return null
-            }
-        })
-        ipcMain.handle('TorchOCRTaskScheduler:currentProcessingFrame', () => {
-            try {
-                return this.currentProcessingFrame
-            } catch (error) {
-                logger.error((error as Error).message)
-                return null
-            }
-        })
-        ipcMain.handle('TorchOCRTaskScheduler:totalFrame', () => {
-            try {
-                if (this._torchOCR.videoProperties === undefined) {
-                    throw new Error('VideoPlayer is not initialized')
-                }
-                return this._torchOCR.videoProperties.lastFrame
-            } catch (error) {
-                logger.error((error as Error).message)
-                return null
-            }
-        })
-        ipcMain.handle('TorchOCRTaskScheduler:subtitleInfos', () => {
-            try {
-                return this.subtitleInfos
-            } catch (error) {
-                logger.error((error as Error).message)
-                return null
             }
         })
     }

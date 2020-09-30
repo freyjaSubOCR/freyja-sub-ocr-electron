@@ -1,0 +1,5 @@
+asarUnpack:
+  - TorchOCRTaskSchedulerWorkerStarter.js
+  - node_modules/bindings
+  - node_modules/file-uri-to-path
+  - node_modules/js-levenshtein

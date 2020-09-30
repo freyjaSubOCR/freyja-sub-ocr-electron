@@ -8,7 +8,7 @@ import CommonIpc from '@/CommonIpc'
 import TorchOCRTaskSchedulerWorker from '@/backends/TorchOCRTaskSchedulerWorker'
 import BMPVideoPlayer from '@/backends/BMPVideoPlayer'
 import ASSGenerator from '@/backends/ASSGenerator'
-import Config from '@/config'
+import ConfigIpc from '@/configIpc'
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -91,7 +91,7 @@ app.on('ready', async () => {
     assGenerator.registerIPCListener()
     const torchOCRTaskSchedulerWorker = new TorchOCRTaskSchedulerWorker()
     torchOCRTaskSchedulerWorker.registerIPCListener()
-    Config.registerIPCListener()
+    ConfigIpc.registerIPCListener()
 
     createWindow()
 })
