@@ -59,6 +59,19 @@ class CommonIpc {
                 return null
             }
         })
+        ipcMain.handle('CommonIpc:ErrorBox', async () => {
+            try {
+                const window = BrowserWindow.getFocusedWindow()
+                if (window !== null) {
+                    await dialog.showMessageBox(window, { type: 'info', title: 'Freyja', message: 'pyTorch backend crashed, please try again.' })
+                } else {
+                    await dialog.showMessageBox({ type: 'info', title: 'Freyja', message: 'pyTorch backend crashed, please try again.' })
+                }
+            } catch (error) {
+                logger.error((error as Error).message)
+                return null
+            }
+        })
     }
 
     minimize(): void {
