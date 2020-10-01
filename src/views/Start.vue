@@ -325,6 +325,7 @@ class Start extends Vue {
         if (!await global.ipcRenderer.invoke('Config:CheckPath')) {
             this.processing = false
             await global.ipcRenderer.invoke('CommonIpc:ErrorBox', 'Cannot find models. Please download model from https://github.com/freyjaSubOCR/freyja-sub-ocr-electron.')
+            return
         }
         if (await global.ipcRenderer.invoke('TorchOCRTaskScheduler:Init', this.path) !== null) {
             // eslint-disable-next-line @typescript-eslint/no-misused-promises

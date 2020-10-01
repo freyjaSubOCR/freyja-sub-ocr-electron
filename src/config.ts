@@ -38,6 +38,15 @@ class Config {
     }
 
     static checkPath(): boolean {
+        if (/\.asar[/\\]/.exec(Config.rcnnModulePath)) {
+            Config.rcnnModulePath = Config.rcnnModulePath.replace(/\.asar([/\\])/, '.asar.unpacked$1')
+        }
+        if (/\.asar[/\\]/.exec(Config.ocrModulePath)) {
+            Config.ocrModulePath = Config.ocrModulePath.replace(/\.asar([/\\])/, '.asar.unpacked$1')
+        }
+        if (/\.asar[/\\]/.exec(Config.ocrCharsPath)) {
+            Config.ocrCharsPath = Config.ocrCharsPath.replace(/\.asar([/\\])/, '.asar.unpacked$1')
+        }
         const rcnnModuleExists = fs.existsSync(Config.rcnnModulePath)
         const ocrModuleExists = fs.existsSync(Config.ocrModulePath)
         const ocrCharsExists = fs.existsSync(Config.ocrCharsPath)
