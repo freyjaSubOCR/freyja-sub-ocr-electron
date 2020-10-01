@@ -1,6 +1,8 @@
 {
-    "name": "freyja-sub-ocr-electron",
+    "name": "freyja",
     "version": "0.1.0",
+    "author": "arition, ReventonC",
+    "description": "freyja subtitle OCR extractor",
     "private": true,
     "scripts": {
         "serve": "vue-cli-service serve",
