@@ -1,4 +1,5 @@
 import path from 'path'
+import fs from 'fs'
 
 interface IConfig {
     cachedFrames: number
@@ -34,6 +35,13 @@ class Config {
         Config.batchSize = config.batchSize
         Config.cropTop = config.cropTop
         Config.cropBottom = config.cropBottom
+    }
+
+    static checkPath(): boolean {
+        const rcnnModuleExists = fs.existsSync(Config.rcnnModulePath)
+        const ocrModuleExists = fs.existsSync(Config.ocrModulePath)
+        const ocrCharsExists = fs.existsSync(Config.ocrCharsPath)
+        return rcnnModuleExists && ocrModuleExists && ocrCharsExists
     }
 
     private static _language = 'SC3500Chars'

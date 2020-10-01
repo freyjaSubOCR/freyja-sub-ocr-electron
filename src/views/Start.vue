@@ -65,7 +65,7 @@
                         </div>
                     </div>
                 </div>
-                <button class="start-button" @click="start" :disabled="!videoOpened || processing">Start</button>
+                <button class="start-button" @click="start" :disabled="!videoOpened || processing">{{processing ? "Processing..." : "Start"}}</button>
             </div>
         </div>
     </div>
@@ -322,16 +322,27 @@ class Start extends Vue {
             throw new Error('Cannot load video from path')
         }
         this.processing = true
-        await global.ipcRenderer.invoke('TorchOCRTaskScheduler:Init', this.path)
-        // eslint-disable-next-line @typescript-eslint/no-misused-promises
-        const interval = setInterval(async () => {
-            this.currentFrame = (await global.ipcRenderer.invoke('TorchOCRTaskScheduler:currentProcessingFrame') as number | null) ?? this.currentFrame
-        }, 1000)
-        await global.ipcRenderer.invoke('TorchOCRTaskScheduler:Start')
-        await global.ipcRenderer.invoke('TorchOCRTaskScheduler:CleanUpSubtitleInfos')
-        clearInterval(interval)
-        await this.$router.push({ name: 'MainWindow', params: { 'path': this.path } })
+        if (!await global.ipcRenderer.invoke('Config:CheckPath')) {
+            this.processing = false
+            await global.ipcRenderer.invoke('CommonIpc:ErrorBox', 'Cannot find models. Please download model from https://github.com/freyjaSubOCR/freyja-sub-ocr-electron.')
+        }
+        if (await global.ipcRenderer.invoke('TorchOCRTaskScheduler:Init', this.path) !== null) {
+            // eslint-disable-next-line @typescript-eslint/no-misused-promises
+            const interval = setInterval(async () => {
+                this.currentFrame = (await global.ipcRenderer.invoke('TorchOCRTaskScheduler:currentProcessingFrame') as number | null) ?? this.currentFrame
+            }, 1000)
+            if (await global.ipcRenderer.invoke('TorchOCRTaskScheduler:Start') !== null) {
+                if (await global.ipcRenderer.invoke('TorchOCRTaskScheduler:CleanUpSubtitleInfos') !== null) {
+                    clearInterval(interval)
+                    await this.$router.push({ name: 'MainWindow', params: { 'path': this.path } })
+                    this.processing = false
+                    return
+                }
+            }
+            clearInterval(interval)
+        }
         this.processing = false
+        await global.ipcRenderer.invoke('CommonIpc:ErrorBox', 'pyTorch backend crashed, please try again.')
     }
 }
 

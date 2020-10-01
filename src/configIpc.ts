@@ -1,6 +1,7 @@
 import { ipcMain } from 'electron'
 import logger from '@/logger'
 import Config from '@/config'
+import { config } from 'vue/types/umd'
 
 class ConfigIpc {
     static registerIPCListener(): void {
@@ -98,6 +99,14 @@ class ConfigIpc {
                     Config.fonts = args[0] as Record<string, string>
                 }
                 return Config.fonts
+            } catch (error) {
+                logger.error((error as Error).message)
+                return null
+            }
+        })
+        ipcMain.handle('Config:CheckPath', () => {
+            try {
+                return Config.checkPath()
             } catch (error) {
                 logger.error((error as Error).message)
                 return null

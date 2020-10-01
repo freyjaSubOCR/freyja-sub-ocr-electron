@@ -59,13 +59,15 @@ class CommonIpc {
                 return null
             }
         })
-        ipcMain.handle('CommonIpc:ErrorBox', async () => {
+        ipcMain.handle('CommonIpc:ErrorBox', async (e, ...args) => {
             try {
-                const window = BrowserWindow.getFocusedWindow()
-                if (window !== null) {
-                    await dialog.showMessageBox(window, { type: 'info', title: 'Freyja', message: 'pyTorch backend crashed, please try again.' })
-                } else {
-                    await dialog.showMessageBox({ type: 'info', title: 'Freyja', message: 'pyTorch backend crashed, please try again.' })
+                if (args.length === 1) {
+                    const window = BrowserWindow.getFocusedWindow()
+                    if (window !== null) {
+                        await dialog.showMessageBox(window, { type: 'info', title: 'Freyja', message: args[0] as string })
+                    } else {
+                        await dialog.showMessageBox({ type: 'info', title: 'Freyja', message: args[0] as string })
+                    }
                 }
             } catch (error) {
                 logger.error((error as Error).message)
