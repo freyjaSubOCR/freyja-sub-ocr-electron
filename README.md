@@ -33,4 +33,6 @@ you meet with your ```log.log``` file on github issues.
 
 - Q: Cannot use CUDA version.
 
-  A: Make sure you have a recent Nvidia GPU. If you do not have a Nvidia GPU, you can use the CPU version.
+  A: Make sure you have a recent Nvidia GPU. If you do not have a Nvidia GPU, you can use the CPU version. If you do
+  have a Nvidia GPU, please try to update the driver.
+  
