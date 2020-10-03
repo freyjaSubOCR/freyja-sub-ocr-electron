@@ -324,7 +324,7 @@ class Start extends Vue {
         this.processing = true
         if (!await global.ipcRenderer.invoke('Config:CheckPath')) {
             this.processing = false
-            await global.ipcRenderer.invoke('CommonIpc:ErrorBox', 'Cannot find models. Please download model from https://github.com/freyjaSubOCR/freyja-sub-ocr-electron.')
+            await global.ipcRenderer.invoke('CommonIpc:ErrorBox', 'Cannot find models. Please download model from https://github.com/freyjaSubOCR/freyja-sub-ocr-model-zoo/releases.')
             return
         }
         if (await global.ipcRenderer.invoke('TorchOCRTaskScheduler:Init', this.path) !== null) {
