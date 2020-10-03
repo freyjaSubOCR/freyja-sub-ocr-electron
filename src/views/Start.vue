@@ -51,15 +51,15 @@
                     </div>
                     <div class="settings-section-header clickable" @click="toggleAdvancedSettingsExpand">Advanced settings <img :class="{ 'advanced-settings-expand': advancedSettingsExpand }" src="@/assets/advanced-settings-expand.svg" /></div>
                     <div v-if="advancedSettingsExpand">
-                        <div class="settings-section settings-cuda">
+                        <div class="settings-section settings-cuda" title="Enable CUDA for faster processing. No effect if you do not have a Nvidia GPU.">
                             <label for="enableCuda">Enable CUDA</label>
                             <input type="checkbox" name="enableCuda" id="enableCuda" v-model="enableCuda" :disabled="processing">
                         </div>
-                        <div class="settings-section">
+                        <div class="settings-section" title="Larger batches use more CPU and GPU memory on OCR process. Reduce the value if you meet memory problems.">
                             <label for="batchSize">Batch size</label>
                             <input type="number" name="batchSize" id="batchSize" v-model.number="batchSize" :disabled="processing">
                         </div>
-                        <div class="settings-section">
+                        <div class="settings-section" title="Larger caches use more CPU memory on video replay. Reduce the value if you meet memory problems.">
                             <label for="cachedFrames">Frame cache size</label>
                             <input type="number" name="cachedFrames" id="cachedFrames" v-model.number="cachedFrames" :disabled="processing">
                         </div>
