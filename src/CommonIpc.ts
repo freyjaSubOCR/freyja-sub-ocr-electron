@@ -1,5 +1,6 @@
 import { dialog, BrowserWindow, ipcMain } from 'electron'
 import logger from '@/logger'
+import { ScriptModule } from 'torch-js'
 
 class CommonIpc {
     registerIPCListener(): void {
@@ -69,6 +70,14 @@ class CommonIpc {
                         await dialog.showMessageBox({ type: 'info', title: 'Freyja', message: args[0] as string })
                     }
                 }
+            } catch (error) {
+                logger.error((error as Error).message)
+                return null
+            }
+        })
+        ipcMain.handle('CommonIpc:CudaAvailable', () => {
+            try {
+                return ScriptModule.isCudaAvailable()
             } catch (error) {
                 logger.error((error as Error).message)
                 return null
