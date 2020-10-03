@@ -98,7 +98,7 @@ class TorchOCR {
         if (this._rcnnModule === undefined) {
             throw new Error('RCNN Module is not initialized')
         }
-        if (ScriptModule.isCudaAvailable()) {
+        if (Config.enableCuda && ScriptModule.isCudaAvailable()) {
             const inputCUDA = input.cuda()
             const result = await this._rcnnModule.forward(inputCUDA) as Array<Record<string, Tensor>>
             inputCUDA.free()
@@ -147,7 +147,7 @@ class TorchOCR {
             throw new Error('OCR Module is not initialized')
         }
 
-        if (ScriptModule.isCudaAvailable()) {
+        if (Config.enableCuda && ScriptModule.isCudaAvailable()) {
             const inputCUDA = input.cuda()
             const result = await this._ocrModule.forward(inputCUDA, boxes) as Array<Array<number>>
             inputCUDA.free()
