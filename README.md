@@ -9,6 +9,10 @@ you meet with your ```log.log``` file on github issues.
 
 ![Edit page screenshot](.img/edit.jpg)
 
+## System requirements
+
+16GB of RAM required. Having a Nvidia GPU is strongly recommended or the process will be extremely slow.
+
 ## Usage
 
 1. Download latest version from [Releases](https://github.com/freyjaSubOCR/freyja-sub-ocr-electron/releases) page and extract it.
