@@ -26,8 +26,45 @@ jobs:
         with:
           node-version: "14"
 
+      - name: MacOS install ffmpeg
+        if: ${{ matrix.os == 'macos-latest' }}
+        shell: bash
+        run: brew install ffmpeg
+
+      - name: Linux install ffmpeg
+        if: ${{ matrix.os == 'ubuntu-latest' }}
+        shell: bash
+        run: |
+          sudo add-apt-repository ppa:jonathonf/ffmpeg-4
+          sudo apt-get install libavcodec-dev libavformat-dev libavdevice-dev libavfilter-dev libavutil-dev libpostproc-dev libswresample-dev libswscale-dev
+
       - name: Install packages
         run: yarn
 
-      - name: Build
-        run: yarn electron:build
+      - name: Windows build
+        if: ${{ matrix.os == 'windows-latest' }}
+        shell: powershell
+        run: |
+          $env:GH_TOKEN="${{ secrets.GITHUB_TOKEN }}"
+          yarn electron:build --windows 7z
+
+      - name: MacOS build
+        if: ${{ matrix.os == 'macos-latest' }}
+        shell: bash
+        run: |
+          export CSC_IDENTITY_AUTO_DISCOVERY=false
+          export GH_TOKEN=${{ secrets.GITHUB_TOKEN }}
+          yarn electron:build --macos 7z
+
+      - name: Linux build
+        if: ${{ matrix.os == 'ubuntu-latest' }}
+        shell: bash
+        run: |
+          export GH_TOKEN=${{ secrets.GITHUB_TOKEN }}
+          yarn electron:build --linux 7z
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: artifact
+          path: dist_electron/*.7z
