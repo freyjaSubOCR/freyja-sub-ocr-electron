@@ -1,7 +1,6 @@
 import { ipcMain } from 'electron'
 import logger from '@/logger'
 import Config from '@/config'
-import { config } from 'vue/types/umd'
 
 class ConfigIpc {
     static registerIPCListener(): void {
