@@ -2,8 +2,7 @@ name: publish-build
 
 on:
   push:
-    tags:
-      - "v*.*.*"
+    branches: [buildtest]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -30,11 +29,23 @@ jobs:
       - name: Install packages
         run: yarn
 
+      - name: MacOS install ffmpeg
+        if: ${{ matrix.os == 'macos-latest' }}
+        shell: bash
+        run: brew install ffmpeg
+
+      - name: Linux install ffmpeg
+        if: ${{ matrix.os == 'ubuntu-latest' }}
+        shell: bash
+        run: |
+          sudo add-apt-repository ppa:jonathonf/ffmpeg-4
+          sudo apt-get install libavcodec-dev libavformat-dev libavdevice-dev libavfilter-dev libavutil-dev libpostproc-dev libswresample-dev libswscale-dev     
+
       - name: Windows build
         if: ${{ matrix.os == 'windows-latest' }}
         shell: powershell
         run: |
-          $env:GH_TOKEN=${{ secrets.GITHUB_TOKEN }}
+          $env:GH_TOKEN="${{ secrets.GITHUB_TOKEN }}"
           yarn electron:build --windows 7z --publish always
 
       - name: MacOS build
