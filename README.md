@@ -17,7 +17,7 @@ you meet with your ```log.log``` file on github issues.
 
 1. Download latest version from [Releases](https://github.com/freyjaSubOCR/freyja-sub-ocr-electron/releases) page and extract it.
 
-2. Download models from <https://github.com/freyjaSubOCR/freyja-sub-ocr-model-zoo/releases> (all txt and torchscript files are needed), and place all files into ```<app_path>/resources/app.asar.unpacked/models/``` folder.
+2. Download models from <https://github.com/freyjaSubOCR/freyja-sub-ocr-model-zoo/releases> (all txt and torchscript files are needed), and place all files into ```<app_path>/models/``` folder.
 
 3. Run ```freyja.exe```.
 

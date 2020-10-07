@@ -5,6 +5,7 @@ node_modules
 *.log
 /utils
 /dist_timetest
+/models
 
 # local env files
 .env.local

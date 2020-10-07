@@ -60,21 +60,21 @@ class Config {
     }
     static set language(value: string) {
         Config._language = value
-        Config.ocrModulePath = path.resolve(__dirname, 'models', `ocr_${Config.language}_${Config.font}.torchscript`)
-        Config.ocrCharsPath = path.resolve(__dirname, 'models', `ocr_${Config.language}.txt`)
+        Config.ocrModulePath = path.resolve('./', 'models', `ocr_${Config.language}_${Config.font}.torchscript`)
+        Config.ocrCharsPath = path.resolve('./', 'models', `ocr_${Config.language}.txt`)
     }
     static get font(): string {
         return Config._font
     }
     static set font(value: string) {
         Config._font = value
-        Config.ocrModulePath = path.resolve(__dirname, 'models', `ocr_${Config.language}_${Config.font}.torchscript`)
+        Config.ocrModulePath = path.resolve('./', 'models', `ocr_${Config.language}_${Config.font}.torchscript`)
     }
 
     static cachedFrames = 200
-    static rcnnModulePath = path.resolve(__dirname, 'models', 'object_detection.torchscript')
-    static ocrModulePath = path.resolve(__dirname, 'models', `ocr_${Config.language}_${Config.font}.torchscript`)
-    static ocrCharsPath = path.resolve(__dirname, 'models', `ocr_${Config.language}.txt`)
+    static rcnnModulePath = path.resolve('./', 'models', 'object_detection.torchscript')
+    static ocrModulePath = path.resolve('./', 'models', `ocr_${Config.language}_${Config.font}.torchscript`)
+    static ocrCharsPath = path.resolve('./', 'models', `ocr_${Config.language}.txt`)
     static enableCuda = true
     static batchSize = 24
     static cropTop = 0
