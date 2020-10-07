@@ -171,6 +171,7 @@ class TorchOCRTaskScheduler {
             ocrPromiseBuffer.push(ocrPromise)
         }
         await Promise.all([tensorDataPromise, rcnnPromise, ocrPromise])
+        logger.debug(this.subtitleInfos)
         return this.subtitleInfos
     }
 
@@ -205,6 +206,7 @@ class TorchOCRTaskScheduler {
             subtitleInfos.push(subtitleInfo)
         }
         this.subtitleInfos = subtitleInfos
+        logger.debug(this.subtitleInfos)
         return this.subtitleInfos
     }
 }
