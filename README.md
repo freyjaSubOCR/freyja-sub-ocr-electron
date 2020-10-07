@@ -15,11 +15,13 @@ you meet with your ```log.log``` file on github issues.
 
 ## Usage
 
-1. Download latest version from [Releases](https://github.com/freyjaSubOCR/freyja-sub-ocr-electron/releases) page and extract it.
+1. If you are using MacOS or Linux, make sure you have ```ffmpeg``` installed.
 
-2. Download models from <https://github.com/freyjaSubOCR/freyja-sub-ocr-model-zoo/releases> (all txt and torchscript files are needed), and place all files into ```<app_path>/models/``` folder.
+2. Download latest version of freyja from [Releases](https://github.com/freyjaSubOCR/freyja-sub-ocr-electron/releases) page and extract it.
 
-3. Run ```freyja.exe```.
+3. Download models from <https://github.com/freyjaSubOCR/freyja-sub-ocr-model-zoo/releases> (all txt and torchscript files are needed), and place all files into ```<app_path>/models/``` folder.
+
+4. Run ```freyja.exe```.
 
 ## Known issues
 
