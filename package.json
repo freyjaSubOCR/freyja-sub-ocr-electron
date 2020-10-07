@@ -3,6 +3,11 @@
     "version": "0.1.0",
     "author": "arition, ReventonC",
     "description": "freyja subtitle OCR extractor",
+    "license": "GPL-3.0-or-later",
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/freyjaSubOCR/freyja-sub-ocr-electron.git"
+    },
     "private": true,
     "scripts": {
         "serve": "vue-cli-service serve",
