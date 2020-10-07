@@ -3,3 +3,8 @@ asarUnpack:
   - node_modules/bindings
   - node_modules/file-uri-to-path
   - node_modules/js-levenshtein
+appId: com.freyja.freyja-electron
+mac:
+  category: public.app-category.productivity
+linux:
+  category: AudioVideo
