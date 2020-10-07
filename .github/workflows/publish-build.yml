@@ -26,9 +26,6 @@ jobs:
         with:
           node-version: '14'
 
-      - name: Install packages
-        run: yarn
-
       - name: MacOS install ffmpeg
         if: ${{ matrix.os == 'macos-latest' }}
         shell: bash
@@ -39,7 +36,10 @@ jobs:
         shell: bash
         run: |
           sudo add-apt-repository ppa:jonathonf/ffmpeg-4
-          sudo apt-get install libavcodec-dev libavformat-dev libavdevice-dev libavfilter-dev libavutil-dev libpostproc-dev libswresample-dev libswscale-dev     
+          sudo apt-get install libavcodec-dev libavformat-dev libavdevice-dev libavfilter-dev libavutil-dev libpostproc-dev libswresample-dev libswscale-dev
+
+      - name: Install packages
+        run: yarn 
 
       - name: Windows build
         if: ${{ matrix.os == 'windows-latest' }}
