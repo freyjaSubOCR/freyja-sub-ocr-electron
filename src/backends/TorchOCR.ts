@@ -104,7 +104,8 @@ class TorchOCR {
             inputCUDA.free()
             return result
         } else {
-            return await this._rcnnModule.forward(input) as Array<Record<string, Tensor>>
+            const result = await this._rcnnModule.forward(input) as Array<Record<string, Tensor>>
+            return result
         }
     }
 
@@ -139,6 +140,7 @@ class TorchOCR {
                 boxesObjectTensor.data[i * 5 + 4] = subtitleInfos[i].startFrame
             }
         }
+        logger.debug(boxesObjectTensor)
         return Tensor.fromObject(boxesObjectTensor)
     }
 
