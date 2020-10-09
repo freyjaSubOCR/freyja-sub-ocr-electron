@@ -2,7 +2,7 @@
     <div class="wrapper">
         <div class="stack stack-left">
             <SubtitleInfoTable v-model="currentFrame" :subtitleInfos.sync="subtitleInfos"></SubtitleInfoTable>
-            <button class="save-sub" @click="saveASS">Save subtitles</button>
+            <button class="primary-button" @click="saveASS">Save subtitles</button>
         </div>
         <div class="stack stack-right">
             <VideoPlayer v-model="currentFrame" :videoProperties="videoProperties" @prev-subtitle="prevSubtitleEvent" @next-subtitle="nextSubtitleEvent"></VideoPlayer>
