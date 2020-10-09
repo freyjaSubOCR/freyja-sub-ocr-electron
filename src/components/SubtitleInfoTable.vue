@@ -9,39 +9,41 @@
         </table>
         <simplebar force-visible>
             <table class="subtitleInfo-content">
-                <tr :class="{ 'subtitleInfo-row': true, 'subtitleInfo-row-merge-highlight': selectStart === index || selectStart <= index && index <= selectEnd, 'active': subtitleInfo.startFrame <= currentFrame && currentFrame < subtitleInfo.endFrame }"
-                    v-for="subtitleInfo, index in subtitleInfos" :key="subtitleInfo.id" @pointerenter="setSelectEnd(index)"
-                    @click="setCurrentFrame((subtitleInfo.endFrame - subtitleInfo.startFrame) / 2 + subtitleInfo.startFrame)">
-                    <td class="subtitleInfo-time">
-                        <input v-model="subtitleInfo.startTimeValidated" @change="updateInput" />
-                    </td>
-                    <td class="subtitleInfo-time">
-                        <input v-model="subtitleInfo.endTimeValidated" @change="updateInput" />
-                    </td>
-                    <td class="subtitleInfo-text">
-                        <input :title="subtitleInfo.text" v-model="subtitleInfo.text" placeholder="Enter subtitle here" />
-                    </td>
-                    <div class="subtitleInfo-buttons">
-                        <button @click="addSubtitle(index)" title="Add">
-                            <img src="@/assets/subtitle-add.svg" alt />
-                        </button>
-                        <button @click="removeSubtitle(index)" title="Remove">
-                            <img src="@/assets/subtitle-delete.svg" alt />
-                        </button>
-                        <button @click="setCurrentFrame((subtitleInfo.endFrame - subtitleInfo.startFrame) / 2 + subtitleInfo.startFrame)" title="Jump">
-                            <img src="@/assets/subtitle-locate.svg" alt />
-                        </button>
-                        <button @click="selectStart = index; selectEnd = index;" v-if="selectStart === -1" title="Merge">
-                            <img src="@/assets/subtitle-merge-start.svg" alt />
-                        </button>
-                        <button @click="selectStart = -1; selectEnd = -1" v-else-if="selectStart === index" title="Cancel Merge">
-                            <img src="@/assets/subtitle-merge-start.svg" alt />
-                        </button>
-                        <button @click="mergeSubtitles" v-else-if="index > selectStart" title="Merge">
-                            <img src="@/assets/subtitle-merge-end.svg" alt />
-                        </button>
-                    </div>
-                </tr>
+                <transition-group name="line" tag="p">
+                    <tr :class="{ 'subtitleInfo-row': true, 'subtitleInfo-row-merge-highlight': selectStart === index || selectStart <= index && index <= selectEnd, 'active': subtitleInfo.startFrame <= currentFrame && currentFrame < subtitleInfo.endFrame }"
+                        v-for="subtitleInfo, index in subtitleInfos" :key="subtitleInfo.id" @pointerenter="setSelectEnd(index)"
+                        @click="setCurrentFrame((subtitleInfo.endFrame - subtitleInfo.startFrame) / 2 + subtitleInfo.startFrame)">
+                        <td class="subtitleInfo-time">
+                            <input v-model="subtitleInfo.startTimeValidated" @change="updateInput" />
+                        </td>
+                        <td class="subtitleInfo-time">
+                            <input v-model="subtitleInfo.endTimeValidated" @change="updateInput" />
+                        </td>
+                        <td class="subtitleInfo-text">
+                            <input :title="subtitleInfo.text" v-model="subtitleInfo.text" placeholder="Enter subtitle here" />
+                        </td>
+                        <div class="subtitleInfo-buttons">
+                            <button @click="addSubtitle(index)" title="Add">
+                                <img src="@/assets/subtitle-add.svg" alt />
+                            </button>
+                            <button @click="removeSubtitle(index)" title="Remove">
+                                <img src="@/assets/subtitle-delete.svg" alt />
+                            </button>
+                            <button @click="setCurrentFrame((subtitleInfo.endFrame - subtitleInfo.startFrame) / 2 + subtitleInfo.startFrame)" title="Jump">
+                                <img src="@/assets/subtitle-locate.svg" alt />
+                            </button>
+                            <button @click="selectStart = index; selectEnd = index;" v-if="selectStart === -1" title="Merge">
+                                <img src="@/assets/subtitle-merge-start.svg" alt />
+                            </button>
+                            <button @click="selectStart = -1; selectEnd = -1" v-else-if="selectStart === index" title="Cancel Merge">
+                                <img src="@/assets/subtitle-merge-start.svg" alt />
+                            </button>
+                            <button @click="mergeSubtitles" v-else-if="index > selectStart" title="Merge">
+                                <img src="@/assets/subtitle-merge-end.svg" alt />
+                            </button>
+                        </div>
+                    </tr>
+                </transition-group>
             </table>
         </simplebar>
     </div>
@@ -182,6 +184,7 @@ export default SubtitleInfoTable
     cursor: default;
     min-height: 48px;
     position: relative;
+    transition: all 0.2s;
 
     &:nth-child(2n+1) {
         background: rgba(18, 44, 63, 0.2);
@@ -291,6 +294,26 @@ export default SubtitleInfoTable
 .subtitleInfo-content .subtitleInfo-text input:focus + .subtitleInfo-buttons {
     display: none;
 }
+
+.line-enter-active,
+.line-leave-active {
+    transition: all 0.2s;
+}
+
+.line-enter {
+    opacity: 0;
+    transform: translate(0, -8px);
+}
+
+.line-leave-to {
+    opacity: 0;
+    transform: translate(0, -8px);
+}
+
+.line-leave-active {
+    position: absolute;
+}
+
 </style>
 
 <style>
