@@ -22,6 +22,11 @@ export default class App extends Vue {
 <style lang="scss">
 * {
     box-sizing: border-box;
+    user-select: none;
+
+    &:focus {
+        outline: none;
+    }
 }
 
 table {
@@ -49,13 +54,102 @@ body {
     overflow: hidden;
 }
 
-.noselect {
-    -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-    -khtml-user-select: none; /* Konqueror HTML */
-    -moz-user-select: none; /* Old versions of Firefox */
-    -ms-user-select: none; /* Internet Explorer/Edge */
-    user-select: none; /* Non-prefixed version, currently
-                                  supported by Chrome, Edge, Opera and Firefox */
+.primary-button {
+    background: #1c425f;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 14px;
+    line-height: 14px;
+    cursor: pointer;
+    transition: 0.2s all;
+
+    &:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+    }
+
+    &:hover {
+        background: #1f4b6d;
+        color: rgba(255, 255, 255, 0.9);
+    }
+
+    &:active {
+        opacity: 0.5;
+    }
 }
+
+.secondary-button {
+    font-size: 14px;
+    line-height: 20px;
+    color: rgba(255, 255, 255, 0.5);
+    border: 1px solid #1c425f;
+    box-sizing: border-box;
+    border-radius: 4px;
+    padding: 8px 16px;
+    background-color: transparent;
+    margin-left: 12px;
+    transition: 0.2s all;
+    cursor: pointer;
+
+    &:hover {
+        color: rgba(255, 255, 255, 0.8);
+        background-color: rgba($color: #fff, $alpha: 0.05);
+    }
+}
+
+select,
+input {
+    background: #112a3e;
+    border: solid 1px #112a3e;
+    border-radius: 4px;
+    outline: none;
+    height: 24px;
+    line-height: 14px;
+    padding-left: 4px;
+    color: rgba(255, 255, 255, 0.7);
+    transition: 0.2s all;
+
+    &:hover {
+        border: solid 1px #1f4b6d;
+    }
+
+    &:active,
+    &:focus {
+        border: solid 1px #3783be;
+    }
+}
+
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+input[type=checkbox] {
+    transition: 0.2s all;
+    display: flex;
+}
+
+input[type=checkbox]::before {
+    width: 12.67px;
+    height: 12.67px;
+    margin: auto;
+    content: " ";
+    background-color: #112a3e;
+    display: inline-block;
+    visibility: visible;
+    border-radius: 2px;
+    border: solid 1px #112a3e;
+}
+
+input[type=checkbox]:hover::before {
+    border: 1px solid #1f4b6d;
+    visibility: visible;
+}
+
+input[type=checkbox]:checked::before {
+    visibility: hidden;
+}
+
 </style>
