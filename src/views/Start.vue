@@ -8,7 +8,7 @@
                     <img src="@/assets/open-video-icon.svg" />
                     <div class="prompt-drag">Drag and drop Video here</div>
                     <div class="prompt-format">MP4 or MKV format</div>
-                    <div class="prompt-or">or <button @click="openVideoDialog" :disabled="processing">Import from computer</button></div>
+                    <div class="prompt-or">or <button class="secondary-button" @click="openVideoDialog" :disabled="processing">Import from computer</button></div>
                 </div>
                 <div class="start-video-wrapper" v-else>
                     <div class="video-reselect">
@@ -27,7 +27,7 @@
                                     <div class="line"></div>
                                 </div>
                                 <div class="dark-top"></div>
-                                <div class="dark-bottom"></div>
+                                <div class="dark-bottom" :style="{'height': `${blackBarHeight + cropBottomComputed - 4}px`, 'bottom': `${-(blackBarHeight + cropBottomComputed - 1)}px`}"></div>
                             </div>
                         </div>
                         <VideoPlayer v-model="currentFrame" :videoProperties="videoProperties" :showSubtitleJumpButton="false" :disabled="processing"></VideoPlayer>
@@ -50,22 +50,24 @@
                         </select>
                     </div>
                     <div class="settings-section-header clickable" @click="toggleAdvancedSettingsExpand">Advanced settings <img :class="{ 'advanced-settings-expand': advancedSettingsExpand }" src="@/assets/advanced-settings-expand.svg" /></div>
-                    <div v-if="advancedSettingsExpand">
-                        <div class="settings-section settings-cuda" title="Enable CUDA for faster processing. No effect if you do not have a Nvidia GPU.">
-                            <label for="enableCuda">Enable CUDA</label>
-                            <input type="checkbox" name="enableCuda" id="enableCuda" v-model="enableCuda" :disabled="processing">
+                    <transition name="slide-fade">
+                        <div v-if="advancedSettingsExpand">
+                            <div class="settings-section settings-cuda" title="Enable CUDA for faster processing. No effect if you do not have a Nvidia GPU.">
+                                <label for="enableCuda">Enable CUDA</label>
+                                <input type="checkbox" name="enableCuda" id="enableCuda" v-model="enableCuda" :disabled="processing">
+                            </div>
+                            <div class="settings-section" title="Larger batches use more CPU and GPU memory on OCR process. Reduce the value if you meet memory problems.">
+                                <label for="batchSize">Batch size</label>
+                                <input type="number" name="batchSize" id="batchSize" v-model.number="batchSize" :disabled="processing">
+                            </div>
+                            <div class="settings-section" title="Larger caches use more CPU memory on video replay. Reduce the value if you meet memory problems.">
+                                <label for="cachedFrames">Frame cache size</label>
+                                <input type="number" name="cachedFrames" id="cachedFrames" v-model.number="cachedFrames" :disabled="processing">
+                            </div>
                         </div>
-                        <div class="settings-section" title="Larger batches use more CPU and GPU memory on OCR process. Reduce the value if you meet memory problems.">
-                            <label for="batchSize">Batch size</label>
-                            <input type="number" name="batchSize" id="batchSize" v-model.number="batchSize" :disabled="processing">
-                        </div>
-                        <div class="settings-section" title="Larger caches use more CPU memory on video replay. Reduce the value if you meet memory problems.">
-                            <label for="cachedFrames">Frame cache size</label>
-                            <input type="number" name="cachedFrames" id="cachedFrames" v-model.number="cachedFrames" :disabled="processing">
-                        </div>
-                    </div>
+                    </transition>
                 </div>
-                <button class="start-button" @click="start" :disabled="!videoOpened || processing">{{processing ? "Processing..." : "Start"}}</button>
+                <button class="primary-button" @click="start" :disabled="!videoOpened || processing">{{processing ? "Processing..." : "Start"}}</button>
             </div>
         </div>
     </div>
@@ -173,7 +175,12 @@ class Start extends Vue {
     }
 
     get cropTopComputed(): number {
-        return this.cropTop / this.videoProperties.height * this.videoHeight
+        // border box height hack
+        let computedHeight = this.cropTop / this.videoProperties.height * this.videoHeight
+        if (computedHeight > this.videoHeight - 6) {
+            computedHeight = this.videoHeight - 6
+        }
+        return computedHeight
     }
 
     set cropTopComputed(value: number) {
@@ -183,6 +190,7 @@ class Start extends Vue {
         if (value < 0) {
             value = 0
         }
+
         this.cropTop = value / this.videoHeight * this.videoProperties.height
     }
 
@@ -367,6 +375,7 @@ export default Start
     background-color: #091620;
     margin: auto;
     border-radius: 4px;
+    overflow: hidden;
 }
 
 .start-settings {
@@ -376,18 +385,6 @@ export default Start
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-
-    select,
-    input {
-        background: #112a3e;
-        border-radius: 4px;
-        border: none;
-        outline: none;
-        height: 24px;
-        line-height: 14px;
-        padding-left: 4px;
-        color: rgba(255, 255, 255, 0.7);
-    }
 }
 
 .start-video {
@@ -421,25 +418,6 @@ export default Start
     font-size: 14px;
     line-height: 24px;
     color: rgba(255, 255, 255, 0.5);
-}
-
-.prompt-or button {
-    font-size: 14px;
-    line-height: 20px;
-    color: rgba(255, 255, 255, 0.5);
-    border: 1px solid #1c425f;
-    box-sizing: border-box;
-    border-radius: 4px;
-    padding: 8px 16px;
-    background-color: transparent;
-    margin-left: 12px;
-    transition: 0.2s all;
-    cursor: pointer;
-
-    &:hover {
-        color: rgba(255, 255, 255, 0.8);
-        background-color: rgba($color: #fff, $alpha: 0.05);
-    }
 }
 
 .video-reselect {
@@ -504,28 +482,6 @@ export default Start
     margin-bottom: 24px;
 }
 
-.start-button {
-    background: #1c425f;
-    padding: 12px;
-    border: none;
-    border-radius: 4px;
-    box-sizing: border-box;
-    color: rgba(255, 255, 255, 0.75);
-    font-size: 14px;
-    line-height: 14px;
-    cursor: pointer;
-    transition: 0.2s all;
-
-    &:disabled {
-        opacity: 0.4;
-        cursor: not-allowed;
-    }
-
-    &:hover {
-        color: rgba(255, 255, 255, 0.9);
-    }
-}
-
 .settings-cuda {
     display: flex;
     flex-direction: row;
@@ -563,6 +519,7 @@ export default Start
 }
 
 .subtitle-select-box {
+    box-sizing: border-box;
     border: 3px solid #18a1b4;
     margin-left: 0;
     margin-right: 0;
@@ -606,18 +563,24 @@ export default Start
 .dark-top,
 .dark-bottom {
     position: absolute;
-    height: 500px;
     left: -10px;
     right: -10px;
     background: rgba(0, 0, 0, 0.7);
 }
 
 .dark-top {
+    height: 500px;
     top: -503px;
 }
 
-.dark-bottom {
-    bottom: -503px;
+.slide-fade-enter-active,
+.slide-fade-leave-active {
+    transition: all 0.2s;
 }
 
+.slide-fade-enter,
+.slide-fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
+    transform: translateY(-10px);
+}
 </style>
