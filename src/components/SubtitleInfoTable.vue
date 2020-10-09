@@ -10,7 +10,8 @@
         <simplebar force-visible>
             <table class="subtitleInfo-content">
                 <tr :class="{ 'subtitleInfo-row': true, 'subtitleInfo-row-merge-highlight': selectStart === index || selectStart <= index && index <= selectEnd, 'active': subtitleInfo.startFrame <= currentFrame && currentFrame < subtitleInfo.endFrame }"
-                    v-for="subtitleInfo, index in subtitleInfos" :key="subtitleInfo.id" @pointerenter="setSelectEnd(index)">
+                    v-for="subtitleInfo, index in subtitleInfos" :key="subtitleInfo.id" @pointerenter="setSelectEnd(index)"
+                    @click="setCurrentFrame((subtitleInfo.endFrame - subtitleInfo.startFrame) / 2 + subtitleInfo.startFrame)">
                     <td class="subtitleInfo-time">
                         <input v-model="subtitleInfo.startTimeValidated" @change="updateInput" />
                     </td>
@@ -21,22 +22,22 @@
                         <input :title="subtitleInfo.text" v-model="subtitleInfo.text" placeholder="Enter subtitle here" />
                     </td>
                     <div class="subtitleInfo-buttons">
-                        <button @click="addSubtitle(index)">
+                        <button @click="addSubtitle(index)" title="Add">
                             <img src="@/assets/subtitle-add.svg" alt />
                         </button>
-                        <button @click="removeSubtitle(index)">
+                        <button @click="removeSubtitle(index)" title="Remove">
                             <img src="@/assets/subtitle-delete.svg" alt />
                         </button>
-                        <button @click="setCurrentFrame((subtitleInfo.endFrame - subtitleInfo.startFrame) / 2 + subtitleInfo.startFrame)">
+                        <button @click="setCurrentFrame((subtitleInfo.endFrame - subtitleInfo.startFrame) / 2 + subtitleInfo.startFrame)" title="Jump">
                             <img src="@/assets/subtitle-locate.svg" alt />
                         </button>
-                        <button @click="selectStart = index; selectEnd = index;" v-if="selectStart === -1">
+                        <button @click="selectStart = index; selectEnd = index;" v-if="selectStart === -1" title="Merge">
                             <img src="@/assets/subtitle-merge-start.svg" alt />
                         </button>
-                        <button @click="selectStart = -1; selectEnd = -1" v-else-if="selectStart === index">
+                        <button @click="selectStart = -1; selectEnd = -1" v-else-if="selectStart === index" title="Cancel Merge">
                             <img src="@/assets/subtitle-merge-start.svg" alt />
                         </button>
-                        <button @click="mergeSubtitles" v-else-if="index > selectStart">
+                        <button @click="mergeSubtitles" v-else-if="index > selectStart" title="Merge">
                             <img src="@/assets/subtitle-merge-end.svg" alt />
                         </button>
                     </div>
@@ -170,6 +171,8 @@ export default SubtitleInfoTable
     display: flex;
     flex-direction: column;
     width: 100%;
+    margin-bottom: 16px;
+    position: relative;
 }
 
 .subtitleInfo-row {
@@ -229,8 +232,8 @@ export default SubtitleInfoTable
 
 .subtitleInfo-content input {
     background: transparent;
-    width: 100%;
     border: none;
+    width: 100%;
 }
 
 .subtitleInfo-content .subtitleInfo-time input {
@@ -250,9 +253,7 @@ export default SubtitleInfoTable
 .subtitleInfo-buttons {
     display: none;
     position: absolute;
-    // left: 50%;
     bottom: -14px;
-    // transform: translateX(-50%);
     right: 16px;
     background: #1c425f;
     border: 1px solid rgba(0, 0, 0, 0.37);
@@ -294,14 +295,15 @@ export default SubtitleInfoTable
 
 <style>
 [data-simplebar] {
-    height: 100%;
+    position: absolute;
+    top: 48px;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
 
 .simplebar-scrollbar::before {
     opacity: 0.5;
 }
 
-.simplebar-scrollbar {
-    margin-bottom: 50px;
-}
 </style>
