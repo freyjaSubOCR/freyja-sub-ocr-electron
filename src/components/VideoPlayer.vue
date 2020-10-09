@@ -223,6 +223,7 @@ export default class VideoPlayer extends Vue {
     margin: auto 0;
     font-weight: 600;
     width: 200px;
+    user-select: text;
 }
 
 .video-control-currentframe {
