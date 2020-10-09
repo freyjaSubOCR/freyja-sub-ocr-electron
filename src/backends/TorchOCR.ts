@@ -140,7 +140,6 @@ class TorchOCR {
                 boxesObjectTensor.data[i * 5 + 4] = subtitleInfos[i].startFrame
             }
         }
-        logger.debug(boxesObjectTensor)
         return Tensor.fromObject(boxesObjectTensor)
     }
 
