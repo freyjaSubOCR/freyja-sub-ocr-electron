@@ -106,6 +106,7 @@ class TorchOCRTaskScheduler {
 
     async start(): Promise<Array<SubtitleInfo>> {
         this.currentProcessingFrame = 0
+        this.subtitleInfos = []
         const step = Config.batchSize
         let tensorDataPromise = new Promise(resolve => resolve())
         let rcnnPromise = new Promise(resolve => resolve())
