@@ -1,18 +1,18 @@
 <template>
     <div class="titlebar-wrapper">
         <div class="titlebar">
-            <div class="titlebar-title noselect">Freyja</div>
+            <div class="titlebar-title">Freyja</div>
             <div class="titlebar-button">
-                <button class="minimize noselect" @click="minimize">
+                <button class="minimize" @click="minimize">
                     <img src="@/assets/titlebar-minimize.svg" alt />
                 </button>
-                <button class="unmaximize noselect" @click="unmaximize" v-if="maximized">
+                <button class="unmaximize" @click="unmaximize" v-if="maximized">
                     <img src="@/assets/titlebar-unmaximize.svg" alt />
                 </button>
-                <button class="maximize noselect" @click="maximize" v-else>
+                <button class="maximize" @click="maximize" v-else>
                     <img src="@/assets/titlebar-maximize.svg" alt />
                 </button>
-                <button class="close noselect" @click="close">
+                <button class="close" @click="close">
                     <img src="@/assets/titlebar-close.svg" alt />
                 </button>
             </div>
