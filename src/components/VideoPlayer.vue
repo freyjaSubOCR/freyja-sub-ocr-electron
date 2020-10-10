@@ -200,13 +200,14 @@ export default class VideoPlayer extends Vue {
     display: flex;
     position: relative;
     flex-grow: 1;
+    max-height: calc(100% - 48px);
 }
 
 .video-img img {
     max-width: 100%;
     max-height: 100%;
     pointer-events: none;
-    margin: auto 0;
+    margin: auto;
 }
 
 .video-control {
