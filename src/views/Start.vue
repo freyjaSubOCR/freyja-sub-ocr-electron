@@ -124,6 +124,7 @@ class Start extends Vue {
         this.cachedFrames = await global.ipcRenderer.invoke('Config:cachedFrames') as number
     }
 
+    // #region RPC config call
     @Watch('language')
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     async watchLanguage(newValue: string, oldValue: string): Promise<void> {
@@ -165,6 +166,7 @@ class Start extends Vue {
     async watchCachedFrames(newValue: number, oldValue: number): Promise<void> {
         await global.ipcRenderer.invoke('Config:cachedFrames', newValue)
     }
+    // #endregion
 
     beforeDestroy(): void {
         /* eslint-disable @typescript-eslint/unbound-method */
@@ -174,6 +176,7 @@ class Start extends Vue {
         /* eslint-enable @typescript-eslint/unbound-method */
     }
 
+    // #region Video crop handle
     get cropTopComputed(): number {
         // border box height hack
         let computedHeight = this.cropTop / this.videoProperties.height * this.videoHeight
@@ -224,9 +227,12 @@ class Start extends Vue {
             this.videoHeight = video.getBoundingClientRect().height
         }
     }
+    // #endregion
 
+    // #region Video crop pointer events
     private _lastY = 0
     private _pointerBtn = 'top'
+
     cropTopPointerDown(event: PointerEvent): void {
         if (!this.processing && this._pointerId === undefined) {
             event.preventDefault()
@@ -235,6 +241,7 @@ class Start extends Vue {
             this._pointerBtn = 'top'
         }
     }
+
     cropBottomPointerDown(event: PointerEvent): void {
         if (!this.processing && this._pointerId === undefined) {
             event.preventDefault()
@@ -262,7 +269,9 @@ class Start extends Vue {
             this._pointerId = undefined
         }
     }
+    // #endregion
 
+    // #region Drag video into window handler
     dragNone(event: DragEvent): void {
         if (event.dataTransfer !== null) {
             event.dataTransfer.dropEffect = 'none'
@@ -281,6 +290,7 @@ class Start extends Vue {
             }
         }
     }
+    // #endregion
 
     toggleAdvancedSettingsExpand(): void {
         this.advancedSettingsExpand = !this.advancedSettingsExpand
@@ -313,6 +323,7 @@ class Start extends Vue {
         }
     }
 
+    // ugly hack of crop handle position initialization problem
     @Watch('currentFrame')
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     watchCurrentFrame(newValue: number, oldValue: number): void {
