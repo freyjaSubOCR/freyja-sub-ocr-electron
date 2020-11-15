@@ -14,6 +14,7 @@ const isDevelopment = process.env.NODE_ENV !== 'production'
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let win: BrowserWindow | null
+let torchOCRTaskSchedulerWorker: TorchOCRTaskSchedulerWorker | undefined
 
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([
@@ -48,6 +49,8 @@ function createWindow() {
     }
 
     win.on('closed', () => {
+        // ignore promise
+        void torchOCRTaskSchedulerWorker?.terminateWorker()
         win = null
     })
 }
@@ -89,7 +92,7 @@ app.on('ready', async () => {
     commonIpc.registerIPCListener()
     const assGenerator = new ASSGenerator()
     assGenerator.registerIPCListener()
-    const torchOCRTaskSchedulerWorker = new TorchOCRTaskSchedulerWorker()
+    torchOCRTaskSchedulerWorker = new TorchOCRTaskSchedulerWorker()
     torchOCRTaskSchedulerWorker.registerIPCListener()
     ConfigIpc.registerIPCListener()
 
