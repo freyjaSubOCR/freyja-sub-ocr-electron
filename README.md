@@ -11,11 +11,12 @@ you meet with your ```log.log``` file on github issues.
 
 ## System requirements
 
-16GB of RAM required. Having a Nvidia GPU is strongly recommended or the process will be extremely slow.
+16GB of RAM required. Having a recent Nvidia GPU is strongly recommended or the process will be extremely slow.
 
 ## Usage
 
-1. If you are using MacOS or Linux, make sure you have ```ffmpeg``` installed.
+1. If you are using Windows, please install [Visual C++ Redist 2019](https://aka.ms/vs/16/release/vc_redist.x64.exe). If
+   you are using MacOS or Linux, make sure you have ```ffmpeg``` installed.
 
 2. Download latest version of Freyja from [Releases](https://github.com/freyjaSubOCR/freyja-sub-ocr-electron/releases)
    page and extract it.
@@ -39,14 +40,23 @@ you meet with your ```log.log``` file on github issues.
   Currently there are some issues related with the underlying ```torch-js``` package. It should be fixed in the next
   beta version.
 
-## FAQ
+## Common issues
 
-- Q: Cannot play the video.
+- Cannot play the video.
 
-  A: Maybe the video is an vfr (variable frame rate) video, which is not supported on current video player
+  Maybe the video is an vfr (variable frame rate) video, which is not supported on current video player
   implementation. You can do a fast transcoding using ffmpeg to convert the video to a constant frame rate video:
   ```ffmpeg -i video.mkv video_transcoded.mkv```. Remux won't work.
 
-- Q: Cannot use GPU models.
+- Cannot use GPU models.
 
-  A: Make sure you have a recent Nvidia GPU. If you do have a Nvidia GPU, please try to update the driver.
+  Make sure you have a recent Nvidia GPU. If you do have a Nvidia GPU, please try to update the driver.
+
+- The program says that "pyTorch backend crashed".
+
+  Please check the ```log.log```.
+  
+  If the log says that ```CUDA out of memory```, you need to reduce the batch size. If it still not works, it means that
+  your GPU memory is too small and you can only use the CPU models.
+
+  If the log shows other errors, please try to change the crop height of the video.

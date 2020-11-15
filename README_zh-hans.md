@@ -13,9 +13,10 @@
 
 Freyja 需要 16GB 的内存。强烈推荐使用带 Nvidia 显卡的电脑，否则过程会非常缓慢。
 
-## 用法
+## 使用
 
-1. 如果您使用的是 MacOS 或 Linux ，请确保已安装```ffmpeg```。
+1. 如果你使用的是 Windows，安装[Visual C++ Redist 2019](https://aka.ms/vs/16/release/vc_redist.x64.exe)。如果你使用的是
+   MacOS 或 Linux ，确保已安装```ffmpeg```。
 
 2. 从[Release页](https://github.com/freyjaSubOCR/freyja-sub-ocr-electron/releases)下载最新版本的Freyja并将其解压缩。
 
@@ -43,3 +44,12 @@ Freyja 需要 16GB 的内存。强烈推荐使用带 Nvidia 显卡的电脑，�
 - 无法使用GPU模型。
 
   确认你有 Nvidia 的显卡。如果确实有 Nvidia 的显卡，请尝试更新驱动程序。
+
+- 程序提示 "pyTorch backend crashed"。
+
+  检查一下 ```log.log``` 中的最后一条错误信息。
+  
+  如果log中有 ```CUDA out of memory``` 的提示，说明显存不足。可以通过降低 ```batch size``` 来减少显存使用。如果降低
+  ```batch size``` 不起作用，说明你的显存太小，请换用CPU模型。
+
+  如果log显示其他错误，请尝试改变视频裁剪的大小然后重试。
