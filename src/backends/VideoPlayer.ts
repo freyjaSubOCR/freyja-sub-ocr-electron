@@ -23,7 +23,7 @@ class VideoPlayer {
         return new VideoProperties(videoProperties)
     }
 
-    async openVideo(path: string): Promise<VideoProperties | null> {
+    async openVideo(path: string): Promise<VideoProperties> {
         this._demuxer = await beamcoder.demuxer(path)
         // eslint-disable-next-line @typescript-eslint/naming-convention
         this._decoder = beamcoder.decoder({ 'demuxer': this._demuxer, 'stream_index': 0 })
@@ -63,7 +63,9 @@ class VideoPlayer {
         }
 
         logger.debug(`Opened Video: ${path}`)
-        const videoProperties = this.videoProperties
+        // Since we just created the demuxer, the videoProperties cannot be null
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        const videoProperties = this.videoProperties!
         logger.debug(videoProperties)
         return videoProperties
     }
