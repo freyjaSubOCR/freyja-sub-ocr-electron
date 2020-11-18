@@ -42,6 +42,10 @@ you meet with your ```log.log``` file on github issues.
 
 ## Common issues
 
+- No audio on video playback.
+
+  Current video player cannot play audio.
+
 - Cannot play the video.
 
   Maybe the video is an vfr (variable frame rate) video, which is not supported on current video player
