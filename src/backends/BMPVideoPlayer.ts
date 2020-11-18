@@ -20,6 +20,14 @@ class BMPVideoPlayer extends VideoPlayer {
                 return null
             }
         })
+        ipcMain.handle('VideoPlayer:GetVideoProperties', () => {
+            try {
+                return this.videoProperties
+            } catch (error) {
+                logger.error((error as Error).message)
+                return null
+            }
+        })
         ipcMain.handle('VideoPlayer:GetImage', async (e, ...args) => {
             try {
                 return await this.getImage2(args[0])

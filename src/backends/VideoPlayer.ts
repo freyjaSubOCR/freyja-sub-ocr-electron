@@ -9,7 +9,21 @@ class VideoPlayer {
     private _formatFilter: beamcoder.Filterer | null = null
     protected startTimestamp = 0
 
-    async openVideo(path: string): Promise<VideoProperties> {
+    get videoProperties(): VideoProperties | null {
+        if (this._demuxer == null) return null
+
+        const videoProperties: IVideoProperties = {
+            duration: this._demuxer.streams[0].duration !== null ? this._demuxer.streams[0].duration : this._demuxer.duration,
+            timeBase: this._demuxer.streams[0].time_base,
+            fps: this._demuxer.streams[0].avg_frame_rate,
+            width: this._demuxer.streams[0].codecpar.width,
+            height: this._demuxer.streams[0].codecpar.height
+        }
+
+        return new VideoProperties(videoProperties)
+    }
+
+    async openVideo(path: string): Promise<VideoProperties | null> {
         this._demuxer = await beamcoder.demuxer(path)
         // eslint-disable-next-line @typescript-eslint/naming-convention
         this._decoder = beamcoder.decoder({ 'demuxer': this._demuxer, 'stream_index': 0 })
@@ -47,18 +61,11 @@ class VideoPlayer {
             logger.debug(`set start timestamp to ${startTimestamp}`)
             this.startTimestamp = startTimestamp
         }
-        const videoProperties: IVideoProperties = {
-            duration: this._demuxer.streams[0].duration !== null ? this._demuxer.streams[0].duration : this._demuxer.duration,
-            timeBase: this._demuxer.streams[0].time_base,
-            fps: this._demuxer.streams[0].avg_frame_rate,
-            width: this._demuxer.streams[0].codecpar.width,
-            height: this._demuxer.streams[0].codecpar.height
-        }
 
         logger.debug(`Opened Video: ${path}`)
+        const videoProperties = this.videoProperties
         logger.debug(videoProperties)
-
-        return new VideoProperties(videoProperties)
+        return videoProperties
     }
 
     async seekByTime(time: number): Promise<void> {

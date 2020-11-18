@@ -71,7 +71,7 @@ class Mainwindow extends Vue {
         if (path === undefined) {
             throw new Error('Cannot load video from path')
         }
-        const videoProperties = (await global.ipcRenderer.invoke('VideoPlayer:OpenVideo', path)) as VideoProperties | null
+        const videoProperties = (await global.ipcRenderer.invoke('VideoPlayer:GetVideoProperties')) as VideoProperties | null
         if (videoProperties != null) {
             this.videoProperties = new VideoProperties(videoProperties)
             this.currentFrame = 0
