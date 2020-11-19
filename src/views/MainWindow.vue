@@ -78,7 +78,7 @@ class Mainwindow extends Vue {
         }
     }
 
-    async created(): Promise<void> {
+    async mounted(): Promise<void> {
         const path = this.$route.params.path as string | undefined
         await this.openVideo(path)
         this.subtitleInfos = ((await global.ipcRenderer.invoke('TorchOCRTaskScheduler:subtitleInfos')) as Array<SubtitleInfo>)
