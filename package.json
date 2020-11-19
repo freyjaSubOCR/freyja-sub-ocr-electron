@@ -23,7 +23,7 @@
     },
     "main": "background.js",
     "dependencies": {
-        "beamcoder": "https://github.com/arition/beamcoder#v0.6.10",
+        "beamcoder": "https://github.com/arition/beamcoder#refs/heads/master",
         "core-js": "^3.7.0",
         "d3": "^6.2.0",
         "js-levenshtein": "^1.1.6",
