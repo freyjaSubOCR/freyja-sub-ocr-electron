@@ -14,6 +14,7 @@ class RawVideoPlayer extends VideoPlayer {
             await this.seekByTimestamp(timestamp)
             let decodedFrames: Array<beamcoder.Frame>
             do {
+                logger.debug(`RawVideoPlayer: decoding for timestamp ${timestamp}`)
                 decodedFrames = await this.decode()
                 decodedFrames = await this.convertPixelFormat(decodedFrames)
 
@@ -67,6 +68,7 @@ class RawVideoPlayer extends VideoPlayer {
         if (this._renderedCache.length === 0) {
             let decodedFrames: Array<beamcoder.Frame>
             try {
+                logger.debug('RawVideoPlayer: decoding for timestamp unknown')
                 decodedFrames = await this.decode()
             } catch (error) {
                 if (error instanceof Error && error.message === 'Reach end of file') {

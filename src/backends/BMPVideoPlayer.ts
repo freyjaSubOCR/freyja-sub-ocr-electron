@@ -2,18 +2,16 @@ import { ipcMain } from 'electron'
 import beamcoder from 'beamcoder'
 import { RectPos, RenderedVideo } from '@/interfaces'
 import logger from '@/logger'
-import Config from '@/config'
 import VideoPlayer from './VideoPlayer'
 
 class BMPVideoPlayer extends VideoPlayer {
     private _decodedCache: Array<Beamcoder.Frame> = []
-    private _renderedCache: Array<RenderedVideo> = []
     private _rectPositons: Array<RectPos> | null = null
-    private _preloadPromise = new Promise((resolve) => resolve())
 
     registerIPCListener(): void {
         ipcMain.handle('VideoPlayer:OpenVideo', async (e, ...args) => {
             try {
+                logger.debug('BMPVideoPlayer:OpenVideo')
                 return await this.openVideo(args[0])
             } catch (error) {
                 logger.error((error as Error).message)
@@ -22,18 +20,38 @@ class BMPVideoPlayer extends VideoPlayer {
         })
         ipcMain.handle('VideoPlayer:GetVideoProperties', () => {
             try {
+                logger.debug('BMPVideoPlayer:GetVideoProperties')
                 return this.videoProperties
             } catch (error) {
                 logger.error((error as Error).message)
                 return null
             }
         })
+        ipcMain.handle('VideoPlayer:Seek', async (e, ...args) => {
+            try {
+                logger.debug(`BMPVideoPlayer:Seek ${args[0] as number}`)
+                return await this.seekByTimestamp(args[0])
+            } catch (error) {
+                logger.error((error as Error).message)
+                return (error as Error)
+            }
+        })
         ipcMain.handle('VideoPlayer:GetImage', async (e, ...args) => {
             try {
+                logger.debug(`BMPVideoPlayer:GetImage ${args[0] as number}`)
                 return await this.getImage2(args[0])
             } catch (error) {
                 logger.error((error as Error).message)
                 return (error as Error)
+            }
+        })
+        ipcMain.handle('VideoPlayer:CloseVideo', () => {
+            try {
+                logger.debug('BMPVideoPlayer:CloseVideo')
+                return this.closeVideo()
+            } catch (error) {
+                logger.error((error as Error).message)
+                return null
             }
         })
     }
@@ -51,6 +69,7 @@ class BMPVideoPlayer extends VideoPlayer {
             await this.seekByTimestamp(timestamp)
             let decodedFrames: Array<beamcoder.Frame>
             do {
+                logger.debug(`BMPVideoPlayer: decoding for timestamp ${timestamp}`)
                 decodedFrames = await this.decode()
                 decodedFrames = await this.convertPixelFormat(decodedFrames)
 
@@ -63,8 +82,6 @@ class BMPVideoPlayer extends VideoPlayer {
                 if (decodedFrames == null) {
                     throw new Error('Unknown decode error')
                 }
-
-                logger.debug(`decoded frame ${decodedFrames.map(t => t.best_effort_timestamp).join(', ')}`)
 
                 // if (decodedFrames.length > 0 && decodedFrames[0].best_effort_timestamp > timestamp) {
                 //     throw new Error('Unsupported variable frame rate video. Try to transcode the video using ffmpeg.\n' +
@@ -83,87 +100,8 @@ class BMPVideoPlayer extends VideoPlayer {
             timestamp: decodedFrame[0].best_effort_timestamp,
             keyFrame: decodedFrame[0].key_frame
         }
-        logger.debug(`send frame on timestamp ${timestamp}`)
+        logger.debug(`BMPVideoPlayer: send frame on timestamp ${timestamp}`)
         return renderedFrame
-    }
-
-    async getImage(timestamp: number): Promise<RenderedVideo> {
-        if (timestamp < this.startTimestamp) {
-            // fake a frame
-            return {
-                data: Buffer.from([]),
-                timestamp: timestamp,
-                keyFrame: false
-            }
-        }
-        if (!this._renderedCache.some(t => t.timestamp === timestamp)) {
-            logger.debug(`cache miss on ${timestamp}`)
-            try {
-                await this._preloadPromise
-            } catch {
-                this._preloadPromise = new Promise(resolve => resolve())
-            }
-            if (!this._renderedCache.some(t => t.timestamp === timestamp)) {
-                await this.renderImage(timestamp)
-                this._preloadPromise = this._preloadPromise.then(() => this.renderImage(),
-                    () => { this._preloadPromise = new Promise(resolve => resolve()) })
-            }
-        }
-
-        const renderedFrame = this._renderedCache.filter(t => t.timestamp === timestamp)
-        if (renderedFrame.length === 0) {
-            throw new Error('Cannot find rendered timestamp from cache')
-        } else if (renderedFrame.length > 1) {
-            logger.debug(`duplicate cache for timestamp ${timestamp}`)
-        }
-        const targetFrame = renderedFrame[0]
-
-        while (this._renderedCache.length > Config.cachedFrames) {
-            this._renderedCache.shift()
-        }
-
-        if (targetFrame.keyFrame) {
-            logger.debug(`preload on ${timestamp}`)
-            this._preloadPromise = this._preloadPromise.then(() => this.renderImage(),
-                () => { this._preloadPromise = new Promise(resolve => resolve()) })
-        }
-
-        logger.debug(`send frame on timestamp ${timestamp}`)
-        return targetFrame
-    }
-
-    async renderImage(timestamp?: number | undefined): Promise<void> {
-        logger.debug(`start render frame on timestamp ${timestamp ?? 'undefined'}`)
-        if (timestamp !== undefined) {
-            await this.seekByTimestamp(timestamp)
-        }
-        let decodedFrames: Array<beamcoder.Frame>
-        do {
-            decodedFrames = await this.decode()
-            decodedFrames = await this.convertPixelFormat(decodedFrames)
-
-            if (this._rectPositons !== null) {
-                decodedFrames = this.drawRect(decodedFrames)
-            }
-
-            // error upstream type definitions
-            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-            if (decodedFrames == null) {
-                throw new Error('Unknown decode error')
-            }
-
-            logger.debug(`decoded frame ${decodedFrames.map(t => t.best_effort_timestamp).join(', ')}`)
-            // Cannot use promise.all since the encode operation must be sequential
-            for (const frame of decodedFrames) {
-                this._renderedCache.push({
-                    data: (await this.encode(frame)).data,
-                    timestamp: frame.best_effort_timestamp,
-                    keyFrame: frame.key_frame
-                })
-            }
-        }
-        // eslint-disable-next-line no-unmodified-loop-condition
-        while (timestamp !== undefined && !this._renderedCache.some(t => t.timestamp === timestamp))
     }
 
     drawRect(frames: Array<beamcoder.Frame>): Array<beamcoder.Frame> {
