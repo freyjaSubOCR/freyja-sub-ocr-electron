@@ -38,11 +38,7 @@ class TorchOCRTaskScheduler {
                     logger.error((error as Error).message)
                     parentPort.postMessage(['Init', null])
                 }
-            }
-        })
-        // eslint-disable-next-line @typescript-eslint/no-misused-promises
-        parentPort.on('message', async (args: [string]) => {
-            if (args[0] === 'Start') {
+            } else if (args[0] === 'Start') {
                 try {
                     const result = await this.start()
                     parentPort.postMessage(['Start', result])
@@ -50,10 +46,7 @@ class TorchOCRTaskScheduler {
                     logger.error((error as Error).message)
                     parentPort.postMessage(['Start', null])
                 }
-            }
-        })
-        parentPort.on('message', (args: [string]) => {
-            if (args[0] === 'CleanUpSubtitleInfos') {
+            } else if (args[0] === 'CleanUpSubtitleInfos') {
                 try {
                     const result = this.cleanUpSubtitleInfos()
                     parentPort.postMessage(['CleanUpSubtitleInfos', result])
@@ -61,20 +54,14 @@ class TorchOCRTaskScheduler {
                     logger.error((error as Error).message)
                     parentPort.postMessage(['CleanUpSubtitleInfos', null])
                 }
-            }
-        })
-        parentPort.on('message', (args: [string]) => {
-            if (args[0] === 'currentProcessingFrame') {
+            } else if (args[0] === 'currentProcessingFrame') {
                 try {
                     parentPort.postMessage(['currentProcessingFrame', this.currentProcessingFrame])
                 } catch (error) {
                     logger.error((error as Error).message)
                     parentPort.postMessage(['currentProcessingFrame', null])
                 }
-            }
-        })
-        parentPort.on('message', (args: [string]) => {
-            if (args[0] === 'totalFrame') {
+            } else if (args[0] === 'totalFrame') {
                 try {
                     if (this._torchOCR.videoProperties === undefined) {
                         throw new Error('VideoPlayer is not initialized')
@@ -84,15 +71,20 @@ class TorchOCRTaskScheduler {
                     logger.error((error as Error).message)
                     parentPort.postMessage(['totalFrame', null])
                 }
-            }
-        })
-        parentPort.on('message', (args: [string]) => {
-            if (args[0] === 'subtitleInfos') {
+            } else if (args[0] === 'subtitleInfos') {
                 try {
                     parentPort.postMessage(['subtitleInfos', this.subtitleInfos])
                 } catch (error) {
                     logger.error((error as Error).message)
                     parentPort.postMessage(['subtitleInfos', null])
+                }
+            } else if (args[0] === 'Close') {
+                try {
+                    const result = this.close()
+                    parentPort.postMessage(['Close', result])
+                } catch (error) {
+                    logger.error((error as Error).message)
+                    parentPort.postMessage(['Close', null])
                 }
             }
         })
@@ -102,6 +94,11 @@ class TorchOCRTaskScheduler {
         this._torchOCR.initRCNN()
         await this._torchOCR.initOCR()
         await this._torchOCR.initVideoPlayer(path)
+    }
+
+    close(): void {
+        this._torchOCR.closeVideoPlayer()
+        this._torchOCR = new TorchOCR()
     }
 
     async start(): Promise<Array<SubtitleInfo>> {

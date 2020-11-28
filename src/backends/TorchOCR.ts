@@ -20,10 +20,6 @@ class TorchOCR {
         return this._videoProperties
     }
 
-    public get videoPlayer(): RawVideoPlayer | undefined {
-        return this._videoPlayer
-    }
-
     initRCNN(path: string | null = null): void {
         if (path == null) { path = Config.rcnnModulePath }
         this._rcnnModule = new ScriptModule(path)
@@ -44,8 +40,16 @@ class TorchOCR {
         return this.videoProperties as VideoProperties
     }
 
+    closeVideoPlayer(): void {
+        if (this._videoPlayer !== undefined) {
+            this._videoPlayer.closeVideo()
+        }
+        this._videoPlayer = undefined
+        this._videoProperties = undefined
+    }
+
     async readRawFrame(frame: number | undefined): Promise<Buffer | null> {
-        if (this.videoPlayer === undefined || this.videoProperties === undefined) {
+        if (this._videoPlayer === undefined || this.videoProperties === undefined) {
             throw new Error('VideoPlayer is not initialized')
         }
         const unitFrame = this.videoProperties.timeBase[1] *
@@ -54,7 +58,7 @@ class TorchOCR {
                 this.videoProperties.fps[0]
         let rawFrame: RenderedVideo
         if (frame === undefined) {
-            const rawFrameNullable = await this.videoPlayer.renderImageSeq()
+            const rawFrameNullable = await this._videoPlayer.renderImageSeq()
             if (rawFrameNullable === null) {
                 return null
             } else {
@@ -62,7 +66,7 @@ class TorchOCR {
             }
         } else {
             const timestamp = lodash.toInteger(frame * unitFrame)
-            rawFrame = await this.videoPlayer.renderImage(timestamp)
+            rawFrame = await this._videoPlayer.renderImage(timestamp)
         }
         let rawData = rawFrame.data[0] as Buffer
         rawData = rawData.slice(0, 3 * this.videoProperties.height * this.videoProperties.width)

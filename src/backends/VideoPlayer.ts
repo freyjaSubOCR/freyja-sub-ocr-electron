@@ -70,22 +70,34 @@ class VideoPlayer {
         return videoProperties
     }
 
+    closeVideo(): void {
+        if (this._demuxer !== null) {
+            // upstream type def bug
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+            this._demuxer.forceClose()
+        }
+        this._demuxer = null
+        this._decoder = null
+        this._encoder = null
+        this._formatFilter = null
+    }
+
     async seekByTime(time: number): Promise<void> {
-        logger.debug(`seek to time ${time}`)
         if (this._demuxer == null) {
             throw new Error('No video is opened for seek')
         }
         await this._demuxer.seek({ 'time': time })
+        logger.debug(`seeked to time ${time}`)
     }
 
     async seekByTimestamp(timestamp: number): Promise<void> {
         timestamp = Math.floor(timestamp)
-        logger.debug(`seek to timestamp ${timestamp}`)
         if (this._demuxer == null) {
             throw new Error('No video is opened for seek')
         }
         // eslint-disable-next-line @typescript-eslint/naming-convention
         await this._demuxer.seek({ 'timestamp': timestamp, 'stream_index': 0 })
+        logger.debug(`seeked to timestamp ${timestamp}`)
     }
 
     protected async convertPixelFormat(decodedFrames: Array<beamcoder.Frame>): Promise<Array<beamcoder.Frame>> {
@@ -117,6 +129,7 @@ class VideoPlayer {
     }
 
     protected async decode(): Promise<Array<beamcoder.Frame>> {
+        logger.debug('start decoding...')
         if (this._demuxer == null || this._decoder == null) {
             throw new Error('No video is opened for decode')
         }
@@ -144,7 +157,7 @@ class VideoPlayer {
             decodedFrames.push(...decodeResult)
         }
 
-        logger.debug(`decoded frames on timestamp ${decodedFrames.map(t => t.pts).join(' ')}`)
+        logger.debug(`decoded frames on timestamp ${decodedFrames.map(t => t.best_effort_timestamp).join(' ')}`)
         return decodedFrames
     }
 }

@@ -71,14 +71,14 @@ class Mainwindow extends Vue {
         if (path === undefined) {
             throw new Error('Cannot load video from path')
         }
-        const videoProperties = (await global.ipcRenderer.invoke('VideoPlayer:GetVideoProperties')) as VideoProperties | null
+        const videoProperties = (await global.ipcRenderer.invoke('VideoPlayer:OpenVideo', path)) as VideoProperties | null
         if (videoProperties != null) {
             this.videoProperties = new VideoProperties(videoProperties)
             this.currentFrame = 0
         }
     }
 
-    async mounted(): Promise<void> {
+    async created(): Promise<void> {
         const path = this.$route.params.path as string | undefined
         await this.openVideo(path)
         this.subtitleInfos = ((await global.ipcRenderer.invoke('TorchOCRTaskScheduler:subtitleInfos')) as Array<SubtitleInfo>)

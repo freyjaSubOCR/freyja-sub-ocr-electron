@@ -133,6 +133,24 @@ class TorchOCRTaskSchedulerWorker {
                 return null
             }
         })
+        ipcMain.handle('TorchOCRTaskScheduler:Close', async () => {
+            try {
+                if (this.worker === undefined) this.initWorker()
+                const worker = this.worker
+                this.worker?.postMessage(['Close'])
+                return await new Promise((resolve) => {
+                    this.worker?.on('message', function handler(rargs: Array<unknown>) {
+                        if (rargs[0] as string === 'Close') {
+                            worker?.off('message', handler)
+                            resolve(rargs[1])
+                        }
+                    })
+                })
+            } catch (error) {
+                logger.error((error as Error).message)
+                return null
+            }
+        })
     }
 }
 

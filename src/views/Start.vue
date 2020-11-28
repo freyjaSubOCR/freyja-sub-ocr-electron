@@ -354,6 +354,8 @@ class Start extends Vue {
             if (await global.ipcRenderer.invoke('TorchOCRTaskScheduler:Start') !== null) {
                 if (await global.ipcRenderer.invoke('TorchOCRTaskScheduler:CleanUpSubtitleInfos') !== null) {
                     clearInterval(interval)
+                    await global.ipcRenderer.invoke('TorchOCRTaskScheduler:Close')
+                    await global.ipcRenderer.invoke('VideoPlayer:CloseVideo')
                     await new Promise((resolve) => setTimeout(resolve, 1000))
                     await this.$router.push({ name: 'MainWindow', params: { 'path': this.path } })
                     this.processing = false
@@ -362,6 +364,7 @@ class Start extends Vue {
             }
             clearInterval(interval)
         }
+        await global.ipcRenderer.invoke('TorchOCRTaskScheduler:Close')
         this.processing = false
         await global.ipcRenderer.invoke('CommonIpc:ErrorBox', 'pyTorch backend crashed, please try again.')
     }
