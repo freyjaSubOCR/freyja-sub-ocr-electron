@@ -1,5 +1,7 @@
 # Freyja
 
+[![GitHub release](https://img.shields.io/github/release/freyjaSubOCR/freyja-sub-ocr-electron)](https://GitHub.com/freyjaSubOCR/freyja-sub-ocr-electron/releases/)
+
 Nodejs + electron user interface for freyja subtitle OCR extractor.
 
 Still in beta. All functionality are useable, but you may meet bug / crash when using the app. Please report any bugs
