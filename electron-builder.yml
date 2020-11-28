@@ -3,6 +3,7 @@ asarUnpack:
   - node_modules/bindings
   - node_modules/file-uri-to-path
   - node_modules/js-levenshtein
+  - node_modules/segfault-handler
 appId: com.freyja.freyja-electron
 mac:
   category: public.app-category.productivity

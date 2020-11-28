@@ -9,7 +9,10 @@ import TorchOCRTaskSchedulerWorker from '@/backends/TorchOCRTaskSchedulerWorker'
 import BMPVideoPlayer from '@/backends/BMPVideoPlayer'
 import ASSGenerator from '@/backends/ASSGenerator'
 import ConfigIpc from '@/configIpc'
+import SegfaultHandler from 'segfault-handler'
+
 const isDevelopment = process.env.NODE_ENV !== 'production'
+SegfaultHandler.registerHandler('crash.log')
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
