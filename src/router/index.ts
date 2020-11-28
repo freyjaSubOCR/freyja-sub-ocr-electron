@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
 import Start from '../views/Start.vue'
+import MainWindow from '../views/MainWindow.vue'
 
 Vue.use(VueRouter)
 
@@ -13,7 +14,7 @@ const routes: Array<RouteConfig> = [
     {
         path: '/MainWindow',
         name: 'MainWindow',
-        component: () => import(/* webpackChunkName: "MainWindow" */ '../views/MainWindow.vue')
+        component: MainWindow
     }
 ]
 
