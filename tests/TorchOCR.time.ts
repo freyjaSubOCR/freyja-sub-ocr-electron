@@ -12,9 +12,9 @@ void (async () => {
         console.log(`Init torchOCR: ${(performance.now() - tStart)}ms`)
 
         const step = 20
-        let tensorDataPromise = new Promise(resolve => resolve())
-        let rcnnPromise = new Promise(resolve => resolve())
-        let ocrPromise = new Promise(resolve => resolve())
+        let tensorDataPromise = new Promise<Tensor | null>(resolve => resolve(null))
+        let rcnnPromise = new Promise<Array<Record<string, Tensor>> | null>(resolve => resolve(null))
+        let ocrPromise = new Promise<void | null>(resolve => resolve(null))
         const ocrPromiseBuffer = [ocrPromise, ocrPromise, ocrPromise, ocrPromise]
         const tLoop = performance.now()
         for (let frame = 0; frame < 800; frame += step) {
@@ -36,7 +36,8 @@ void (async () => {
 
             rcnnPromise = Promise.all([rcnnPromise, tensorDataPromise]).then(async (values) => {
                 tStart = performance.now()
-                const inputTensor = values[1] as Tensor
+                const inputTensor = values[1]
+                if (inputTensor === null) return null
                 // eslint-disable-next-line @typescript-eslint/no-unused-vars
                 const rcnnResults = await torchOCR.rcnnForward(inputTensor)
                 console.log(`Inferance RCNN ${frame}: ${(performance.now() - tStart)}ms`)
@@ -45,8 +46,10 @@ void (async () => {
 
             ocrPromise = Promise.all([ocrPromise, tensorDataPromise, rcnnPromise]).then(async (values) => {
                 tStart = performance.now()
-                const inputTensor = values[1] as Tensor
-                const rcnnResults = values[2] as Array<Record<string, Tensor>>
+                const inputTensor = values[1]
+                if (inputTensor === null) return null
+                const rcnnResults = values[2]
+                if (rcnnResults === null) return null
                 const subtitleInfos = torchOCR.rcnnParse(rcnnResults)
                 const boxesTensor = torchOCR.subtitleInfoToTensor(subtitleInfos)
                 console.log(`Copy Tensor data (box) ${frame}: ${(performance.now() - tStart)}ms`)

@@ -26,9 +26,9 @@ class TorchOCRWorker {
         this.currentProcessingFrame = 0
         this.subtitleInfos = []
         const step = Config.batchSize
-        let tensorDataPromise = new Promise(resolve => resolve())
-        let rcnnPromise = new Promise(resolve => resolve())
-        let ocrPromise = new Promise(resolve => resolve())
+        let tensorDataPromise = new Promise<Tensor | null>(resolve => resolve(null))
+        let rcnnPromise = new Promise<Array<Record<string, Tensor>> | null>(resolve => resolve(null))
+        let ocrPromise = new Promise<void | null>(resolve => resolve(null))
         const ocrPromiseBuffer = [ocrPromise, ocrPromise, ocrPromise, ocrPromise]
         if (this._torchOCR.videoProperties === undefined) {
             throw new Error('VideoPlayer is not initialized')
@@ -60,7 +60,7 @@ class TorchOCRWorker {
 
             rcnnPromise = Promise.all([rcnnPromise, tensorDataPromise]).then(async (values) => {
                 logger.debug(`rcnn on frame ${currentFrame}...`)
-                const inputTensor = values[1] as Tensor | null
+                const inputTensor = values[1]
                 if (inputTensor === null) return null
                 const rcnnResults = await this._torchOCR.rcnnForward(inputTensor)
                 return rcnnResults
@@ -68,9 +68,10 @@ class TorchOCRWorker {
 
             ocrPromise = Promise.all([ocrPromise, tensorDataPromise, rcnnPromise]).then(async (values) => {
                 logger.debug(`ocr on frame ${currentFrame}...`)
-                const inputTensor = values[1] as Tensor | null
+                const inputTensor = values[1]
                 if (inputTensor === null) return null
-                const rcnnResults = values[2] as Array<Record<string, Tensor>>
+                const rcnnResults = values[2]
+                if (rcnnResults === null) return null
                 const subtitleInfos = this._torchOCR.rcnnParse(rcnnResults)
                 if (subtitleInfos.length !== 0) {
                     const boxesTensor = this._torchOCR.subtitleInfoToTensor(subtitleInfos)

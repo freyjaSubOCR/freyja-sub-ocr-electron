@@ -65,7 +65,7 @@ export default class VideoPlayer extends Vue {
     frameData: Buffer | null = null
     debouncedUpdatePicData?: lodash.DebouncedFunc<(frame: number) => Promise<void>>
     play = false
-    updatePicDataPromise = new Promise((resolve) => resolve())
+    updatePicDataPromise = new Promise<void>((resolve) => resolve())
     errorMessage = ''
     currentDisplayFrame = -1
 
@@ -122,7 +122,7 @@ export default class VideoPlayer extends Vue {
             this.currentDisplayFrame = -1
             this.updatePicDataPromise = this.updatePicDataPromise.then(() => this.updatePicData(currentFrame))
         } else if (currentFrame !== oldFrame) {
-            await new Promise((resolve) => resolve())
+            await new Promise<void>((resolve) => resolve())
             this.updatePicDataPromise = this.updatePicDataPromise.then(() => this.updatePicData(currentFrame))
             // if (currentFrame - oldFrame === 1) {
             //     this.updatePicDataPromise = this.updatePicDataPromise.then(() => this.updatePicData(currentFrame))
