@@ -1,94 +1,15 @@
 import TorchOCR from './TorchOCR'
-import { parentPort as parentPortNull } from 'worker_threads'
 import logger from '@/logger'
 import { Tensor } from 'torch-js'
 import { IConfig, Config } from '@/config'
 import { SubtitleInfo } from '@/SubtitleInfo'
 import levenshtein from 'js-levenshtein'
+import { expose } from 'threads/worker'
 
-class TorchOCRTaskScheduler {
+class TorchOCRWorker {
     private _torchOCR: TorchOCR = new TorchOCR()
     currentProcessingFrame = 0
     subtitleInfos: Array<SubtitleInfo> = []
-
-    registerWorkerListener(): void {
-        if (parentPortNull === null) {
-            throw new Error('Not in a worker thread')
-        }
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        const parentPort = parentPortNull
-        // eslint-disable-next-line @typescript-eslint/no-misused-promises
-        parentPort.on('message', async (args: [string, string, IConfig]) => {
-            if (args[0] === 'Init') {
-                try {
-                    Config.import(args[2])
-                    if (/\.asar[/\\]/.exec(Config.rcnnModulePath)) {
-                        Config.rcnnModulePath = Config.rcnnModulePath.replace(/\.asar([/\\])/, '.asar.unpacked$1')
-                    }
-                    if (/\.asar[/\\]/.exec(Config.ocrModulePath)) {
-                        Config.ocrModulePath = Config.ocrModulePath.replace(/\.asar([/\\])/, '.asar.unpacked$1')
-                    }
-                    if (/\.asar[/\\]/.exec(Config.ocrCharsPath)) {
-                        Config.ocrCharsPath = Config.ocrCharsPath.replace(/\.asar([/\\])/, '.asar.unpacked$1')
-                    }
-                    logger.debug(Config.export())
-                    const result = await this.init(args[1])
-                    parentPort.postMessage(['Init', result])
-                } catch (error) {
-                    logger.error((error as Error).message)
-                    parentPort.postMessage(['Init', null])
-                }
-            } else if (args[0] === 'Start') {
-                try {
-                    const result = await this.start()
-                    parentPort.postMessage(['Start', result])
-                } catch (error) {
-                    logger.error((error as Error).message)
-                    parentPort.postMessage(['Start', null])
-                }
-            } else if (args[0] === 'CleanUpSubtitleInfos') {
-                try {
-                    const result = this.cleanUpSubtitleInfos()
-                    parentPort.postMessage(['CleanUpSubtitleInfos', result])
-                } catch (error) {
-                    logger.error((error as Error).message)
-                    parentPort.postMessage(['CleanUpSubtitleInfos', null])
-                }
-            } else if (args[0] === 'currentProcessingFrame') {
-                try {
-                    parentPort.postMessage(['currentProcessingFrame', this.currentProcessingFrame])
-                } catch (error) {
-                    logger.error((error as Error).message)
-                    parentPort.postMessage(['currentProcessingFrame', null])
-                }
-            } else if (args[0] === 'totalFrame') {
-                try {
-                    if (this._torchOCR.videoProperties === undefined) {
-                        throw new Error('VideoPlayer is not initialized')
-                    }
-                    parentPort.postMessage(['totalFrame', this._torchOCR.videoProperties.lastFrame])
-                } catch (error) {
-                    logger.error((error as Error).message)
-                    parentPort.postMessage(['totalFrame', null])
-                }
-            } else if (args[0] === 'subtitleInfos') {
-                try {
-                    parentPort.postMessage(['subtitleInfos', this.subtitleInfos])
-                } catch (error) {
-                    logger.error((error as Error).message)
-                    parentPort.postMessage(['subtitleInfos', null])
-                }
-            } else if (args[0] === 'Close') {
-                try {
-                    const result = this.close()
-                    parentPort.postMessage(['Close', result])
-                } catch (error) {
-                    logger.error((error as Error).message)
-                    parentPort.postMessage(['Close', null])
-                }
-            }
-        })
-    }
 
     async init(path: string): Promise<void> {
         this._torchOCR.initRCNN()
@@ -209,4 +130,31 @@ class TorchOCRTaskScheduler {
     }
 }
 
-export default TorchOCRTaskScheduler
+const torchOCRWorker = new TorchOCRWorker()
+
+const torchOCRWorkerThreadInterface = {
+    importConfig(config: IConfig): void {
+        Config.import(config)
+        if (/\.asar[/\\]/.exec(Config.rcnnModulePath)) {
+            Config.rcnnModulePath = Config.rcnnModulePath.replace(/\.asar([/\\])/, '.asar.unpacked$1')
+        }
+        if (/\.asar[/\\]/.exec(Config.ocrModulePath)) {
+            Config.ocrModulePath = Config.ocrModulePath.replace(/\.asar([/\\])/, '.asar.unpacked$1')
+        }
+        if (/\.asar[/\\]/.exec(Config.ocrCharsPath)) {
+            Config.ocrCharsPath = Config.ocrCharsPath.replace(/\.asar([/\\])/, '.asar.unpacked$1')
+        }
+        logger.debug(Config.export())
+    },
+    init(path: string): Promise<void> { return torchOCRWorker.init(path) },
+    start(): Promise<Array<SubtitleInfo>> { return torchOCRWorker.start() },
+    close(): void { return torchOCRWorker.close() },
+    cleanUpSubtitleInfos(): Array<SubtitleInfo> { return torchOCRWorker.cleanUpSubtitleInfos() },
+    currentProcessingFrame(): number { return torchOCRWorker.currentProcessingFrame }
+}
+
+export type TorchOCRWorkerThreadInterface = typeof torchOCRWorkerThreadInterface
+
+expose(torchOCRWorkerThreadInterface)
+
+export default TorchOCRWorker

@@ -1,4 +1,4 @@
-import TorchOCRTaskScheduler from '@/backends/TorchOCRTaskScheduler'
+import TorchOCRTaskScheduler from '@/backends/TorchOCRWorker'
 
 describe('TorchOCRTaskScheduler.ts', () => {
     it('task test', async () => {

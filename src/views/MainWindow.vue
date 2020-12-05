@@ -81,7 +81,7 @@ class Mainwindow extends Vue {
     async created(): Promise<void> {
         const path = this.$route.params.path as string | undefined
         await this.openVideo(path)
-        this.subtitleInfos = ((await global.ipcRenderer.invoke('TorchOCRTaskScheduler:subtitleInfos')) as Array<SubtitleInfo>)
+        this.subtitleInfos = ((await global.ipcRenderer.invoke('CommonStorage:subtitleInfos')) as Array<SubtitleInfo>)
             .map(t => {
                 const subtitleInfo = new SubtitleInfo(t)
                 subtitleInfo.fps = this.videoProperties.fps[0] / this.videoProperties.fps[1]

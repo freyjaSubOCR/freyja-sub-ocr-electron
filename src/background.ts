@@ -5,7 +5,8 @@ import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
 import path from 'path'
 import CommonIpc from '@/CommonIpc'
-import TorchOCRTaskSchedulerWorker from '@/backends/TorchOCRTaskSchedulerWorker'
+import CommonStorage from '@/CommonStorage'
+import TorchOCRWorkerManager from '@/backends/TorchOCRWorkerManager'
 import BMPVideoPlayer from '@/backends/BMPVideoPlayer'
 import ASSGenerator from '@/backends/ASSGenerator'
 import ConfigIpc from '@/configIpc'
@@ -17,7 +18,7 @@ SegfaultHandler.registerHandler('crash.log')
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let win: BrowserWindow | null
-let torchOCRTaskSchedulerWorker: TorchOCRTaskSchedulerWorker | undefined
+let torchOCRWorkerManager: TorchOCRWorkerManager | undefined
 
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([
@@ -53,7 +54,7 @@ function createWindow() {
 
     win.on('closed', () => {
         // ignore promise
-        void torchOCRTaskSchedulerWorker?.terminateWorker()
+        void torchOCRWorkerManager?.terminateWorker()
         win = null
     })
 }
@@ -93,10 +94,12 @@ app.on('ready', async () => {
     bmpVideoPlayer.registerIPCListener()
     const commonIpc = new CommonIpc()
     commonIpc.registerIPCListener()
+    const commonStorage = new CommonStorage()
+    commonStorage.registerIPCListener()
     const assGenerator = new ASSGenerator()
     assGenerator.registerIPCListener()
-    torchOCRTaskSchedulerWorker = new TorchOCRTaskSchedulerWorker()
-    torchOCRTaskSchedulerWorker.registerIPCListener()
+    torchOCRWorkerManager = new TorchOCRWorkerManager()
+    torchOCRWorkerManager.registerIPCListener()
     ConfigIpc.registerIPCListener()
 
     createWindow()

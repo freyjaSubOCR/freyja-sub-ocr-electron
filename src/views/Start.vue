@@ -77,6 +77,7 @@
 import { Component, Vue, Watch } from 'vue-property-decorator'
 import VideoPlayer from '@/components/VideoPlayer.vue'
 import { VideoProperties } from '@/VideoProperties'
+import { SubtitleInfo } from '@/SubtitleInfo'
 import lodash from 'lodash'
 
 @Component({
@@ -346,15 +347,17 @@ class Start extends Vue {
             await global.ipcRenderer.invoke('CommonIpc:ErrorBox', 'Cannot find models. Please download model from https://github.com/freyjaSubOCR/freyja-sub-ocr-model-zoo/releases.')
             return
         }
-        if (await global.ipcRenderer.invoke('TorchOCRTaskScheduler:Init', this.path) !== null) {
+        if (await global.ipcRenderer.invoke('TorchOCRWorker:Init', this.path) !== null) {
             // eslint-disable-next-line @typescript-eslint/no-misused-promises
             const interval = setInterval(async () => {
-                this.currentFrame = (await global.ipcRenderer.invoke('TorchOCRTaskScheduler:currentProcessingFrame') as number | null) ?? this.currentFrame
+                this.currentFrame = (await global.ipcRenderer.invoke('TorchOCRWorker:currentProcessingFrame') as number | null) ?? this.currentFrame
             }, 1000)
-            if (await global.ipcRenderer.invoke('TorchOCRTaskScheduler:Start') !== null) {
-                if (await global.ipcRenderer.invoke('TorchOCRTaskScheduler:CleanUpSubtitleInfos') !== null) {
+            if (await global.ipcRenderer.invoke('TorchOCRWorker:Start') !== null) {
+                const subtitleInfos = await global.ipcRenderer.invoke('TorchOCRWorker:CleanUpSubtitleInfos') as Array<SubtitleInfo> | null
+                if (subtitleInfos !== null) {
                     clearInterval(interval)
-                    await global.ipcRenderer.invoke('TorchOCRTaskScheduler:Close')
+                    await global.ipcRenderer.invoke('CommonStorage:subtitleInfos', subtitleInfos)
+                    await global.ipcRenderer.invoke('TorchOCRWorker:Close')
                     await global.ipcRenderer.invoke('VideoPlayer:CloseVideo')
                     await new Promise((resolve) => setTimeout(resolve, 1000))
                     await this.$router.push({ name: 'MainWindow', params: { 'path': this.path } })
@@ -364,7 +367,7 @@ class Start extends Vue {
             }
             clearInterval(interval)
         }
-        await global.ipcRenderer.invoke('TorchOCRTaskScheduler:Close')
+        await global.ipcRenderer.invoke('TorchOCRWorker:Close')
         this.processing = false
         await global.ipcRenderer.invoke('CommonIpc:ErrorBox', 'pyTorch backend crashed, please try again.')
     }
