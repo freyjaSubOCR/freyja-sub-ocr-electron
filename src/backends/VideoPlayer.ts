@@ -141,8 +141,10 @@ class VideoPlayer {
         let metKeyFrame = false
 
         while (decodedFrames.length === 0 || !metKeyFrame) {
-            const packet = await this._demuxer.read()
+            let packet = await this._demuxer.read()
             // error upstream type definitions
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+            for (; packet != null && packet.stream_index !== 0; packet = await this._demuxer.read());
             // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
             if (packet == null) {
                 decodedFrames.push(...(await this._decoder.flush()).frames)
