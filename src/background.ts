@@ -12,7 +12,7 @@ import ASSGenerator from '@/backends/ASSGenerator'
 import ConfigIpc from '@/configIpc'
 import SegfaultHandler from 'segfault-handler'
 
-const isDevelopment = process.env.NODE_ENV !== 'production'
+const isDevelopment = process.env.NODE_ENV === 'development'
 SegfaultHandler.registerHandler('crash.log')
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -45,7 +45,7 @@ function createWindow() {
     if (process.env.WEBPACK_DEV_SERVER_URL) {
         // Load the url of the dev server if in development mode
         void win.loadURL(process.env.WEBPACK_DEV_SERVER_URL)
-        if (!process.env.IS_TEST) win.webContents.openDevTools()
+        if (isDevelopment && !process.env.IS_TEST) win.webContents.openDevTools()
     } else {
         createProtocol('app')
         // Load the index.html when not in development
