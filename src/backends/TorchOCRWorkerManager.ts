@@ -13,7 +13,11 @@ class TorchOCRTaskSchedulerWorker {
 
     async initWorker(): Promise<void> {
         if (this.worker !== undefined) return
-        this.worker = await spawn<TorchOCRWorkerThreadInterface>(new Worker('@/backends/TorchOCRWorker'))
+        let workerPath = '@/backends/TorchOCRWorker'
+        if (process.env.NODE_ENV !== 'production') {
+            workerPath = '0.worker.js'
+        }
+        this.worker = await spawn<TorchOCRWorkerThreadInterface>(new Worker(workerPath))
     }
 
     async terminateWorker(): Promise<void> {

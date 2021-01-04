@@ -47,20 +47,20 @@ class Config {
         if (/\.asar[/\\]/.exec(Config.ocrCharsPath)) {
             Config.ocrCharsPath = Config.ocrCharsPath.replace(/\.asar([/\\])/, '.asar.unpacked$1')
         }
-        const rcnnModuleExists = fs.existsSync(Config.rcnnModulePath)
+        // const rcnnModuleExists = fs.existsSync(Config.rcnnModulePath)
         const ocrModuleExists = fs.existsSync(Config.ocrModulePath)
         const ocrCharsExists = fs.existsSync(Config.ocrCharsPath)
-        return rcnnModuleExists && ocrModuleExists && ocrCharsExists
+        return ocrModuleExists && ocrCharsExists
     }
 
-    private static _language = 'SC3500Chars'
+    private static _language = 'SC5000Chars'
     private static _font = 'yuan'
     static get language(): string {
         return Config._language
     }
     static set language(value: string) {
         Config._language = value
-        Config.ocrModulePath = path.resolve('./', 'models', `ocr_${Config.language}_${Config.font}.torchscript`)
+        Config.ocrModulePath = path.resolve('./', 'models', `ocrV3_${Config.language}_${Config.font}.torchscript`)
         Config.ocrCharsPath = path.resolve('./', 'models', `ocr_${Config.language}.txt`)
     }
     static get font(): string {
@@ -68,19 +68,19 @@ class Config {
     }
     static set font(value: string) {
         Config._font = value
-        Config.ocrModulePath = path.resolve('./', 'models', `ocr_${Config.language}_${Config.font}.torchscript`)
+        Config.ocrModulePath = path.resolve('./', 'models', `ocrV3_${Config.language}_${Config.font}.torchscript`)
     }
 
     static cachedFrames = 200
     static rcnnModulePath = path.resolve('./', 'models', 'object_detection.torchscript')
-    static ocrModulePath = path.resolve('./', 'models', `ocr_${Config.language}_${Config.font}.torchscript`)
+    static ocrModulePath = path.resolve('./', 'models', `ocrV3_${Config.language}_${Config.font}.torchscript`)
     static ocrCharsPath = path.resolve('./', 'models', `ocr_${Config.language}.txt`)
     static enableCuda = true
     static batchSize = 8
     static cropTop = 0
     static cropBottom = 0
     // eslint-disable-next-line @typescript-eslint/naming-convention
-    static languages: Record<string, string> = { 'Simplified Chinese': 'SC3500Chars', 'Traditional Chinese': 'TC3600Chars', 'All CJK Chars': 'CJKChars' }
+    static languages: Record<string, string> = { 'Simplified Chinese': 'SC5000Chars', 'Traditional Chinese': 'TC5000Chars' }
     // eslint-disable-next-line @typescript-eslint/naming-convention
     static fonts: Record<string, string> = { '圆体': 'yuan', '黑体': 'hei' }
 }

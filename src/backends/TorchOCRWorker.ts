@@ -12,7 +12,6 @@ class TorchOCRWorker {
     subtitleInfos: Array<SubtitleInfo> = []
 
     async init(path: string): Promise<void> {
-        this._torchOCR.initRCNN()
         await this._torchOCR.initOCR()
         await this._torchOCR.initVideoPlayer(path)
     }
@@ -27,7 +26,6 @@ class TorchOCRWorker {
         this.subtitleInfos = []
         const step = Config.batchSize
         let tensorDataPromise = new Promise<Tensor | null>(resolve => resolve(null))
-        let rcnnPromise = new Promise<Array<Record<string, Tensor>> | null>(resolve => resolve(null))
         let ocrPromise = new Promise<void | null>(resolve => resolve(null))
         const ocrPromiseBuffer = [ocrPromise, ocrPromise, ocrPromise, ocrPromise]
         if (this._torchOCR.videoProperties === undefined) {
@@ -58,39 +56,25 @@ class TorchOCRWorker {
                 return inputTensor
             })
 
-            rcnnPromise = Promise.all([rcnnPromise, tensorDataPromise]).then(async (values) => {
-                logger.debug(`rcnn on frame ${currentFrame}...`)
-                const inputTensor = values[1]
-                if (inputTensor === null) return null
-                const rcnnResults = await this._torchOCR.rcnnForward(inputTensor)
-                return rcnnResults
-            })
-
-            ocrPromise = Promise.all([ocrPromise, tensorDataPromise, rcnnPromise]).then(async (values) => {
+            ocrPromise = Promise.all([ocrPromise, tensorDataPromise]).then(async (values) => {
                 logger.debug(`ocr on frame ${currentFrame}...`)
                 const inputTensor = values[1]
                 if (inputTensor === null) return null
-                const rcnnResults = values[2]
-                if (rcnnResults === null) return null
-                const subtitleInfos = this._torchOCR.rcnnParse(rcnnResults)
-                if (subtitleInfos.length !== 0) {
-                    const boxesTensor = this._torchOCR.subtitleInfoToTensor(subtitleInfos)
-                    const ocrResults = this._torchOCR.ocrParse(await this._torchOCR.ocrForward(inputTensor, boxesTensor))
 
-                    for (const i of subtitleInfos.keys()) {
-                        subtitleInfos[i].texts = [ocrResults[i]]
-                        subtitleInfos[i].startFrame = subtitleInfos[i].startFrame + currentFrame
-                        subtitleInfos[i].endFrame = subtitleInfos[i].endFrame + currentFrame
-                        this.subtitleInfos.push(subtitleInfos[i])
-                    }
-                    boxesTensor.free()
+                const ocrResults = this._torchOCR.ocrParse(await this._torchOCR.ocrV3Forward(inputTensor))
+
+                for (const i of ocrResults.keys()) {
+                    const subtitleInfo = new SubtitleInfo(i + currentFrame, i + currentFrame + 1)
+                    subtitleInfo.texts = ocrResults[i] === '' ? [] : [ocrResults[i]]
+                    this.subtitleInfos.push(subtitleInfo)
                 }
+
                 inputTensor.free()
             })
             void ocrPromiseBuffer.shift()
             ocrPromiseBuffer.push(ocrPromise)
         }
-        await Promise.all([tensorDataPromise, rcnnPromise, ocrPromise])
+        await Promise.all([tensorDataPromise, ocrPromise])
         logger.debug(this.subtitleInfos)
         return this.subtitleInfos
     }
@@ -156,6 +140,8 @@ const torchOCRWorkerThreadInterface = {
 
 export type TorchOCRWorkerThreadInterface = typeof torchOCRWorkerThreadInterface
 
-expose(torchOCRWorkerThreadInterface)
+if (process.env.NODE_ENV !== 'test') {
+    expose(torchOCRWorkerThreadInterface)
+}
 
 export default TorchOCRWorker

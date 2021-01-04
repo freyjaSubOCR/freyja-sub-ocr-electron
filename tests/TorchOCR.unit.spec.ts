@@ -1,11 +1,6 @@
 import TorchOCR from '@/backends/TorchOCR'
 
 describe('TorchOCR.ts', () => {
-    it('Init RCNN Module', () => {
-        const torchOCR = new TorchOCR()
-        torchOCR.initRCNN()
-        expect(torchOCR).toBeDefined()
-    })
     it('Init OCR Module', async () => {
         const torchOCR = new TorchOCR()
         await torchOCR.initOCR()

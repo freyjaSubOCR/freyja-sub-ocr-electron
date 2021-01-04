@@ -162,6 +162,21 @@ class TorchOCR {
         }
     }
 
+    async ocrV3Forward(input: Tensor): Promise<Array<Array<number>>> {
+        if (this._ocrModule === undefined) {
+            throw new Error('OCR Module is not initialized')
+        }
+
+        if (Config.enableCuda && ScriptModule.isCudaAvailable()) {
+            const inputCUDA = input.cuda()
+            const result = await this._ocrModule.forward(inputCUDA) as Array<Array<number>>
+            inputCUDA.free()
+            return result
+        } else {
+            return await this._ocrModule.forward(input) as Array<Array<number>>
+        }
+    }
+
     ocrParse(ocrResults: Array<Array<number>>): Array<string> {
         return ocrResults.map(t => t.map(d => {
             if (this._ocrChars === undefined) {

@@ -6,14 +6,12 @@ void (async () => {
     try {
         let tStart = performance.now()
         const torchOCR = new TorchOCR()
-        torchOCR.initRCNN()
         await torchOCR.initOCR()
         await torchOCR.initVideoPlayer('D:/Projects/freyja-sub-ocr-electron/tests/files/sample.mp4')
         console.log(`Init torchOCR: ${(performance.now() - tStart)}ms`)
 
         const step = 20
         let tensorDataPromise = new Promise<Tensor | null>(resolve => resolve(null))
-        let rcnnPromise = new Promise<Array<Record<string, Tensor>> | null>(resolve => resolve(null))
         let ocrPromise = new Promise<void | null>(resolve => resolve(null))
         const ocrPromiseBuffer = [ocrPromise, ocrPromise, ocrPromise, ocrPromise]
         const tLoop = performance.now()
@@ -34,37 +32,20 @@ void (async () => {
                 return inputTensor
             })
 
-            rcnnPromise = Promise.all([rcnnPromise, tensorDataPromise]).then(async (values) => {
-                tStart = performance.now()
+            ocrPromise = Promise.all([ocrPromise, tensorDataPromise]).then(async (values) => {
                 const inputTensor = values[1]
                 if (inputTensor === null) return null
-                // eslint-disable-next-line @typescript-eslint/no-unused-vars
-                const rcnnResults = await torchOCR.rcnnForward(inputTensor)
-                console.log(`Inferance RCNN ${frame}: ${(performance.now() - tStart)}ms`)
-                return rcnnResults
-            })
-
-            ocrPromise = Promise.all([ocrPromise, tensorDataPromise, rcnnPromise]).then(async (values) => {
-                tStart = performance.now()
-                const inputTensor = values[1]
-                if (inputTensor === null) return null
-                const rcnnResults = values[2]
-                if (rcnnResults === null) return null
-                const subtitleInfos = torchOCR.rcnnParse(rcnnResults)
-                const boxesTensor = torchOCR.subtitleInfoToTensor(subtitleInfos)
-                console.log(`Copy Tensor data (box) ${frame}: ${(performance.now() - tStart)}ms`)
 
                 tStart = performance.now()
                 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-                const ocrResults = torchOCR.ocrParse(await torchOCR.ocrForward(inputTensor, boxesTensor))
+                const ocrResults = torchOCR.ocrParse(await torchOCR.ocrV3Forward(inputTensor))
                 console.log(`Inferance OCR ${frame}: ${(performance.now() - tStart)}ms`)
                 inputTensor.free()
-                boxesTensor.free()
             })
             void ocrPromiseBuffer.shift()
             ocrPromiseBuffer.push(ocrPromise)
         }
-        await Promise.all([tensorDataPromise, rcnnPromise, ocrPromise])
+        await Promise.all([tensorDataPromise, ocrPromise])
         console.log(`\nTotal loop: ${(performance.now() - tLoop)}ms`)
     } catch (e) {
         console.log(e)

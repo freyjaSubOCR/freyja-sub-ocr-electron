@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TorchOCRTaskScheduler.ts task test 1`] = `
+Array [
+  Object {
+    "endFrame": 27,
+    "startFrame": 0,
+    "text": "我是神野惠",
+  },
+  Object {
+    "endFrame": 82,
+    "startFrame": 35,
+    "text": "是和泉纱雾的同班同学",
+  },
+  Object {
+    "endFrame": 142,
+    "startFrame": 84,
+    "text": "你为什么要让她进我们家啊",
+  },
+  Object {
+    "endFrame": 243,
+    "startFrame": 144,
+    "text": "跟我差不多岁数的女孩子都最喜欢鸡鸡了",
+  },
+  Object {
+    "endFrame": 278,
+    "startFrame": 246,
+    "text": "最…最喜欢？",
+  },
+  Object {
+    "endFrame": 372,
+    "startFrame": 284,
+    "text": "名字就叫「把小和泉从房间里拖出来！」同盟",
+  },
+  Object {
+    "endFrame": 403,
+    "startFrame": 377,
+    "text": "不出去 不出去",
+  },
+  Object {
+    "endFrame": 438,
+    "startFrame": 403,
+    "text": "我说不出去就是不出去",
+  },
+  Object {
+    "endFrame": 513,
+    "startFrame": 441,
+    "text": "哥哥想让妹妹变成什么样？",
+  },
+  Object {
+    "endFrame": 561,
+    "startFrame": 531,
+    "text": "和泉政宗？",
+  },
+  Object {
+    "endFrame": 619,
+    "startFrame": 571,
+    "text": "居然是如此年轻的女孩子？",
+  },
+  Object {
+    "endFrame": 864,
+    "startFrame": 628,
+    "text": "我的下一个作品要请情色漫画老师来担任插画师",
+  },
+]
+`;

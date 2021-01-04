@@ -1,37 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`TorchOCR.ts Intergration test 1`] = `
-Object {
-  "data": Float32Array [
-    786.7085571289062,
-    972.3910522460938,
-    1134.784423828125,
-    1053.9405517578125,
-  ],
-  "shape": Array [
-    1,
-    4,
-  ],
-}
-`;
-
-exports[`TorchOCR.ts Intergration test 2`] = `
-Array [
-  SubtitleInfo {
-    "box": Int32Array [
-      776,
-      962,
-      1144,
-      1063,
-    ],
-    "endFrame": 1,
-    "startFrame": 0,
-    "texts": Array [],
-  },
-]
-`;
-
-exports[`TorchOCR.ts Intergration test 3`] = `
 Array [
   "我是神野惠",
 ]
