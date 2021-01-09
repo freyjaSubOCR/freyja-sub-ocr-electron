@@ -13,7 +13,7 @@ you meet with your ```log.log``` file on github issues.
 
 ## System requirements
 
-16GB of RAM required. Having a recent Nvidia GPU is strongly recommended or the process will be extremely slow.
+8GB of RAM required. Having a recent Nvidia GPU is strongly recommended or the process will be extremely slow.
 
 ## Usage
 
