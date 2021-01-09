@@ -13,7 +13,7 @@ class TorchOCRTaskSchedulerWorker {
 
     async initWorker(): Promise<void> {
         if (this.worker !== undefined) return
-        let workerPath = '@/backends/TorchOCRWorker'
+        let workerPath = '0.worker.js'
         if (process.env.NODE_ENV !== 'production') {
             workerPath = '0.worker.js'
         }
