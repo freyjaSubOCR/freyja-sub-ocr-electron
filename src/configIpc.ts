@@ -51,7 +51,7 @@ class ConfigIpc {
         ipcMain.handle('Config:cropBottom', (e, ...args) => {
             try {
                 if (args.length === 1) {
-                    Config.cropTop = args[0] as number
+                    Config.cropBottom = args[0] as number
                 }
                 return Config.cropBottom
             } catch (error) {
