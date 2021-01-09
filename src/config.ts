@@ -76,7 +76,7 @@ class Config {
     static ocrModulePath = path.resolve('./', 'models', `ocrV3_${Config.language}_${Config.font}.torchscript`)
     static ocrCharsPath = path.resolve('./', 'models', `ocr_${Config.language}.txt`)
     static enableCuda = true
-    static batchSize = 8
+    static batchSize = 32
     static cropTop = 0
     static cropBottom = 0
     // eslint-disable-next-line @typescript-eslint/naming-convention
