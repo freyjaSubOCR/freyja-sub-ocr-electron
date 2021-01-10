@@ -4,7 +4,7 @@ exports[`TorchOCRTaskScheduler.ts task test 1`] = `
 Array [
   Object {
     "endFrame": 27,
-    "startFrame": 0,
+    "startFrame": 2,
     "text": "我是神野惠",
   },
   Object {
@@ -58,7 +58,7 @@ Array [
     "text": "居然是如此年轻的女孩子？",
   },
   Object {
-    "endFrame": 864,
+    "endFrame": 719,
     "startFrame": 628,
     "text": "我的下一个作品要请情色漫画老师来担任插画师",
   },

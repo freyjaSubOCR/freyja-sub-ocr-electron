@@ -88,27 +88,33 @@ class TorchOCRWorker {
         const subtitleInfos: Array<SubtitleInfo> = []
         for (const i of this.subtitleInfos.keys()) {
             const currentSubtitleInfo = this.subtitleInfos[i]
-            if (subtitleInfo === undefined) {
-                subtitleInfo = new SubtitleInfo(currentSubtitleInfo.startFrame, currentSubtitleInfo.endFrame)
-            }
-            if (subtitleInfo.text !== undefined && currentSubtitleInfo.text !== undefined) {
-                if (levenshtein(subtitleInfo.text, currentSubtitleInfo.text) > 3) {
+            if (currentSubtitleInfo.text === undefined) {
+                if (subtitleInfo !== undefined) {
                     subtitleInfo.generateTime(this._torchOCR.videoProperties.fps[0] / this._torchOCR.videoProperties.fps[1])
-                    subtitleInfos.push(subtitleInfo)
+                    subtitleInfos.push(subtitleInfo) // previous subtitle end, push to array
+                    subtitleInfo = undefined
+                }
+            } else {
+                if (subtitleInfo?.text === undefined) {
                     subtitleInfo = new SubtitleInfo(currentSubtitleInfo.startFrame, currentSubtitleInfo.endFrame)
                 } else {
-                    subtitleInfo.endFrame = currentSubtitleInfo.endFrame
+                    if (levenshtein(subtitleInfo.text, currentSubtitleInfo.text) > 3) {
+                        subtitleInfo.generateTime(this._torchOCR.videoProperties.fps[0] / this._torchOCR.videoProperties.fps[1])
+                        subtitleInfos.push(subtitleInfo) // push old subtitle
+                        subtitleInfo = new SubtitleInfo(currentSubtitleInfo.startFrame, currentSubtitleInfo.endFrame) // create new subtitle for current text
+                    } else {
+                        subtitleInfo.endFrame = currentSubtitleInfo.endFrame
+                    }
                 }
-            }
-            if (currentSubtitleInfo.text !== undefined) {
                 subtitleInfo.texts.push(currentSubtitleInfo.text)
             }
         }
         if (subtitleInfo !== undefined) {
-            subtitleInfo.endFrame = this.subtitleInfos[this.subtitleInfos.length - 1].endFrame
             subtitleInfo.generateTime(this._torchOCR.videoProperties.fps[0] / this._torchOCR.videoProperties.fps[1])
-            subtitleInfos.push(subtitleInfo)
+            subtitleInfos.push(subtitleInfo) // previous subtitle end, push to array
+            subtitleInfo = undefined
         }
+
         this.subtitleInfos = subtitleInfos
         logger.debug(this.subtitleInfos)
         return this.subtitleInfos
