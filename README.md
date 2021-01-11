@@ -23,12 +23,10 @@ you meet with your ```log.log``` file on github issues.
 2. Download latest version of Freyja from [Releases](https://github.com/freyjaSubOCR/freyja-sub-ocr-electron/releases)
    page and extract it.
 
-3. Download models from <https://github.com/freyjaSubOCR/freyja-sub-ocr-model-zoo/releases>. Choose GPU models if you
-   have a Nvidia GPU, otherwise choose CPU models. Download all txt and torchscript files, and place these files into
-   ```<app_path>/models/``` folder.
+3. Download models from <https://github.com/freyjaSubOCR/freyja-sub-ocr-model-zoo/releases>. Download all txt and
+   torchscript files, and place these files into ```<app_path>/models/``` folder.
 
-4. Run ```freyja.exe```. Enable ```Enable CUDA``` option if you have a Nvidia GPU and downloaded GPU models,
-   otherwise disable the option.
+4. Run ```freyja.exe```. Enable ```Enable CUDA``` option if you have a Nvidia GPU, otherwise disable the option.
 
 ## Known issues
 

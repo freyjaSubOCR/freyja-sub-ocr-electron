@@ -20,10 +20,10 @@ Freyja 需要 8GB 的内存。强烈推荐使用带 Nvidia 显卡的电脑，否
 
 2. 从[Release页](https://github.com/freyjaSubOCR/freyja-sub-ocr-electron/releases)下载最新版本的Freyja并将其解压缩。
 
-3. 从<https://github.com/freyjaSubOCR/freyja-sub-ocr-model-zoo/releases>中下载模型。如果你有 Nvidia 显卡，就下载GPU模型；
-   否则就下载CPU模型。下载对应模型的所有txt和torchscript文件，并将这些文件放入```<app_path>/models/```文件夹。
+3. 从<https://github.com/freyjaSubOCR/freyja-sub-ocr-model-zoo/releases>中下载模型。下载对应模型的所有txt和torchscript文
+   件，并将这些文件放入```<app_path>/models/```文件夹。
 
-4. 运行```freyja.exe```。如果有 Nvidia 显卡并下载了 GPU 模型，请启用```Enable CUDA```选项，否则禁用该选项。
+4. 运行```freyja.exe```。如果有 Nvidia 显卡，请启用```Enable CUDA```选项，否则禁用该选项。
 
 ## 已知的问题
 
